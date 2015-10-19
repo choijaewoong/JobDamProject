@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,6 +48,9 @@ public class MainActivity extends SlidingFragmentActivity
 //        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
 //        setSlidingActionBarEnabled(false);
 
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +87,46 @@ public class MainActivity extends SlidingFragmentActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-        return false;
+        int id = menuItem.getItemId();
+        if (id == R.id.nav_camara) {
+            emptyBackStack();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyJobFragment()).commit();
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+            Fragment old = getSupportFragmentManager().findFragmentById(R.id.nav_gallery);
+            if (old == null) {
+                emptyBackStack();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new CardBoxFragment()).addToBackStack(null).commit();
+            }
+        } else if (id == R.id.nav_slideshow) {
+            Fragment old = getSupportFragmentManager().findFragmentById(R.id.nav_slideshow);
+            if (old == null) {
+                emptyBackStack();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new JobInfoFragment()).addToBackStack(null).commit();
+            }
+        } else if (id == R.id.nav_manage) {
+            Fragment old = getSupportFragmentManager().findFragmentById(R.id.nav_manage);
+            if (old == null) {
+                emptyBackStack();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new BoardFragment()).addToBackStack(null).commit();
+            }
+        } else if (id == R.id.nav_share) {
+            Fragment old = getSupportFragmentManager().findFragmentById(R.id.nav_share);
+            if (old == null) {
+                emptyBackStack();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new AlarmFragment()).addToBackStack(null).commit();
+            }
+        } else if (id == R.id.nav_send) {
+            Fragment old = getSupportFragmentManager().findFragmentById(R.id.nav_send);
+            if (old == null) {
+                emptyBackStack();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new SettingFragment()).addToBackStack(null).commit();
+            }
+        }
+        showContent();//
+        return true;
+    }
+    private void emptyBackStack() {
+        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 }
