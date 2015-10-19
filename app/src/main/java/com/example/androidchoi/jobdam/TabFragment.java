@@ -6,12 +6,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class TabFragment extends Fragment {
+
+    ListView mListView;
+    JobItemAdapter mAdapter;
 
     public TabFragment() {
         // Required empty public constructor
@@ -22,10 +26,18 @@ public class TabFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tab, container, false);
-
+        mListView = (ListView)view.findViewById(R.id.listView_job);
+        mAdapter = new JobItemAdapter();
+        mListView.setAdapter(mAdapter);
+        initData();
         return view;
     }
-
+    private void initData() {
+        for(int i = 0; i<20; i++) {
+            JobItemData data = new JobItemData();
+            mAdapter.add(data);
+        }
+    }
 //    @Override
 //    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 //        super.onCreateOptionsMenu(menu, inflater);
