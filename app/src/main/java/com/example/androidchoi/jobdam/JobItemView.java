@@ -22,10 +22,5 @@ public class JobItemView extends RelativeLayout{
     }
 
     public void setItemData(JobItemData data){
-
-
-
     }
-
-
 }

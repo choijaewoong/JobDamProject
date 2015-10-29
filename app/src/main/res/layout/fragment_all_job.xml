@@ -4,12 +4,11 @@
     tools:context="com.example.dongja94.sampleslidingmenu.TwoFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
-    <TextView
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Job Info"
-        android:id="@+id/textView4"
-        android:layout_gravity="center" />
+        android:id="@+id/listview_all_job"
+        android:layout_gravity="left|top"
+        android:divider="@null"
+        android:dividerHeight="0dp"/>
 </FrameLayout>

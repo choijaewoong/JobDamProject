@@ -66,7 +66,7 @@ public class MainActivity extends SlidingFragmentActivity
             public void onClick(View v) {
 
 //            if (old == null) {
-                emptyBackStack();
+//                emptyBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new SettingFragment()).addToBackStack(null).commit();
                 showContent();
 //            }
@@ -117,7 +117,7 @@ public class MainActivity extends SlidingFragmentActivity
             Fragment old = getSupportFragmentManager().findFragmentById(R.id.nav_slideshow);
             if (old == null) {
                 emptyBackStack();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new JobInfoFragment()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new AllJobFragment()).addToBackStack(null).commit();
             }
         } else if (id == R.id.nav_manage) {
             Fragment old = getSupportFragmentManager().findFragmentById(R.id.nav_manage);

@@ -17,6 +17,7 @@
     <dimen name="menu_width">240dp</dimen>
     <dimen name="shadow_width">8dp</dimen>
 
+    <dimen name="header_height">60dp</dimen>
 
     <dimen name="job_item_padding">8dp</dimen>
 
