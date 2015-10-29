@@ -1,51 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/job_item_padding">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:id="@+id/image_job_logo"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginRight="@dimen/default_margin"
-        android:src="@android:mipmap/sym_def_app_icon"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/job_item_height"
+        android:layout_marginLeft="@dimen/job_item_horizontal_margin"
+        android:layout_marginRight="@dimen/job_item_horizontal_margin"
+        android:layout_marginTop="@dimen/job_item_vertical_margin"
+        android:background="@drawable/border"
+        android:padding="@dimen/job_item_padding">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/text_job_dday"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/image_job_logo"
-        android:layout_toEndOf="@+id/image_job_logo"/>
+        <ImageView
+            android:id="@+id/image_job_logo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@android:mipmap/sym_def_app_icon"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/text_job_content"
-        android:layout_below="@+id/text_job_dday"
-        android:layout_toRightOf="@+id/image_job_logo"
-        android:layout_toEndOf="@+id/image_job_logo"/>
+        <TextView
+            android:id="@+id/text_job_dday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/text_job_link"
-        android:layout_alignBottom="@+id/image_job_logo"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        <TextView
+            android:id="@+id/text_job_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:layout_alignTop="@+id/image_job_logo"
+            android:layout_toRightOf="@+id/image_job_logo"
+            android:layout_toEndOf="@+id/image_job_logo" />
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:id="@+id/image_like_icon"
-        android:layout_below="@+id/text_job_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        <TextView
+            android:id="@+id/text_job_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:layout_alignBottom="@+id/image_job_logo"
+            android:layout_toRightOf="@+id/image_job_logo"
+            android:layout_toEndOf="@+id/image_job_logo" />
+
+        <ImageView
+            android:id="@+id/image_like_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/text_job_content" />
+    </RelativeLayout>
 </RelativeLayout>

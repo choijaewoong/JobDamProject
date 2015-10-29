@@ -19,6 +19,10 @@
 
     <dimen name="header_height">60dp</dimen>
 
+    <!-- job item-->
+    <dimen name="job_item_height">100dp</dimen>
+    <dimen name="job_item_horizontal_margin">16dp</dimen>
+    <dimen name="job_item_vertical_margin">8dp</dimen>
     <dimen name="job_item_padding">8dp</dimen>
 
 </resources>
