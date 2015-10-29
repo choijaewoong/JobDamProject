@@ -8,16 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.androidchoi.jobdam.Adpater.JobItemAdapter;
+import com.example.androidchoi.jobdam.Model.JobItemData;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TabFragment extends Fragment {
+public class MyJobListFragment extends Fragment {
 
     ListView mListView;
     JobItemAdapter mAdapter;
 
-    public TabFragment() {
+    public MyJobListFragment() {
         // Required empty public constructor
         setHasOptionsMenu(true);
     }
@@ -25,7 +28,7 @@ public class TabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_tab, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_job_list, container, false);
 
         mListView = (ListView)view.findViewById(R.id.listView_job);
         mAdapter = new JobItemAdapter();

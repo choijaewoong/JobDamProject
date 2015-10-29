@@ -1,4 +1,4 @@
-package com.example.androidchoi.jobdam;
+package com.example.androidchoi.jobdam.Adpater;
 
 import android.content.Context;
 import android.os.Bundle;

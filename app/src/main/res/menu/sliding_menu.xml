@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camara"
             android:icon="@android:drawable/ic_menu_camera"
@@ -18,15 +19,15 @@
             android:id="@+id/nav_manage"
             android:icon="@android:drawable/ic_menu_manage"
             android:title="@string/board"/>
+
     </group>
 
-    <item android:title="Setting">
-        <menu>
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="single">
             <item
                 android:id="@+id/nav_share"
                 android:icon="@android:drawable/ic_menu_share"
                 android:title="@string/alarm"/>
-        </menu>
-    </item>
-
+    </group>
 </menu>

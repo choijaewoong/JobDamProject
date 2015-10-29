@@ -1,8 +1,11 @@
-package com.example.androidchoi.jobdam;
+package com.example.androidchoi.jobdam.Adpater;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.example.androidchoi.jobdam.Model.JobItemData;
+import com.example.androidchoi.jobdam.JobItemView;
 
 import java.util.ArrayList;
 import java.util.List;
