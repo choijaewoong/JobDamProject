@@ -26,6 +26,7 @@ public class TabFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tab, container, false);
+
         mListView = (ListView)view.findViewById(R.id.listView_job);
         mAdapter = new JobItemAdapter();
         mListView.setAdapter(mAdapter);

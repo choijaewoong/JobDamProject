@@ -37,7 +37,6 @@ public class MyJobFragment extends Fragment {
         mAdapter = new TabsAdapter(getActivity(), getChildFragmentManager(), tabHost, pager);
         mAdapter.addTab(tabHost.newTabSpec(LIST).setIndicator("잡담 리스트"), TabFragment.class, null);
         mAdapter.addTab(tabHost.newTabSpec(CALENDAR).setIndicator("잡담 캘린더"), TabFragment.class, null);
-
         return view;
     }
 }
