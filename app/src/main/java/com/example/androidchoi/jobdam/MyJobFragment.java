@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.TabsAdapter;
 
@@ -26,6 +27,13 @@ public class MyJobFragment extends Fragment {
 
     public MyJobFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        TextView subTitle = (TextView)getActivity().findViewById(R.id.text_subtitle);
+        subTitle.setText(R.string.my_job);
     }
 
     @Override

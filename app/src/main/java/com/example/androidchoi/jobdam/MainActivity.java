@@ -111,6 +111,7 @@ public class MainActivity extends SlidingFragmentActivity
             if (old == null) {
                 emptyBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new CardBoxFragment()).addToBackStack(null).commit();
+
             }
         } else if (id == R.id.nav_slideshow) {
             Fragment old = getSupportFragmentManager().findFragmentById(R.id.nav_slideshow);

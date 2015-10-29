@@ -25,6 +25,12 @@ public class AllJobFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        TextView subTitle = (TextView)getActivity().findViewById(R.id.text_subtitle);
+        subTitle.setText(R.string.all_job);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
