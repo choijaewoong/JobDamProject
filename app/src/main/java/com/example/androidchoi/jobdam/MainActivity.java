@@ -1,12 +1,16 @@
 package com.example.androidchoi.jobdam;
 
+
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -31,6 +35,20 @@ public class MainActivity extends SlidingFragmentActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false); //타이틀 제거
+
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
+                ActionBar.LayoutParams.MATCH_PARENT, Gravity.CENTER);
+        View customView = getLayoutInflater().inflate(R.layout.view_toolbar_custom, null);
+        getSupportActionBar().setCustomView(customView, params);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+
+
+//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
+//        setSlidingActionBarEnabled(false);
+
+
         if (savedInstanceState == null){
 //            getSupportFragmentManager().beginTransaction().add(R.id.menu_container, new MenuFragment()).commit();
             getSupportFragmentManager().beginTransaction().add(R.id.container, new MyJobFragment()).commit();
@@ -41,13 +59,9 @@ public class MainActivity extends SlidingFragmentActivity
         mSlidingMenu.setShadowWidthRes(R.dimen.shadow_width);
         mSlidingMenu.setFadeDegree(0.0f);
         mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
-//        setSlidingActionBarEnabled(false);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
     }
 
     @Override
@@ -105,14 +119,15 @@ public class MainActivity extends SlidingFragmentActivity
                 emptyBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new AlarmFragment()).addToBackStack(null).commit();
             }
-        } else if (id == R.id.nav_send) {
-            Fragment old = getSupportFragmentManager().findFragmentById(R.id.nav_send);
-            if (old == null) {
-                emptyBackStack();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new SettingFragment()).addToBackStack(null).commit();
-            }
         }
-        showContent();//
+//        else if (id == R.id.nav_send) {
+//            Fragment old = getSupportFragmentManager().findFragmentById(R.id.nav_send);
+//            if (old == null) {
+//                emptyBackStack();
+//                getSupportFragmentManager().beginTransaction().replace(R.id.container, new SettingFragment()).addToBackStack(null).commit();
+//            }
+//        }
+        showContent();
         return true;
     }
     private void emptyBackStack() {
