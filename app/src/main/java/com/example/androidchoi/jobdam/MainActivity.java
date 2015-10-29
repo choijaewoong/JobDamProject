@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -43,11 +44,8 @@ public class MainActivity extends SlidingFragmentActivity
         View customView = getLayoutInflater().inflate(R.layout.view_toolbar_custom, null);
         getSupportActionBar().setCustomView(customView, params);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
-
-
 //        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
 //        setSlidingActionBarEnabled(false);
-
 
         if (savedInstanceState == null){
 //            getSupportFragmentManager().beginTransaction().add(R.id.menu_container, new MenuFragment()).commit();
@@ -57,11 +55,25 @@ public class MainActivity extends SlidingFragmentActivity
         mSlidingMenu.setBehindWidthRes(R.dimen.menu_width);
         mSlidingMenu.setShadowDrawable(R.drawable.shadow);
         mSlidingMenu.setShadowWidthRes(R.dimen.shadow_width);
-        mSlidingMenu.setFadeDegree(0.0f);
-        mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+        mSlidingMenu.setFadeDegree(0.0f); //블러처리 해제
+        mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        ImageView setting =(ImageView)findViewById(R.id.btn_setting);
+        setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//            if (old == null) {
+                emptyBackStack();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new SettingFragment()).addToBackStack(null).commit();
+                showContent();
+//            }
+            }
+        });
+
+
     }
 
     @Override
