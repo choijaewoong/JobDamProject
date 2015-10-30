@@ -28,6 +28,14 @@ public class CardBoxFragment extends Fragment {
         // Required empty public constructor
         setHasOptionsMenu(true);
     }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        TextView subTitle = (TextView)getActivity().findViewById(R.id.text_subtitle);
+        subTitle.setText(R.string.card_box);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
