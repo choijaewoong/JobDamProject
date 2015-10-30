@@ -58,6 +58,9 @@ public class CardBoxFragment extends Fragment {
 
     private void initData() {
         for(int i=0; i<10; i++){
+
+            // 네트워크 매니저를 통해 데이터를 생성해서 가져옴.
+
             CardItemData data = new CardItemData();
             mAdapter.add(data);
         }

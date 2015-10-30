@@ -1,80 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="@dimen/item_height"
+    android:background="#a3a3a3">
 
     <ImageView
         android:id="@+id/image_category_bar"
         android:layout_width="@dimen/category_bar_width"
-        android:layout_height="@dimen/card_item_height"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="left|top"
-        android:layout_marginLeft="@dimen/card_item_horizontal_margin"
-        android:layout_marginTop="@dimen/card_item_vertical_margin"
-        android:background="#ff0000"
-        android:layout_marginBottom="@dimen/card_item_vertical_margin" />
+        android:background="#c24949" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/card_item_height"
-        android:layout_alignTop="@+id/image_category_bar"
-        android:layout_gravity="left|top"
-        android:layout_toEndOf="@+id/image_category_bar"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/image_category_bar"
-        android:padding="@dimen/card_item_padding"
-        android:layout_marginRight="@dimen/card_item_horizontal_margin"
-        android:background="#d8d8d8">
+        android:layout_toEndOf="@+id/image_category_bar" />
 
-        <ImageView
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Content"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/textView2"
+        android:layout_toRightOf="@+id/image_category_bar"
+        android:layout_toEndOf="@+id/image_category_bar" />
+
+    <ImageView
             android:id="@+id/imageView"
             android:layout_width="@dimen/card_item_image_thumnail_size"
             android:layout_height="@dimen/card_item_image_thumnail_size"
-            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
+            android:layout_alignParentEnd="true"
+            android:background="#d6ff99"
+        android:layout_marginRight="@dimen/card_item_image_thumnail_margin" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:text="New Text"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/imageView"
-            android:text="New Text" />
-
-        <TextView
+    <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:text="New Text"
-            android:textColor="#ff0000" />
+            android:text="Category"
+            android:textColor="#ff0000"
+            android:layout_alignBottom="@+id/image_category_bar"
+            android:layout_toRightOf="@+id/image_category_bar"
+            android:layout_toEndOf="@+id/image_category_bar" />
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/imageView4"
-            android:layout_toEndOf="@+id/imageView4" />
-
-        <ImageView
+    <ImageView
             android:layout_width="1dp"
             android:layout_height="10dp"
             android:id="@+id/imageView4"
@@ -85,6 +63,15 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="3dp"
             android:layout_marginRight="8dp" />
-    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:id="@+id/textView"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_toRightOf="@+id/imageView4"
+        android:layout_toEndOf="@+id/imageView4" />
 
 </RelativeLayout>
+

@@ -17,21 +17,20 @@
     <dimen name="menu_width">240dp</dimen>
     <dimen name="shadow_width">8dp</dimen>
 
-    <dimen name="header_height">60dp</dimen>
+    <dimen name="header_height">40dp</dimen>
+    <dimen name="header_margin">16dp</dimen>
 
-    <!-- job item-->
-    <dimen name="job_item_height">100dp</dimen>
-    <dimen name="job_item_horizontal_margin">16dp</dimen>
-    <dimen name="job_item_vertical_margin">8dp</dimen>
-    <dimen name="job_item_padding">8dp</dimen>
+    <!--listview-->
+    <dimen name="listview_padding">16dp</dimen>
+
+    <!--item-->
+    <dimen name="item_padding">16dp</dimen>
+    <dimen name="item_height">100dp</dimen>
 
     <!-- card item-->
-    <dimen name="card_item_height">100dp</dimen>
-    <dimen name="card_item_horizontal_margin">16dp</dimen>
-    <dimen name="card_item_vertical_margin">8dp</dimen>
-    <dimen name="card_item_padding">8dp</dimen>
     <dimen name="category_bar_width">16dp</dimen>
     <dimen name="card_item_image_thumnail_size">60dp</dimen>
+    <dimen name="card_item_image_thumnail_margin">24dp</dimen>
 
 
 </resources>

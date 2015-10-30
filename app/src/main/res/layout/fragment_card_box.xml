@@ -10,8 +10,13 @@
         android:layout_height="match_parent"
         android:id="@+id/listview_card"
         android:layout_gravity="left|top"
-        android:divider="@null"
-        android:dividerHeight="0dp"/>
+        android:divider="@android:color/transparent"
+        android:dividerHeight="16dp"
+        android:scrollbars="none"
+        android:paddingLeft="@dimen/listview_padding"
+        android:paddingRight="@dimen/listview_padding"
+        android:paddingBottom="@dimen/listview_padding"
+        android:clipToPadding="false"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

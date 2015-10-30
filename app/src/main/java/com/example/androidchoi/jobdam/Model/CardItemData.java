@@ -14,6 +14,6 @@ public class CardItemData {
     Date mStartDate;
     Date mEndDate;
 
-    public CardItemData() {
+    public CardItemData(){
     }
 }
