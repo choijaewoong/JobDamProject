@@ -32,7 +32,7 @@ public class MyJobListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_job_list, container, false);
         View headerView = inflater.inflate(R.layout.view_job_count_header, null);
 
-        mListView = (ListView)view.findViewById(R.id.listview_all_job);
+        mListView = (ListView)view.findViewById(R.id.listview_my_job);
         mListView.addHeaderView(headerView);
         mAdapter = new JobItemAdapter();
         mListView.setAdapter(mAdapter);
