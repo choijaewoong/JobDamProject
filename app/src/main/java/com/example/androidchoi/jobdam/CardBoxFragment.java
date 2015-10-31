@@ -1,19 +1,19 @@
 package com.example.androidchoi.jobdam;
 
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.CardItemAdapter;
 import com.example.androidchoi.jobdam.Model.CardItemData;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 
 
 /**
@@ -52,15 +52,27 @@ public class CardBoxFragment extends Fragment {
         TextView textView = (TextView)view.findViewById(R.id.text_card_item_count);
         textView.setText("총 " + mAdapter.getCount() + "건");
 
-        FloatingActionButton fab = (FloatingActionButton)view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionMenu fam = (FloatingActionMenu)view.findViewById(R.id.menu);
+        FloatingActionButton addCardButton = (FloatingActionButton)view.findViewById(R.id.fab_write_card);
+        FloatingActionButton addCategoryButton = (FloatingActionButton)view.findViewById(R.id.fab_add_category);
+        addCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "hello", Toast.LENGTH_SHORT).show();
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CardWriteActivity.class);
+                startActivity(intent);
             }
         });
+
+
+
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Toast.makeText(getActivity(), "hello", Toast.LENGTH_SHORT).show();
+////                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+////                        .setAction("Action", null).show();
+//            }
+//        });
         return view;
     }
 

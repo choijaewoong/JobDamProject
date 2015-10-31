@@ -18,8 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".JobDetailActivity"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".JobDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity android:name=".CardWriteActivity" >
         </activity>
     </application>
 

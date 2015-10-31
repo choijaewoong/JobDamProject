@@ -4,10 +4,8 @@
     <dimen name="default_double_margin">8dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-
     <!-- floatingbutton margin-->
-    <dimen name="fab_margin">16dp</dimen>
-
+    <dimen name="fab_margin">8dp</dimen>
     <!-- navigation bar-->
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">200dp</dimen>
@@ -19,16 +17,15 @@
 
     <dimen name="header_height">40dp</dimen>
     <dimen name="header_margin">16dp</dimen>
-
     <!--listview-->
     <dimen name="listview_padding">16dp</dimen>
-
     <!--item-->
     <dimen name="item_padding">16dp</dimen>
     <dimen name="item_height">100dp</dimen>
-
     <!-- card item-->
     <dimen name="category_bar_width">16dp</dimen>
     <dimen name="card_item_image_thumnail_size">60dp</dimen>
     <dimen name="card_item_image_thumnail_margin">24dp</dimen>
+    <!-- card write activity-->
+    <dimen name="button_padding">16dp</dimen>
 </resources>

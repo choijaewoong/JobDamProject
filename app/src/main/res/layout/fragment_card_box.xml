@@ -1,28 +1,98 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.dongja94.sampleslidingmenu.MainFragment">
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="com.example.dongja94.sampleslidingmenu.MainFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
     <ListView
+        android:id="@+id/listview_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listview_card"
         android:layout_gravity="left|top"
+        android:clipToPadding="false"
         android:divider="@android:color/transparent"
         android:dividerHeight="16dp"
-        android:scrollbars="none"
+        android:paddingBottom="@dimen/listview_padding"
         android:paddingLeft="@dimen/listview_padding"
         android:paddingRight="@dimen/listview_padding"
-        android:paddingBottom="@dimen/listview_padding"
-        android:clipToPadding="false"/>
+        android:scrollbars="none"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menu"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email"/>
+        android:layout_height="66dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="right|bottom"
+        app:menu_animationDelayPerItem="50"
+        app:menu_backgroundColor="@android:color/transparent"
+        app:menu_buttonSpacing="0dp"
+        app:menu_colorNormal="#0db5f7"
+        app:menu_colorPressed="#1594c6"
+        app:menu_colorRipple="#99FFFFFF"
+        app:menu_fab_size="normal"
+        app:menu_icon="@drawable/fab_add"
+        app:menu_openDirection="up"
+        app:menu_showShadow="true"
+        app:menu_labels_colorNormal="@android:color/transparent"
+        app:menu_labels_colorPressed="@android:color/transparent"
+        app:menu_labels_colorRipple="@android:color/transparent"
+        app:menu_labels_cornerRadius="3dp"
+        app:menu_labels_ellipsize="none"
+        app:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+        app:menu_labels_margin="0dp"
+        app:menu_labels_maxLines="-1"
+        app:menu_labels_position="left"
+        app:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+        app:menu_labels_showShadow="false"
+        app:menu_labels_singleLine="false"
+        app:menu_labels_textColor="#FFFFFF"
+        app:menu_labels_textSize="14sp"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin">
+        <!--app:menu_shadowColor="#66000000"-->
+        <!--app:menu_shadowRadius="4dp"-->
+        <!--app:menu_shadowXOffset="1dp"-->
+        <!--app:menu_shadowYOffset="3dp"-->
+        <!--app:menu_labels_colorNormal="#ffffff"-->
+        <!--app:menu_labels_colorPressed="#444444"-->
+        <!--app:menu_labels_colorRipple="#66FFFFFF"-->
+        <!--app:menu_labels_cornerRadius="3dp"-->
+        <!--app:menu_labels_ellipsize="none"-->
+        <!--app:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"-->
+        <!--app:menu_labels_margin="0dp"-->
+        <!--app:menu_labels_maxLines="-1"-->
+        <!--app:menu_labels_position="left"-->
+        <!--app:menu_labels_showAnimation="@anim/fab_slide_in_from_right"-->
+        <!--app:menu_labels_showShadow="true"-->
+        <!--app:menu_labels_singleLine="false"-->
+        <!--app:menu_labels_textColor="#FFFFFF"-->
+        <!--app:menu_labels_textSize="14sp"-->
+        <!--app:menu_fab_label="your_label_here"-->
+        <!--android:layout_marginBottom="@dimen/fab_margin"-->
+        <!--android:layout_marginRight="@dimen/fab_margin"-->
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_add_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="#ffffff"
+            app:fab_colorPressed="#bcbcbc"
+            app:fab_colorRipple="#99FFFFFF"
+            app:fab_label="카테고리 추가"
+            app:fab_size="mini"/>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_write_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="#ffffff"
+            app:fab_colorPressed="#bcbcbc"
+            app:fab_colorRipple="#99FFFFFF"
+            app:fab_label="카드 작성"
+            app:fab_size="mini"/>
+
+    </com.github.clans.fab.FloatingActionMenu>
 </FrameLayout>
