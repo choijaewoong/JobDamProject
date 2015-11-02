@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/Users/Choi/AndroidStudioProjects/JobDam/slidingmenu/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Choi/AndroidStudioProjects/JobDamProject/slidingmenu/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
@@ -167,10 +167,10 @@
     <item name="home" type="id"/>
     <item name="progress_circular" type="id"/>
     <item name="progress_horizontal" type="id"/>
-    <!-- From: file:/C:/Users/Choi/AndroidStudioProjects/JobDam/slidingmenu/src/main/res/values/ids.xml -->
+    <!-- From: file:/C:/Users/Choi/AndroidStudioProjects/JobDamProject/slidingmenu/src/main/res/values/ids.xml -->
     <eat-comment/>
     <item name="selected_view" type="id"/>
-    <!-- From: file:/C:/Users/Choi/AndroidStudioProjects/JobDam/slidingmenu/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values/values.xml -->
+    <!-- From: file:/C:/Users/Choi/AndroidStudioProjects/JobDamProject/slidingmenu/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/res/values/values.xml -->
     <eat-comment/>
     <item name="split_action_bar" type="id"/>
     <item name="up" type="id"/>
