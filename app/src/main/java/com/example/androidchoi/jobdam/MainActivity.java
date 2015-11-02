@@ -1,33 +1,34 @@
 package com.example.androidchoi.jobdam;
 
 
-import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
+    import android.content.Intent;
+    import android.os.Bundle;
+    import android.support.design.widget.NavigationView;
+    import android.support.v4.app.Fragment;
+    import android.support.v4.app.FragmentManager;
+    import android.support.v7.app.ActionBar;
+    import android.support.v7.widget.Toolbar;
+    import android.view.Gravity;
+    import android.view.MenuItem;
+    import android.view.View;
+    import android.widget.ImageView;
 
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+    import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+    import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class MainActivity extends SlidingFragmentActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+    public class MainActivity extends SlidingFragmentActivity
+            implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String TAG_MY_JOB = "myJob";
-    private static final String TAG_CARD_BOX = "cardBox";
-    private static final String TAG_JOB_INFO = "jobInfo";
-    private static final String TAG_BOARD_ = "board";
-    private static final String TAG_ALARM  = "alarm";
-    private static final String TAG_SETTING  = "setting";
+        private static final String TAG_MY_JOB = "myJob";
+        private static final String TAG_CARD_BOX = "cardBox";
+        private static final String TAG_JOB_INFO = "jobInfo";
+        private static final String TAG_BOARD_ = "board";
+        private static final String TAG_ALARM = "alarm";
+        private static final String TAG_SETTING = "setting";
 
-    SlidingMenu mSlidingMenu;
+        SlidingMenu mSlidingMenu;
 
-    @Override
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -46,7 +47,7 @@ public class MainActivity extends SlidingFragmentActivity
 //        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
 //        setSlidingActionBarEnabled(false);
 
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
 //            getSupportFragmentManager().beginTransaction().add(R.id.menu_container, new MenuFragment()).commit();
             getSupportFragmentManager().beginTransaction().add(R.id.container, new MyJobFragment()).commit();
         }
@@ -59,20 +60,15 @@ public class MainActivity extends SlidingFragmentActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        ImageView setting =(ImageView)findViewById(R.id.btn_setting);
+        ImageView setting = (ImageView) findViewById(R.id.btn_setting);
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//            if (old == null) {
-//                emptyBackStack();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new SettingFragment()).addToBackStack(null).commit();
+                Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                startActivity(intent);
                 showContent();
-//            }
             }
         });
-
-
     }
 
 //    @Override
@@ -142,6 +138,7 @@ public class MainActivity extends SlidingFragmentActivity
         showContent();
         return true;
     }
+
     private void emptyBackStack() {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
