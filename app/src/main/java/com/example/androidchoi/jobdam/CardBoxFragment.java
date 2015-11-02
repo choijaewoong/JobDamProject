@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,7 +23,9 @@ import com.github.clans.fab.FloatingActionMenu;
 public class CardBoxFragment extends Fragment {
 
     ListView mListView;
+    ImageView mImageView;
     CardItemAdapter mAdapter;
+
 
     public CardBoxFragment() {
         // Required empty public constructor
@@ -63,16 +66,21 @@ public class CardBoxFragment extends Fragment {
             }
         });
 
+        mImageView = (ImageView)view.findViewById(R.id.image_background_blur);
+        fam.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
+            @Override
+            public void onMenuToggle(boolean opened) {
 
+                if(opened){
+                    mImageView.setVisibility(View.VISIBLE);
+                    mListView.setEnabled(false);
+                }else{
+                    mImageView.setVisibility(View.GONE);
+                    mListView.setEnabled(true);
+                }
+            }
+        });
 
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Toast.makeText(getActivity(), "hello", Toast.LENGTH_SHORT).show();
-////                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-////                        .setAction("Action", null).show();
-//            }
-//        });
         return view;
     }
 
