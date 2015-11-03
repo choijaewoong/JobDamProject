@@ -21,11 +21,10 @@ public class MainActivity extends SlidingFragmentActivity
 
     private static final String TAG_MY_JOB = "myJob";
     private static final String TAG_CARD_BOX = "cardBox";
-    private static final String TAG_JOB_INFO = "jobInfo";
-    private static final String TAG_BOARD_ = "board";
+    private static final String TAG_ALL_JOB = "jobInfo";
+    private static final String TAG_BOARD = "board";
     private static final String TAG_ALARM = "alarm";
     private static final String TAG_SETTING = "setting";
-
     SlidingMenu mSlidingMenu;
 
     @Override
@@ -35,7 +34,6 @@ public class MainActivity extends SlidingFragmentActivity
         setBehindContentView(R.layout.slidingmenu_main); //Setting SlidingMenu
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false); //타이틀 제거
 
@@ -49,15 +47,14 @@ public class MainActivity extends SlidingFragmentActivity
 
         if (savedInstanceState == null) {
 //            getSupportFragmentManager().beginTransaction().add(R.id.menu_container, new MenuFragment()).commit();
-            getSupportFragmentManager().beginTransaction().add(R.id.container, new MyJobFragment()).commit();
-        }
+            getSupportFragmentManager().beginTransaction().add(R.id.container, new MyJobFragment(),TAG_MY_JOB).commit();
+            }
         mSlidingMenu = getSlidingMenu();
         mSlidingMenu.setBehindWidthRes(R.dimen.menu_width);
         mSlidingMenu.setShadowDrawable(R.drawable.shadow);
         mSlidingMenu.setShadowWidthRes(R.dimen.shadow_width);
         mSlidingMenu.setFadeDegree(0.0f); //블러처리 해제
         mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         ImageView setting = (ImageView) findViewById(R.id.btn_setting);
@@ -70,13 +67,6 @@ public class MainActivity extends SlidingFragmentActivity
             }
         });
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -100,45 +90,38 @@ public class MainActivity extends SlidingFragmentActivity
         int id = menuItem.getItemId();
         if (id == R.id.nav_camara) {
             emptyBackStack();
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyJobFragment()).commit();
-            // Handle the camera action
+//            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_MY_JOB);
+//            if(old == null) {
+//                getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyJobFragment(), TAG_MY_JOB).commit();
+//            }
         } else if (id == R.id.nav_gallery) {
-            Fragment old = getSupportFragmentManager().findFragmentById(R.id.nav_gallery);
+            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_CARD_BOX);
             if (old == null) {
                 emptyBackStack();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new CardBoxFragment()).addToBackStack(null).commit();
-
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new CardBoxFragment(),TAG_CARD_BOX).addToBackStack(null).commit();
             }
         } else if (id == R.id.nav_slideshow) {
-            Fragment old = getSupportFragmentManager().findFragmentById(R.id.nav_slideshow);
+            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_ALL_JOB);
             if (old == null) {
                 emptyBackStack();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new AllJobFragment()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new AllJobFragment(), TAG_ALL_JOB).addToBackStack(null).commit();
             }
         } else if (id == R.id.nav_manage) {
-            Fragment old = getSupportFragmentManager().findFragmentById(R.id.nav_manage);
+            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_BOARD);
             if (old == null) {
                 emptyBackStack();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new BoardFragment()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new BoardFragment(), TAG_BOARD).addToBackStack(null).commit();
             }
         } else if (id == R.id.nav_share) {
-            Fragment old = getSupportFragmentManager().findFragmentById(R.id.nav_share);
+            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_ALARM);
             if (old == null) {
                 emptyBackStack();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new AlarmFragment()).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new AlarmFragment(), TAG_ALARM).addToBackStack(null).commit();
             }
         }
-//        else if (id == R.id.nav_send) {
-//            Fragment old = getSupportFragmentManager().findFragmentById(R.id.nav_send);
-//            if (old == null) {
-//                emptyBackStack();
-//                getSupportFragmentManager().beginTransaction().replace(R.id.container, new SettingFragment()).addToBackStack(null).commit();
-//            }
-//        }
         showContent();
         return true;
     }
-
     private void emptyBackStack() {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
