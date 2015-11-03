@@ -35,6 +35,16 @@
         </activity>
         <activity android:name=".SettingActivity" >
         </activity>
+        <activity android:name=".SettingMenuActivity.HelpDeskActivity" >
+        </activity>
+        <activity android:name=".SettingMenuActivity.PrivacyActivity" >
+        </activity>
+        <activity android:name=".SettingMenuActivity.LegalActivity" >
+        </activity>
+        <activity android:name=".SettingMenuActivity.AlarmSettingActivity" >
+        </activity>
+        <activity android:name=".SettingMenuActivity.VersionInfoActivity" >
+        </activity>
     </application>
 
 </manifest>

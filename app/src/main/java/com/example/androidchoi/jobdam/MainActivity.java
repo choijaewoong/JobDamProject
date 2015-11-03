@@ -116,7 +116,7 @@ public class MainActivity extends SlidingFragmentActivity
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_ALARM);
             if (old == null) {
                 emptyBackStack();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new AlarmFragment(), TAG_ALARM).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new AnnouncementFragment(), TAG_ALARM).addToBackStack(null).commit();
             }
         }
         showContent();

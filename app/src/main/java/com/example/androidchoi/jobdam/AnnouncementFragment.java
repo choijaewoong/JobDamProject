@@ -12,10 +12,10 @@ import android.widget.TextView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AlarmFragment extends Fragment {
+public class AnnouncementFragment extends Fragment {
 
 
-    public AlarmFragment() {
+    public AnnouncementFragment() {
         // Required empty public constructor
     }
 
@@ -30,7 +30,7 @@ public class AlarmFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_alarm, container, false);
+        return inflater.inflate(R.layout.fragment_announcement, container, false);
     }
 
 

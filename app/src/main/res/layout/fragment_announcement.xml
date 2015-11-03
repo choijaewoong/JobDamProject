@@ -5,11 +5,9 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
+    <ExpandableListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Alarm"
-        android:id="@+id/textView4"
-        android:layout_gravity="center" />
+        android:id="@+id/expandableListView"
+        android:layout_gravity="left|top"/>
 </FrameLayout>
