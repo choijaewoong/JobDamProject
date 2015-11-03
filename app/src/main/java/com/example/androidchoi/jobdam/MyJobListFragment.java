@@ -32,7 +32,7 @@ public class MyJobListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_job_list, container, false);
-        View headerView = inflater.inflate(R.layout.view_job_count_header, null);
+        View headerView = inflater.inflate(R.layout.view_job_item_count_header, null);
 
         mListView = (ListView)view.findViewById(R.id.listview_my_job);
         mListView.addHeaderView(headerView, null, false);

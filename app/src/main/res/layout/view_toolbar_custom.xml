@@ -5,14 +5,14 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="vertical"
-    android:paddingRight="60dp">
+    android:paddingRight="@dimen/toolbar_padding">
 
     <ImageView
         android:id="@+id/image_app_title"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/toolbar_image_width"
+        android:layout_height="@dimen/toolbar_image_height"
         android:layout_gravity="center_horizontal"
-        android:background="#000000" />
+        android:background="@android:color/black" />
 
     <TextView
         android:id="@+id/text_subtitle"
@@ -20,5 +20,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="New Text"
-        android:textColor="#ffffff" />
+        android:textColor="@android:color/white" />
 </LinearLayout>

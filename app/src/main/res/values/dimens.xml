@@ -28,4 +28,8 @@
     <dimen name="card_item_image_thumnail_margin">24dp</dimen>
     <!-- card write activity-->
     <dimen name="button_padding">16dp</dimen>
+    <!--CustomToolbar-->
+    <dimen name="toolbar_padding">60dp</dimen>
+    <dimen name="toolbar_image_width">100dp</dimen>
+    <dimen name="toolbar_image_height">30dp</dimen>
 </resources>

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -45,14 +46,23 @@ public class CardBoxFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_card_box, container, false);
-        View headerView = inflater.inflate(R.layout.view_card_item_header, null);
+        View headerView = inflater.inflate(R.layout.view_card_item_count_header, null);
 
         mListView = (ListView) view.findViewById(R.id.listview_card);
         mListView.addHeaderView(headerView);
         mAdapter = new CardItemAdapter();
         mListView.setAdapter(mAdapter);
-        initData();
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                CardItemData data = (CardItemData)mAdapter.getItem(position-1);
+                Intent intent = new Intent(getActivity(), CardWriteActivity.class);
+                intent.putExtra(CardItemData.CARDITEM, data);
+                startActivity(intent);
+            }
+        });
 
+        initData();
         TextView textView = (TextView) view.findViewById(R.id.text_card_item_count);
         textView.setText("총 " + mAdapter.getCount() + "건");
 

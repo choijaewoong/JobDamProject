@@ -1,11 +1,14 @@
 package com.example.androidchoi.jobdam.Model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Tacademy on 2015-10-29.
  */
-public class CardItemData {
+public class CardItemData implements Serializable {
+
+    public static final String CARDITEM = "cardItem";
 
     String mTitle;
     String mContent;
