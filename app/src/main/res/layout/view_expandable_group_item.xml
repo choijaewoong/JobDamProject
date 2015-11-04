@@ -12,7 +12,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/imageView12"
-        android:layout_toStartOf="@+id/imageView12">
+        android:layout_toStartOf="@+id/imageView12"
+        android:id="@+id/relativeLayout">
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,8 +27,6 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
-
-
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"

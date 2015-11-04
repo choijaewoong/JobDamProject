@@ -60,7 +60,6 @@
             android:layout_margin="@dimen/default_double_margin"
             android:id="@+id/btn_setting"
             android:layout_alignParentTop="true"
-
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:background="#000000" />

@@ -4,9 +4,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 
-import com.example.androidchoi.jobdam.ExpandableChildItemView;
+import com.example.androidchoi.jobdam.ExpandableChildContentItemView;
 import com.example.androidchoi.jobdam.ExpandableGroupItemView;
-import com.example.androidchoi.jobdam.Model.ExpandableGroupData;
+import com.example.androidchoi.jobdam.Model.ContentData;
+import com.example.androidchoi.jobdam.Model.GroupData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +15,12 @@ import java.util.List;
 /**
  * Created by Choi on 2015-11-03.
  */
-public class ExpandableAdapter extends BaseExpandableListAdapter {
+public class AnnouncementAdapter extends BaseExpandableListAdapter {
 
-    List<ExpandableGroupData> mItems = new ArrayList<ExpandableGroupData>();
+    List<GroupData> mItems = new ArrayList<GroupData>();
 
-    public void add(String title, String content) {
-        ExpandableGroupData data = new ExpandableGroupData(title, content);
+    public void add(String title, ContentData content) {
+        GroupData data = new GroupData(title, content);
         mItems.add(data);
 
         notifyDataSetChanged();
@@ -41,7 +42,7 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return mItems.get(groupPosition).getContent();
+        return mItems.get(groupPosition).getChildData();
     }
 
     @Override
@@ -74,13 +75,13 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        ExpandableChildItemView view;
+        ExpandableChildContentItemView view;
         if (convertView != null) {
-            view = (ExpandableChildItemView) convertView;
+            view = (ExpandableChildContentItemView) convertView;
         } else {
-            view = new ExpandableChildItemView(parent.getContext());
+            view = new ExpandableChildContentItemView(parent.getContext());
         }
-        view.setExpandableContent(mItems.get(groupPosition));
+        view.setExpandableContent((ContentData)mItems.get(groupPosition).getChildData());
         return view;
     }
 

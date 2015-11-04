@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.example.androidchoi.jobdam.Model.ExpandableGroupData;
+import com.example.androidchoi.jobdam.Model.GroupData;
 
 /**
  * Created by Choi on 2015-11-03.
@@ -20,7 +20,7 @@ public class ExpandableGroupItemView extends FrameLayout{
         inflate(getContext(), R.layout.view_expandable_group_item, this);
         mExpandableTitleView = (TextView)findViewById(R.id.text_expandable_title);
     }
-    public void setExpandableTitle(ExpandableGroupData item) {
+    public void setExpandableTitle(GroupData item) {
         mExpandableTitleView.setText(item.getTitle());
     }
     public void setSelectTitle(boolean flag) {

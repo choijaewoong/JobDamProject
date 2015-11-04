@@ -1,4 +1,4 @@
-package com.example.androidchoi.jobdam;
+package com.example.androidchoi.jobdam.Setting;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,11 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.androidchoi.jobdam.SettingMenu.AlarmSettingActivity;
-import com.example.androidchoi.jobdam.SettingMenu.HelpDeskActivity;
-import com.example.androidchoi.jobdam.SettingMenu.LegalActivity;
-import com.example.androidchoi.jobdam.SettingMenu.PrivacyActivity;
-import com.example.androidchoi.jobdam.SettingMenu.VersionInfoActivity;
+import com.example.androidchoi.jobdam.MainActivity;
+import com.example.androidchoi.jobdam.R;
 
 public class SettingActivity extends AppCompatActivity {
     public final static String[] SETTINGMENU

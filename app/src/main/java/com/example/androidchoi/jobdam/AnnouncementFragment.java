@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
-import com.example.androidchoi.jobdam.Adpater.ExpandableAdapter;
+import com.example.androidchoi.jobdam.Adpater.AnnouncementAdapter;
+import com.example.androidchoi.jobdam.Model.ContentData;
 
 
 /**
@@ -17,8 +18,8 @@ import com.example.androidchoi.jobdam.Adpater.ExpandableAdapter;
  */
 public class AnnouncementFragment extends Fragment {
 
-    ExpandableListView mExpandableListView;
-    ExpandableAdapter mExpandableAdapter;
+    ExpandableListView mAnnouncementListView;
+    AnnouncementAdapter mAnnouncementAdapter;
 
     public AnnouncementFragment() {
         // Required empty public constructor
@@ -36,20 +37,19 @@ public class AnnouncementFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_announcement, container, false);
-        mExpandableListView =(ExpandableListView)view.findViewById(R.id.listview_expandable);
-        mExpandableAdapter = new ExpandableAdapter();
-        mExpandableListView.setAdapter(mExpandableAdapter);
-        mExpandableListView.setGroupIndicator(null);
+        mAnnouncementListView =(ExpandableListView)view.findViewById(R.id.listview_announcement);
+        mAnnouncementAdapter = new AnnouncementAdapter();
+        mAnnouncementListView.setAdapter(mAnnouncementAdapter);
+        mAnnouncementListView.setGroupIndicator(null);
         initExpandableMenu();
         return view;
     }
 
     private void initExpandableMenu() {
-        mExpandableAdapter.add("First Announcement","Hello World");
-        mExpandableAdapter.add("Second Announcement","Hello World");
-        mExpandableAdapter.add("Third Announcement","Hello World");
-        mExpandableAdapter.add("Fourth AnnouncementFourth AnnouncementFourth Announcement","Hello World");
+        ContentData contentData = new ContentData("Hello World");
+        mAnnouncementAdapter.add("First Announcement", contentData);
+        mAnnouncementAdapter.add("Second Announcement",contentData);
+        mAnnouncementAdapter.add("Third Announcement", contentData);
+        mAnnouncementAdapter.add("Fourth AnnouncementFourth AnnouncementFourth Announcement",contentData);
     }
-
-
 }

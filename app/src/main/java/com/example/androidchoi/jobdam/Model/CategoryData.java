@@ -1,4 +1,4 @@
-package com.example.androidchoi.jobdam;
+package com.example.androidchoi.jobdam.Model;
 
 import java.util.HashMap;
 

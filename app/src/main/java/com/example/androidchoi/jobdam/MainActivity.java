@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.androidchoi.jobdam.Setting.SettingActivity;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -24,7 +25,6 @@ public class MainActivity extends SlidingFragmentActivity
     private static final String TAG_ALL_JOB = "jobInfo";
     private static final String TAG_BOARD = "board";
     private static final String TAG_ALARM = "alarm";
-    private static final String TAG_SETTING = "setting";
     SlidingMenu mSlidingMenu;
 
     @Override
@@ -55,9 +55,12 @@ public class MainActivity extends SlidingFragmentActivity
         mSlidingMenu.setShadowWidthRes(R.dimen.shadow_width);
         mSlidingMenu.setFadeDegree(0.0f); //블러처리 해제
         mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+
+        View navHeaderView = getLayoutInflater().inflate(R.layout.nav_header_main, null);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        ImageView setting = (ImageView) findViewById(R.id.btn_setting);
+        navigationView.addHeaderView(navHeaderView);
+        ImageView setting = (ImageView)navHeaderView.findViewById(R.id.btn_setting);
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

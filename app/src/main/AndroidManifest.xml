@@ -33,17 +33,17 @@
             android:name=".LogIn.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".SettingActivity" >
+        <activity android:name=".Setting.SettingActivity" >
         </activity>
-        <activity android:name=".SettingMenu.HelpDeskActivity" >
+        <activity android:name=".Setting.HelpDeskActivity" >
         </activity>
-        <activity android:name=".SettingMenu.PrivacyActivity" >
+        <activity android:name=".Setting.PrivacyActivity" >
         </activity>
-        <activity android:name=".SettingMenu.LegalActivity" >
+        <activity android:name=".Setting.LegalActivity" >
         </activity>
-        <activity android:name=".SettingMenu.AlarmSettingActivity" >
+        <activity android:name=".Setting.AlarmSettingActivity" >
         </activity>
-        <activity android:name=".SettingMenu.VersionInfoActivity" >
+        <activity android:name=".Setting.VersionInfoActivity" >
         </activity>
     </application>
 
