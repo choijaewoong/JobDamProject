@@ -4,14 +4,14 @@ import android.content.Context;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.androidchoi.jobdam.Model.JobItemData;
+import com.example.androidchoi.jobdam.Model.JobData;
 
 /**
  * Created by Choi on 2015-10-18.
  */
 public class JobItemView extends RelativeLayout{
 
-    JobItemData data;
+    JobData data;
     TextView mCorp;
     TextView mTitle;
 
@@ -28,7 +28,7 @@ public class JobItemView extends RelativeLayout{
         mTitle = (TextView)findViewById(R.id.text_job_title);
     }
 
-    public void setItemData(JobItemData data){
+    public void setItemData(JobData data){
         mCorp.setText(data.getCorporation());
         mTitle.setText(data.getJobTitle());
     }

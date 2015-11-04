@@ -13,7 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.CardItemAdapter;
-import com.example.androidchoi.jobdam.Model.CardItemData;
+import com.example.androidchoi.jobdam.Model.CardData;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -55,9 +55,9 @@ public class CardBoxFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CardItemData data = (CardItemData)mAdapter.getItem(position-1);
+                CardData data = (CardData)mAdapter.getItem(position-1);
                 Intent intent = new Intent(getActivity(), CardWriteActivity.class);
-                intent.putExtra(CardItemData.CARDITEM, data);
+                intent.putExtra(CardData.CARDITEM, data);
                 startActivity(intent);
             }
         });
@@ -97,7 +97,7 @@ public class CardBoxFragment extends Fragment {
     private void initData() {
         for (int i = 0; i < 10; i++) {
             // 네트워크 매니저를 통해 데이터를 생성해서 가져옴.
-            CardItemData data = new CardItemData();
+            CardData data = new CardData();
             mAdapter.add(data);
         }
     }

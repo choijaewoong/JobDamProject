@@ -7,11 +7,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.androidchoi.jobdam.Model.JobItemData;
+import com.example.androidchoi.jobdam.Model.JobData;
 
 public class JobDetailActivity extends AppCompatActivity {
 
-    JobItemData mData;
+    JobData mData;
     TextView mTextView;
 
     @Override
@@ -24,7 +24,7 @@ public class JobDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         Intent intent = getIntent();
-        mData = (JobItemData)intent.getSerializableExtra(JobItemData.JOBITEM);
+        mData = (JobData)intent.getSerializableExtra(JobData.JOBITEM);
         mTextView = (TextView)findViewById(R.id.detail_title);
         mTextView.setText(mData.getJobTitle());
     }

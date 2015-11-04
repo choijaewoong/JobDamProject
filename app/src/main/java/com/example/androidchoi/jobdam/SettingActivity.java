@@ -9,11 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.androidchoi.jobdam.SettingMenuActivity.AlarmSettingActivity;
-import com.example.androidchoi.jobdam.SettingMenuActivity.HelpDeskActivity;
-import com.example.androidchoi.jobdam.SettingMenuActivity.LegalActivity;
-import com.example.androidchoi.jobdam.SettingMenuActivity.PrivacyActivity;
-import com.example.androidchoi.jobdam.SettingMenuActivity.VersionInfoActivity;
+import com.example.androidchoi.jobdam.SettingMenu.AlarmSettingActivity;
+import com.example.androidchoi.jobdam.SettingMenu.HelpDeskActivity;
+import com.example.androidchoi.jobdam.SettingMenu.LegalActivity;
+import com.example.androidchoi.jobdam.SettingMenu.PrivacyActivity;
+import com.example.androidchoi.jobdam.SettingMenu.VersionInfoActivity;
 
 public class SettingActivity extends AppCompatActivity {
     public final static String[] SETTINGMENU
@@ -64,7 +64,6 @@ public class SettingActivity extends AppCompatActivity {
                 }
             }
         });
-
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         mListView.setAdapter(mAdapter);
         initSettingMenu();

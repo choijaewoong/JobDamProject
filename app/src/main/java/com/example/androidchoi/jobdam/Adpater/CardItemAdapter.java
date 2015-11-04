@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.example.androidchoi.jobdam.CardItemView;
-import com.example.androidchoi.jobdam.Model.CardItemData;
+import com.example.androidchoi.jobdam.Model.CardData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +15,9 @@ import java.util.List;
  */
 public class CardItemAdapter extends BaseAdapter {
 
-    List<CardItemData> items = new ArrayList<CardItemData>();
+    List<CardData> items = new ArrayList<CardData>();
 
-    public void add(CardItemData item){
+    public void add(CardData item){
         items.add(item);
         notifyDataSetChanged();
     }

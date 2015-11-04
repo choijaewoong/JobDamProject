@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by Tacademy on 2015-10-29.
  */
-public class CardItemData implements Serializable {
+public class CardData implements Serializable {
 
     public static final String CARDITEM = "cardItem";
 
@@ -17,15 +17,15 @@ public class CardItemData implements Serializable {
     Date mStartDate;
     Date mEndDate;
 
-    public String getmTitle() {
+    public String getTitle() {
         return mTitle;
     }
 
-    public String getmContent() {
+    public String getContent() {
         return mContent;
     }
 
-    public CardItemData(){
+    public CardData(){
         mTitle = "카드 제목";
         mContent = "카드 내용";
     }

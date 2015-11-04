@@ -21,7 +21,7 @@
         <activity android:name=".CardWriteActivity" >
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".LogIn.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar.Splash" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,20 +30,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".LogIn.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity android:name=".SettingActivity" >
         </activity>
-        <activity android:name=".SettingMenuActivity.HelpDeskActivity" >
+        <activity android:name=".SettingMenu.HelpDeskActivity" >
         </activity>
-        <activity android:name=".SettingMenuActivity.PrivacyActivity" >
+        <activity android:name=".SettingMenu.PrivacyActivity" >
         </activity>
-        <activity android:name=".SettingMenuActivity.LegalActivity" >
+        <activity android:name=".SettingMenu.LegalActivity" >
         </activity>
-        <activity android:name=".SettingMenuActivity.AlarmSettingActivity" >
+        <activity android:name=".SettingMenu.AlarmSettingActivity" >
         </activity>
-        <activity android:name=".SettingMenuActivity.VersionInfoActivity" >
+        <activity android:name=".SettingMenu.VersionInfoActivity" >
         </activity>
     </application>
 

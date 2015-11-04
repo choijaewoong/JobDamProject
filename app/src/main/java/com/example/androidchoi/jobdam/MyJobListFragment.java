@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.JobItemAdapter;
-import com.example.androidchoi.jobdam.Model.JobItemData;
+import com.example.androidchoi.jobdam.Model.JobData;
 
 
 /**
@@ -41,9 +41,9 @@ public class MyJobListFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                JobItemData data = (JobItemData)mAdapter.getItem(position - 1);
+                JobData data = (JobData)mAdapter.getItem(position - 1);
                 Intent intent = new Intent(getActivity(), JobDetailActivity.class);
-                intent.putExtra(JobItemData.JOBITEM, data);
+                intent.putExtra(JobData.JOBITEM, data);
                 startActivity(intent);
             }
         });
@@ -55,7 +55,7 @@ public class MyJobListFragment extends Fragment {
     }
     private void initData() {
         for(int i = 0; i<5; i++) {
-            JobItemData data = new JobItemData();
+            JobData data = new JobData();
             data.setJobTitle("기업" + i);
             mAdapter.add(data);
         }

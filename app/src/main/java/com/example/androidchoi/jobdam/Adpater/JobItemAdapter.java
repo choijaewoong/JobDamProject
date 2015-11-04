@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.example.androidchoi.jobdam.Model.JobItemData;
+import com.example.androidchoi.jobdam.Model.JobData;
 import com.example.androidchoi.jobdam.JobItemView;
 
 import java.util.ArrayList;
@@ -15,9 +15,9 @@ import java.util.List;
  */
 public class JobItemAdapter extends BaseAdapter {
 
-    List<JobItemData> items = new ArrayList<JobItemData>();
+    List<JobData> items = new ArrayList<JobData>();
 
-    public void add(JobItemData item){
+    public void add(JobData item){
         items.add(item);
         notifyDataSetChanged();
     }

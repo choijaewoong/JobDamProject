@@ -1,4 +1,4 @@
-package com.example.androidchoi.jobdam;
+package com.example.androidchoi.jobdam.LogIn;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,10 @@ import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
+import com.example.androidchoi.jobdam.MainActivity;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Manager.PropertyManager;
+import com.example.androidchoi.jobdam.R;
 
 public class SplashActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.androidchoi.jobdam;
+package com.example.androidchoi.jobdam.LogIn;
 
 
 import android.content.Intent;
@@ -12,8 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.androidchoi.jobdam.MainActivity;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Manager.PropertyManager;
+import com.example.androidchoi.jobdam.R;
 
 
 /**

@@ -6,7 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
+
+import com.example.androidchoi.jobdam.Adpater.ExpandableAdapter;
 
 
 /**
@@ -14,6 +17,8 @@ import android.widget.TextView;
  */
 public class AnnouncementFragment extends Fragment {
 
+    ExpandableListView mExpandableListView;
+    ExpandableAdapter mExpandableAdapter;
 
     public AnnouncementFragment() {
         // Required empty public constructor
@@ -30,7 +35,20 @@ public class AnnouncementFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_announcement, container, false);
+        View view =  inflater.inflate(R.layout.fragment_announcement, container, false);
+        mExpandableListView =(ExpandableListView)view.findViewById(R.id.listview_expandable);
+        mExpandableAdapter = new ExpandableAdapter();
+        mExpandableListView.setAdapter(mExpandableAdapter);
+        mExpandableListView.setGroupIndicator(null);
+        initExpandableMenu();
+        return view;
+    }
+
+    private void initExpandableMenu() {
+        mExpandableAdapter.add("First Announcement","Hello World");
+        mExpandableAdapter.add("Second Announcement","Hello World");
+        mExpandableAdapter.add("Third Announcement","Hello World");
+        mExpandableAdapter.add("Fourth AnnouncementFourth AnnouncementFourth Announcement","Hello World");
     }
 
 

@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by Choi on 2015-10-18.
  */
-public class JobItemData implements Serializable {
+public class JobData implements Serializable {
 
     public static final String JOBITEM = "jobItem";
 
@@ -32,7 +32,7 @@ public class JobItemData implements Serializable {
     Date mStart;
     Date mEnd;
 
-    public JobItemData() {
+    public JobData() {
         mLogoResourceId = android.R.mipmap.sym_def_app_icon;
         mCorporation ="기업 이름";
         mJobTitle = "채용 정보 제목";

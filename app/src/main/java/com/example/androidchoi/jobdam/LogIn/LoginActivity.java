@@ -1,7 +1,10 @@
-package com.example.androidchoi.jobdam;
+package com.example.androidchoi.jobdam.LogIn;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.androidchoi.jobdam.LoginFragment;
+import com.example.androidchoi.jobdam.R;
 
 public class LoginActivity extends AppCompatActivity {
 

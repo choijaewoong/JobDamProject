@@ -1,4 +1,4 @@
-package com.example.androidchoi.jobdam.SettingMenuActivity;
+package com.example.androidchoi.jobdam.SettingMenu;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
