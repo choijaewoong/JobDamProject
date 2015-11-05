@@ -15,21 +15,26 @@ import java.util.List;
  */
 public class JobItemAdapter extends BaseAdapter {
 
-    List<JobData> items = new ArrayList<JobData>();
+    List<JobData> mItems = new ArrayList<JobData>();
+
+    public void addList(List<JobData> items){
+        mItems = items;
+        notifyDataSetChanged();
+    }
 
     public void add(JobData item){
-        items.add(item);
+        mItems.add(item);
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return items.size();
+        return mItems.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return items.get(position);
+        return mItems.get(position);
     }
 
     @Override
@@ -46,7 +51,7 @@ public class JobItemAdapter extends BaseAdapter {
         }else {
             view = (JobItemView)convertView;
         }
-        view.setItemData(items.get(position));
+        view.setItemData(mItems.get(position));
 
         return view;
     }

@@ -56,6 +56,7 @@ public class MainActivity extends SlidingFragmentActivity
         mSlidingMenu.setFadeDegree(0.0f); //블러처리 해제
         mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 
+
         View navHeaderView = getLayoutInflater().inflate(R.layout.nav_header_main, null);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

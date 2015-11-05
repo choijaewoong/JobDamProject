@@ -11,10 +11,8 @@ import com.example.androidchoi.jobdam.Model.JobData;
  */
 public class JobItemView extends RelativeLayout{
 
-    JobData data;
     TextView mCorp;
     TextView mTitle;
-
 
     public JobItemView(Context context) {
         super(context);
@@ -22,14 +20,15 @@ public class JobItemView extends RelativeLayout{
     }
 
     private void init() {
-
         inflate(getContext(), R.layout.view_job_item, this);
         mCorp = (TextView)findViewById(R.id.text_corp);
         mTitle = (TextView)findViewById(R.id.text_job_title);
     }
 
     public void setItemData(JobData data){
-        mCorp.setText(data.getCorporation());
-        mTitle.setText(data.getJobTitle());
+        mCorp.setText(data.getCompany().getName());
+        mTitle.setText(data.getPosition().getTitle());
+//        mCorp.setSelected(true);
+//        mTitle.setSelected(true);
     }
 }

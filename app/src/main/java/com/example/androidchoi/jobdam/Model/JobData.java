@@ -1,5 +1,7 @@
 package com.example.androidchoi.jobdam.Model;
 
+import com.begentgroup.xmlparser.SerializedName;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,34 +12,40 @@ public class JobData implements Serializable {
 
     public static final String JOBITEM = "jobItem";
 
-    int mLogoResourceId;
-    String mCorporation; // 기업 이름
-    String mJobTitle; // 채용 공고 제목
+    private int mLogoResourceId;
+    private JobCompanyData company;
+    private JobContentData position;
+    @SerializedName("url")
+    private String mSiteUrl; // 사이트 주소
 
-    public void setJobTitle(String mJobTitle) {
-        this.mJobTitle = mJobTitle;
+    public JobCompanyData getCompany() {
+        return company;
+    }
+    public JobContentData getPosition() {
+        return position;
+    }
+    public String getSiteUrl() {
+        return mSiteUrl;
     }
 
-    public String getCorporation() {
-        return mCorporation;
-    }
+    @SerializedName("title")
+    private String mJobTitle; // 채용 공고 제목
+    @SerializedName("experience-level")
+    private String mExperience;
+    @SerializedName("required-education-level")
+    private String mEducationLevel;
+    private String location;
+    private String keyword;
+    private String salary;
+    private StringBuilder mQualification = new StringBuilder(); //지원 자격
+    private StringBuilder mConditions = new StringBuilder(); //근무 조건
 
-    public String getJobTitle() {
-        return mJobTitle;
-    }
-
-    String mQualification; //지원 자격
-    String mConditions; //근무 조건
-    String mSiteUrl; // 사이트 주소
-    Date mStart; // 시작일
-    Date mEnd; // 마감일
+    private Date mStart; // 시작일
+    private Date mEnd; // 마감일
 
     public JobData() {
         mLogoResourceId = android.R.mipmap.sym_def_app_icon;
-        mCorporation ="기업 이름";
-        mJobTitle = "채용 정보 제목";
+       mJobTitle = "채용 정보 제목";
         mSiteUrl = "www.google.com";
     }
-
-    public void setData(){}
 }

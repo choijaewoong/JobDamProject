@@ -26,4 +26,5 @@ dependencies {
     compile project(':slidingmenu')
     compile project(':FloatingActionButton')
     compile 'com.android.support:design:23.1.0'
+    compile files('libs/simplexmlparser_0.1.2.jar')
 }

@@ -61,10 +61,10 @@ public class MyJobListFragment extends Fragment {
         return view;
     }
     private void initData() {
-        for(int i = 0; i<5; i++) {
-            JobData data = new JobData();
-            data.setJobTitle("기업" + i);
-            mAdapter.add(data);
-        }
+//        for(int i = 0; i<5; i++) {
+//            JobData data = new JobData();
+//            data.setJobTitle("기업" + i);
+//            mAdapter.add(data);
+//        }
     }
 }
