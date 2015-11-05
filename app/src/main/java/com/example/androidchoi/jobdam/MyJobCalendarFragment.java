@@ -11,19 +11,13 @@ import android.view.ViewGroup;
  * A simple {@link Fragment} subclass.
  */
 public class MyJobCalendarFragment extends Fragment {
-
-
     public MyJobCalendarFragment() {
         // Required empty public constructor
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_my_job_calendar, container, false);
     }
-
-
 }

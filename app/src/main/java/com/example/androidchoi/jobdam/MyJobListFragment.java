@@ -19,14 +19,22 @@ import com.example.androidchoi.jobdam.Model.JobData;
  * A simple {@link Fragment} subclass.
  */
 public class MyJobListFragment extends Fragment {
-
     ListView mListView;
     JobItemAdapter mAdapter;
+
+//    public static MyJobListFragment newInstance(int page){
+//        Bundle args = new Bundle();
+//        args.putInt("ddd",page);
+//        MyJobListFragment myJobListFragment = new MyJobListFragment();
+//        myJobListFragment.setArguments(args);
+//        return myJobListFragment;
+//    }
 
     public MyJobListFragment() {
         // Required empty public constructor
         setHasOptionsMenu(true);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,13 +49,12 @@ public class MyJobListFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                JobData data = (JobData)mAdapter.getItem(position - 1);
+                JobData data = (JobData) mAdapter.getItem(position - 1);
                 Intent intent = new Intent(getActivity(), JobDetailActivity.class);
                 intent.putExtra(JobData.JOBITEM, data);
                 startActivity(intent);
             }
         });
-
         initData();
         TextView textView = (TextView)view.findViewById(R.id.text_job_item_count);
         textView.setText("총 "+ mAdapter.getCount() + "건");

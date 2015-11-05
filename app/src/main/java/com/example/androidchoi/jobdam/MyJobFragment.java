@@ -2,15 +2,18 @@ package com.example.androidchoi.jobdam;
 
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.example.androidchoi.jobdam.Adpater.TabsAdapter;
+import com.example.androidchoi.jobdam.Adpater.MyFragmentPagerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -21,9 +24,9 @@ public class MyJobFragment extends Fragment {
     private static final String LIST = "joblist";
     private static final String CALENDAR = "jobcalendar";
 
-    TabHost tabHost;
-    ViewPager pager;
-    TabsAdapter mAdapter;
+    ViewPager mViewPager;
+    TabLayout mTabLayout;
+    MyFragmentPagerAdapter mAdapter;
 
     public MyJobFragment() {
         // Required empty public constructor
@@ -41,12 +44,14 @@ public class MyJobFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_job, container, false);
-        tabHost = (TabHost)view.findViewById(R.id.tabHost);
-        tabHost.setup();
-        pager = (ViewPager)view.findViewById(R.id.pager);
-        mAdapter = new TabsAdapter(getActivity(), getChildFragmentManager(), tabHost, pager);
-        mAdapter.addTab(tabHost.newTabSpec(LIST).setIndicator("잡담 리스트"), MyJobListFragment.class, null);
-        mAdapter.addTab(tabHost.newTabSpec(CALENDAR).setIndicator("잡담 캘린더"), MyJobCalendarFragment.class, null);
+        List<Fragment> fragments = new ArrayList<Fragment>();
+        fragments.add(new MyJobListFragment());
+        fragments.add(new MyJobCalendarFragment());
+        mAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), fragments);
+        mViewPager = (ViewPager)view.findViewById(R.id.viewpager);
+        mViewPager.setAdapter(mAdapter);
+        mTabLayout = (TabLayout)view.findViewById(R.id.sliding_tabs);
+        mTabLayout.setupWithViewPager(mViewPager);
         return view;
     }
 }

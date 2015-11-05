@@ -47,14 +47,14 @@ public class MainActivity extends SlidingFragmentActivity
 
         if (savedInstanceState == null) {
 //            getSupportFragmentManager().beginTransaction().add(R.id.menu_container, new MenuFragment()).commit();
-            getSupportFragmentManager().beginTransaction().add(R.id.container, new MyJobFragment(),TAG_MY_JOB).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.container, new MyJobFragment(), TAG_MY_JOB).commit();
             }
         mSlidingMenu = getSlidingMenu();
         mSlidingMenu.setBehindWidthRes(R.dimen.menu_width);
         mSlidingMenu.setShadowDrawable(R.drawable.shadow);
         mSlidingMenu.setShadowWidthRes(R.dimen.shadow_width);
         mSlidingMenu.setFadeDegree(0.0f); //블러처리 해제
-        mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+        mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 
         View navHeaderView = getLayoutInflater().inflate(R.layout.nav_header_main, null);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -95,6 +95,7 @@ public class MainActivity extends SlidingFragmentActivity
             emptyBackStack();
 //            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_MY_JOB);
 //            if(old == null) {
+//                emptyBackStack();
 //                getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyJobFragment(), TAG_MY_JOB).commit();
 //            }
         } else if (id == R.id.nav_gallery) {
