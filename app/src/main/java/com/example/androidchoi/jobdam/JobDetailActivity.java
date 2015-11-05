@@ -58,7 +58,7 @@ public class JobDetailActivity extends AppCompatActivity {
         mExpandableAdapter.add("지원자격", data);
         mExpandableAdapter.add("근무조건", data3);
         mExpandableAdapter.add("접수기간", data4);
-        mExpandableAdapter.add("상세페이지", data2);
+        mExpandableAdapter.add("상세페이지", new AddressData(mData.getSiteUrl()));
         mExpandableAdapter.add("자기소개서 항목", data5);
     }
 
