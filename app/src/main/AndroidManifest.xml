@@ -19,7 +19,8 @@
             android:name=".JobDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".CardWriteActivity" >
+        <activity android:name=".CardWriteActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".LogIn.SplashActivity"
@@ -34,17 +35,23 @@
             android:name=".LogIn.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".Setting.SettingActivity" >
+        <activity android:name=".Setting.SettingActivity"
+                  android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".Setting.HelpDeskActivity" >
+        <activity android:name=".Setting.HelpDeskActivity"
+                  android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".Setting.PrivacyActivity" >
+        <activity android:name=".Setting.PrivacyActivity"
+                  android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".Setting.LegalActivity" >
+        <activity android:name=".Setting.LegalActivity"
+                  android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".Setting.AlarmSettingActivity" >
+        <activity android:name=".Setting.AlarmSettingActivity"
+                  android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".Setting.VersionInfoActivity" >
+        <activity android:name=".Setting.VersionInfoActivity"
+                  android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
 

@@ -29,7 +29,7 @@ public class AnnouncementFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         TextView subTitle = (TextView)getActivity().findViewById(R.id.text_subtitle);
-        subTitle.setText(R.string.alarm);
+        subTitle.setText(R.string.announcement);
     }
 
     @Override
