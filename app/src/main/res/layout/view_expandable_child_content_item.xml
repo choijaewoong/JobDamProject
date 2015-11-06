@@ -10,15 +10,18 @@
         android:text="content"
         android:id="@+id/text_expandable_content"
         android:textSize="15sp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/default_double_dimen"
+        android:layout_marginRight="@dimen/default_double_dimen"
+        android:textColor="@android:color/black"/>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
+        android:background="@color/colorDivider"
         android:layout_below="@+id/text_expandable_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="@dimen/default_dimen"/>
 </RelativeLayout>

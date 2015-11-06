@@ -14,10 +14,14 @@ import com.example.androidchoi.jobdam.Model.AddressData;
 import com.example.androidchoi.jobdam.Model.ContentData;
 import com.example.androidchoi.jobdam.Model.JobData;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class JobDetailActivity extends AppCompatActivity {
 
     JobData mData;
-    TextView mTextView;
+    TextView mCorpName;
+    TextView mJobTitle;
     ExpandableListView mExpandableListView;
     JobDetailAdapter mExpandableAdapter;
 
@@ -36,31 +40,48 @@ public class JobDetailActivity extends AppCompatActivity {
 
         mExpandableListView = (ExpandableListView)findViewById(R.id.listview_job_detail_expandable);
         mExpandableAdapter = new JobDetailAdapter();
+        // 헤더뷰 설정
         View corpHeaderView = getLayoutInflater().inflate(R.layout.view_job_detail_corp_header, null);
         View titleHeaderView = getLayoutInflater().inflate(R.layout.view_job_detail_title_header,null);
+        mCorpName = (TextView)corpHeaderView.findViewById(R.id.text_detail_corp_name);
+        mCorpName.setText(mData.getCompany().getName());
+        mJobTitle = (TextView)titleHeaderView.findViewById(R.id.text_detail_job_title);
+        mJobTitle.setText(mData.getPosition().getTitle());
         mExpandableListView.addHeaderView(corpHeaderView);
         mExpandableListView.addHeaderView(titleHeaderView);
+
         mExpandableListView.setAdapter(mExpandableAdapter);
         mExpandableListView.setGroupIndicator(null);
-        initJobDetailMenu();
+
+        initJobDetailMenu(); // 상세 채용 정보 카테고리 생성
         for(int i=0; i<mExpandableAdapter.getGroupCount(); i++){
             mExpandableListView.expandGroup(i);
         }
     }
 
     private void initJobDetailMenu() {
-        ContentData data = new ContentData("ddddcvasdfd");
-        ContentData data3 = new ContentData("dd234ddasdfd");
-        ContentData data4 = new ContentData("dddd33asdfd");
-        ContentData data5 = new ContentData("ddddasdfd");
-        AddressData data2 = new AddressData("http://www.naver.com");
-//        JobDetailGroupData menu = new JobDetailGroupData("지원자격",data);
-        mExpandableAdapter.add("지원자격", data);
-        mExpandableAdapter.add("근무조건", data3);
-        mExpandableAdapter.add("접수기간", data4);
-        mExpandableAdapter.add("상세페이지", new AddressData(mData.getSiteUrl()));
-        mExpandableAdapter.add("자기소개서 항목", data5);
+        mExpandableAdapter.add(getString(R.string.qualification), new ContentData(getQualification()));
+        mExpandableAdapter.add(getString(R.string.conditions), new ContentData(getConditions()));
+        mExpandableAdapter.add(getString(R.string.period), new ContentData(getPeriod()));
+        mExpandableAdapter.add(getString(R.string.detail_page), new AddressData(mData.getSiteUrl()));
+        mExpandableAdapter.add(getString(R.string.questions), new ContentData("empty"));
     }
+
+    public String getQualification() {
+        return getString(R.string.experience_level) + mData.getPosition().getExperienceLevel() + "\n"
+                + getString(R.string.education_level) + mData.getPosition().getEducationLevel();
+    }
+    public String getConditions() {
+        return getString(R.string.location) + mData.getPosition().getLocation() + "\n"
+                + getString(R.string.salary) + mData.getSalary();
+    }
+
+    public String getPeriod() {
+        Date end = new Date(mData.getEnd() * 1000L);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("~ yyyy년 MM월 dd일 E요일 HH시 mm분");
+        return dateFormat.format(end);
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

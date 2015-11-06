@@ -4,10 +4,10 @@
 
     <!-- TODO: Update blank fragment layout -->
     <ListView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listview_my_job"
-        android:layout_gravity="left|bottom"
+        android:layout_gravity="left|top"
         android:divider="@android:color/transparent"
         android:dividerHeight="16dp"
         android:scrollbars="none"

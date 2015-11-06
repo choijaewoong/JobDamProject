@@ -4,10 +4,23 @@
     <string name="my_job">내가 담은 채용 정보</string>
     <string name="card_box">나의 카드 박스</string>
     <string name="all_job">전체 채용 정보</string>
-    <string name="board">응원 게시판</string>
-    <string name="alarm">알림통통</string>
+    <string name="board">잡담 톡</string>
+    <string name="alarm">잡담 알림</string>
     <string name="setting">설정</string>
+    <!-- activity name-->
+    <string name="detail_job_info">상세채용정보</string>
+    <!-- detail job info category -->
+    <string name="qualification">지원자격</string>
+    <string name="conditions">근무조건</string>
+    <string name="period">접수기간</string>
+    <string name="detail_page">상세페이지</string>
+    <string name="questions">자기소개서 항목</string>
+    <string name="scrap">스크랩</string>
+    <string name="homepage">홈페이지</string>
+    <string name="experience_level"><b>경력 : </b></string>
+    <string name="education_level"><b>학력 : </b></string>
+    <string name="location"><b>지역 : </b></string>
+    <string name="salary"><b>급여 : </b></string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

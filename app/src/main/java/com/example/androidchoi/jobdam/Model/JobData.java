@@ -36,4 +36,8 @@ public class JobData implements Serializable {
     public JobData() {
         mLogoResourceId = android.R.mipmap.sym_def_app_icon;
     }
+
+    private String qualification;
+    private String conditions;
+    private String period;
 }

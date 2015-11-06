@@ -1,7 +1,7 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="default_margin">8dp</dimen>
-    <dimen name="default_double_margin">8dp</dimen>
+    <dimen name="default_dimen">8dp</dimen>
+    <dimen name="default_double_dimen">16dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <!-- floatingbutton margin-->
@@ -32,4 +32,11 @@
     <dimen name="toolbar_padding">60dp</dimen>
     <dimen name="toolbar_image_width">100dp</dimen>
     <dimen name="toolbar_image_height">30dp</dimen>
+    <!-- corp header -->
+    <dimen name="top_margin">30dp</dimen>
+    <!-- font size-->
+    <dimen name="font_semi_large">16sp</dimen>
+    <dimen name="font_large">18sp</dimen>
+    <dimen name="font_x_large">20sp</dimen>
+
 </resources>

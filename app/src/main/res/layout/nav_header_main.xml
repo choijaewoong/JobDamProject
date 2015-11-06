@@ -32,7 +32,7 @@
             android:layout_below="@+id/image_profile"
             android:layout_centerHorizontal="true"
             android:textSize="16sp"
-            android:layout_margin="@dimen/default_margin" />
+            android:layout_margin="@dimen/default_dimen" />
 
         <TextView
             android:id="@+id/text_user_email"
@@ -52,12 +52,12 @@
             android:layout_alignBottom="@+id/text_user_name"
             android:layout_toRightOf="@+id/text_user_name"
             android:layout_toEndOf="@+id/text_user_name"
-            android:layout_marginLeft="@dimen/default_margin" />
+            android:layout_marginLeft="@dimen/default_dimen" />
         
         <ImageView
             android:layout_width="@dimen/nav_header_image_button"
             android:layout_height="@dimen/nav_header_image_button"
-            android:layout_margin="@dimen/default_double_margin"
+            android:layout_margin="@dimen/default_double_dimen"
             android:id="@+id/btn_setting"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"

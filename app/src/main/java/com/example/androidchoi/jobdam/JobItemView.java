@@ -35,6 +35,7 @@ public class JobItemView extends RelativeLayout{
     public void setItemData(JobData data){
         mCorp.setText(data.getCompany().getName());
         mTitle.setText(data.getPosition().getTitle());
+
         Date start = new Date(data.getStart() * 1000L);
         Date end = new Date(data.getEnd() * 1000L);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
