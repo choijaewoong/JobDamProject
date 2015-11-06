@@ -12,7 +12,7 @@
         android:layout_width="@dimen/toolbar_image_width"
         android:layout_height="@dimen/toolbar_image_height"
         android:layout_gravity="center_horizontal"
-        android:background="@android:color/black" />
+        android:src="@drawable/icon_jobdam"/>
 
     <TextView
         android:id="@+id/text_subtitle"

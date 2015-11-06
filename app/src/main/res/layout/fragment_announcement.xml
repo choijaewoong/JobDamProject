@@ -11,5 +11,5 @@
         android:layout_height="wrap_content"
         android:id="@+id/listview_announcement"
         android:layout_gravity="left|top"
-        />
+        android:scrollbars="none"/>
 </FrameLayout>

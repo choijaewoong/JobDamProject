@@ -32,8 +32,8 @@
             android:textSize="@dimen/font_semi_large"/>
     </RelativeLayout>
     <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
         android:id="@+id/imageView12"
         android:src="@drawable/numberpicker_down_normal_holo_dark"
         android:layout_alignParentTop="true"

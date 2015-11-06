@@ -4,6 +4,13 @@
     <color name="colorPrimaryDark">#1594c6</color>
     <color name="colorAccent">#ffc400</color>
 
-    <color name="colorDivider">#c6c6c6</color>
+    <color name="colorDivider">#cfcfcf</color>
 
+    <!-- d-day color-->
+    <color name="colorOver">#898989</color>
+    <color name="colorDanger">#ff0000</color>
+    <color name="colorWarning">#fff200</color>
+    <color name="colorSafe">#00731d</color>
+
+    <color name="colorBackgroundBlur">#66000000</color>
 </resources>

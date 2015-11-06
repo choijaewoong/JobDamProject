@@ -6,8 +6,8 @@
     android:paddingBottom="@dimen/default_dimen">
 
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="@dimen/corp_logo_size"
+        android:layout_height="@dimen/corp_logo_size"
         android:id="@+id/image_detail_corp_logo"
         android:layout_gravity="center_horizontal"
         android:background="#808080" />

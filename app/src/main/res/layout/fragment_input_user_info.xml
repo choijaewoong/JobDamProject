@@ -7,7 +7,10 @@
              tools:context="com.example.androidchoi.jobdam.LogIn.InputUserInfoFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_input_user_info"
         android:layout_width="match_parent"
@@ -19,9 +22,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="정보 입력"/>
+            android:textSize="@dimen/font_size_title"
+            android:text="@string/input_info"/>
 
     </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -38,14 +43,14 @@
             android:layout_centerHorizontal="true">
 
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="@dimen/login_profile"
+                android:layout_height="@dimen/login_profile"
                 android:id="@+id/imageView8"
                 android:background="#939393"/>
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
                 android:id="@+id/imageView9"
                 android:layout_gravity="right|bottom"
                 android:background="#000000"/>
@@ -59,14 +64,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:padding="24dp">
+        android:padding="@dimen/login_layout_padding">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editText3"
             android:layout_gravity="center_horizontal"
-            android:hint="이름"
+            android:hint="@string/user_name"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"/>
 
@@ -75,7 +80,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/editText4"
             android:layout_gravity="center_horizontal"
-            android:hint="이메일"
+            android:hint="@string/user_email"
             android:layout_below="@+id/editText3"
             android:layout_centerHorizontal="true"/>
 
@@ -85,7 +90,7 @@
             android:id="@+id/editText5"
             android:inputType="textPassword"
             android:layout_gravity="center_horizontal"
-            android:hint="비밀번호"
+            android:hint="@string/user_password"
             android:layout_below="@+id/editText4"
             android:layout_centerHorizontal="true"/>
 
@@ -95,14 +100,14 @@
             android:id="@+id/editText6"
             android:inputType="textPassword"
             android:layout_gravity="center_horizontal"
-            android:hint="비밀번호 확인"
+            android:hint="@string/user_password_check"
             android:layout_below="@+id/editText5"
             android:layout_centerHorizontal="true"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="입력 완료"
+            android:text="@string/submit_user_info"
             android:id="@+id/btn_input_complete"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentBottom="true"

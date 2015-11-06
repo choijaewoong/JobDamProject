@@ -106,7 +106,7 @@ public class AllJobFragment extends Fragment {
             super.onPostExecute(allJobList);
             mAdapter.addList(allJobList.getJobList());
             mListView.setAdapter(mAdapter);
-            mTextView.setText("총 " + mAdapter.getCount() + "건");
+            mTextView.setText("공채정보 총 " + mAdapter.getCount() + "건");
         }
     }
 }

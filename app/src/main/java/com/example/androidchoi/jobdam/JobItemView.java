@@ -38,15 +38,38 @@ public class JobItemView extends RelativeLayout{
 
         Date start = new Date(data.getStart() * 1000L);
         Date end = new Date(data.getEnd() * 1000L);
+
+        setPeriod(start, end);
+        setDDay(start, end);
+
+//        mCorp.setSelected(true);
+//        mTitle.setSelected(true);
+    }
+
+    public void setPeriod(Date start, Date end){
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
         StringBuilder period = new StringBuilder();
         period.append(dateFormat.format(start))
                 .append("~")
                 .append(dateFormat.format(end));
         mPeriod.setText(period.toString());
-        long d_day = (end.getTime()-start.getTime())/86400000;
-        mDDay.setText( "d-" + (d_day+1));
-//        mCorp.setSelected(true);
-//        mTitle.setSelected(true);
+
     }
+
+    public void setDDay(Date start, Date end){
+        long day = (end.getTime()-start.getTime())/86400000;
+        int d_day = (int)(day+1);
+        mDDay.setText("d-" + d_day);
+        if(d_day == 0){
+            mDDay.setText( "d-day");
+            mDDay.setTextColor(getResources().getColor(R.color.colorOver));
+        } else if(d_day > 10){
+            mDDay.setTextColor(getResources().getColor(R.color.colorSafe));
+        } else if (d_day > 3)
+            mDDay.setTextColor(getResources().getColor(R.color.colorWarning));
+        else{
+            mDDay.setTextColor(getResources().getColor(R.color.colorDanger));
+        }
+    }
+
 }

@@ -13,7 +13,7 @@
         android:layout_gravity="left|top"
         android:clipToPadding="false"
         android:divider="@android:color/transparent"
-        android:dividerHeight="16dp"
+        android:dividerHeight="@dimen/default_dimen"
         android:paddingBottom="@dimen/listview_padding"
         android:paddingLeft="@dimen/listview_padding"
         android:paddingRight="@dimen/listview_padding"
@@ -24,7 +24,7 @@
         android:layout_height="match_parent"
         android:id="@+id/image_background_blur"
         android:layout_gravity="center"
-        android:background="#66000000"
+        android:background="@color/colorBackgroundBlur"
         android:visibility="gone"/>
 
     <com.github.clans.fab.FloatingActionMenu
@@ -89,7 +89,7 @@
             app:fab_colorNormal="#ffffff"
             app:fab_colorPressed="#bcbcbc"
             app:fab_colorRipple="#99FFFFFF"
-            app:fab_label="카테고리 추가"
+            app:fab_label="@string/add_cartegory"
             app:fab_size="mini"/>
 
         <com.github.clans.fab.FloatingActionButton
@@ -99,7 +99,7 @@
             app:fab_colorNormal="#ffffff"
             app:fab_colorPressed="#bcbcbc"
             app:fab_colorRipple="#99FFFFFF"
-            app:fab_label="카드 작성"
+            app:fab_label="@string/write_card"
             app:fab_size="mini"/>
 
     </com.github.clans.fab.FloatingActionMenu>
