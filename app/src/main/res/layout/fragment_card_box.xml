@@ -17,7 +17,8 @@
         android:paddingBottom="@dimen/listview_padding"
         android:paddingLeft="@dimen/listview_padding"
         android:paddingRight="@dimen/listview_padding"
-        android:scrollbars="none"/>
+        android:scrollbars="none"
+        android:background="@color/colorBackground"/>
 
     <ImageView
         android:layout_width="match_parent"

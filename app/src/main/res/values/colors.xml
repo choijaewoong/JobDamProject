@@ -5,6 +5,9 @@
     <color name="colorAccent">#ffc400</color>
 
     <color name="colorDivider">#cfcfcf</color>
+    <color name="colorBackground">#e6e9f4</color>
+    <!--#e0e0e0    e7e7e7   e6e9f4-->
+
 
     <!-- d-day color-->
     <color name="colorOver">#898989</color>

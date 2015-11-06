@@ -12,7 +12,8 @@
         android:layout_width="@dimen/toolbar_image_width"
         android:layout_height="@dimen/toolbar_image_height"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/icon_jobdam"/>
+        android:src="@drawable/icon_jobdam"
+        android:scaleType="fitCenter"/>
 
     <TextView
         android:id="@+id/text_subtitle"
@@ -20,5 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="New Text"
+        android:textSize="@dimen/font_size_default"
         android:textColor="@android:color/white" />
 </LinearLayout>

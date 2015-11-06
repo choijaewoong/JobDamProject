@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/item_height"
-    android:background="#a3a3a3">
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:background="@android:color/white">
 
     <ImageView
         android:id="@+id/image_category_bar"
@@ -12,66 +12,96 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="left|top"
-        android:background="#c24949" />
+        android:background="#c24949"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Title"
-        android:id="@+id/text_card_title"
-        android:layout_alignParentTop="true"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/image_category_bar"
         android:layout_toRightOf="@+id/image_category_bar"
-        android:layout_toEndOf="@+id/image_category_bar" />
+        android:paddingBottom="@dimen/default_dimen"
+        android:paddingLeft="@dimen/card_left_padding"
+        android:paddingRight="@dimen/card_right_padding"
+        android:paddingTop="@dimen/default_dimen">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Content"
-        android:id="@+id/text_card_content"
-        android:layout_below="@+id/text_card_title"
-        android:layout_toRightOf="@+id/image_category_bar"
-        android:layout_toEndOf="@+id/image_category_bar" />
+        <TextView
+            android:id="@+id/text_card_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/text_card_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/text_card_content"
+            android:autoText="false"
+            android:paddingRight="@dimen/default_dimen"
+            android:text="Title"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_large"/>
 
-    <ImageView
+        <TextView
+            android:id="@+id/text_card_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/linearLayout2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/text_card_title"
+            android:layout_toLeftOf="@+id/image_card_image"
+            android:layout_toStartOf="@+id/image_card_image"
+            android:paddingRight="@dimen/default_dimen"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text="Content"
+            android:textColor="@android:color/black"/>
+
+        <ImageView
             android:id="@+id/image_card_image"
             android:layout_width="@dimen/card_item_image_thumnail_size"
             android:layout_height="@dimen/card_item_image_thumnail_size"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:background="#d6ff99"
-        android:layout_marginRight="@dimen/card_item_image_thumnail_margin" />
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="#d6ff99"/>
 
-    <TextView
-            android:id="@+id/text_category"
+        <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Category"
-            android:textColor="#ff0000"
-            android:layout_alignBottom="@+id/image_category_bar"
-            android:layout_toRightOf="@+id/image_category_bar"
-            android:layout_toEndOf="@+id/image_category_bar" />
+            android:layout_alignLeft="@+id/text_card_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/text_card_content"
+            android:orientation="horizontal">
 
-    <ImageView
-            android:layout_width="1dp"
-            android:layout_height="10dp"
-            android:id="@+id/imageView4"
-            android:background="#000000"
-            android:layout_alignTop="@+id/text_category"
-            android:layout_toRightOf="@+id/text_category"
-            android:layout_toEndOf="@+id/text_category"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginRight="8dp" />
+            <TextView
+                android:id="@+id/text_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="스크랩"
+                android:textColor="#ff0000"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Date"
-        android:id="@+id/text_date"
-        android:layout_alignTop="@+id/text_category"
-        android:layout_toRightOf="@+id/imageView4"
-        android:layout_toEndOf="@+id/imageView4" />
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="1dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/text_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="2015.10.38"
+                android:textColor="@android:color/darker_gray"/>
+        </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
 

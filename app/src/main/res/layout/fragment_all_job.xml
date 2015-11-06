@@ -15,5 +15,6 @@
         android:paddingLeft="@dimen/listview_padding"
         android:paddingRight="@dimen/listview_padding"
         android:paddingBottom="@dimen/listview_padding"
-        android:clipToPadding="false"/>
+        android:clipToPadding="false"
+        android:background="@color/colorBackground"/>
 </FrameLayout>
