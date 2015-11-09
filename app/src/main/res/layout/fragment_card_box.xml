@@ -13,12 +13,9 @@
         android:layout_gravity="left|top"
         android:clipToPadding="false"
         android:divider="@android:color/transparent"
-        android:dividerHeight="@dimen/default_dimen"
-        android:paddingBottom="@dimen/listview_padding"
-        android:paddingLeft="@dimen/listview_padding"
-        android:paddingRight="@dimen/listview_padding"
         android:scrollbars="none"
         android:background="@color/colorBackground"/>
+        <!--@dimen/item_height-->
 
     <ImageView
         android:layout_width="match_parent"

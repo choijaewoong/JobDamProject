@@ -5,10 +5,14 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -58,10 +62,36 @@ public class AllJobFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_all_job, container, false);
-        View headerView = inflater.inflate(R.layout.view_job_item_count_header, null);
+        View searchHeaderView = inflater.inflate(R.layout.view_item_search_header, null);
+        View countHeaderView = inflater.inflate(R.layout.view_item_count_header, null);
 
         mListView = (ListView)view.findViewById(R.id.listview_all_job);
-        mListView.addHeaderView(headerView);
+        mListView.addHeaderView(searchHeaderView);
+        mListView.addHeaderView(countHeaderView, null, false);
+        final ImageView deleteImage = (ImageView)searchHeaderView.findViewById(R.id.image_search_delete);
+        EditText searchEdit = (EditText)searchHeaderView.findViewById(R.id.editText_search_bar);
+        searchEdit.setHint("태그를 검색해주세요");
+        searchEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String string = s.toString();
+                if (!string.equals("")) {
+                    deleteImage.setVisibility(View.VISIBLE);
+                } else {
+                    deleteImage.setVisibility(View.GONE);
+                }
+            }
+        });
         mAdapter = new JobItemAdapter();
 //        initData();
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -73,7 +103,7 @@ public class AllJobFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        mTextView = (TextView)view.findViewById(R.id.text_job_item_count);
+        mTextView = (TextView)view.findViewById(R.id.text_item_count);
         return view;
     }
 

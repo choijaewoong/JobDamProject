@@ -40,10 +40,10 @@ public class MyJobListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_job_list, container, false);
-        View headerView = inflater.inflate(R.layout.view_job_item_count_header, null);
+        View countHeaderView = inflater.inflate(R.layout.view_item_count_header, null);
 
         mListView = (ListView)view.findViewById(R.id.listview_my_job);
-        mListView.addHeaderView(headerView, null, false);
+        mListView.addHeaderView(countHeaderView, null, false);
         mAdapter = new JobItemAdapter();
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -56,7 +56,7 @@ public class MyJobListFragment extends Fragment {
             }
         });
         initData();
-        TextView textView = (TextView)view.findViewById(R.id.text_job_item_count);
+        TextView textView = (TextView)view.findViewById(R.id.text_item_count);
         textView.setText("총 "+ mAdapter.getCount() + "건");
         return view;
     }

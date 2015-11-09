@@ -39,8 +39,16 @@ public class MainActivity extends SlidingFragmentActivity
 
         ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
                 ActionBar.LayoutParams.MATCH_PARENT, Gravity.CENTER);
-        View customView = getLayoutInflater().inflate(R.layout.view_toolbar_custom, null);
-        getSupportActionBar().setCustomView(customView, params);
+        View customToolbar = getLayoutInflater().inflate(R.layout.view_toolbar_custom, null);
+        ImageView titleImage = (ImageView)customToolbar.findViewById(R.id.image_app_title);
+        titleImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                emptyBackStack();
+            }
+        });
+
+        getSupportActionBar().setCustomView(customToolbar, params);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
 //        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
 //        setSlidingActionBarEnabled(false);
