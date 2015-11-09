@@ -6,9 +6,9 @@ import java.io.Serializable;
  * Created by Choi on 2015-11-05.
  */
 public class JobCompanyData implements Serializable {
-    private String name;
+    private JobCompanyNameData name;
 
-    public String getName() {
+    public JobCompanyNameData getName() {
         return name;
     }
 }

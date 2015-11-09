@@ -1,11 +1,14 @@
 package com.example.androidchoi.jobdam;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
@@ -25,7 +28,6 @@ public class JobDetailActivity extends AppCompatActivity {
     ExpandableListView mExpandableListView;
     JobDetailAdapter mExpandableAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +45,19 @@ public class JobDetailActivity extends AppCompatActivity {
         // 헤더뷰 설정
         View corpHeaderView = getLayoutInflater().inflate(R.layout.view_job_detail_corp_header, null);
         View titleHeaderView = getLayoutInflater().inflate(R.layout.view_job_detail_title_header,null);
+        Button corpLink = (Button)titleHeaderView.findViewById(R.id.btn_detail_move_homepage);
+        corpLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uriUrl = Uri.parse(mData.getCompany().getName().getLink());
+                Intent intent = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(intent);
+            }
+        });
+
+
         mCorpName = (TextView)corpHeaderView.findViewById(R.id.text_detail_corp_name);
-        mCorpName.setText(mData.getCompany().getName());
+        mCorpName.setText(mData.getCompany().getName().getValue());
         mJobTitle = (TextView)titleHeaderView.findViewById(R.id.text_detail_job_title);
         mJobTitle.setText(mData.getPosition().getTitle());
         mExpandableListView.addHeaderView(corpHeaderView);
@@ -72,7 +85,7 @@ public class JobDetailActivity extends AppCompatActivity {
                 + getString(R.string.education_level) + mData.getPosition().getEducationLevel();
     }
     public String getConditions() {
-        return getString(R.string.location) + mData.getPosition().getLocation() + "\n"
+        return getString(R.string.location) + Html.fromHtml(mData.getPosition().getLocation()) + "\n"
                 + getString(R.string.salary) + mData.getSalary();
     }
 
@@ -81,7 +94,6 @@ public class JobDetailActivity extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("~ yyyy년 MM월 dd일 E요일 HH시 mm분");
         return dateFormat.format(end);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

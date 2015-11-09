@@ -33,7 +33,7 @@ public class JobItemView extends RelativeLayout{
     }
 
     public void setItemData(JobData data){
-        mCorp.setText(data.getCompany().getName());
+        mCorp.setText(data.getCompany().getName().getValue());
         mTitle.setText(data.getPosition().getTitle());
 
         Date start = new Date(data.getStart() * 1000L);
