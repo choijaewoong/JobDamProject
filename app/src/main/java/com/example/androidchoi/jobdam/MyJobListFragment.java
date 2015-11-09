@@ -77,10 +77,10 @@ public class MyJobListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_job_list, container, false);
         View searchHeaderView = inflater.inflate(R.layout.view_item_search_header, null);
         View countHeaderView = inflater.inflate(R.layout.view_item_count_header, null);
-
         mListView = (ListView)view.findViewById(R.id.listview_my_job);
         mListView.addHeaderView(searchHeaderView);
         mListView.addHeaderView(countHeaderView, null, false);
+        mDeleteImage = (ImageView)searchHeaderView.findViewById(R.id.image_search_delete);
         mSearchEdit = (EditText)searchHeaderView.findViewById(R.id.editText_search_bar);
         mSearchEdit.setHint("기업을 검색해주세요");
         mSearchEdit.addTextChangedListener(new TextWatcher() {

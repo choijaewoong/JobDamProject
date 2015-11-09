@@ -10,7 +10,6 @@
         android:layout_gravity="left|top"
         android:divider="@android:color/transparent"
         android:scrollbars="none"
-        android:clipToPadding="false"
-        android:background="@color/colorBackground"/>
+        android:clipToPadding="false"/>
 
 </FrameLayout>

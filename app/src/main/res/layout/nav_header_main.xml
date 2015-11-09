@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/nav_header_height"
         android:layout_gravity="center_vertical|left"
-        android:background="@color/colorDivider">
+        android:background="@color/colorBackground">
 
         <ImageView
             android:id="@+id/image_profile"
