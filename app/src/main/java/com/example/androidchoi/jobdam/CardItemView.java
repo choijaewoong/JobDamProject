@@ -22,8 +22,8 @@ public class CardItemView extends RelativeLayout{
 
     private void init() {
         inflate(getContext(), R.layout.view_card_item, this);
-        mTitle = (TextView)findViewById(R.id.text_card_title);
-        mContent = (TextView)findViewById(R.id.text_card_content);
+        mTitle = (TextView)findViewById(R.id.edit_text_card_title);
+        mContent = (TextView)findViewById(R.id.edit_text_card_content);
     }
 
     public void setItemData(CardData data){

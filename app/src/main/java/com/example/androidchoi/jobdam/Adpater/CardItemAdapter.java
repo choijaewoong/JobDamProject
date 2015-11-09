@@ -22,6 +22,15 @@ public class CardItemAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void add(CardData item, int position){
+        items.add(position, item);
+        notifyDataSetChanged();
+    }
+
+    public void update(CardData item, int position){
+        items.get(position).setCarditem(item);
+    }
+
     @Override
     public int getCount() {
         return items.size();

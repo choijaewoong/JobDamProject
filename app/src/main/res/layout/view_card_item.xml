@@ -28,28 +28,30 @@
         android:paddingTop="@dimen/default_dimen">
 
         <TextView
-            android:id="@+id/text_card_title"
+            android:id="@+id/edit_text_card_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/text_card_content"
+            android:layout_alignEnd="@+id/edit_text_card_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_alignRight="@+id/text_card_content"
+            android:layout_alignRight="@+id/edit_text_card_content"
             android:autoText="false"
             android:paddingRight="@dimen/default_dimen"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:text="Title"
             android:textColor="@android:color/black"
             android:textSize="@dimen/font_large"/>
 
         <TextView
-            android:id="@+id/text_card_content"
+            android:id="@+id/edit_text_card_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/linearLayout2"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/text_card_title"
+            android:layout_below="@+id/edit_text_card_title"
             android:layout_toLeftOf="@+id/image_card_image"
             android:layout_toStartOf="@+id/image_card_image"
             android:paddingRight="@dimen/default_dimen"
@@ -71,9 +73,9 @@
             android:id="@+id/linearLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/text_card_content"
+            android:layout_alignLeft="@+id/edit_text_card_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/text_card_content"
+            android:layout_alignStart="@+id/edit_text_card_content"
             android:orientation="horizontal">
 
             <TextView
@@ -87,11 +89,13 @@
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="1dp"
-                android:layout_height="12dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:background="@android:color/darker_gray"/>
+                android:background="@android:color/darker_gray"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"/>
 
             <TextView
                 android:id="@+id/text_date"

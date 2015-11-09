@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,15 +24,33 @@ import com.github.clans.fab.FloatingActionMenu;
  */
 public class CardBoxFragment extends Fragment {
 
+    private static final int REQUEST_MODIFY = 1;
+    private static final int REQUEST_NEW = 2;
+
     ListView mListView;
     ImageView mImageView;
     CardItemAdapter mAdapter;
     FloatingActionMenu fam;
-    boolean mAlreadyLoaed;
 
     public CardBoxFragment() {
         // Required empty public constructor
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode != Activity.RESULT_OK) return;
+
+        if(requestCode == REQUEST_MODIFY){
+            int position = data.getIntExtra(CardWriteActivity.EXTRA_CARD_POSITION, 0);
+            CardData cardData = (CardData) data.getSerializableExtra(CardWriteActivity.EXTRA_CARD_DATA);
+            mAdapter.update(cardData, position);
+        }else if(requestCode == REQUEST_NEW){
+            CardData cardData = (CardData) data.getSerializableExtra(CardWriteActivity.EXTRA_CARD_DATA);
+            mAdapter.add(cardData, 0);
+            mListView.smoothScrollToPositionFromTop(0,0,500);
+        }
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -58,7 +77,8 @@ public class CardBoxFragment extends Fragment {
                 CardData data = (CardData)mAdapter.getItem(position-1);
                 Intent intent = new Intent(getActivity(), CardWriteActivity.class);
                 intent.putExtra(CardData.CARDITEM, data);
-                startActivity(intent);
+                intent.putExtra(CardData.CARDPOSITION, position-1);
+                startActivityForResult(intent, REQUEST_MODIFY);
             }
         });
 
@@ -68,15 +88,15 @@ public class CardBoxFragment extends Fragment {
 
         fam = (FloatingActionMenu) view.findViewById(R.id.menu);
         FloatingActionButton addCardButton = (FloatingActionButton) view.findViewById(R.id.fab_write_card);
-        FloatingActionButton addCategoryButton = (FloatingActionButton) view.findViewById(R.id.fab_add_category);
         addCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CardWriteActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_NEW);
                 fam.close(true);
             }
         });
+        FloatingActionButton addCategoryButton = (FloatingActionButton) view.findViewById(R.id.fab_add_category);
         mImageView = (ImageView) view.findViewById(R.id.image_background_blur);
         fam.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
             @Override
