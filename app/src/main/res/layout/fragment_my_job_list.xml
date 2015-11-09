@@ -9,11 +9,8 @@
         android:id="@+id/listview_my_job"
         android:layout_gravity="left|top"
         android:divider="@android:color/transparent"
-        android:dividerHeight="@dimen/default_dimen"
         android:scrollbars="none"
-        android:paddingLeft="@dimen/listview_padding"
-        android:paddingRight="@dimen/listview_padding"
-        android:paddingBottom="@dimen/listview_padding"
-        android:clipToPadding="false"/>
+        android:clipToPadding="false"
+        android:background="@color/colorBackground"/>
 
 </FrameLayout>

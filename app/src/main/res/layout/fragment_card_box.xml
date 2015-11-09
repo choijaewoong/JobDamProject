@@ -6,6 +6,8 @@
              tools:context="com.example.dongja94.sampleslidingmenu.MainFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <!--@dimen/item_height-->
+
     <ListView
         android:id="@+id/listview_card"
         android:layout_width="match_parent"
@@ -15,25 +17,23 @@
         android:divider="@android:color/transparent"
         android:scrollbars="none"
         android:background="@color/colorBackground"/>
-        <!--@dimen/item_height-->
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/image_background_blur"
-        android:layout_gravity="center"
-        android:background="@color/colorBackgroundBlur"
+        android:background="#88000000"
         android:visibility="gone"/>
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/menu"
-        android:layout_width="wrap_content"
-        android:layout_height="66dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_gravity="right|bottom"
         app:menu_animationDelayPerItem="50"
-        app:menu_backgroundColor="@android:color/transparent"
+        app:menu_backgroundColor="@color/colorBackgroundBlur"
         app:menu_buttonSpacing="0dp"
         app:menu_colorNormal="#0db5f7"
         app:menu_colorPressed="#1594c6"
@@ -56,8 +56,8 @@
         app:menu_labels_singleLine="false"
         app:menu_labels_textColor="#FFFFFF"
         app:menu_labels_textSize="14sp"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/fab_margin">
+        android:paddingRight="@dimen/fab_margin"
+        android:paddingBottom="@dimen/fab_margin">
         <!--app:menu_shadowColor="#66000000"-->
         <!--app:menu_shadowRadius="4dp"-->
         <!--app:menu_shadowXOffset="1dp"-->

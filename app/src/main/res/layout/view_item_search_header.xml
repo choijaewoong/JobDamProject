@@ -8,7 +8,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/search_view_height">
+        android:layout_height="@dimen/search_view_height"
+        android:background="@android:color/white">
     <ImageView
         android:id="@+id/image_search_icon"
         android:layout_width="@dimen/search_icon_size"
@@ -27,6 +28,8 @@
         android:inputType="text"
         android:maxLength="17"
         android:maxLines="1"
+        android:textSize="@dimen/font_semi_large"
+        android:textColorHint="@color/colorDivider"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
 

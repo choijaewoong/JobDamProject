@@ -36,10 +36,10 @@ public class CardBoxFragment extends Fragment {
     private static final int REQUEST_NEW = 2;
 
     ListView mListView;
-    ImageView mImageView;
     CardItemAdapter mAdapter;
     FloatingActionMenu fam;
-    EditText searchEdit;
+    EditText mSearchEdit;
+    ImageView mDeleteImage;
 
     public CardBoxFragment() {
         // Required empty public constructor
@@ -73,11 +73,11 @@ public class CardBoxFragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if (searchEdit.isFocused()) {
+                    if (mSearchEdit.isFocused()) {
                         Rect outRect = new Rect();
-                        searchEdit.getGlobalVisibleRect(outRect);
+                        mSearchEdit.getGlobalVisibleRect(outRect);
                         if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                            searchEdit.clearFocus();
+                            mSearchEdit.clearFocus();
                             InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                         }
@@ -98,10 +98,10 @@ public class CardBoxFragment extends Fragment {
         mListView = (ListView) view.findViewById(R.id.listview_card);
         mListView.addHeaderView(searchHeaderView);
         mListView.addHeaderView(countHeaderView, null, false);
-        final ImageView deleteImage = (ImageView)searchHeaderView.findViewById(R.id.image_search_delete);
-        searchEdit = (EditText)searchHeaderView.findViewById(R.id.editText_search_bar);
-        searchEdit.setHint("태그를 검색해주세요");
-        searchEdit.addTextChangedListener(new TextWatcher() {
+        mDeleteImage = (ImageView)searchHeaderView.findViewById(R.id.image_search_delete);
+        mSearchEdit = (EditText)searchHeaderView.findViewById(R.id.editText_search_bar);
+        mSearchEdit.setHint("태그를 검색해주세요");
+        mSearchEdit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -116,9 +116,9 @@ public class CardBoxFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 String string = s.toString();
                 if (!string.equals("")) {
-                    deleteImage.setVisibility(View.VISIBLE);
+                    mDeleteImage.setVisibility(View.VISIBLE);
                 } else {
-                    deleteImage.setVisibility(View.GONE);
+                    mDeleteImage.setVisibility(View.GONE);
                 }
             }
         });
@@ -140,7 +140,6 @@ public class CardBoxFragment extends Fragment {
         TextView textView = (TextView) view.findViewById(R.id.text_item_count);
         textView.setText("총 " + mAdapter.getCount() + "건");
 
-        fam = (FloatingActionMenu) view.findViewById(R.id.menu);
         FloatingActionButton addCardButton = (FloatingActionButton) view.findViewById(R.id.fab_write_card);
         addCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,20 +150,19 @@ public class CardBoxFragment extends Fragment {
             }
         });
         FloatingActionButton addCategoryButton = (FloatingActionButton) view.findViewById(R.id.fab_add_category);
-        mImageView = (ImageView) view.findViewById(R.id.image_background_blur);
-        fam.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
-            @Override
-            public void onMenuToggle(boolean opened) {
-
-                if (opened) {
-                    mImageView.setVisibility(View.VISIBLE);
-                    mListView.setEnabled(false);
-                } else {
-                    mImageView.setVisibility(View.GONE);
-                    mListView.setEnabled(true);
-                }
-            }
-        });
+        fam = (FloatingActionMenu) view.findViewById(R.id.menu);
+//        fam.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
+//            @Override
+//            public void onMenuToggle(boolean opened) {
+//                if (opened) {
+//                    mBlurImage.setVisibility(View.VISIBLE);
+//                    mListView.setEnabled(false);
+//                } else {
+//                    mBlurImage.setVisibility(View.GONE);
+//                    mListView.setEnabled(true);
+//                }
+//            }
+//        });
         return view;
     }
 
