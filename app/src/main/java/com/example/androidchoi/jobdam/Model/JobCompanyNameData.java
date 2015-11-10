@@ -10,10 +10,10 @@ import java.io.Serializable;
  */
 public class JobCompanyNameData implements Serializable {
     @SerializedName("href")
-    String link;
+    private String link;
 
     @DefaultValueField
-    String value;
+    private String value;
 
     public String getLink() {
         return link;

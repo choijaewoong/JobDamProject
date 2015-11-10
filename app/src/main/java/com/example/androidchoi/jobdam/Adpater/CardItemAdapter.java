@@ -17,20 +17,9 @@ public class CardItemAdapter extends BaseAdapter {
 
     List<CardData> items = new ArrayList<CardData>();
 
-    public void add(CardData item){
-        items.add(item);
-        notifyDataSetChanged();
+    public void setItems(ArrayList<CardData> cardList){
+        items = cardList;
     }
-
-    public void add(CardData item, int position){
-        items.add(position, item);
-        notifyDataSetChanged();
-    }
-
-    public void update(CardData item, int position){
-        items.get(position).setCarditem(item);
-    }
-
     @Override
     public int getCount() {
         return items.size();

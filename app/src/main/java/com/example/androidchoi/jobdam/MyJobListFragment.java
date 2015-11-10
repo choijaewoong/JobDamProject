@@ -22,6 +22,9 @@ import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.JobItemAdapter;
 import com.example.androidchoi.jobdam.Model.JobData;
+import com.example.androidchoi.jobdam.Model.MyJobLab;
+
+import java.util.ArrayList;
 
 
 /**
@@ -32,6 +35,7 @@ public class MyJobListFragment extends Fragment {
     JobItemAdapter mAdapter;
     EditText mSearchEdit;
     ImageView mDeleteImage;
+    private ArrayList<JobData> mJobList;
 
 //    public static MyJobListFragment newInstance(int page){
 //        Bundle args = new Bundle();
@@ -109,9 +113,9 @@ public class MyJobListFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                JobData data = (JobData) mAdapter.getItem(position - 1);
+                JobData data = (JobData) mAdapter.getItem(position - mListView.getHeaderViewsCount());
                 Intent intent = new Intent(getActivity(), JobDetailActivity.class);
-                intent.putExtra(JobData.JOBITEM, data);
+                intent.putExtra(JobData.JOBID, data.getId());
                 startActivity(intent);
             }
         });
@@ -121,10 +125,13 @@ public class MyJobListFragment extends Fragment {
         return view;
     }
     private void initData() {
-//        for(int i = 0; i<5; i++) {
-//            JobData data = new JobData();
-//            data.setJobTitle("기업" + i);
-//            mAdapter.add(data);
-//        }
+        mJobList = MyJobLab.get(getActivity()).getJobList();
+        mAdapter.setItems(mJobList);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
     }
 }

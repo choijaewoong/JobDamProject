@@ -123,7 +123,7 @@ public class AllJobFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                JobData data = (JobData) mAdapter.getItem(position - 1);
+                JobData data = (JobData) mAdapter.getItem(position - mListView.getHeaderViewsCount());
                 Intent intent = new Intent(getActivity(), JobDetailActivity.class);
                 intent.putExtra(JobData.JOBITEM, data);
                 startActivity(intent);
@@ -160,7 +160,7 @@ public class AllJobFragment extends Fragment {
         @Override
         protected void onPostExecute(AllJobListData allJobList) {
             super.onPostExecute(allJobList);
-            mAdapter.addList(allJobList.getJobList());
+            mAdapter.setItems(allJobList.getJobList());
             mListView.setAdapter(mAdapter);
             mTextView.setText("공채정보 총 " + mAdapter.getCount() + "건");
         }

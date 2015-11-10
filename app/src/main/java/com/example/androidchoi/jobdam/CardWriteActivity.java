@@ -10,12 +10,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Model.CardData;
+import com.example.androidchoi.jobdam.Model.CardLab;
+
+import java.util.UUID;
 
 public class CardWriteActivity extends AppCompatActivity {
 
     public static final String EXTRA_CARD_DATA = "card data";
     public static final String EXTRA_CARD_POSITION = "card position";
-
 
     CardData mData;
     EditText mTitle;
@@ -24,7 +26,6 @@ public class CardWriteActivity extends AppCompatActivity {
     TextView mCancelButton;
     TextView mSaveButton;
     boolean isFocused = false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +38,8 @@ public class CardWriteActivity extends AppCompatActivity {
         mCancelButton = (TextView)findViewById(R.id.text_cancel_card);
 
         Intent intent = getIntent();
-        mData = (CardData)intent.getSerializableExtra(CardData.CARDITEM);
-        final int cardPosition = intent.getIntExtra(CardData.CARDPOSITION, 0);
+        UUID cardId = (UUID)intent.getSerializableExtra(CardData.CARD_ID);
+        mData = CardLab.get(getApplicationContext()).getCard(cardId);
         if(mData != null){
             mCancelSaveLayout.setVisibility(View.GONE);
             mTitle.setText(mData.getTitle());
@@ -55,16 +56,14 @@ public class CardWriteActivity extends AppCompatActivity {
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mData == null){
+                if (mData == null) {
                     mData = new CardData();
+                    setData();
+                    CardLab.get(getApplicationContext()).addCardData(mData);
+                }else {
+                    setData();
                 }
-                mData.setTitle(mTitle.getText().toString());
-                mData.setContent(mContent.getText().toString());
-
-                Intent intent = new Intent();
-                intent.putExtra(EXTRA_CARD_DATA, mData);
-                intent.putExtra(EXTRA_CARD_POSITION, cardPosition);
-                setResult(Activity.RESULT_OK, intent);
+                setResult(Activity.RESULT_OK);
                 finish();
             }
         });
@@ -85,6 +84,11 @@ public class CardWriteActivity extends AppCompatActivity {
             }
         });
     }
+    public void setData(){
+        mData.setTitle(mTitle.getText().toString());
+        mData.setContent(mContent.getText().toString());
+    }
+
     public void changeMode(){
         isFocused = true;
         mCancelSaveLayout.setVisibility(View.VISIBLE);

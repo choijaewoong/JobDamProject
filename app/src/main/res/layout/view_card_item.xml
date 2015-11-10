@@ -34,7 +34,7 @@
         android:paddingLeft="@dimen/card_left_padding"
         android:paddingRight="@dimen/card_right_padding"
         android:paddingTop="@dimen/default_dimen"
-        android:background="@android:color/white">
+        android:background="@drawable/item_click_selector">
 
         <TextView
             android:id="@+id/edit_text_card_title"

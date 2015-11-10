@@ -23,8 +23,11 @@ import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.CardItemAdapter;
 import com.example.androidchoi.jobdam.Model.CardData;
+import com.example.androidchoi.jobdam.Model.CardLab;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+
+import java.util.ArrayList;
 
 
 /**
@@ -40,6 +43,7 @@ public class CardBoxFragment extends Fragment {
     FloatingActionMenu fam;
     EditText mSearchEdit;
     ImageView mDeleteImage;
+    private ArrayList<CardData> mCardList;
 
     public CardBoxFragment() {
         // Required empty public constructor
@@ -49,15 +53,10 @@ public class CardBoxFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode != Activity.RESULT_OK) return;
-
         if(requestCode == REQUEST_MODIFY){
-            int position = data.getIntExtra(CardWriteActivity.EXTRA_CARD_POSITION, 0);
-            CardData cardData = (CardData) data.getSerializableExtra(CardWriteActivity.EXTRA_CARD_DATA);
-            mAdapter.update(cardData, position);
+//            Toast.makeText(getActivity(), CardLab.get(getActivity()).getCardList().get(0).getTitle(), Toast.LENGTH_SHORT).show();
         }else if(requestCode == REQUEST_NEW){
-            CardData cardData = (CardData) data.getSerializableExtra(CardWriteActivity.EXTRA_CARD_DATA);
-            mAdapter.add(cardData, 0);
-            mListView.smoothScrollToPositionFromTop(0,0,500);
+            mListView.smoothScrollToPositionFromTop(0, 0, 500);
         }
         mAdapter.notifyDataSetChanged();
     }
@@ -130,8 +129,8 @@ public class CardBoxFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CardData data = (CardData) mAdapter.getItem(position - mListView.getHeaderViewsCount());
                 Intent intent = new Intent(getActivity(), CardWriteActivity.class);
-                intent.putExtra(CardData.CARDITEM, data);
-                intent.putExtra(CardData.CARDPOSITION, position - mListView.getHeaderViewsCount());
+                intent.putExtra(CardData.CARD_ID, data.getId());
+//                intent.putExtra(CardData.CARDPOSITION, position - mListView.getHeaderViewsCount());
                 startActivityForResult(intent, REQUEST_MODIFY);
             }
         });
@@ -167,10 +166,7 @@ public class CardBoxFragment extends Fragment {
     }
 
     private void initData() {
-        for (int i = 0; i < 10; i++) {
-            // 네트워크 매니저를 통해 데이터를 생성해서 가져옴.
-            CardData data = new CardData();
-            mAdapter.add(data);
-        }
+        mCardList = CardLab.get(getActivity()).getCardList();
+        mAdapter.setItems(mCardList);
     }
 }

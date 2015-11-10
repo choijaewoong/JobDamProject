@@ -9,8 +9,10 @@ import java.io.Serializable;
  */
 public class JobData implements Serializable {
 
-    public static final String JOBITEM = "jobItem";
+    public static final String JOBITEM = "job_item";
+    public static final String JOBID = "job_id";
 
+    private int id;
     private int mLogoResourceId;
     private JobCompanyData company;
     private JobContentData position;
@@ -23,6 +25,7 @@ public class JobData implements Serializable {
     private String keyword;  //분류
     private String salary;   //연봉
 
+    public int getId() { return id; }
     public JobCompanyData getCompany() {return company;}
     public JobContentData getPosition() {return position;}
     public String getSiteUrl() {

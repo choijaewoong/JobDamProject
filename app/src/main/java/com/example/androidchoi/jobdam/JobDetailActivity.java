@@ -11,11 +11,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.JobDetailAdapter;
 import com.example.androidchoi.jobdam.Model.AddressData;
 import com.example.androidchoi.jobdam.Model.ContentData;
 import com.example.androidchoi.jobdam.Model.JobData;
+import com.example.androidchoi.jobdam.Model.MyJobLab;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,12 +41,29 @@ public class JobDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mData = (JobData)intent.getSerializableExtra(JobData.JOBITEM);
+        if(mData == null){
+            int id = intent.getIntExtra(JobData.JOBID, 0);
+            mData = MyJobLab.get(getApplicationContext()).getJobData(id);
+        }
+//        Toast.makeText(JobDetailActivity.this, mData.getId()+" " ,Toast.LENGTH_SHORT).show();
 
         mExpandableListView = (ExpandableListView)findViewById(R.id.listview_job_detail_expandable);
         mExpandableAdapter = new JobDetailAdapter();
         // 헤더뷰 설정
         View corpHeaderView = getLayoutInflater().inflate(R.layout.view_job_detail_corp_header, null);
         View titleHeaderView = getLayoutInflater().inflate(R.layout.view_job_detail_title_header,null);
+        Button scrapButton = (Button)titleHeaderView.findViewById(R.id.btn_detail_scrap);
+        scrapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MyJobLab.get(getApplication()).getJobData(mData.getId()) == null) {
+                    MyJobLab.get(getApplicationContext()).addJobData(mData);
+                    Toast.makeText(JobDetailActivity.this, getString(R.string.check_scrap), Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(JobDetailActivity.this, getString(R.string.check_not_scrap), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         Button corpLink = (Button)titleHeaderView.findViewById(R.id.btn_detail_move_homepage);
         corpLink.setOnClickListener(new View.OnClickListener() {
             @Override
