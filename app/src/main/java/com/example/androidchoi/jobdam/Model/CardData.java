@@ -37,7 +37,7 @@ public class CardData implements Serializable {
 
     public CardData(){
         mId = UUID.randomUUID();
-        mTitle = "Android Studio";
+        mTitle = mId+"";
         mContent = "1. 코드 최적화는 가장 나중에\n" +
                 "2. 수레바퀴를 다시 만들지 말라.\n" +
                 "  (만들어져 있는건 굳이 만들지 말자)\n" +

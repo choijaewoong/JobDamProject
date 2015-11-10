@@ -15,8 +15,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="left|top"
         android:clipToPadding="false"
-        android:divider="@android:color/transparent"
-        android:scrollbars="none"/>
+        android:divider="@android:color/transparent"/>
 
     <ImageView
         android:layout_width="match_parent"

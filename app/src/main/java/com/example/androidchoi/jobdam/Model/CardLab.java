@@ -18,7 +18,7 @@ public class CardLab {
         mCardList = new ArrayList<CardData>();
 
         //서버에서 데이터 추가할 부분
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             // 네트워크 매니저를 통해 데이터를 생성해서 가져옴.
             CardData data = new CardData();
             addCardData(data);

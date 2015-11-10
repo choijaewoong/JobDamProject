@@ -43,4 +43,10 @@ public class JobData implements Serializable {
     private String qualification;
     private String conditions;
     private String period;
+
+    @Override
+    public String toString() {
+        return company.getName().getValue() + "/"
+                + getPosition().getTitle();
+    }
 }

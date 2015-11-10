@@ -36,6 +36,7 @@ public class MyJobListFragment extends Fragment {
     EditText mSearchEdit;
     ImageView mDeleteImage;
     private ArrayList<JobData> mJobList;
+    TextView mCountTextView;
 
 //    public static MyJobListFragment newInstance(int page){
 //        Bundle args = new Bundle();
@@ -95,7 +96,14 @@ public class MyJobListFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+//                ArrayList<JobData> jobList = new ArrayList<JobData>();
+//                for (JobData c : mJobList) {
+//                    if (c.toString().contains(s)) {
+//                        jobList.add(c);
+//                    }
+//                }
+//                mAdapter.setItems(jobList);
+//                mCountTextView.setText("총 " + mAdapter.getCount() + "건");
             }
 
             @Override
@@ -120,8 +128,8 @@ public class MyJobListFragment extends Fragment {
             }
         });
         initData();
-        TextView textView = (TextView)view.findViewById(R.id.text_item_count);
-        textView.setText("총 "+ mAdapter.getCount() + "건");
+        mCountTextView = (TextView)view.findViewById(R.id.text_item_count);
+        mCountTextView.setText("총 " + mAdapter.getCount() + "건");
         return view;
     }
     private void initData() {

@@ -19,6 +19,7 @@ public class CardItemAdapter extends BaseAdapter {
 
     public void setItems(ArrayList<CardData> cardList){
         items = cardList;
+        notifyDataSetChanged();
     }
     @Override
     public int getCount() {

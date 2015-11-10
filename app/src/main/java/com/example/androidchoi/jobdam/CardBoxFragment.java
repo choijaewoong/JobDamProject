@@ -44,6 +44,7 @@ public class CardBoxFragment extends Fragment {
     EditText mSearchEdit;
     ImageView mDeleteImage;
     private ArrayList<CardData> mCardList;
+    TextView mCountTextView;
 
     public CardBoxFragment() {
         // Required empty public constructor
@@ -58,6 +59,7 @@ public class CardBoxFragment extends Fragment {
         }else if(requestCode == REQUEST_NEW){
             mListView.smoothScrollToPositionFromTop(0, 0, 500);
         }
+        mCountTextView.setText("총 " + mAdapter.getCount() + "건");
         mAdapter.notifyDataSetChanged();
     }
 
@@ -108,7 +110,14 @@ public class CardBoxFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+//                ArrayList<CardData> cardList = new ArrayList<CardData>();
+//                for (CardData c : mCardList) {
+//                    if (c.getTitle().contains(s)) {
+//                        cardList.add(c);
+//                    }
+//                }
+//                mAdapter.setItems(cardList);
+//                mCountTextView.setText("총 " + mAdapter.getCount() + "건");
             }
 
             @Override
@@ -136,8 +145,8 @@ public class CardBoxFragment extends Fragment {
         });
 
         initData();
-        TextView textView = (TextView) view.findViewById(R.id.text_item_count);
-        textView.setText("총 " + mAdapter.getCount() + "건");
+        mCountTextView = (TextView) view.findViewById(R.id.text_item_count);
+        mCountTextView.setText("총 " + mAdapter.getCount() + "건");
 
         FloatingActionButton addCardButton = (FloatingActionButton) view.findViewById(R.id.fab_write_card);
         addCardButton.setOnClickListener(new View.OnClickListener() {
