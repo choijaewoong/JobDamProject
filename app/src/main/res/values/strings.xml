@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JobDam</string>
+    <string name="app_name">JOBDAM</string>
     <string name="action_settings">Settings</string>
     <string name="my_job">내가 담은 채용 정보</string>
     <string name="card_box">나의 카드 박스</string>
@@ -44,4 +44,7 @@
     <!-- Check Message-->
     <string name="check_scrap">스크랩 되었습니다.</string>
     <string name="check_not_scrap">이미 스크랩 되어있습니다.</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

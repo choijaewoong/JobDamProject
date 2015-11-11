@@ -48,7 +48,7 @@ public class MyJobFragment extends Fragment {
         fragments.add(new MyJobListFragment());
         fragments.add(new MyJobCalendarFragment());
         mAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), fragments);
-        mViewPager = (ViewPager)view.findViewById(R.id.viewpager);
+        mViewPager = (ViewPager)view.findViewById(R.id.tab_pager);
         mViewPager.setAdapter(mAdapter);
         mTabLayout = (TabLayout)view.findViewById(R.id.sliding_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
