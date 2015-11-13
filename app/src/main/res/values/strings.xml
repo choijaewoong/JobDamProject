@@ -4,8 +4,8 @@
     <string name="my_job">내가 담은 채용 정보</string>
     <string name="card_box">나의 카드 박스</string>
     <string name="all_job">전체 채용 정보</string>
-    <string name="board">잡담 톡</string>
-    <string name="announcement">잡담 알림</string>
+    <string name="board">잡담톡</string>
+    <string name="announcement">알림통통</string>
     <string name="setting">설정</string>
     <!-- activity name-->
     <string name="detail_job_info">상세채용정보</string>

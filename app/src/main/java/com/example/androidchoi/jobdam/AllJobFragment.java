@@ -4,7 +4,6 @@ package com.example.androidchoi.jobdam;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -21,16 +20,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.begentgroup.xmlparser.XMLParser;
 import com.example.androidchoi.jobdam.Adpater.JobItemAdapter;
-import com.example.androidchoi.jobdam.Model.AllJobListData;
+import com.example.androidchoi.jobdam.Manager.JobAPIRequest;
+import com.example.androidchoi.jobdam.Manager.NetworkManager;
+import com.example.androidchoi.jobdam.Manager.NetworkRequest;
 import com.example.androidchoi.jobdam.Model.JobData;
+import com.example.androidchoi.jobdam.Model.JobList;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 
@@ -49,7 +45,6 @@ public class AllJobFragment extends Fragment {
     public AllJobFragment() {
         // Required empty public constructor
     }
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -75,12 +70,27 @@ public class AllJobFragment extends Fragment {
             }
         });
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        XmlParsingTask xmlParsingTask = new XmlParsingTask();
-        xmlParsingTask.execute();
+        JobAPIRequest request = new JobAPIRequest();
+        NetworkManager.getInstance().getNetworkData(getActivity(), request,
+                new NetworkManager.OnResultListener<JobList>() {
+                    @Override
+                    public void onSuccess(NetworkRequest<JobList> request, JobList result) {
+                        mAdapter = new JobItemAdapter();
+                        mAdapter.setItems(result.getJobList());
+                        mListView.setAdapter(mAdapter);
+                        mTextView.setText("공채정보 총 " + mAdapter.getCount() + "건");
+                    }
+
+                    @Override
+                    public void onFail(NetworkRequest<JobList> request, int code) {
+
+                    }
+                });
+//        XmlParsingTask xmlParsingTask = new XmlParsingTask();
+//        xmlParsingTask.execute();
     }
 
     @Override
@@ -100,12 +110,10 @@ public class AllJobFragment extends Fragment {
         mSearchEdit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
@@ -118,8 +126,6 @@ public class AllJobFragment extends Fragment {
                 }
             }
         });
-        mAdapter = new JobItemAdapter();
-//        initData();
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -133,35 +139,35 @@ public class AllJobFragment extends Fragment {
         return view;
     }
 
-    public static final String JOB_URL = "http://api.saramin.co.kr/job-search?stock=kospi+kosdaq&sr=directhire&fields=posting-date+expiration-date+keyword-code+count&count=10";
-    private class XmlParsingTask extends AsyncTask<String, Integer, AllJobListData>{
-        @Override
-        protected AllJobListData doInBackground(String... params) {
-            try{
-                URL url = new URL(JOB_URL);
-                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                int code = conn.getResponseCode();
-                if(code == HttpURLConnection.HTTP_OK){
-                    XMLParser parser = new XMLParser();
-                    AllJobListData allJobList = parser.fromXml(conn.getInputStream(), "jobs", AllJobListData.class);
-                    return allJobList;
-                }
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(AllJobListData allJobList) {
-            super.onPostExecute(allJobList);
-            mAdapter.setItems(allJobList.getJobList());
-            mListView.setAdapter(mAdapter);
-            mTextView.setText("공채정보 총 " + mAdapter.getCount() + "건");
-        }
-    }
+//    public static final String JOB_URL = "http://api.saramin.co.kr/job-search?stock=kospi+kosdaq&sr=directhire&fields=posting-date+expiration-date+keyword-code+count&count=10";
+//    private class XmlParsingTask extends AsyncTask<String, Integer, JobList>{
+//        @Override
+//        protected JobList doInBackground(String... params) {
+//            try{
+//                URL url = new URL(JOB_URL);
+//                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+//                int code = conn.getResponseCode();
+//                if(code == HttpURLConnection.HTTP_OK){
+//                    XMLParser parser = new XMLParser();
+//                    JobList jobList = parser.fromXml(conn.getInputStream(), "jobs", JobList.class);
+//                    return jobList;
+//                }
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(JobList jobList) {
+//            super.onPostExecute(jobList);
+//            mAdapter.setItems(jobList.getJobList());
+//            mListView.setAdapter(mAdapter);
+//            mTextView.setText("공채정보 총 " + mAdapter.getCount() + "건");
+//        }
+//    }
 }

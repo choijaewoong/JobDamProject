@@ -1,7 +1,6 @@
 package com.example.androidchoi.jobdam.LogIn;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,12 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.androidchoi.jobdam.LogIn.ServiceAgreementFragment;
-import com.example.androidchoi.jobdam.MainActivity;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
-import com.example.androidchoi.jobdam.Manager.PropertyManager;
 import com.example.androidchoi.jobdam.R;
 
 
@@ -39,25 +34,26 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 final String email = "EMAIL";
                 final String password = "PASSWORD";
-                NetworkManager.getInstance().login(email, password, new NetworkManager.OnResultListener<String>() {
-                    @Override
-                    public void onSuccess(String result) {
-                        if (result.equals("ok")) {
-                            PropertyManager.getInstance().setId(email);
-                            PropertyManager.getInstance().setPassword(password);
-                            startActivity(new Intent(getContext(), MainActivity.class));
-                            getActivity().finish();
-                        } else {
-                            // ...
-                            Toast.makeText(getActivity(), "사용자 정보가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFail(int code) {
-
-                    }
-                });
+                NetworkManager.getInstance().login(email, password);
+//                        new NetworkManager.OnResultListener<String>() {
+//                    @Override
+//                    public void onSuccess(String result) {
+//                        if (result.equals("ok")) {
+//                            PropertyManager.getInstance().setId(email);
+//                            PropertyManager.getInstance().setPassword(password);
+//                            startActivity(new Intent(getContext(), MainActivity.class));
+//                            getActivity().finish();
+//                        } else {
+//                            // ...
+//                            Toast.makeText(getActivity(), "사용자 정보가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFail(int code) {
+//
+//                    }
+//                });
             }
         });
 

@@ -22,21 +22,23 @@ public class SplashActivity extends AppCompatActivity {
         String id = PropertyManager.getInstance().getId();
         if (!TextUtils.isEmpty(id)) {
             String password = PropertyManager.getInstance().getPassword();
-            NetworkManager.getInstance().login(id, password, new NetworkManager.OnResultListener<String>() {
-                @Override
-                public void onSuccess(String result) {
-                    if (result.equals("ok")) {
-                        goMain();
-                    } else {
-                        goLogin();
-                    }
-                }
+            NetworkManager.getInstance().login(id, password);
 
-                @Override
-                public void onFail(int code) {
-                    goLogin();
-                }
-            });
+//            new NetworkManager.OnResultListener<String>() {
+//                @Override
+//                public void onSuccess(String result) {
+//                    if (result.equals("ok")) {
+//                        goMain();
+//                    } else {
+//                        goLogin();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFail(int code) {
+//                    goLogin();
+//                }
+//            });
         } else {
             mHandler.postDelayed(new Runnable() {
                 @Override

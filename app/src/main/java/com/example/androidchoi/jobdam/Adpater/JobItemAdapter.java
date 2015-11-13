@@ -17,7 +17,7 @@ public class JobItemAdapter extends BaseAdapter {
     ArrayList<Job> mItems = new ArrayList<Job>();
 
     public void setItems(ArrayList items){
-        mItems = items;
+        mItems.addAll(items);
         notifyDataSetChanged();
     }
 

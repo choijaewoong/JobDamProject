@@ -1,7 +1,6 @@
 package com.example.androidchoi.jobdam.LogIn;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -12,9 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.androidchoi.jobdam.MainActivity;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
-import com.example.androidchoi.jobdam.Manager.PropertyManager;
 import com.example.androidchoi.jobdam.R;
 
 
@@ -42,24 +39,26 @@ public class InputUserInfoFragment extends Fragment{
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NetworkManager.getInstance().signup("aaa", "1111", new NetworkManager.OnResultListener<String>() {
-                    @Override
-                    public void onSuccess(String result) {
-                        if (result.equals("ok")) {
-                            PropertyManager.getInstance().setId("aaa");
-                            PropertyManager.getInstance().setPassword("1111");
-                            startActivity(new Intent(getContext(), MainActivity.class));
-                            getActivity().finish();
-                        } else {
-                            //
-                        }
-                    }
+                NetworkManager.getInstance().signup("aaa", "1111");
 
-                    @Override
-                    public void onFail(int code) {
-                        // ...
-                    }
-                });
+//                        , new NetworkManager.OnResultListener<String>() {
+//                    @Override
+//                    public void onSuccess(String result) {
+//                        if (result.equals("ok")) {
+//                            PropertyManager.getInstance().setId("aaa");
+//                            PropertyManager.getInstance().setPassword("1111");
+//                            startActivity(new Intent(getContext(), MainActivity.class));
+//                            getActivity().finish();
+//                        } else {
+//                            //
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFail(int code) {
+//                        // ...
+//                    }
+//                });
             }
         });
         return view;

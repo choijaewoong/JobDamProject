@@ -5,29 +5,23 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camara"
-            android:icon="@android:drawable/ic_menu_camera"
+            android:icon="@drawable/icon_menu_ndc"
             android:title="@string/my_job"/>
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@android:drawable/ic_menu_gallery"
+            android:icon="@drawable/icon_menu_ncb"
             android:title="@string/card_box"/>
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@android:drawable/ic_menu_slideshow"
+            android:icon="@drawable/icon_menu_jcj"
             android:title="@string/all_job"/>
         <item
             android:id="@+id/nav_manage"
-            android:icon="@android:drawable/ic_menu_manage"
+            android:icon="@drawable/icon_menu_jdt"
             android:title="@string/board"/>
-
-    </group>
-
-    <group
-        android:id="@+id/menu_bottom"
-        android:checkableBehavior="single">
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@android:drawable/ic_menu_share"
-                android:title="@string/announcement"/>
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/icon_menu_at"
+            android:title="@string/announcement"/>
     </group>
 </menu>

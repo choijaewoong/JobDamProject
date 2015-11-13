@@ -8,7 +8,6 @@ import java.io.Serializable;
  * Created by Choi on 2015-10-18.
  */
 public class JobData extends Job implements Serializable {
-
     private int id;
     private int mLogoResourceId;
     private JobCompanyData company;

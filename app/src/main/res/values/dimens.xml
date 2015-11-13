@@ -46,6 +46,7 @@
     <!-- card item-->
     <dimen name="card_right_padding">40dp</dimen>
     <dimen name="card_left_padding">24dp</dimen>
+    <dimen name="bar_bottom_padding">2.5dp</dimen>
     <!-- image size-->
     <dimen name="corp_logo_size">80dp</dimen>
     <dimen name="icon_size">30dp</dimen>
