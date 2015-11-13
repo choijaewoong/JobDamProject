@@ -19,11 +19,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.MyJobItemAdapter;
-import com.example.androidchoi.jobdam.Manager.MyJobRequest;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
-import com.example.androidchoi.jobdam.Manager.NetworkRequest;
 import com.example.androidchoi.jobdam.Model.Job;
 import com.example.androidchoi.jobdam.Model.MyJobList;
 import com.example.androidchoi.jobdam.Model.MyJobs;
@@ -51,20 +50,18 @@ public class MyJobListFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        MyJobRequest request = new MyJobRequest("kim");
-        NetworkManager.getInstance().getNetworkData(getActivity(), request, new NetworkManager.OnResultListener<MyJobList>() {
+        NetworkManager.getInstance().getMyJob(getActivity(), "kim", new NetworkManager.OnResultListener<MyJobList>() {
             @Override
-            public void onSuccess(NetworkRequest<MyJobList> request, MyJobList result) {
+            public void onSuccess(MyJobList result) {
                 mJobList = result.getJobList();
                 mAdapter.setItems(mJobList);
                 mCountTextView.setText("총 " + mAdapter.getCount() + "건");
             }
             @Override
-            public void onFail(NetworkRequest<MyJobList> request, int code) {
+            public void onFail(int code) {
+                Toast.makeText(getActivity(), code + "" , Toast.LENGTH_SHORT).show();
             }
         });
-
         FrameLayout touchInterceptor = (FrameLayout)getActivity().findViewById(R.id.touchInterceptor);
         touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -146,45 +143,4 @@ public class MyJobListFragment extends Fragment {
         super.onResume();
         mAdapter.notifyDataSetChanged();
     }
-//
-//    public static final String ShowMyScrapUrl = "http://52.69.235.46:3000/showmyscrap/%s";
-//    class MyJobTask extends AsyncTask<String,Integer,String> {
-//        @Override
-//        protected String doInBackground(String... params) {
-//            String name = params[0];
-//            String urlText = String.format(ShowMyScrapUrl, name);
-//            try {
-//                URL url = new URL(urlText);
-//                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//                conn.setRequestProperty("Accept", "application/json");
-//                int code = conn.getResponseCode();
-//                if (code == HttpURLConnection.HTTP_OK) {
-//                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//                    StringBuilder sb = new StringBuilder();
-//                    String line;
-//                    while ((line = br.readLine()) != null) {
-//                        sb.append(line).append("\n\r");
-//                    }
-//                    return sb.toString();
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String s) {
-//            super.onPostExecute(s);
-//            if(s != null){
-//                Gson gson = new Gson();
-//                MyJobList.get(getContext(), gson.fromJson(s, MyJobList.class));
-//            }else {
-//                MyJobList.get(getContext());
-//                Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
-//            }
-//            mJobList = MyJobList.get(getContext()).getJobList();
-//            mAdapter.setItems(mJobList);
-//        }
-//    }
 }

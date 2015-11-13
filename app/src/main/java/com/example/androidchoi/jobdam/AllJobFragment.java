@@ -19,11 +19,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.JobItemAdapter;
-import com.example.androidchoi.jobdam.Manager.JobAPIRequest;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
-import com.example.androidchoi.jobdam.Manager.NetworkRequest;
 import com.example.androidchoi.jobdam.Model.JobData;
 import com.example.androidchoi.jobdam.Model.JobList;
 
@@ -45,13 +44,30 @@ public class AllJobFragment extends Fragment {
     public AllJobFragment() {
         // Required empty public constructor
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        TextView subTitle = (TextView)getActivity().findViewById(R.id.text_subtitle);
+        TextView subTitle = (TextView) getActivity().findViewById(R.id.text_subtitle);
         subTitle.setText(R.string.all_job);
 
-        FrameLayout touchInterceptor = (FrameLayout)getActivity().findViewById(R.id.touchInterceptor);
+        mListView.setAdapter(mAdapter);
+        NetworkManager.getInstance().getJobAPI(getActivity(),
+                new NetworkManager.OnResultListener<JobList>() {
+                    @Override
+                    public void onSuccess(JobList result) {
+                        mAdapter.setItems(result.getJobList());
+                        mTextView.setText("공채정보 총 " + mAdapter.getCount() + "건");
+
+                    }
+
+                    @Override
+                    public void onFail(int code) {
+                        Toast.makeText(getActivity(), "error : " + code, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        FrameLayout touchInterceptor = (FrameLayout) getActivity().findViewById(R.id.touchInterceptor);
         touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -70,28 +86,6 @@ public class AllJobFragment extends Fragment {
             }
         });
     }
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        JobAPIRequest request = new JobAPIRequest();
-        NetworkManager.getInstance().getNetworkData(getActivity(), request,
-                new NetworkManager.OnResultListener<JobList>() {
-                    @Override
-                    public void onSuccess(NetworkRequest<JobList> request, JobList result) {
-                        mAdapter = new JobItemAdapter();
-                        mAdapter.setItems(result.getJobList());
-                        mListView.setAdapter(mAdapter);
-                        mTextView.setText("공채정보 총 " + mAdapter.getCount() + "건");
-                    }
-
-                    @Override
-                    public void onFail(NetworkRequest<JobList> request, int code) {
-
-                    }
-                });
-//        XmlParsingTask xmlParsingTask = new XmlParsingTask();
-//        xmlParsingTask.execute();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -101,11 +95,11 @@ public class AllJobFragment extends Fragment {
         View searchHeaderView = inflater.inflate(R.layout.view_item_search_header, null);
         View countHeaderView = inflater.inflate(R.layout.view_item_count_header, null);
 
-        mListView = (ListView)view.findViewById(R.id.listview_all_job);
+        mListView = (ListView) view.findViewById(R.id.listview_all_job);
         mListView.addHeaderView(searchHeaderView);
         mListView.addHeaderView(countHeaderView, null, false);
-        mDeleteImage = (ImageView)searchHeaderView.findViewById(R.id.image_search_delete);
-        mSearchEdit = (EditText)searchHeaderView.findViewById(R.id.editText_search_bar);
+        mDeleteImage = (ImageView) searchHeaderView.findViewById(R.id.image_search_delete);
+        mSearchEdit = (EditText) searchHeaderView.findViewById(R.id.editText_search_bar);
         mSearchEdit.setHint("기업을 검색해주세요");
         mSearchEdit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -126,6 +120,7 @@ public class AllJobFragment extends Fragment {
                 }
             }
         });
+        mAdapter = new JobItemAdapter();
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -135,39 +130,7 @@ public class AllJobFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        mTextView = (TextView)view.findViewById(R.id.text_item_count);
+        mTextView = (TextView) view.findViewById(R.id.text_item_count);
         return view;
     }
-
-//    public static final String JOB_URL = "http://api.saramin.co.kr/job-search?stock=kospi+kosdaq&sr=directhire&fields=posting-date+expiration-date+keyword-code+count&count=10";
-//    private class XmlParsingTask extends AsyncTask<String, Integer, JobList>{
-//        @Override
-//        protected JobList doInBackground(String... params) {
-//            try{
-//                URL url = new URL(JOB_URL);
-//                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-//                int code = conn.getResponseCode();
-//                if(code == HttpURLConnection.HTTP_OK){
-//                    XMLParser parser = new XMLParser();
-//                    JobList jobList = parser.fromXml(conn.getInputStream(), "jobs", JobList.class);
-//                    return jobList;
-//                }
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(JobList jobList) {
-//            super.onPostExecute(jobList);
-//            mAdapter.setItems(jobList.getJobList());
-//            mListView.setAdapter(mAdapter);
-//            mTextView.setText("공채정보 총 " + mAdapter.getCount() + "건");
-//        }
-//    }
 }
