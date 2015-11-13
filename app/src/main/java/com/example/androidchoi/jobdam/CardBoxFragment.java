@@ -138,7 +138,8 @@ public class CardBoxFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CardData data = (CardData) mAdapter.getItem(position - mListView.getHeaderViewsCount());
                 Intent intent = new Intent(getActivity(), CardWriteActivity.class);
-                intent.putExtra(CardData.CARD_ID, data.getId());
+                intent.putExtra(CardData.CARD_ITEM, data);
+                intent.putExtra(CardData.CARD_NEW, false);
 //                intent.putExtra(CardData.CARDPOSITION, position - mListView.getHeaderViewsCount());
                 startActivityForResult(intent, REQUEST_MODIFY);
             }
@@ -153,6 +154,7 @@ public class CardBoxFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CardWriteActivity.class);
+                intent.putExtra(CardData.CARD_NEW, true);
                 startActivityForResult(intent, REQUEST_NEW);
                 fam.close(true);
             }

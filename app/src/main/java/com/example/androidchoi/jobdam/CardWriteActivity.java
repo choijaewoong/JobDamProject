@@ -4,18 +4,23 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.CardData;
 import com.example.androidchoi.jobdam.Model.CardLab;
+import com.google.gson.Gson;
 
 public class CardWriteActivity extends AppCompatActivity {
 
     public static final String EXTRA_CARD_DATA = "card data";
     public static final String EXTRA_CARD_POSITION = "card position";
+
 
     CardData mData;
     EditText mTitle;
@@ -23,6 +28,7 @@ public class CardWriteActivity extends AppCompatActivity {
     LinearLayout mCancelSaveLayout;
     TextView mCancelButton;
     TextView mSaveButton;
+    boolean isNew;
     boolean isFocused = false;
 
     @Override
@@ -36,8 +42,8 @@ public class CardWriteActivity extends AppCompatActivity {
         mCancelButton = (TextView)findViewById(R.id.text_cancel_card);
 
         Intent intent = getIntent();
-        int cardId = intent.getIntExtra(CardData.CARD_ID, 0);
-        mData = CardLab.get(getApplicationContext()).getCard(cardId);
+        isNew = intent.getBooleanExtra(CardData.CARD_NEW, true);
+        mData = (CardData)intent.getSerializableExtra(CardData.CARD_ITEM);
         if(mData != null){
             mCancelSaveLayout.setVisibility(View.GONE);
             mTitle.setText(mData.getTitle());
@@ -58,6 +64,23 @@ public class CardWriteActivity extends AppCompatActivity {
                     mData = new CardData();
                     setData();
                     CardLab.get(getApplicationContext()).addCardData(mData);
+
+                    Gson gson = new Gson();
+                    final String json = gson.toJson(mData);
+                    NetworkManager.getInstance().addMemo(CardWriteActivity.this, json, new NetworkManager.OnResultListener<String>(){
+                        @Override
+                        public void onSuccess(String result) {
+                            Toast.makeText(CardWriteActivity.this, json, Toast.LENGTH_SHORT).show();
+                            Log.i("dd",json);
+
+                        }
+
+                        @Override
+                        public void onFail(int code) {
+                            Toast.makeText(CardWriteActivity.this, "실패.", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
                 }else {
                     setData();
                 }

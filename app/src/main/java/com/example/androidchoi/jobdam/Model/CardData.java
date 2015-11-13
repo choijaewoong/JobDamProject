@@ -8,7 +8,8 @@ import java.util.Date;
  */
 public class CardData implements Serializable {
 
-    public static final String CARD_ID = "cardId";
+    public static final String CARD_ITEM = "cardItem";
+    public static final String CARD_NEW = "cardNew";
     public static final String CARDPOSITION = "cardposition";
 
     private int id;

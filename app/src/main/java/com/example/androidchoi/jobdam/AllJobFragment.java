@@ -58,9 +58,7 @@ public class AllJobFragment extends Fragment {
                     public void onSuccess(JobList result) {
                         mAdapter.setItems(result.getJobList());
                         mTextView.setText("공채정보 총 " + mAdapter.getCount() + "건");
-
                     }
-
                     @Override
                     public void onFail(int code) {
                         Toast.makeText(getActivity(), "error : " + code, Toast.LENGTH_SHORT).show();

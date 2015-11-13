@@ -15,10 +15,12 @@ import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.apache.http.Header;
 import org.apache.http.client.HttpClient;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHeader;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -132,7 +134,31 @@ public class NetworkManager {
                 listener.onSuccess(MyJobList.get(MyApplication.getContext()));
             }
         });
+    }
 
+    public void addMyJob(Context context, String userName, final OnResultListener<MyJobList> listener){
+
+
+    }
+
+    private static final String ADD_MEMO = SERVER + "/addboard";
+    public void addMemo(Context context, final String jsonString, final OnResultListener<String> listener){
+        Header[] headers = null;
+        try {
+            client.post(context, ADD_MEMO, headers, new StringEntity(jsonString), "application/json", new TextHttpResponseHandler() {
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+                }
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    listener.onSuccess(responseString);
+                }
+            });
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     public void cancelAll(Context context) {
