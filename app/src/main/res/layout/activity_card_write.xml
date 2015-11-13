@@ -132,7 +132,8 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            >
 
             <ImageView
                 android:layout_width="@dimen/icon_size"
@@ -147,9 +148,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/text_card_tag"
                 android:layout_weight="1"
-                android:layout_gravity="center_vertical"
                 android:background="@android:color/transparent"
-                android:hint="태그"/>
+                android:hint="태그"
+                android:layout_gravity="center_vertical"/>
 
             <ImageView
                 android:layout_width="@dimen/icon_size"

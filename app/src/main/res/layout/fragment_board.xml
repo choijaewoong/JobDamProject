@@ -2,19 +2,29 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
                 tools:context="com.example.dongja94.sampleslidingmenu.TwoFragment">
 
 
     <!-- TODO: Update blank fragment layout -->
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView15"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/linearLayout3"
+        android:background="@drawable/board_background"/>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager_article"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout3"
         android:paddingLeft="64dp"
-        android:paddingRight="64dp">
+        android:paddingRight="64dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/imageView13">
     </android.support.v4.view.ViewPager>
 
     <LinearLayout
@@ -24,7 +34,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
         <TextView
@@ -35,6 +45,13 @@
             android:gravity="center"
             android:text="New Text"/>
 
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView14"
+            android:layout_weight="0"
+            android:background="@android:color/white"/>
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="0dp"
@@ -43,6 +60,14 @@
             android:gravity="center"
             android:text="New Text"/>
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/imageView13"
+        android:layout_above="@+id/linearLayout3"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/white"/>
 
 
 </RelativeLayout>

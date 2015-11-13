@@ -27,4 +27,5 @@ dependencies {
     compile project(':FloatingActionButton')
     compile 'com.android.support:design:23.1.0'
     compile files('libs/simplexmlparser.jar')
+    compile 'com.google.code.gson:gson:2.2.4'
 }

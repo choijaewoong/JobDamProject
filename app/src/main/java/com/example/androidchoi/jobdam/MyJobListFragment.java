@@ -4,6 +4,7 @@ package com.example.androidchoi.jobdam;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -19,11 +20,19 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.androidchoi.jobdam.Adpater.JobItemAdapter;
-import com.example.androidchoi.jobdam.Model.JobData;
-import com.example.androidchoi.jobdam.Model.MyJobLab;
+import com.example.androidchoi.jobdam.Adpater.MyJobItemAdapter;
+import com.example.androidchoi.jobdam.Model.Job;
+import com.example.androidchoi.jobdam.Model.MyJobList;
+import com.example.androidchoi.jobdam.Model.MyJobs;
+import com.google.gson.Gson;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -31,20 +40,13 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class MyJobListFragment extends Fragment {
+
     ListView mListView;
-    JobItemAdapter mAdapter;
+    MyJobItemAdapter mAdapter;
     EditText mSearchEdit;
     ImageView mDeleteImage;
-    private ArrayList<JobData> mJobList;
+    private ArrayList<MyJobs> mJobList;
     TextView mCountTextView;
-
-//    public static MyJobListFragment newInstance(int page){
-//        Bundle args = new Bundle();
-//        args.putInt("ddd",page);
-//        MyJobListFragment myJobListFragment = new MyJobListFragment();
-//        myJobListFragment.setArguments(args);
-//        return myJobListFragment;
-//    }
 
     public MyJobListFragment() {
         // Required empty public constructor
@@ -116,30 +118,68 @@ public class MyJobListFragment extends Fragment {
                 }
             }
         });
-        mAdapter = new JobItemAdapter();
+        mAdapter = new MyJobItemAdapter();
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                JobData data = (JobData) mAdapter.getItem(position - mListView.getHeaderViewsCount());
+                Job data = (Job) mAdapter.getItem(position - mListView.getHeaderViewsCount());
                 Intent intent = new Intent(getActivity(), JobDetailActivity.class);
-                intent.putExtra(JobData.JOBID, data.getId());
+                intent.putExtra(Job.JOBITEM, data);
                 startActivity(intent);
             }
         });
-        initData();
+        new MyJobTask().execute("kim");
+
         mCountTextView = (TextView)view.findViewById(R.id.text_item_count);
         mCountTextView.setText("총 " + mAdapter.getCount() + "건");
         return view;
-    }
-    private void initData() {
-        mJobList = MyJobLab.get(getActivity()).getJobList();
-        mAdapter.setItems(mJobList);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mAdapter.notifyDataSetChanged();
+    }
+
+    public static final String ShowMyScrapUrl = "http://52.69.235.46:3000/showmyscrap/%s";
+    class MyJobTask extends AsyncTask<String,Integer,String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String name = params[0];
+            String urlText = String.format(ShowMyScrapUrl, name);
+            try {
+                URL url = new URL(urlText);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestProperty("Accept", "application/json");
+                int code = conn.getResponseCode();
+                if (code == HttpURLConnection.HTTP_OK) {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line).append("\n\r");
+                    }
+                    return sb.toString();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            if(s != null){
+                Gson gson = new Gson();
+                MyJobList.get(getContext(), gson.fromJson(s, MyJobList.class));
+            }else {
+                MyJobList.get(getContext());
+                Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+            }
+            mJobList = MyJobList.get(getContext()).getJobList();
+            mAdapter.setItems(mJobList);
+        }
     }
 }

@@ -21,6 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="New Text"
-        android:textSize="@dimen/font_size_default"
+        android:textSize="@dimen/font_size_small"
         android:textColor="@android:color/white" />
 </LinearLayout>

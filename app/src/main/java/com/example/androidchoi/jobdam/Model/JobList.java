@@ -2,18 +2,21 @@ package com.example.androidchoi.jobdam.Model;
 
 import android.content.Context;
 
+import com.begentgroup.xmlparser.SerializedName;
+
 import java.util.ArrayList;
 
 /**
  * Created by Choi on 2015-11-10.
  */
-public class MyJobLab {
-    private static MyJobLab sMyJobLab;
+public class JobList {
+    private static JobList sJobList;
     private Context mContext;
 
+    @SerializedName("job")
     private ArrayList<JobData> mJobList;
 
-    private MyJobLab(Context context){
+    private JobList(Context context){
         mContext = context;
         mJobList = new ArrayList<JobData>();
         //데이터 추가가
@@ -23,11 +26,11 @@ public class MyJobLab {
 //            addJobData(data);
 //        }
     }
-    public static MyJobLab get(Context context){
-        if(sMyJobLab == null){
-            sMyJobLab = new MyJobLab(context.getApplicationContext());
+    public static JobList get(Context context){
+        if(sJobList == null){
+            sJobList = new JobList(context.getApplicationContext());
         }
-        return sMyJobLab;
+        return sJobList;
     }
 
     public ArrayList<JobData> getJobList(){

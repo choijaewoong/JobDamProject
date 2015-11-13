@@ -31,7 +31,7 @@
             android:layout_gravity="center"
             android:layout_below="@+id/image_profile"
             android:layout_centerHorizontal="true"
-            android:textSize="@dimen/font_semi_large"
+            android:textSize="@dimen/font_size_default"
             android:layout_margin="@dimen/default_dimen" />
 
         <TextView
@@ -42,7 +42,7 @@
             android:layout_gravity="center_horizontal|bottom"
             android:layout_below="@+id/text_user_name"
             android:layout_centerHorizontal="true"
-            android:textSize="@dimen/font_size_default"/>
+            android:textSize="@dimen/font_size_small"/>
 
         <ImageView
             android:layout_width="@dimen/nav_header_image_button"

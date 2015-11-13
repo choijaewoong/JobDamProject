@@ -46,7 +46,8 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:text="Corporation"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            />
 
         <TextView
             android:id="@+id/text_job_title"
@@ -58,7 +59,8 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:text="Job Title"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/text_period"

@@ -16,15 +16,17 @@ import android.widget.Toast;
 import com.example.androidchoi.jobdam.Adpater.JobDetailAdapter;
 import com.example.androidchoi.jobdam.Model.AddressData;
 import com.example.androidchoi.jobdam.Model.ContentData;
-import com.example.androidchoi.jobdam.Model.JobData;
-import com.example.androidchoi.jobdam.Model.MyJobLab;
+import com.example.androidchoi.jobdam.Model.Job;
+import com.example.androidchoi.jobdam.Model.MyJobList;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class JobDetailActivity extends AppCompatActivity {
 
-    JobData mData;
+    public static final String EXTRA_JOB_DATA = "jobdata";
+
+    Job mData;
     TextView mCorpName;
     TextView mJobTitle;
     ExpandableListView mExpandableListView;
@@ -40,11 +42,11 @@ public class JobDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         Intent intent = getIntent();
-        mData = (JobData)intent.getSerializableExtra(JobData.JOBITEM);
-        if(mData == null){
-            int id = intent.getIntExtra(JobData.JOBID, 0);
-            mData = MyJobLab.get(getApplicationContext()).getJobData(id);
-        }
+        mData = (Job)intent.getSerializableExtra(Job.JOBITEM);
+//        if(mData == null){
+//            int id = intent.getIntExtra(Job.JOBID, 0);
+//            mData = MyJobLab.get(getApplicationContext()).getJobData(id);
+//        }
 //        Toast.makeText(JobDetailActivity.this, mData.getId()+" " ,Toast.LENGTH_SHORT).show();
 
         mExpandableListView = (ExpandableListView)findViewById(R.id.listview_job_detail_expandable);
@@ -56,19 +58,21 @@ public class JobDetailActivity extends AppCompatActivity {
         scrapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(MyJobLab.get(getApplication()).getJobData(mData.getId()) == null) {
-                    MyJobLab.get(getApplicationContext()).addJobData(mData);
-                    Toast.makeText(JobDetailActivity.this, getString(R.string.check_scrap), Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(JobDetailActivity.this, getString(R.string.check_not_scrap), Toast.LENGTH_SHORT).show();
-                }
+                MyJobList.get(getApplicationContext()).addJobData(mData);
+                Toast.makeText(JobDetailActivity.this, getString(R.string.check_scrap), Toast.LENGTH_SHORT).show();
+//                if(MyJobLab.get(getApplication()).getJobData(mData.getId()) == null) {
+//                    MyJobLab.get(getApplicationContext()).addJobData(mData);
+//                    Toast.makeText(JobDetailActivity.this, getString(R.string.check_scrap), Toast.LENGTH_SHORT).show();
+//                }else{
+//                    Toast.makeText(JobDetailActivity.this, getString(R.string.check_not_scrap), Toast.LENGTH_SHORT).show();
+//                }
             }
         });
         Button corpLink = (Button)titleHeaderView.findViewById(R.id.btn_detail_move_homepage);
         corpLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uriUrl = Uri.parse(mData.getCompany().getName().getLink());
+                Uri uriUrl = Uri.parse(mData.getCompanyLink());
                 Intent intent = new Intent(Intent.ACTION_VIEW, uriUrl);
                 startActivity(intent);
             }
@@ -76,9 +80,9 @@ public class JobDetailActivity extends AppCompatActivity {
 
 
         mCorpName = (TextView)corpHeaderView.findViewById(R.id.text_detail_corp_name);
-        mCorpName.setText(mData.getCompany().getName().getValue());
+        mCorpName.setText(mData.getCompanyName());
         mJobTitle = (TextView)titleHeaderView.findViewById(R.id.text_detail_job_title);
-        mJobTitle.setText(mData.getPosition().getTitle());
+        mJobTitle.setText(mData.getJobTitle());
         mExpandableListView.addHeaderView(corpHeaderView);
         mExpandableListView.addHeaderView(titleHeaderView);
 
@@ -100,11 +104,11 @@ public class JobDetailActivity extends AppCompatActivity {
     }
 
     public String getQualification() {
-        return getString(R.string.experience_level) + mData.getPosition().getExperienceLevel() + "\n"
-                + getString(R.string.education_level) + mData.getPosition().getEducationLevel();
+        return getString(R.string.experience_level) + mData.getExperienceLevel() + "\n"
+                + getString(R.string.education_level) + mData.getEducationLevel();
     }
     public String getConditions() {
-        return getString(R.string.location) + Html.fromHtml(mData.getPosition().getLocation()) + "\n"
+        return getString(R.string.location) + Html.fromHtml(mData.getLocation()) + "\n"
                 + getString(R.string.salary) + mData.getSalary();
     }
 

@@ -2,8 +2,9 @@ package com.example.androidchoi.jobdam.Model;
 
 import android.content.Context;
 
+import com.begentgroup.xmlparser.SerializedName;
+
 import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  * Created by Choi on 2015-11-10.
@@ -11,6 +12,8 @@ import java.util.UUID;
 public class CardLab {
     private static CardLab sCardLab;
     private Context mContext;
+
+    @SerializedName("memo")
     private ArrayList<CardData> mCardList;
 
     private CardLab(Context context){
@@ -35,9 +38,9 @@ public class CardLab {
         return mCardList;
     }
 
-    public CardData getCard(UUID id){
+    public CardData getCard(int id){
         for(CardData c : mCardList){
-            if(c.getId().equals(id))
+            if(c.getId() == id)
                 return c;
         }
         return null;

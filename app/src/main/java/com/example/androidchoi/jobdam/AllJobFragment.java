@@ -135,7 +135,6 @@ public class AllJobFragment extends Fragment {
 
     public static final String JOB_URL = "http://api.saramin.co.kr/job-search?stock=kospi+kosdaq&sr=directhire&fields=posting-date+expiration-date+keyword-code+count&count=10";
     private class XmlParsingTask extends AsyncTask<String, Integer, AllJobListData>{
-
         @Override
         protected AllJobListData doInBackground(String... params) {
             try{

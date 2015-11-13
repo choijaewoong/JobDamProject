@@ -5,26 +5,27 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.example.androidchoi.jobdam.JobItemView;
-import com.example.androidchoi.jobdam.Model.Job;
+import com.example.androidchoi.jobdam.Model.MyJob;
+import com.example.androidchoi.jobdam.Model.MyJobs;
 
 import java.util.ArrayList;
 
 /**
- * Created by Choi on 2015-10-19.
+ * Created by Choi on 2015-11-13.
  */
-public class JobItemAdapter extends BaseAdapter {
+public class MyJobItemAdapter extends BaseAdapter {
 
-    ArrayList<Job> mItems = new ArrayList<Job>();
+    ArrayList<MyJobs> mItems = new ArrayList<MyJobs>();
 
-    public void setItems(ArrayList items){
+    public void setItems(ArrayList<MyJobs> items){
         mItems = items;
         notifyDataSetChanged();
     }
-
-    public void add(Job item){
-        mItems.add(item);
-        notifyDataSetChanged();
-    }
+//
+//    public void add(MyJobs item){
+//        mItems.add(item);
+//        notifyDataSetChanged();
+//    }
 
     @Override
     public int getCount() {
@@ -33,7 +34,9 @@ public class JobItemAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return mItems.get(position);
+        MyJob myJob =  mItems.get(position).getJob();
+        if(myJob == null) myJob = new MyJob();
+        return myJob;
     }
 
     @Override
@@ -50,7 +53,7 @@ public class JobItemAdapter extends BaseAdapter {
         }else {
             view = (JobItemView)convertView;
         }
-        view.setItemData(mItems.get(position));
+        view.setItemData((MyJob)getItem(position));
 
         return view;
     }

@@ -2,7 +2,6 @@ package com.example.androidchoi.jobdam.Model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * Created by Tacademy on 2015-10-29.
@@ -12,33 +11,34 @@ public class CardData implements Serializable {
     public static final String CARD_ID = "cardId";
     public static final String CARDPOSITION = "cardposition";
 
-    private UUID mId;
-    private String mTitle;
-    private String mContent;
-    private int mCategoryIndex;
+    private int id;
+    private int userId;
+    private String title;
+    private String content;
+    private String category;
     private int[] mImageResources;
-    private Date mStartDate;
-    private Date mEndDate;
+    private Date startDate;
+    private Date endDate;
 
     public void setCarditem(CardData cardItem){
-        mTitle = cardItem.getTitle();
-        mContent = cardItem.getContent();
+        title = cardItem.getTitle();
+        content = cardItem.getContent();
     }
 
-    public UUID getId() { return mId; }
+    public int getId() { return id; }
     public String getTitle() {
-        return mTitle;
+        return title;
     }
     public String getContent() {
-        return mContent;
+        return content;
     }
-    public void setTitle(String title) { mTitle = title; }
-    public void setContent(String content) { mContent = content; }
+    public void setTitle(String title) { this.title = title; }
+    public void setContent(String content) { this.content = content; }
 
     public CardData(){
-        mId = UUID.randomUUID();
-        mTitle = mId+"";
-        mContent = "1. 코드 최적화는 가장 나중에\n" +
+        id = 0;
+        title = id + "";
+        content = "1. 코드 최적화는 가장 나중에\n" +
                 "2. 수레바퀴를 다시 만들지 말라.\n" +
                 "  (만들어져 있는건 굳이 만들지 말자)\n" +
                 "   (gemFile,  JQuery)" +

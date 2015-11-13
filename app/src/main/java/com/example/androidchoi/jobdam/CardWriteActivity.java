@@ -12,8 +12,6 @@ import android.widget.TextView;
 import com.example.androidchoi.jobdam.Model.CardData;
 import com.example.androidchoi.jobdam.Model.CardLab;
 
-import java.util.UUID;
-
 public class CardWriteActivity extends AppCompatActivity {
 
     public static final String EXTRA_CARD_DATA = "card data";
@@ -38,7 +36,7 @@ public class CardWriteActivity extends AppCompatActivity {
         mCancelButton = (TextView)findViewById(R.id.text_cancel_card);
 
         Intent intent = getIntent();
-        UUID cardId = (UUID)intent.getSerializableExtra(CardData.CARD_ID);
+        int cardId = intent.getIntExtra(CardData.CARD_ID, 0);
         mData = CardLab.get(getApplicationContext()).getCard(cardId);
         if(mData != null){
             mCancelSaveLayout.setVisibility(View.GONE);

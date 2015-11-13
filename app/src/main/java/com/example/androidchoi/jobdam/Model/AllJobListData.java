@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Created by Choi on 2015-11-05.
  */
 public class AllJobListData {
-    private static MyJobLab sMyJobLab;
+    private static JobList sJobList;
     private Context mContext;
     @SerializedName("job")
     private ArrayList<JobData> jobList;

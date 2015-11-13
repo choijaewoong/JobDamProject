@@ -28,7 +28,7 @@
         android:inputType="text"
         android:maxLength="17"
         android:maxLines="1"
-        android:textSize="@dimen/font_semi_large"
+        android:textSize="@dimen/font_size_default"
         android:textColorHint="@color/colorDivider"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
