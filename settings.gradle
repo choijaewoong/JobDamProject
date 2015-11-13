@@ -1,1 +1,1 @@
-include ':app', ':slidingmenu', ':FloatingActionButton'
+include ':app', ':slidingmenu', ':FloatingActionButton', ':androidAsyncHttp'

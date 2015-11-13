@@ -4,6 +4,8 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
+    useLibrary 'org.apache.http.legacy'
+
     defaultConfig {
         applicationId "com.example.androidchoi.jobdam"
         minSdkVersion 15
@@ -25,7 +27,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile project(':slidingmenu')
     compile project(':FloatingActionButton')
+    compile project(':androidAsyncHttp')
     compile 'com.android.support:design:23.1.0'
     compile files('libs/simplexmlparser.jar')
     compile 'com.google.code.gson:gson:2.2.4'
+
 }

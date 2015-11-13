@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FloatingActionButton/FloatingActionButton.iml" filepath="$PROJECT_DIR$/FloatingActionButton/FloatingActionButton.iml" />
       <module fileurl="file://$PROJECT_DIR$/JobDamProject.iml" filepath="$PROJECT_DIR$/JobDamProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/androidAsyncHttp/androidAsyncHttp.iml" filepath="$PROJECT_DIR$/androidAsyncHttp/androidAsyncHttp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/androidAsyncHttp/androidAsyncHttp.iml" filepath="$PROJECT_DIR$/androidAsyncHttp/androidAsyncHttp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/slidingmenu/slidingmenu.iml" filepath="$PROJECT_DIR$/slidingmenu/slidingmenu.iml" />
     </modules>
