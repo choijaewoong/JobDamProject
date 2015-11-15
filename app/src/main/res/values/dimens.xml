@@ -58,6 +58,9 @@
     <dimen name="search_icon_size">20dp</dimen>
     <!-- JobDam Talk-->
     <dimen name="write_article_button">60dp</dimen>
+    <!-- Calendar -->
+    <dimen name="calendar_header_height">24dp</dimen>
+
     <!-- font size-->
     <dimen name="font_size_semi_large">16sp</dimen>
     <dimen name="font_size_large">18sp</dimen>

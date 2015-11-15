@@ -18,8 +18,6 @@ public class CalendarManager {
 			super(detailMessage);
 			// TODO Auto-generated constructor stub
 		}
-
-		
 	}
 	
 	private static CalendarManager instance;

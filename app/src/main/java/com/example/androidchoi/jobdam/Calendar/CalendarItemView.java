@@ -16,48 +16,40 @@ public class CalendarItemView extends LinearLayout {
 	TextView numberView;
 	TextView contentView;
 	CalendarItem mItem;
-	public final static int NUMBER_COLOR = Color.BLACK;
-	public final static int SAT_COLOR = Color.BLUE;
-	public final static int SUN_COLOR = Color.RED;
-	public final static float IN_MONTH_TEXT_SIZE_SP = 20.0f;
+	LinearLayout mLinearLayout;
 
-	public final static int OUT_MONTH_TEXT_COLOR = Color.GRAY;
-	public final static float OUT_MONTH_TEXT_SIZE_SP = 15.0f;
-	
 	public CalendarItemView(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
 		LayoutInflater.from(context).inflate(R.layout.calendar_item, this);
-		numberView = (TextView)findViewById(R.id.number);
-		contentView = (TextView)findViewById(R.id.content);
+		mLinearLayout = (LinearLayout)findViewById(R.id.calendar_item_view);
+		numberView = (TextView)findViewById(R.id.calendar_num);
+		contentView = (TextView)findViewById(R.id.calendar_content);
 	}
 	
 	public void setData(CalendarItem item) {
 		mItem = item;
-		float textsize = IN_MONTH_TEXT_SIZE_SP;
-		int textColor = NUMBER_COLOR;
+		int textColor;
 		if (!item.inMonth) {
-			textsize = OUT_MONTH_TEXT_SIZE_SP;
-			textColor = OUT_MONTH_TEXT_COLOR;
+			textColor = getResources().getColor(R.color.colorCalendarOutMonth);
+			mLinearLayout.setBackgroundResource(R.color.colorBackground);
 		} else {
-			textsize = IN_MONTH_TEXT_SIZE_SP;
+			mLinearLayout.setBackgroundColor(Color.WHITE);
 			switch (item.dayOfWeek) {
 				case Calendar.SUNDAY :
-					textColor = SUN_COLOR;
+					textColor = getResources().getColor(R.color.colorCalendarSun);
 					break;
 				case Calendar.SATURDAY :
-					textColor = SAT_COLOR;
+					textColor = getResources().getColor(R.color.colorCalendarSat);
 					break;
 				default :
-					textColor = NUMBER_COLOR;
+					textColor = getResources().getColor(R.color.colorCalendarInMonth);
 					break;
 			}
 		}
-//		numberView.setTextSize;
 		numberView.setTextColor(textColor);
 		numberView.setText("" + item.dayOfMonth);
-		// contentView setting
-		
+
 		ArrayList items = item.items;
 		int size = items.size();
 		StringBuilder sb = new StringBuilder();
