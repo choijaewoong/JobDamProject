@@ -10,4 +10,8 @@ public class CalendarItem {
 	public int dayOfWeek;
 	public boolean inMonth;
 	ArrayList items = new ArrayList();
+
+	public ArrayList getItems() {
+		return items;
+	}
 }

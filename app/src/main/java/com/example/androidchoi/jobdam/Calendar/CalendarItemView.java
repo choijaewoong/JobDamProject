@@ -21,7 +21,7 @@ public class CalendarItemView extends LinearLayout {
 	public CalendarItemView(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
-		LayoutInflater.from(context).inflate(R.layout.calendar_item, this);
+		LayoutInflater.from(context).inflate(R.layout.view_calendar_item, this);
 		mLinearLayout = (LinearLayout)findViewById(R.id.calendar_item_view);
 		numberView = (TextView)findViewById(R.id.calendar_num);
 		contentView = (TextView)findViewById(R.id.calendar_content);

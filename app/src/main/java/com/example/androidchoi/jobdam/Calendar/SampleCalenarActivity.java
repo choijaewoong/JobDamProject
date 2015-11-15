@@ -28,7 +28,7 @@ public class SampleCalenarActivity extends AppCompatActivity {
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-			setContentView(R.layout.calendar_container);
+			setContentView(R.layout.fragment_my_job_calendar);
 
 			mItemdata.add(new ItemData(2015,9,10,"A"));
         mItemdata.add(new ItemData(2015,9,11,"B"));

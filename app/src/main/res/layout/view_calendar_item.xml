@@ -8,18 +8,18 @@
 
     <TextView
         android:id="@+id/calendar_num"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left|top"
-        android:paddingLeft="2dp"
-        android:paddingTop="2dp"
+        android:paddingLeft="@dimen/calendar_number_horizontal_padding"
         android:text="TextView"
-        android:textSize="@dimen/font_size_min"/>
+        android:textSize="@dimen/font_size_min"
+        android:paddingTop="@dimen/calendar_number_vertical_padding"/>
 
     <TextView
         android:id="@+id/calendar_content"
-        android:layout_width="fill_parent"
-        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/calendar_item_content_height"
         android:gravity="center"/>
 
 </LinearLayout>
