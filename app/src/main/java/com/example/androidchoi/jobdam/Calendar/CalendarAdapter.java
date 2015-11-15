@@ -10,7 +10,6 @@ public class CalendarAdapter extends BaseAdapter {
 	Context mContext;
 	CalendarData mData;
 	
-	
 	public CalendarAdapter(Context context, CalendarData data) {
 		mContext = context;
 		mData = data;

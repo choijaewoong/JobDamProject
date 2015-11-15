@@ -6,14 +6,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Calendar.CalendarAdapter;
 import com.example.androidchoi.jobdam.Calendar.CalendarData;
-import com.example.androidchoi.jobdam.Calendar.CalendarItem;
 import com.example.androidchoi.jobdam.Calendar.CalendarManager;
 import com.example.androidchoi.jobdam.Calendar.ItemData;
 
@@ -28,7 +26,7 @@ public class MyJobCalendarFragment extends Fragment {
     GridView gridView;
     CalendarAdapter mAdapter;
 
-    private static final boolean isWeekCalendar = false;
+    public static boolean isWeekCalendar = false;
 
     ArrayList<ItemData> mItemdata = new ArrayList<ItemData>();
 
@@ -104,16 +102,7 @@ public class MyJobCalendarFragment extends Fragment {
             mAdapter = new CalendarAdapter(getActivity(), data);
         }
         gridView.setAdapter(mAdapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-                                    long id) {
-                // TODO Auto-generated method stub
-                CalendarItem item = (CalendarItem) mAdapter.getItem(position);
-                item.getItems().size();
-            }
-        });
+        gridView.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
         return view;
     }
 }
