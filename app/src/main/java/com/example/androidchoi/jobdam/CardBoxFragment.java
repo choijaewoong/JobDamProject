@@ -131,8 +131,10 @@ public class CardBoxFragment extends Fragment {
             }
         });
 
-        mAdapter = new CardItemAdapter();
-        mListView.setAdapter(mAdapter);
+        initData();
+        mCountTextView = (TextView) view.findViewById(R.id.text_item_count);
+        mCountTextView.setText("총 " + mAdapter.getCount() + "건");
+
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -144,11 +146,7 @@ public class CardBoxFragment extends Fragment {
                 startActivityForResult(intent, REQUEST_MODIFY);
             }
         });
-
-        initData();
-        mCountTextView = (TextView) view.findViewById(R.id.text_item_count);
-        mCountTextView.setText("총 " + mAdapter.getCount() + "건");
-
+        fam = (FloatingActionMenu) view.findViewById(R.id.menu);
         FloatingActionButton addCardButton = (FloatingActionButton) view.findViewById(R.id.fab_write_card);
         addCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,7 +158,7 @@ public class CardBoxFragment extends Fragment {
             }
         });
         FloatingActionButton addCategoryButton = (FloatingActionButton) view.findViewById(R.id.fab_add_category);
-        fam = (FloatingActionMenu) view.findViewById(R.id.menu);
+
 //        fam.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
 //            @Override
 //            public void onMenuToggle(boolean opened) {
@@ -178,6 +176,9 @@ public class CardBoxFragment extends Fragment {
 
     private void initData() {
         mCardList = CardLab.get(getActivity()).getCardList();
+        mAdapter = new CardItemAdapter();
         mAdapter.setItems(mCardList);
+        mListView.setAdapter(mAdapter);
+
     }
 }

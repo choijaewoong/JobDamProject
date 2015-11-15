@@ -5,15 +5,20 @@
     <color name="colorAccent">#ffc400</color>
     <color name="colorLightPrimary">#9ce3ff</color>
 
-    <color name="colorDivider">#cfcfcf</color>
+    <color name="colorLightGray">#b5b5b5</color>
+    <color name="colorGray">#606060</color>
     <color name="colorBackground">#f1f1f1</color>
+    <color name="colorDivider">#d9d9d9</color>
     <!--#e0e0e0    e7e7e7   e6e9f4-->
+
+    <color name="colorShadow">#d9d9d9</color>
+
 
 
     <!-- d-day color-->
-    <color name="colorOver">#898989</color>
-    <color name="colorDanger">#ff0000</color>
-    <color name="colorWarning">#fff200</color>
+    <color name="colorOver">#b5b5b5</color>
+    <color name="colorDanger">#FF1515</color>
+    <color name="colorWarning">#ffa726</color>
     <color name="colorSafe">#00731d</color>
 
     <color name="colorBackgroundBlur">#66000000</color>

@@ -17,10 +17,23 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:background="#000000"
-        android:layout_marginLeft="@dimen/default_dimen"/>
+        android:layout_marginLeft="@dimen/default_dimen"
+        android:src="@drawable/button_search"
+        android:scaleType="center"/>
 
-    <EditText
+        <ImageView
+            android:id="@+id/image_search_delete"
+            android:layout_width="@dimen/search_icon_size"
+            android:layout_height="@dimen/search_icon_size"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/default_dimen"
+            android:scaleType="center"
+            android:visibility="gone"
+            android:src="@drawable/button_search_delete"/>
+
+        <EditText
         android:id="@+id/editText_search_bar"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
@@ -29,24 +42,13 @@
         android:maxLength="17"
         android:maxLines="1"
         android:textSize="@dimen/font_size_default"
-        android:textColorHint="@color/colorDivider"
+        android:textColorHint="@color/colorLightGray"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
 
-    <ImageView
-        android:id="@+id/image_search_delete"
-        android:layout_width="@dimen/search_icon_size"
-        android:layout_height="@dimen/search_icon_size"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:background="#000000"
-        android:visibility="gone"
-        android:layout_marginRight="@dimen/default_dimen"/>
-
-    <ImageView
+        <ImageView
         android:layout_width="match_parent"
-        android:layout_height="0.25dp"
+        android:layout_height="@dimen/divider_height"
         android:id="@+id/imageView3"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

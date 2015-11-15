@@ -76,6 +76,7 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
             view = new ExpandableGroupItemView(parent.getContext());
         }
         view.setExpandableTitle(mItems.get(groupPosition));
+        view.setExapandableFoldImage(isExpanded);
         return view;
     }
     @Override

@@ -12,8 +12,9 @@
         android:layout_width="@dimen/toolbar_image_width"
         android:layout_height="@dimen/toolbar_image_height"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/icon_jobdam"
-        android:scaleType="fitCenter"/>
+        android:src="@drawable/title_jobdam"
+        android:scaleType="center"
+        android:layout_marginTop="@dimen/toolbar_gap"/>
 
     <TextView
         android:id="@+id/text_subtitle"
@@ -22,5 +23,6 @@
         android:layout_gravity="center_horizontal"
         android:text="New Text"
         android:textSize="@dimen/font_size_small"
-        android:textColor="@android:color/white" />
+        android:textColor="@color/colorLightPrimary"
+        android:layout_marginTop="@dimen/toolbar_gap"/>
 </LinearLayout>

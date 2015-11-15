@@ -15,7 +15,8 @@
         android:layout_gravity="center_horizontal"
         android:textSize="@dimen/font_size_title"
         android:gravity="center_horizontal"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="10dp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -23,18 +24,27 @@
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal">
-        <Button
+        <ToggleButton
             android:id="@+id/btn_detail_scrap"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/scrap" />
+            android:layout_height="40dp"
+            android:text="@string/scrap"
+            android:textOff="@string/scrap"
+            android:textOn="@string/scrap"
+            android:background="@drawable/selector_button_scrap"
+            android:paddingLeft="@dimen/default_double_dimen"
+            android:textColor="@drawable/selector_button_text"
+            android:layout_marginRight="@dimen/default_dimen"
+            android:checked="false"/>
         <Button
             android:id="@+id/btn_detail_move_homepage"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@+id/textView3"
-            android:text="@string/homepage" />
+            android:text="@string/homepage"
+            android:background="@drawable/selector_button_corp_page"
+            android:textColor="@drawable/selector_button_text"/>
     </LinearLayout>
 </LinearLayout>

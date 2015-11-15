@@ -14,23 +14,25 @@
     tools:context="com.example.androidchoi.jobdam.CardWriteActivity">
 
     <ImageView
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
+        android:layout_width="@dimen/image_button_size"
+        android:layout_height="@dimen/image_button_size"
         android:id="@+id/imageView2"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:background="#000000"/>
+        android:src="@drawable/button_category_folder"
+        />
 
     <ImageView
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
+        android:layout_width="@dimen/image_button_size"
+        android:layout_height="@dimen/image_button_size"
         android:id="@+id/imageView5"
-        android:background="#000000"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/imageView2"
         android:layout_toEndOf="@+id/imageView2"
-        android:layout_marginLeft="16dp"/>
+        android:layout_marginLeft="12dp"
+        android:src="@drawable/button_gallery"
+        />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -43,105 +45,147 @@
         android:id="@+id/linearLayout_cancel_save_button">
 
         <TextView
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="취소"
             android:id="@+id/text_cancel_card"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:textColor="@android:color/black"
+            android:textColor="@color/colorGray"
             android:gravity="center_vertical|center_horizontal"/>
 
         <ImageView
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@android:color/black"
+            android:background="@color/colorGray"
             android:id="@+id/imageView"
             android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginBottom="6dp"/>
+            android:layout_marginRight="6dp"/>
 
         <TextView
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="저장"
             android:id="@+id/text_save_card"
-            android:textColor="@android:color/black"
+            android:textColor="@color/colorGray"
             android:gravity="center_horizontal"/>
 
     </LinearLayout>
 
-    <TextView
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView6"
-        android:textSize="16sp"
+        android:id="@+id/linearLayout4"
         android:layout_below="@+id/imageView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="@dimen/default_double_dimen">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2015년 10월 14일"
+            android:id="@+id/textView6"
+            android:textSize="16sp"
+            android:layout_below="@+id/imageView2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/colorPrimary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2015년 10월 14일"
+            android:id="@+id/textView7"
+            android:textSize="16sp"
+            android:layout_above="@+id/linearLayout"
+            android:layout_toRightOf="@+id/imageView5"
+            android:layout_toEndOf="@+id/imageView5"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/colorPrimary"/>
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:id="@+id/edit_text_card_title"
+        android:layout_weight="1"
+        android:inputType="text"
+        android:maxLines="1"
+        android:maxLength="30"
+        android:ellipsize="end"
+        android:background="@android:color/transparent"
+        android:textColorHint="@color/colorLightGray"
+        android:hint="제목을 입력하세요"
+        android:layout_below="@+id/linearLayout4"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView7"
-        android:textSize="16sp"
-        android:layout_above="@+id/linearLayout"
-        android:layout_toRightOf="@+id/imageView5"
-        android:layout_toEndOf="@+id/imageView5"
-        android:layout_marginLeft="33dp"
-        android:layout_marginStart="33dp"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:id="@+id/image_divider"
+        android:background="@color/colorLightGray"
+        android:layout_below="@+id/edit_text_card_title"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/default_dimen"
+        android:layout_marginBottom="@dimen/default_dimen"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/edit_text_card_content"
+        android:layout_weight="8"
+        android:background="@android:color/transparent"
+        android:textColorHint="@color/colorLightGray"
+        android:hint="내용을 입력하세요"
+        android:gravity="top"
+        android:layout_alignParentLeft="true"
+        android:layout_above="@+id/linearLayout6"
+        android:layout_below="@+id/image_divider"/>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/textView6"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="@dimen/default_double_dimen"
-        android:id="@+id/linearLayout">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/linearLayout6"
+        >
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/edit_text_card_title"
-            android:layout_weight="1"
-            android:inputType="text"
-            android:maxLines="1"
-            android:maxLength="30"
-            android:ellipsize="end"
-            android:background="@android:color/transparent"
-            android:hint="제목"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:inputType="textMultiLine"
-            android:ems="10"
-            android:id="@+id/edit_text_card_content"
-            android:layout_weight="8"
-            android:background="@android:color/transparent"
-            android:hint="내용"
-            android:gravity="top"/>
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/imageView10"
+            android:layout_gravity="center_vertical"
+            android:adjustViewBounds="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/button_tag"
+            android:scaleType="centerCrop"/>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="32dp"
             android:layout_weight="1"
-            >
-
-            <ImageView
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                android:id="@+id/imageView10"
-                android:layout_gravity="center_vertical"
-                android:background="#000000"
-                android:adjustViewBounds="true"/>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/imageView2"
+            android:layout_toRightOf="@+id/imageView2"
+            android:id="@+id/linearLayout5"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/tag_bar_container"
+            android:layout_marginLeft="@dimen/default_dimen">
 
             <EditText
                 android:layout_width="wrap_content"
@@ -149,15 +193,20 @@
                 android:id="@+id/text_card_tag"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
+                android:textColorHint="@color/colorLightGray"
                 android:hint="태그"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_double_dimen"
+                android:layout_marginRight="@dimen/default_double_dimen"/>
 
             <ImageView
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                android:id="@+id/imageView11"
-                android:background="#000000"
-                android:layout_gravity="center_vertical"/>
+                android:layout_width="@dimen/image_button_size"
+                android:layout_height="@dimen/image_button_size"
+                android:id="@+id/btn_add_tag"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/default_double_dimen"
+                android:src="@drawable/button_plus"
+                android:scaleType="centerCrop"/>
         </LinearLayout>
     </LinearLayout>
 

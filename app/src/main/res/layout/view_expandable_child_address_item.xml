@@ -5,14 +5,17 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:id="@+id/btn_move_address"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:text="상세페이지로 이동"/>
+        android:text="상세페이지로 이동"
+        android:textColor="@android:color/white"
+        android:background="@drawable/selector_button_detail_page"
+        android:layout_marginBottom="12dp"/>
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="0.25dp"
+        android:layout_height="@dimen/divider_height"
         android:background="@color/colorDivider"
         android:layout_below="@+id/btn_move_address"
         android:layout_alignParentLeft="true"

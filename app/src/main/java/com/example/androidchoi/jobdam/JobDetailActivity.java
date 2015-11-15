@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.example.androidchoi.jobdam.Adpater.JobDetailAdapter;
 import com.example.androidchoi.jobdam.Model.AddressData;
@@ -40,6 +41,7 @@ public class JobDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
 
         Intent intent = getIntent();
         mData = (Job)intent.getSerializableExtra(Job.JOBITEM);
@@ -54,7 +56,7 @@ public class JobDetailActivity extends AppCompatActivity {
         // 헤더뷰 설정
         View corpHeaderView = getLayoutInflater().inflate(R.layout.view_job_detail_corp_header, null);
         View titleHeaderView = getLayoutInflater().inflate(R.layout.view_job_detail_title_header,null);
-        Button scrapButton = (Button)titleHeaderView.findViewById(R.id.btn_detail_scrap);
+        ToggleButton scrapButton = (ToggleButton)titleHeaderView.findViewById(R.id.btn_detail_scrap);
         scrapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

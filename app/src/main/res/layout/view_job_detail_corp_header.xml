@@ -18,7 +18,7 @@
         android:id="@+id/text_detail_corp_name"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/default_dimen"
-        android:textSize="@dimen/font_large"
+        android:textSize="@dimen/font_size_large"
         android:textColor="@android:color/black"/>
 
 </LinearLayout>

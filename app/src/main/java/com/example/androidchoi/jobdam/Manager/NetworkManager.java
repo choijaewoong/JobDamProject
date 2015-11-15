@@ -141,9 +141,10 @@ public class NetworkManager {
 
     }
 
-    private static final String ADD_MEMO = SERVER + "/addboard";
+    private static final String ADD_MEMO = SERVER + "/addmemo";
     public void addMemo(Context context, final String jsonString, final OnResultListener<String> listener){
-        Header[] headers = null;
+        Header[] headers = new Header[1];
+        headers[0] = new BasicHeader("Accept", "application/json");
         try {
             client.post(context, ADD_MEMO, headers, new StringEntity(jsonString), "application/json", new TextHttpResponseHandler() {
                 @Override

@@ -3,9 +3,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/default_double_dimen"
-                android:paddingTop="@dimen/default_dimen"
                 android:paddingRight="@dimen/default_double_dimen"
-                android:paddingBottom="@dimen/default_dimen">
+                android:paddingBottom="@dimen/job_item_vertical_gap">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -33,8 +32,9 @@
         android:layout_toLeftOf="@+id/text_job_dday"
         android:layout_toRightOf="@+id/image_job_logo"
         android:layout_toEndOf="@+id/image_job_logo"
-        android:layout_marginLeft="@dimen/default_dimen"
-        android:layout_marginRight="@dimen/job_content_margin">
+        android:layout_marginLeft="@dimen/job_content_left_margin"
+        android:layout_marginRight="@dimen/job_content_right_margin"
+        android:id="@+id/linearLayout7">
 
         <TextView
             android:id="@+id/text_corp"
@@ -47,7 +47,7 @@
             android:singleLine="true"
             android:text="Corporation"
             android:textColor="@android:color/black"
-            />
+            android:textSize="@dimen/font_size_default"/>
 
         <TextView
             android:id="@+id/text_job_title"
@@ -60,7 +60,7 @@
             android:singleLine="true"
             android:text="Job Title"
             android:textColor="@android:color/black"
-            android:textSize="13sp"/>
+            android:textSize="@dimen/font_size_default"/>
 
         <TextView
             android:id="@+id/text_period"
@@ -70,7 +70,8 @@
             android:layout_toEndOf="@+id/image_job_logo"
             android:layout_toRightOf="@+id/image_job_logo"
             android:text="Period"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_size_min"/>
     </LinearLayout>
 
 
@@ -79,19 +80,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="d-day"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_size_small"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/image_scrap"
-        android:layout_alignEnd="@+id/image_scrap"
-        android:textColor="@android:color/black"/>
-
-    <ImageView
-        android:id="@+id/image_scrap"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_action_star"/>
+        android:layout_marginRight="@dimen/default_dimen"/>
+
+        <TextView
+            android:id="@+id/text_show_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="항목보기"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/font_size_small"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+
     </RelativeLayout>
 
 </RelativeLayout>

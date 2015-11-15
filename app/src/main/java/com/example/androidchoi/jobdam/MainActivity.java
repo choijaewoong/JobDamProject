@@ -50,7 +50,7 @@ public class MainActivity extends SlidingFragmentActivity
 
         getSupportActionBar().setCustomView(customToolbar, params);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
-//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
 //        setSlidingActionBarEnabled(false);
 
         if (savedInstanceState == null) {
