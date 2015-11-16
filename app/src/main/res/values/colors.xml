@@ -19,7 +19,6 @@
     <color name="colorCalendarSun">#ff1673</color>
     <color name="colorCalendarSat">#0db5f7</color>
 
-
     <!-- d-day color-->
     <color name="colorOver">#b5b5b5</color>
     <color name="colorDanger">#FF1515</color>
@@ -27,4 +26,7 @@
     <color name="colorSafe">#00731d</color>
 
     <color name="colorBackgroundBlur">#66000000</color>
+
+    <!-- nav_header_background-->
+    <color name="colorNavHeaderBackground">#032b3b</color>
 </resources>

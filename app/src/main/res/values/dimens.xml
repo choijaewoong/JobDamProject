@@ -14,9 +14,12 @@
     <dimen name="nav_header_height">198dp</dimen>
     <dimen name="nav_header_profile_size">88dp</dimen>
     <dimen name="nav_header_camera_size">32dp</dimen>
+    <dimen name="nav_header_setting_margin">12dp</dimen>
+    <dimen name="nav_header_name_top_margin">10dp</dimen>
+    <dimen name="nav_header_name_bottom_margin">4dp</dimen>
     <!--<dimen name="nav_header_setting_icon_size">20dp</dimen>-->
     <dimen name="nav_header_profile_top_margin">40dp</dimen>
-    <dimen name="menu_width">240dp</dimen>
+    <dimen name="menu_width">260dp</dimen>
     <dimen name="shadow_width">8dp</dimen>
     <!-- tab layout-->
     <dimen name="tab_indicator_height">5dp</dimen>

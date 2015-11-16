@@ -11,7 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:background="@android:color/white"
-        app:menu="@menu/sliding_menu"/>
+        android:background="@color/colorNavHeaderBackground"
+        app:menu="@menu/sliding_menu"
+        app:itemTextColor="@android:color/white"
+        app:itemIconTint="@android:color/white"/>
     <!--app:headerLayout="@layout/nav_header_main"-->
 </FrameLayout>

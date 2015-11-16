@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/nav_header_height"
         android:layout_gravity="center_vertical|left"
-        android:background="@color/colorBackground">
+        android:background="@drawable/nav_header_background">
 
         <ImageView
             android:id="@+id/image_profile"
@@ -31,9 +31,12 @@
             android:layout_gravity="center"
             android:layout_below="@+id/image_profile"
             android:layout_centerHorizontal="true"
-            android:textSize="@dimen/font_size_large"
-            android:layout_margin="@dimen/default_dimen"
-            android:textColor="@color/colorGray"/>
+            android:textSize="@dimen/font_size_semi_large"
+            android:textColor="@android:color/white"
+            android:textIsSelectable="true"
+            android:layout_marginTop="@dimen/nav_header_name_top_margin"
+            android:layout_marginBottom="@dimen/nav_header_name_bottom_margin"
+            android:layout_marginRight="@dimen/default_dimen"/>
 
         <TextView
             android:id="@+id/text_user_email"
@@ -52,13 +55,13 @@
             android:id="@+id/btn_name_modify"
             android:background="@drawable/m_modification_icon"
             android:layout_alignTop="@+id/text_user_name"
-            android:layout_toRightOf="@+id/text_user_email"
-            android:layout_toEndOf="@+id/text_user_email"/>
+            android:layout_toRightOf="@+id/text_user_name"
+            android:layout_toEndOf="@+id/text_user_name"/>
         
         <ImageView
             android:layout_width="@dimen/image_button_size"
             android:layout_height="@dimen/image_button_size"
-            android:layout_margin="@dimen/default_dimen"
+            android:layout_margin="@dimen/nav_header_setting_margin"
             android:id="@+id/btn_setting"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
