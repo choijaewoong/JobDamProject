@@ -61,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/calendar_header_height"
         android:layout_gravity="center_horizontal"
-        android:background="@android:color/white">
+        android:background="@color/colorBackground">
 
         <TextView
             android:layout_width="0dp"

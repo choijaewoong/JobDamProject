@@ -19,8 +19,8 @@
     <dimen name="nav_header_name_bottom_margin">4dp</dimen>
     <!--<dimen name="nav_header_setting_icon_size">20dp</dimen>-->
     <dimen name="nav_header_profile_top_margin">40dp</dimen>
-    <dimen name="menu_width">260dp</dimen>
-    <dimen name="shadow_width">8dp</dimen>
+    <dimen name="menu_width">280dp</dimen>
+    <dimen name="shadow_width">6dp</dimen>
     <!-- tab layout-->
     <dimen name="tab_indicator_height">5dp</dimen>
     <!-- view count list header-->
@@ -66,7 +66,7 @@
     <!-- Calendar -->
     <dimen name="calendar_header_height">24dp</dimen>
     <dimen name="calendar_item_content_height">50dp</dimen>
-    <dimen name="calendar_title_height">40dp</dimen>
+    <dimen name="calendar_title_height">48dp</dimen>
     <dimen name="calendar_grid_separator">0.5dp</dimen>
     <dimen name="calendar_shadow">12dp</dimen>
     <dimen name="calendar_number_horizontal_padding">4dp</dimen>

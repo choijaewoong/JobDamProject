@@ -87,7 +87,9 @@
             app:fab_colorPressed="#bcbcbc"
             app:fab_colorRipple="#99FFFFFF"
             app:fab_label="@string/add_cartegory"
-            app:fab_size="mini"/>
+            app:fab_size="mini"
+            android:src="@drawable/floating_button_add_category"
+            />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_write_card"
@@ -97,7 +99,8 @@
             app:fab_colorPressed="#bcbcbc"
             app:fab_colorRipple="#99FFFFFF"
             app:fab_label="@string/write_card"
-            app:fab_size="mini"/>
+            app:fab_size="mini"
+            android:src="@drawable/floating_button_write"/>
 
     </com.github.clans.fab.FloatingActionMenu>
 
