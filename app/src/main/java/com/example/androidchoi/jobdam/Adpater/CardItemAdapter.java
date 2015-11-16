@@ -5,29 +5,28 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.example.androidchoi.jobdam.CardItemView;
-import com.example.androidchoi.jobdam.Model.CardData;
+import com.example.androidchoi.jobdam.Model.MyCards;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Tacademy on 2015-10-30.
  */
 public class CardItemAdapter extends BaseAdapter {
 
-    List<CardData> items = new ArrayList<CardData>();
+    ArrayList<MyCards> mItems = new ArrayList<MyCards>();
 
-    public void setItems(ArrayList<CardData> cardList){
-        items = cardList;
+    public void setItems(ArrayList<MyCards> items){
+        mItems = items;
         notifyDataSetChanged();
     }
     @Override
     public int getCount() {
-        return items.size();
+        return mItems.size();
     }
     @Override
     public Object getItem(int position) {
-        return items.get(position);
+        return mItems.get(position).getCard();
     }
     @Override
     public long getItemId(int position) {
@@ -41,7 +40,7 @@ public class CardItemAdapter extends BaseAdapter {
         }else{
             view = (CardItemView)convertView;
         }
-        view.setItemData(items.get(position));
+        view.setItemData(mItems.get(position).getCard());
         return view;
     }
 }

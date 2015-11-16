@@ -24,8 +24,9 @@ import android.widget.Toast;
 import com.example.androidchoi.jobdam.Adpater.MyJobItemAdapter;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Job;
-import com.example.androidchoi.jobdam.Model.MyJobList;
+import com.example.androidchoi.jobdam.Model.MyJobLab;
 import com.example.androidchoi.jobdam.Model.MyJobs;
+import com.example.androidchoi.jobdam.Model.User;
 
 import java.util.ArrayList;
 
@@ -50,16 +51,18 @@ public class MyJobListFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        NetworkManager.getInstance().getMyJob(getActivity(), "kim", new NetworkManager.OnResultListener<MyJobList>() {
+        NetworkManager.getInstance().showMyJob(getActivity(), User.USER_NAME, new NetworkManager.OnResultListener<MyJobLab>() {
             @Override
-            public void onSuccess(MyJobList result) {
+            public void onSuccess(MyJobLab result) {
+                Toast.makeText(getActivity(), "Job 불러오기 성공", Toast.LENGTH_SHORT).show();
                 mJobList = result.getJobList();
                 mAdapter.setItems(mJobList);
                 mCountTextView.setText("총 " + mAdapter.getCount() + "건");
             }
+
             @Override
             public void onFail(int code) {
-                Toast.makeText(getActivity(), code + "" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), code + "", Toast.LENGTH_SHORT).show();
             }
         });
         FrameLayout touchInterceptor = (FrameLayout)getActivity().findViewById(R.id.touchInterceptor);

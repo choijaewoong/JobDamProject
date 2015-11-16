@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="New Text"
-        android:textSize="@dimen/font_size_small"
+        android:textSize="@dimen/font_size_default"
         android:textColor="@color/colorLightPrimary"
         android:layout_marginTop="@dimen/toolbar_gap"/>
 </LinearLayout>

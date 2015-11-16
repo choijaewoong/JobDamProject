@@ -71,7 +71,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="#d6ff99"/>
+            android:src="@drawable/image_default_picture"/>
 
         <LinearLayout
             android:id="@+id/linearLayout2"

@@ -20,10 +20,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.CardItemAdapter;
-import com.example.androidchoi.jobdam.Model.CardData;
-import com.example.androidchoi.jobdam.Model.CardLab;
+import com.example.androidchoi.jobdam.Manager.NetworkManager;
+import com.example.androidchoi.jobdam.Model.MyCardLab;
+import com.example.androidchoi.jobdam.Model.MyCard;
+import com.example.androidchoi.jobdam.Model.MyCards;
+import com.example.androidchoi.jobdam.Model.User;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -43,7 +47,7 @@ public class CardBoxFragment extends Fragment {
     FloatingActionMenu fam;
     EditText mSearchEdit;
     ImageView mDeleteImage;
-    private ArrayList<CardData> mCardList;
+    private ArrayList<MyCards> mCardList;
     TextView mCountTextView;
 
     public CardBoxFragment() {
@@ -68,6 +72,20 @@ public class CardBoxFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         TextView subTitle = (TextView) getActivity().findViewById(R.id.text_subtitle);
         subTitle.setText(R.string.card_box);
+
+        Toast.makeText(getActivity(),"카드를 불러옵니다!", Toast.LENGTH_SHORT).show();
+        NetworkManager.getInstance().showMyMemo(getActivity(), User.USER_NAME, new NetworkManager.OnResultListener<MyCardLab>() {
+            @Override
+            public void onSuccess(MyCardLab result) {
+                mCardList = result.getCardList();
+                mAdapter.setItems(mCardList);
+                mCountTextView.setText("총 " + mAdapter.getCount() + "건");
+            }
+            @Override
+            public void onFail(int code) {
+                Toast.makeText(getActivity(), code + "", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         FrameLayout touchInterceptor = (FrameLayout)getActivity().findViewById(R.id.touchInterceptor);
         touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
@@ -130,18 +148,15 @@ public class CardBoxFragment extends Fragment {
                 }
             }
         });
-
-        initData();
-        mCountTextView = (TextView) view.findViewById(R.id.text_item_count);
-        mCountTextView.setText("총 " + mAdapter.getCount() + "건");
-
+        mAdapter = new CardItemAdapter();
+        mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CardData data = (CardData) mAdapter.getItem(position - mListView.getHeaderViewsCount());
+                MyCard data = (MyCard) mAdapter.getItem(position - mListView.getHeaderViewsCount());
                 Intent intent = new Intent(getActivity(), CardWriteActivity.class);
-                intent.putExtra(CardData.CARD_ITEM, data);
-                intent.putExtra(CardData.CARD_NEW, false);
+                intent.putExtra(MyCard.CARD_ITEM, data);
+                intent.putExtra(MyCard.CARD_NEW, false);
 //                intent.putExtra(CardData.CARDPOSITION, position - mListView.getHeaderViewsCount());
                 startActivityForResult(intent, REQUEST_MODIFY);
             }
@@ -152,33 +167,14 @@ public class CardBoxFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CardWriteActivity.class);
-                intent.putExtra(CardData.CARD_NEW, true);
+                intent.putExtra(MyCard.CARD_NEW, true);
                 startActivityForResult(intent, REQUEST_NEW);
                 fam.close(true);
             }
         });
         FloatingActionButton addCategoryButton = (FloatingActionButton) view.findViewById(R.id.fab_add_category);
 
-//        fam.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
-//            @Override
-//            public void onMenuToggle(boolean opened) {
-//                if (opened) {
-//                    mBlurImage.setVisibility(View.VISIBLE);
-//                    mListView.setEnabled(false);
-//                } else {
-//                    mBlurImage.setVisibility(View.GONE);
-//                    mListView.setEnabled(true);
-//                }
-//            }
-//        });
+        mCountTextView = (TextView) view.findViewById(R.id.text_item_count);
         return view;
-    }
-
-    private void initData() {
-        mCardList = CardLab.get(getActivity()).getCardList();
-        mAdapter = new CardItemAdapter();
-        mAdapter.setItems(mCardList);
-        mListView.setAdapter(mAdapter);
-
     }
 }

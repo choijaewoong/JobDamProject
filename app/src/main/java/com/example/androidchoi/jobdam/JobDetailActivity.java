@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -15,10 +16,13 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.androidchoi.jobdam.Adpater.JobDetailAdapter;
+import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.AddressData;
 import com.example.androidchoi.jobdam.Model.ContentData;
 import com.example.androidchoi.jobdam.Model.Job;
-import com.example.androidchoi.jobdam.Model.MyJobList;
+import com.example.androidchoi.jobdam.Model.MyJob;
+import com.example.androidchoi.jobdam.Model.MyJobLab;
+import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -60,8 +64,26 @@ public class JobDetailActivity extends AppCompatActivity {
         scrapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyJobList.get(getApplicationContext()).addJobData(mData);
-                Toast.makeText(JobDetailActivity.this, getString(R.string.check_scrap), Toast.LENGTH_SHORT).show();
+                MyJob job = new MyJob();
+                job.setData(mData);
+               MyJobLab.get(getApplicationContext()).addJobData(job);
+               Gson gson = new Gson();
+               final String json = gson.toJson(job);
+               Toast.makeText(JobDetailActivity.this, getString(R.string.check_scrap), Toast.LENGTH_SHORT).show();
+
+                NetworkManager.getInstance().addMyJob(JobDetailActivity.this, "lee", json, new NetworkManager.OnResultListener<String>() {
+
+                    @Override
+                    public void onSuccess(String result) {
+                        Log.i("json", json);
+                    }
+
+                    @Override
+                    public void onFail(int code) {
+
+                    }
+                });
+
 //                if(MyJobLab.get(getApplication()).getJobData(mData.getId()) == null) {
 //                    MyJobLab.get(getApplicationContext()).addJobData(mData);
 //                    Toast.makeText(JobDetailActivity.this, getString(R.string.check_scrap), Toast.LENGTH_SHORT).show();

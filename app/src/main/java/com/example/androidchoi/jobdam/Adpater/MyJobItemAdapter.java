@@ -35,7 +35,6 @@ public class MyJobItemAdapter extends BaseAdapter {
     @Override
     public Object getItem(int position) {
         MyJob myJob =  mItems.get(position).getJob();
-        if(myJob == null) myJob = new MyJob();
         return myJob;
     }
 

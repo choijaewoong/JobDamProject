@@ -3,8 +3,9 @@ package com.example.androidchoi.jobdam.Manager;
 import android.content.Context;
 
 import com.begentgroup.xmlparser.XMLParser;
+import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.JobList;
-import com.example.androidchoi.jobdam.Model.MyJobList;
+import com.example.androidchoi.jobdam.Model.MyJobLab;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -89,13 +90,13 @@ public class NetworkManager {
     private static final String FIELDS = "posting-date+expiration-date+keyword-code+count";
     private static final String COUNT = "10";
 
+    // 사람인 api 불러오는 method
     public void getJobAPI(Context context, final OnResultListener<JobList> listener){
         final RequestParams params = new RequestParams();
         params.put("stock", STOCK);
         params.put("sr",SR);
         params.put("fields", FIELDS);
         params.put("count", COUNT);
-
         client.get(context, API_ADDRESS, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -103,50 +104,98 @@ public class NetworkManager {
                 JobList jobList = parser.fromXml(bais, "jobs", JobList.class);
                 listener.onSuccess(jobList);
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 listener.onFail(statusCode);
-
             }
         });
     }
 
     private static final String SERVER = "http://52.69.235.46:3000";
+
+    // 내가 담은 채용정보 불러오는 method
     private static final String SHOW_MY_JOB = SERVER + "/showmyscrap/%s";
-    public void getMyJob(Context context, String userName, final OnResultListener<MyJobList> listener){
+    public void showMyJob(Context context, String userName, final OnResultListener<MyJobLab> listener){
         RequestParams params = new RequestParams();
         String url = String.format(SHOW_MY_JOB, userName);
-//        params.put("user_id", userName);
-
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
-
         client.get(context, url, headers, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
-
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                MyJobList.get(MyApplication.getContext(), gson.fromJson(responseString.toString(), MyJobList.class));
-                listener.onSuccess(MyJobList.get(MyApplication.getContext()));
+                // 싱글톤 MyJobList
+               MyJobLab.get(MyApplication.getContext(), gson.fromJson(responseString.toString(), MyJobLab.class));
+                listener.onSuccess(MyJobLab.get(MyApplication.getContext()));
             }
         });
     }
-
-    public void addMyJob(Context context, String userName, final OnResultListener<MyJobList> listener){
-
-
+    // 채용정보 담는 method
+    private static final String ADD_MY_JOB = SERVER + "/addscrap/%s";
+    public void addMyJob(Context context, String userName, final String jsonString, final OnResultListener<String> listener) {
+        RequestParams params = new RequestParams();
+        String url = String.format(ADD_MY_JOB, userName);
+        try {
+            client.post(context, url, new StringEntity(jsonString), "application/json", new TextHttpResponseHandler() {
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    listener.onFail(statusCode);
+                }
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    listener.onSuccess(responseString);
+                }
+            });
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
-
-    private static final String ADD_MEMO = SERVER + "/addmemo";
-    public void addMemo(Context context, final String jsonString, final OnResultListener<String> listener){
+    public static final String SHOW_MY_MEMO = SERVER + "/showmymemo/%s";
+    public void showMyMemo(Context context, String userName, final OnResultListener<MyCardLab> listener){
+        RequestParams params = new RequestParams();
+        String url = String.format(SHOW_MY_MEMO, userName);
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
+        client.get(context, url, headers, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+            }
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                MyCardLab.get(MyApplication.getContext(), gson.fromJson(responseString.toString(), MyCardLab.class));
+                listener.onSuccess(MyCardLab.get(MyApplication.getContext()));
+            }
+        });
+    }
+    // 메모 추가
+    private static final String ADD_MEMO = SERVER + "/addmemo";
+    public void addMemo(Context context, final String jsonString, final OnResultListener<String> listener){
+//        Header[] headers = new Header[1];
+//        headers[0] = new BasicHeader("Accept", "application/json");
         try {
-            client.post(context, ADD_MEMO, headers, new StringEntity(jsonString), "application/json", new TextHttpResponseHandler() {
+            client.post(context, ADD_MEMO, new StringEntity(jsonString), "application/json", new TextHttpResponseHandler() {
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable){
+
+                }
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    listener.onSuccess(responseString);
+                }
+            });
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+    //메모 수정
+    private static final String UPDATE_MEMO = SERVER + "/memo/update";
+    public void updateMemo(Context context, final String jsonString, final OnResultListener<String> listener){
+        try {
+            client.post(context, UPDATE_MEMO, new StringEntity(jsonString), "application/json", new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
@@ -161,6 +210,7 @@ public class NetworkManager {
             e.printStackTrace();
         }
     }
+
 
     public void cancelAll(Context context) {
         client.cancelRequests(context, true);

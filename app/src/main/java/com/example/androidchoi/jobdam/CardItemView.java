@@ -4,14 +4,14 @@ import android.content.Context;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.androidchoi.jobdam.Model.CardData;
+import com.example.androidchoi.jobdam.Model.MyCard;
 
 /**
  * Created by Tacademy on 2015-10-29.
  */
 public class CardItemView extends RelativeLayout{
 
-    CardData data;
+//    CardData data;
     TextView mTitle;
     TextView mContent;
 
@@ -26,7 +26,7 @@ public class CardItemView extends RelativeLayout{
         mContent = (TextView)findViewById(R.id.edit_text_card_content);
     }
 
-    public void setItemData(CardData data){
+    public void setItemData(MyCard data){
         mTitle.setText(data.getTitle());
         mContent.setText(data.getContent());
     }

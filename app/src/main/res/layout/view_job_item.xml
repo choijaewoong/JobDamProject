@@ -96,7 +96,13 @@
             android:textSize="@dimen/font_size_small"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/button_show_question_list"
+            android:gravity="center"
+            android:paddingLeft="@dimen/border_horizontal_padding"
+            android:paddingRight="@dimen/border_horizontal_padding"
+            android:paddingTop="@dimen/border_vertical_padding"
+            android:paddingBottom="@dimen/border_vertical_padding"/>
 
     </RelativeLayout>
 
