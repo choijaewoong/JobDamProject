@@ -3,8 +3,8 @@
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/default_dimen"
-                android:paddingRight="@dimen/default_dimen">
+                android:paddingLeft="@dimen/default_small_dimen"
+                android:paddingRight="@dimen/default_small_dimen">
 
     <ImageView
         android:layout_width="@dimen/icon_size"

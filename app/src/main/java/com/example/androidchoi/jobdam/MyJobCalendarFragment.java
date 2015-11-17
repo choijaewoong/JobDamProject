@@ -6,14 +6,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Calendar.CalendarAdapter;
 import com.example.androidchoi.jobdam.Calendar.CalendarData;
+import com.example.androidchoi.jobdam.Calendar.CalendarItem;
 import com.example.androidchoi.jobdam.Calendar.CalendarManager;
 import com.example.androidchoi.jobdam.Calendar.ItemData;
+import com.example.androidchoi.jobdam.Model.MyJobs;
 
 import java.util.ArrayList;
 
@@ -25,8 +29,9 @@ public class MyJobCalendarFragment extends Fragment {
     TextView titleView;
     GridView gridView;
     CalendarAdapter mAdapter;
+    private ArrayList<MyJobs> mJobList;
 
-    public static boolean isWeekCalendar = false;
+    private static boolean isWeekCalendar = false;
 
     ArrayList<ItemData> mItemdata = new ArrayList<ItemData>();
 
@@ -43,6 +48,11 @@ public class MyJobCalendarFragment extends Fragment {
         mItemdata.add(new ItemData(2015,9,15,"D"));
         mItemdata.add(new ItemData(2015,9,21,"E"));
         mItemdata.add(new ItemData(2015, 9, 21, "F"));
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -76,7 +86,7 @@ public class MyJobCalendarFragment extends Fragment {
                 // TODO Auto-generated method stub
                 if (isWeekCalendar) {
                     CalendarData data = CalendarManager.getInstance().getPrevWeekCalendarData();
-                    titleView.setText("" + data.year + "." + (data.weekOfYear) +"주");
+                    titleView.setText("" + data.year + "." + (data.weekOfYear) + "주");
                     mAdapter.setCalendarData(data);
                 } else {
                     CalendarData data = CalendarManager.getInstance().getLastMonthCalendarData();
@@ -86,6 +96,22 @@ public class MyJobCalendarFragment extends Fragment {
             }
         });
         gridView = (GridView)view.findViewById(R.id.gridView1);
+        gridView.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
+        refreshView();
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                isWeekCalendar = !isWeekCalendar;
+                refreshView();
+                Toast.makeText(getActivity(), ((CalendarItem)mAdapter.getItem(position)).dayOfMonth + "", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        return view;
+    }
+
+    public void refreshView(){
         try {
             CalendarManager.getInstance().setDataObject(mItemdata);
         } catch (CalendarManager.NoComparableObjectException e) {
@@ -102,7 +128,6 @@ public class MyJobCalendarFragment extends Fragment {
             mAdapter = new CalendarAdapter(getActivity(), data);
         }
         gridView.setAdapter(mAdapter);
-        gridView.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
-        return view;
+
     }
 }

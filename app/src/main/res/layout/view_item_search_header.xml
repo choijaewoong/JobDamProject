@@ -17,7 +17,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/default_dimen"
+        android:layout_marginLeft="@dimen/default_small_dimen"
         android:src="@drawable/button_search"
         android:scaleType="center"/>
 
@@ -28,7 +28,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/default_dimen"
+            android:layout_marginRight="@dimen/default_small_dimen"
             android:scaleType="center"
             android:visibility="gone"
             android:src="@drawable/button_search_delete"/>

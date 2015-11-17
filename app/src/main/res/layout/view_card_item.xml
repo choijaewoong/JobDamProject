@@ -7,8 +7,8 @@
 
 <RelativeLayout android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/default_double_dimen"
-                android:paddingRight="@dimen/default_double_dimen"
+                android:paddingLeft="@dimen/default_dimen"
+                android:paddingRight="@dimen/default_dimen"
                 android:paddingBottom="@dimen/card_item_vertical_gap">
 
     <RelativeLayout
@@ -38,7 +38,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:autoText="false"
-            android:paddingRight="@dimen/default_dimen"
+            android:paddingRight="@dimen/default_small_dimen"
             android:maxLines="1"
             android:ellipsize="end"
             android:text="Title"
@@ -47,13 +47,13 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/image_category_bar"
             android:layout_toEndOf="@+id/image_category_bar"
-            android:layout_marginTop="@dimen/default_dimen"/>
+            android:layout_marginTop="@dimen/default_small_dimen"/>
 
         <TextView
             android:id="@+id/edit_text_card_content"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:paddingRight="@dimen/default_dimen"
+            android:paddingRight="@dimen/default_small_dimen"
             android:maxLines="2"
             android:ellipsize="end"
             android:text="Content"
@@ -81,7 +81,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/edit_text_card_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="@dimen/default_dimen">
+            android:layout_marginBottom="@dimen/default_small_dimen">
 
             <TextView
                 android:id="@+id/text_category"

@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam.Manager;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.begentgroup.xmlparser.XMLParser;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
@@ -129,6 +130,7 @@ public class NetworkManager {
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 // 싱글톤 MyJobList
                MyJobLab.get(MyApplication.getContext(), gson.fromJson(responseString.toString(), MyJobLab.class));
+                Toast.makeText(MyApplication.getContext(),"Network Success", Toast.LENGTH_SHORT).show();
                 listener.onSuccess(MyJobLab.get(MyApplication.getContext()));
             }
         });

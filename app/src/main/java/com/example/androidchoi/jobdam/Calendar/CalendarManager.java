@@ -49,7 +49,6 @@ public class CalendarManager {
 		mData.clear();
 		mData.addAll(data);
 		Collections.sort(mData, new Comparator() {
-
 			@Override
 			public int compare(Object lhs, Object rhs) {
 				// TODO Auto-generated method stub

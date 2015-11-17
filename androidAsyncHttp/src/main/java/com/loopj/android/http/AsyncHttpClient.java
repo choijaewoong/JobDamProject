@@ -741,11 +741,14 @@ public class AsyncHttpClient {
     /**
      * Perform a HTTP PUT request, without any parameters.
      *
+     *
+     * @param context
      * @param url             the URL to send the request to.
-     * @param responseHandler the response handler instance that should handle the response.
-     * @return RequestHandle of future request process
+     * @param headers
+     *@param params
+     * @param responseHandler the response handler instance that should handle the response.  @return RequestHandle of future request process
      */
-    public RequestHandle put(String url, ResponseHandlerInterface responseHandler) {
+    public RequestHandle put(Context context, String url, Header[] headers, RequestParams params, ResponseHandlerInterface responseHandler) {
         return put(null, url, null, responseHandler);
     }
 

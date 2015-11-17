@@ -36,7 +36,7 @@
             android:textIsSelectable="true"
             android:layout_marginTop="@dimen/nav_header_name_top_margin"
             android:layout_marginBottom="@dimen/nav_header_name_bottom_margin"
-            android:layout_marginRight="@dimen/default_dimen"/>
+            android:layout_marginRight="@dimen/default_small_dimen"/>
 
         <TextView
             android:id="@+id/text_user_email"

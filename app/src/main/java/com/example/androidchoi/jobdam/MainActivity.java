@@ -61,7 +61,7 @@ public class MainActivity extends SlidingFragmentActivity
         mSlidingMenu.setBehindWidthRes(R.dimen.menu_width);
         mSlidingMenu.setShadowDrawable(R.drawable.shadow);
         mSlidingMenu.setShadowWidthRes(R.dimen.shadow_width);
-        mSlidingMenu.setFadeDegree(0.0f); //블러처리 해제
+        mSlidingMenu.setFadeDegree(0.3f); //블러처리 해제
         mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 
 

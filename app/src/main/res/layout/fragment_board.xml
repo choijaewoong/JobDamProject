@@ -52,8 +52,8 @@
             android:id="@+id/imageView14"
             android:layout_weight="0"
             android:background="@android:color/white"
-            android:layout_marginTop="@dimen/default_dimen"
-            android:layout_marginBottom="@dimen/default_dimen"/>
+            android:layout_marginTop="@dimen/default_small_dimen"
+            android:layout_marginBottom="@dimen/default_small_dimen"/>
 
         <TextView
             android:id="@+id/textView2"
@@ -73,7 +73,7 @@
         android:layout_centerHorizontal="true"
         android:src="@drawable/selector_button_write_article"
         android:clickable="true"
-        android:layout_margin="@dimen/default_double_dimen"/>
+        android:layout_margin="@dimen/default_dimen"/>
 
 
 </RelativeLayout>

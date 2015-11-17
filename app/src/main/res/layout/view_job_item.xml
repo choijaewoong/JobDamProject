@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/default_double_dimen"
-                android:paddingRight="@dimen/default_double_dimen"
+                android:paddingLeft="@dimen/default_dimen"
+                android:paddingRight="@dimen/job_container_right_padding"
                 android:paddingBottom="@dimen/job_item_vertical_gap">
 
     <RelativeLayout
@@ -12,7 +12,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/image_job_container"
-        android:padding="@dimen/default_dimen">
+        android:paddingLeft="@dimen/default_small_dimen"
+        android:layout_marginRight="2.5dp">
         <!--android:background="@drawable/border"-->
 
     <ImageView
@@ -28,13 +29,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginLeft="24dp"
+        android:id="@+id/linearLayout7"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/text_job_dday"
         android:layout_toRightOf="@+id/image_job_logo"
         android:layout_toEndOf="@+id/image_job_logo"
-        android:layout_marginLeft="@dimen/job_content_left_margin"
-        android:layout_marginRight="@dimen/job_content_right_margin"
-        android:id="@+id/linearLayout7">
+        android:layout_marginRight="48dp">
 
         <TextView
             android:id="@+id/text_corp"
@@ -75,25 +75,13 @@
     </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/text_job_dday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="d-day"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/font_size_small"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="@dimen/default_dimen"/>
-
         <TextView
             android:id="@+id/text_show_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="항목보기"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/font_size_small"
+            android:textSize="@dimen/font_size_min"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -102,8 +90,25 @@
             android:paddingLeft="@dimen/border_horizontal_padding"
             android:paddingRight="@dimen/border_horizontal_padding"
             android:paddingTop="@dimen/border_vertical_padding"
-            android:paddingBottom="@dimen/border_vertical_padding"/>
+            android:paddingBottom="@dimen/border_vertical_padding"
+            android:layout_margin="@dimen/default_small_dimen"/>
 
     </RelativeLayout>
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/text_job_dday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="d-day"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_size_min"
+        android:background="@drawable/image_dday_box_default"
+        android:layout_gravity="right"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/text_show_question"
+        android:layout_alignStart="@+id/text_show_question"
+        android:layout_marginTop="@dimen/default_small_dimen"
+        android:gravity="center_vertical|center_horizontal"
+        android:paddingLeft="3dp"/>
+
+</FrameLayout>

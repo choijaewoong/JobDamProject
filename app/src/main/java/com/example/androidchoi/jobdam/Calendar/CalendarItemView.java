@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.widget.Checkable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.R;
 
@@ -73,7 +72,6 @@ public class CalendarItemView extends LinearLayout implements Checkable{
 		this.checked = checked;
 		if(checked){
 			mLinearLayout.setBackgroundResource(R.color.colorPrimary);
-			Toast.makeText(getContext(), numberView.getText(), Toast.LENGTH_SHORT).show();
 		}else{
 			mLinearLayout.setBackgroundColor(backgroundColor);
 		}

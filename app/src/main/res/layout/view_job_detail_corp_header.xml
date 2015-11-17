@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/top_margin"
-    android:paddingBottom="@dimen/default_dimen">
+    android:paddingBottom="@dimen/default_small_dimen">
 
     <ImageView
         android:layout_width="@dimen/corp_logo_size"
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/text_detail_corp_name"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/default_dimen"
+        android:layout_marginTop="@dimen/default_small_dimen"
         android:textSize="@dimen/font_size_large"
         android:textColor="@android:color/black"/>
 
