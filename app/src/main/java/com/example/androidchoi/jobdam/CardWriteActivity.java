@@ -24,14 +24,13 @@ public class CardWriteActivity extends AppCompatActivity {
     public static final String EXTRA_CARD_DATA = "card data";
     public static final String EXTRA_CARD_POSITION = "card position";
 
-
     MyCard mData;
     EditText mEditTitle;
     EditText mEditContent;
     TextView mTextTitle;
     TextView mTextContent;
+    ScrollView scrollView;
     LinearLayout mCancelSaveLayout;
-//    RelativeLayout mCardContainer;
     TextView mCancelButton;
     TextView mSaveButton;
     boolean isNew;
@@ -46,25 +45,31 @@ public class CardWriteActivity extends AppCompatActivity {
         mEditContent = (EditText) findViewById(R.id.edit_text_card_content);
         mTextTitle = (TextView)findViewById(R.id.text_view_card_title);
         mTextContent = (TextView) findViewById(R.id.text_view_card_content);
+        scrollView = (ScrollView)findViewById(R.id.scroll_view_content);
 
         mCancelSaveLayout = (LinearLayout) findViewById(R.id.linearLayout_cancel_save_button);
-//        mCardContainer = (RelativeLayout)findViewById(R.id.card_container);
         mCancelButton = (TextView) findViewById(R.id.text_cancel_card);
         mSaveButton = (TextView) findViewById(R.id.text_save_card);
 
         Intent intent = getIntent();
         isNew = intent.getBooleanExtra(MyCard.CARD_NEW, true);
         mData = (MyCard) intent.getSerializableExtra(MyCard.CARD_ITEM);
-        // 기존 Data있는 경우
+        // 기존 Data있는 경우 (메모 수정)
         if (mData != null) {
             mCancelSaveLayout.setVisibility(View.GONE);
             mTextTitle.setText(mData.getTitle());
             mTextContent.setText(mData.getContent());
+        } else{ // 기존 Data없는 경우 (메모 추가)
+            changeWriteMode();
+            mEditContent.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(mEditContent, InputMethodManager.SHOW_IMPLICIT);
         }
 
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Show Cancel Check Dialog
                 finish();
             }
         });
@@ -117,12 +122,6 @@ public class CardWriteActivity extends AppCompatActivity {
         mTextContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                mTextContent.setCursorVisible(true);
-//                mTextContent.setFocusableInTouchMode(true);
-//                mTextContent.setEllipsize(TextUtils.TruncateAt.END);
-//                mTextContent.setInputType(InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE);
-//                mTextContent.requestFocus();
-//                mEditContent.getSelectionStart();
                 changeWriteMode();
                 mEditContent.requestFocus();
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -130,22 +129,22 @@ public class CardWriteActivity extends AppCompatActivity {
 
             }
         });
-        mEditTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!isFocused) {
-                    changeMode();
-                }
-            }
-        });//
-        mEditContent.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!isFocused) {
-                    changeMode();
-                }
-            }
-        });
+//        mEditTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!isFocused) {
+//                    changeMode();
+//                }
+//            }
+//        });//
+//        mEditContent.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!isFocused) {
+//                    changeMode();
+//                }
+//            }
+//        });
     }
 
     public String jsonStringFromData() {
@@ -156,17 +155,17 @@ public class CardWriteActivity extends AppCompatActivity {
         return gson.toJson(mData);
     }
 
-    public void changeMode() {
-        isFocused = true;
-        mCancelSaveLayout.setVisibility(View.VISIBLE);
-    }
+//    public void changeMode() {
+//        isFocused = true;
+//        mCancelSaveLayout.setVisibility(View.VISIBLE);
+//    }
 
     public void changeWriteMode(){
-        ScrollView scrollView = (ScrollView)findViewById(R.id.scroll_view_content);
+        mCancelSaveLayout.setVisibility(View.VISIBLE);
         scrollView.setVisibility(View.GONE);
         mTextTitle.setVisibility(View.GONE);
         mEditTitle.setVisibility(View.VISIBLE);
-        mTextContent.setVisibility(View.GONE);
+//        mTextContent.setVisibility(View.GONE);
         mEditContent.setVisibility(View.VISIBLE);
         mEditTitle.setText(mTextTitle.getText());
         mEditContent.setText(mTextContent.getText());

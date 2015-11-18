@@ -33,7 +33,8 @@
         </activity>
         <activity
             android:name=".CardWriteActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize">
         </activity>
         <activity
             android:name=".LogIn.SplashActivity"
