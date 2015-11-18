@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingTop="@dimen/default_small_dimen"
-    android:paddingBottom="@dimen/default_small_dimen">
+    android:paddingBottom="@dimen/default_small_dimen"
+              android:paddingLeft="@dimen/default_dimen"
+              android:paddingRight="@dimen/default_dimen">
 
     <TextView
         android:id="@+id/text_detail_job_title"
@@ -34,8 +36,9 @@
             android:background="@drawable/selector_button_scrap"
             android:paddingLeft="@dimen/default_dimen"
             android:textColor="@drawable/selector_button_text"
-            android:layout_marginRight="@dimen/default_small_dimen"
-            android:checked="false"/>
+            android:layout_marginRight="@dimen/default_dimen"
+            android:checked="false"
+            android:textSize="@dimen/font_size_semi_large"/>
         <Button
             android:id="@+id/btn_detail_move_homepage"
             android:layout_width="wrap_content"
@@ -45,6 +48,7 @@
             android:layout_below="@+id/textView3"
             android:text="@string/homepage"
             android:background="@drawable/selector_button_corp_page"
-            android:textColor="@drawable/selector_button_text"/>
+            android:textColor="@drawable/selector_button_text"
+            android:textSize="@dimen/font_size_semi_large"/>
     </LinearLayout>
 </LinearLayout>

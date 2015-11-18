@@ -135,7 +135,7 @@ public class NetworkManager {
             }
         });
     }
-    // 채용정보 담는 method
+    // 채용정보 담기
     private static final String ADD_MY_JOB = SERVER + "/addscrap/%s";
     public void addMyJob(Context context, String userName, final String jsonString, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
@@ -155,6 +155,8 @@ public class NetworkManager {
             e.printStackTrace();
         }
     }
+
+    //메모 보기
     public static final String SHOW_MY_MEMO = SERVER + "/showmymemo/%s";
     public void showMyMemo(Context context, String userName, final OnResultListener<MyCardLab> listener){
         RequestParams params = new RequestParams();
@@ -207,6 +209,66 @@ public class NetworkManager {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
                     Toast.makeText(MyApplication.getContext(), "메모 수정!", Toast.LENGTH_SHORT).show();
+                    listener.onSuccess(responseString);
+                }
+            });
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //게시글 보기
+    public static final String SHOW_ARTICLE = SERVER + "/boardlist/%s";
+    public void showArticle(Context context, String userName, final OnResultListener<MyCardLab> listener){
+        RequestParams params = new RequestParams();
+        String url = String.format(SHOW_MY_MEMO, userName);
+        Header[] headers = new Header[1];
+        headers[0] = new BasicHeader("Accept", "application/json");
+        client.get(context, SHOW_ARTICLE, headers, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+            }
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+                listener.onSuccess(MyCardLab.get(MyApplication.getContext()));
+            }
+        });    }
+
+    // 게시글 추가
+    private static final String ADD_ARTICLE = SERVER + "/addboard";
+    public void addArticle(Context context, final String jsonString, final OnResultListener<String> listener){
+//        Header[] headers = new Header[1];
+//        headers[0] = new BasicHeader("Accept", "application/json");
+        try {
+            client.post(context, ADD_ARTICLE, new StringEntity(jsonString), "application/json", new TextHttpResponseHandler() {
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable){
+
+                }
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    Toast.makeText(MyApplication.getContext(), "게시글 추가!", Toast.LENGTH_SHORT).show();
+                    listener.onSuccess(responseString);
+                }
+            });
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+    //게시글 수정
+    private static final String UPDATE_ARTICLE = SERVER + "/board/update";
+    public void updateArticle(Context context, final String jsonString, final OnResultListener<String> listener){
+        try {
+            client.post(context, UPDATE_ARTICLE, new StringEntity(jsonString), "application/json", new TextHttpResponseHandler() {
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+                }
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    Toast.makeText(MyApplication.getContext(), "게시글 수정!", Toast.LENGTH_SHORT).show();
                     listener.onSuccess(responseString);
                 }
             });
