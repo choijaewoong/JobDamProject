@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.androidchoi.jobdam" >
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -14,7 +15,6 @@
         <activity
             android:name=".Calendar.SampleCalenarActivity"
             android:label="@string/app_name" >
-
         </activity>
         <activity
             android:name=".MainActivity"
@@ -30,8 +30,9 @@
             android:name=".JobDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".CardWriteActivity"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".CardWriteActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".LogIn.SplashActivity"
@@ -41,23 +42,32 @@
             android:name=".LogIn.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".Setting.SettingActivity"
-                  android:theme="@style/AppTheme.NoActionBar" >
+        <activity
+            android:name=".Setting.SettingActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".Setting.HelpDeskActivity"
-                  android:theme="@style/AppTheme.NoActionBar" >
+        <activity
+            android:name=".Setting.HelpDeskActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".Setting.PrivacyActivity"
-                  android:theme="@style/AppTheme.NoActionBar" >
+        <activity
+            android:name=".Setting.PrivacyActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".Setting.LegalActivity"
-                  android:theme="@style/AppTheme.NoActionBar" >
+        <activity
+            android:name=".Setting.LegalActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".Setting.AlarmSettingActivity"
-                  android:theme="@style/AppTheme.NoActionBar" >
+        <activity
+            android:name=".Setting.AlarmSettingActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".Setting.VersionInfoActivity"
-                  android:theme="@style/AppTheme.NoActionBar" >
+        <activity
+            android:name=".Setting.VersionInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity android:name=".ArticleWriteActivity"
+            android:windowSoftInputMode="stateVisible">
         </activity>
     </application>
 

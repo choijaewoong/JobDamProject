@@ -1,12 +1,14 @@
 package com.example.androidchoi.jobdam;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ public class BoardFragment extends Fragment {
     ViewPager pager;
     BoardPagerAdapter mAdapter;
     ArrayList<Articles> mArticlesList = new ArrayList<Articles>();
+    ImageView articleWriteImage;
 
     public BoardFragment() {
         // Required empty public constructor
@@ -80,8 +83,15 @@ public class BoardFragment extends Fragment {
             }
         });
 //        pager.setCurrentItem(2, true);
+        articleWriteImage =(ImageView)view.findViewById(R.id.image_article_write_button);
+        articleWriteImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ArticleWriteActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
-
-
 }
