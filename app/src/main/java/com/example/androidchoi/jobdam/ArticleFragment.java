@@ -3,6 +3,7 @@ package com.example.androidchoi.jobdam;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class ArticleFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.view_article, container, false);
         TextView tv = (TextView)view.findViewById(R.id.text_article);
+        tv.setMovementMethod(new ScrollingMovementMethod());
         tv.setText(mTitle);
         return view;
     }

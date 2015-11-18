@@ -17,7 +17,7 @@ public class BoardPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return ArticleFragment.newInstance("Title" + position);
+        return ArticleFragment.newInstance("국민은행 합격했어요...!!!\n 잡담 덕분이에요..ㅜㅜ\n 감사해요!!!\n 잡담 짱짱!!!!!!!!!!!!");
     }
 
     @Override

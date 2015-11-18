@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.BoardPagerAdapter;
 
@@ -48,7 +47,7 @@ public class BoardFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                Toast.makeText(getActivity(), "selected : " + position, Toast.LENGTH_SHORT).show();
+
 
             }
 
@@ -57,7 +56,7 @@ public class BoardFragment extends Fragment {
 
             }
         });
-        pager.setCurrentItem(2, true);
+//        pager.setCurrentItem(2, true);
         return view;
     }
 

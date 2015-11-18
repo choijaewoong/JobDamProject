@@ -186,6 +186,7 @@ public class NetworkManager {
                 }
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    Toast.makeText(MyApplication.getContext(), "메모 추가!", Toast.LENGTH_SHORT).show();
                     listener.onSuccess(responseString);
                 }
             });
@@ -205,6 +206,7 @@ public class NetworkManager {
 
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    Toast.makeText(MyApplication.getContext(), "메모 수정!", Toast.LENGTH_SHORT).show();
                     listener.onSuccess(responseString);
                 }
             });

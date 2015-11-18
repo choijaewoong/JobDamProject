@@ -60,9 +60,6 @@ public class CardWriteActivity extends AppCompatActivity {
             mCancelSaveLayout.setVisibility(View.GONE);
             mTextTitle.setText(mData.getTitle());
             mTextContent.setText(mData.getContent());
-        } else{
-//            mEditTitle.setText(mData.getTitle());
-//            mEditContent.setText(mData.getContent());
         }
 
         mCancelButton.setOnClickListener(new View.OnClickListener() {
@@ -108,19 +105,6 @@ public class CardWriteActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-//        final int[] x = new int[1];
-//        final int[] y = new int[1];
-//        mTextTitle.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                x[0] = (int)event.getX();
-//                y[0] = (int)event.getY();
-//
-//                return true;
-//            }
-//        });
-
         mTextTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
