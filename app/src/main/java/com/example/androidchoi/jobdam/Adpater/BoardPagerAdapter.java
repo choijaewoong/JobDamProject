@@ -5,11 +5,21 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.androidchoi.jobdam.ArticleFragment;
+import com.example.androidchoi.jobdam.Model.Articles;
+
+import java.util.ArrayList;
 
 /**
  * Created by Choi on 2015-11-11.
  */
 public class BoardPagerAdapter extends FragmentPagerAdapter {
+
+    ArrayList<Articles> mItems = new ArrayList<Articles>();
+
+    public void setItems(ArrayList<Articles> items){
+        mItems = items;
+        notifyDataSetChanged();
+    }
 
     public BoardPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -17,12 +27,11 @@ public class BoardPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return ArticleFragment.newInstance("국민은행 합격했어요...!!!\n 잡담 덕분이에요..ㅜㅜ\n 감사해요!!!\n 잡담 짱짱!!!!!!!!!!!!");
+        return ArticleFragment.newInstance(mItems.get(position).getArticle());
     }
-
     @Override
     public int getCount() {
-        return 5;
+        return mItems.size();
     }
     @Override
     public float getPageWidth(int position) {

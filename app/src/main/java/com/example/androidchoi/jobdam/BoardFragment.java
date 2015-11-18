@@ -8,8 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.BoardPagerAdapter;
+import com.example.androidchoi.jobdam.Model.ArticleLab;
+import com.example.androidchoi.jobdam.Model.Articles;
+
+import java.util.ArrayList;
 
 
 /**
@@ -18,6 +23,8 @@ import com.example.androidchoi.jobdam.Adpater.BoardPagerAdapter;
 public class BoardFragment extends Fragment {
 
     ViewPager pager;
+    BoardPagerAdapter mAdapter;
+    ArrayList<Articles> mArticlesList = new ArrayList<Articles>();
 
     public BoardFragment() {
         // Required empty public constructor
@@ -35,10 +42,14 @@ public class BoardFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_board, container, false);
+        mAdapter = new BoardPagerAdapter(getChildFragmentManager());
+        mArticlesList = ArticleLab.get(getActivity()).getArticleList();
+        Toast.makeText(getActivity(), mArticlesList.size()+"", Toast.LENGTH_SHORT).show();
+        mAdapter.setItems(mArticlesList);
         pager = (ViewPager)view.findViewById(R.id.view_pager_article);
         pager.setClipToPadding(false);
         pager.setPageMargin(40);
-        pager.setAdapter(new BoardPagerAdapter(getChildFragmentManager()));
+        pager.setAdapter(mAdapter);
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
