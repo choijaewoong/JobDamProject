@@ -55,7 +55,7 @@ public class MyJobListFragment extends Fragment {
         NetworkManager.getInstance().showMyJob(getActivity(), User.USER_NAME, new NetworkManager.OnResultListener<MyJobLab>() {
             @Override
             public void onSuccess(MyJobLab result) {
-                Toast.makeText(getActivity(), "Job 불러오기 성공" + MyJobLab.get(getContext()).getJobList().size(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Job 불러오기 성공" + MyJobLab.get(getContext()).getJobList().size(), Toast.LENGTH_SHORT).show();
                 mJobList = result.getJobList();
                 mAdapter.setItems(mJobList);
                 mCountTextView.setText("총 " + mAdapter.getCount() + "건");

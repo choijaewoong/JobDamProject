@@ -20,13 +20,13 @@ public class ArticleLab {
     private ArticleLab(Context context){
         mContext = context;
         mArticleList = new ArrayList<Articles>();
-        Article article = new Article();
-        article.setContent("국민은행 합격했어요...!!!\n 잡담 덕분이에요..ㅜㅜ\n 감사해요!!!\n 잡담 짱짱!!!!!!!!!!!!");
-        Articles articles = new Articles();
-        articles.setArticle(article);
-        for(int i= 0; i< 10; i++) {
-            mArticleList.add(articles);
-        }
+//        Article article = new Article();
+//        article.setContent("국민은행 합격했어요...!!!\n 잡담 덕분이에요..ㅜㅜ\n 감사해요!!!\n 잡담 짱짱!!!!!!!!!!!!");
+//        Articles articles = new Articles();
+//        articles.setArticle(article);
+//        for(int i= 0; i< 10; i++) {
+//            mArticleList.add(articles);
+//        }
     }
     private ArticleLab(Context context, ArrayList<Articles> articleList){
         mContext = context;

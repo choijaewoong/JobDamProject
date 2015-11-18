@@ -8,7 +8,8 @@ import java.io.Serializable;
  */
 public class Article implements Serializable {
 
-    private int timestamp;
+    private String user_id;
+    private String timestamp;
     private int emotionIndex;
     private boolean likebool;
     private String content;

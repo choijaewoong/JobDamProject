@@ -222,10 +222,10 @@ public class NetworkManager {
     public static final String SHOW_ARTICLE = SERVER + "/boardlist/%s";
     public void showArticle(Context context, String userName, final OnResultListener<ArticleLab> listener){
         RequestParams params = new RequestParams();
-        String url = String.format(SHOW_MY_MEMO, userName);
+        String url = String.format(SHOW_ARTICLE, userName);
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
-        client.get(context, SHOW_ARTICLE, headers, params, new TextHttpResponseHandler() {
+        client.get(context, url, headers, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);

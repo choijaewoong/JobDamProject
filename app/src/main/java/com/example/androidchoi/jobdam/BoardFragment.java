@@ -13,8 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.BoardPagerAdapter;
+import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.ArticleLab;
 import com.example.androidchoi.jobdam.Model.Articles;
+import com.example.androidchoi.jobdam.Model.User;
 
 import java.util.ArrayList;
 
@@ -38,18 +40,21 @@ public class BoardFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         TextView subTitle = (TextView)getActivity().findViewById(R.id.text_subtitle);
         subTitle.setText(R.string.board);
-//        NetworkManager.getInstance().showArticle(getActivity(),
-//                User.USER_NAME, new NetworkManager.OnResultListener<ArticleLab>(){
-//
-//                    @Override
-//                    public void onSuccess(ArticleLab result) {
-//                        mAdapter.setItems(result.getArticleList());
-//                    }
-//                    @Override
-//                    public void onFail(int code) {
-//                        Toast.makeText(getActivity(), "error : " + code, Toast.LENGTH_SHORT).show();
-//                    }
-//                });
+        NetworkManager.getInstance().showArticle(getActivity(),
+                User.USER_NAME, new NetworkManager.OnResultListener<ArticleLab>(){
+
+                    @Override
+                    public void onSuccess(ArticleLab result) {
+                        mArticlesList = result.getArticleList();
+                        mAdapter.setItems(mArticlesList);
+                        Toast.makeText(getActivity(), "mArtistList" + mArticlesList.size()+"", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "result.getArticleList" + result.getArticleList().size()+"", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onFail(int code) {
+                        Toast.makeText(getActivity(), "error : " + code, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override
@@ -58,9 +63,6 @@ public class BoardFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_board, container, false);
         mAdapter = new BoardPagerAdapter(getChildFragmentManager());
-        mArticlesList = ArticleLab.get(getActivity()).getArticleList();
-        Toast.makeText(getActivity(), mArticlesList.size()+"", Toast.LENGTH_SHORT).show();
-        mAdapter.setItems(mArticlesList);
         pager = (ViewPager)view.findViewById(R.id.view_pager_article);
         pager.setClipToPadding(false);
         pager.setPageMargin(40);
