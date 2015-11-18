@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.CardItemAdapter;
+import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyCard;
@@ -74,7 +75,8 @@ public class CardBoxFragment extends Fragment {
         subTitle.setText(R.string.card_box);
 
         Toast.makeText(getActivity(),"카드를 불러옵니다!", Toast.LENGTH_SHORT).show();
-        NetworkManager.getInstance().showMyMemo(getActivity(), User.USER_NAME, new NetworkManager.OnResultListener<MyCardLab>() {
+        NetworkManager.getInstance().showMyMemo(getActivity(),
+                User.USER_NAME, new NetworkManager.OnResultListener<MyCardLab>() {
             @Override
             public void onSuccess(MyCardLab result) {
                 mCardList = result.getCardList();
@@ -83,10 +85,9 @@ public class CardBoxFragment extends Fragment {
             }
             @Override
             public void onFail(int code) {
-                Toast.makeText(getActivity(), code + "", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyApplication.getContext(), code + "", Toast.LENGTH_SHORT).show();
             }
         });
-
         FrameLayout touchInterceptor = (FrameLayout)getActivity().findViewById(R.id.touchInterceptor);
         touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -106,7 +107,6 @@ public class CardBoxFragment extends Fragment {
             }
         });
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

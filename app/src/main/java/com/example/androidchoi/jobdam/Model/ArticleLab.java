@@ -20,7 +20,6 @@ public class ArticleLab {
     private ArticleLab(Context context){
         mContext = context;
         mArticleList = new ArrayList<Articles>();
-
         Article article = new Article();
         article.setContent("국민은행 합격했어요...!!!\n 잡담 덕분이에요..ㅜㅜ\n 감사해요!!!\n 잡담 짱짱!!!!!!!!!!!!");
         Articles articles = new Articles();
@@ -29,10 +28,20 @@ public class ArticleLab {
             mArticleList.add(articles);
         }
     }
-
+    private ArticleLab(Context context, ArrayList<Articles> articleList){
+        mContext = context;
+        mArticleList = articleList;
+    }
     public static ArticleLab get(Context context){
         if(sArticleLab == null){
             sArticleLab = new ArticleLab(context.getApplicationContext());
+        }
+        return sArticleLab;
+    }
+
+    public static ArticleLab get(Context context, ArticleLab articleLab){
+        if(sArticleLab == null){
+            sArticleLab = new ArticleLab(context.getApplicationContext(), articleLab.getArticleList());
         }
         return sArticleLab;
     }

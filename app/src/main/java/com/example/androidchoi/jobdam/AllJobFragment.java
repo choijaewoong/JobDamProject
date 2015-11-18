@@ -51,7 +51,6 @@ public class AllJobFragment extends Fragment {
         TextView subTitle = (TextView) getActivity().findViewById(R.id.text_subtitle);
         subTitle.setText(R.string.all_job);
 
-        mListView.setAdapter(mAdapter);
         NetworkManager.getInstance().getJobAPI(getActivity(),
                 new NetworkManager.OnResultListener<JobList>() {
                     @Override
@@ -119,6 +118,7 @@ public class AllJobFragment extends Fragment {
             }
         });
         mAdapter = new JobItemAdapter();
+        mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

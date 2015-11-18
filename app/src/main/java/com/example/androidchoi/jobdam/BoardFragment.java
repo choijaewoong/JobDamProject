@@ -35,6 +35,18 @@ public class BoardFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         TextView subTitle = (TextView)getActivity().findViewById(R.id.text_subtitle);
         subTitle.setText(R.string.board);
+//        NetworkManager.getInstance().showArticle(getActivity(),
+//                User.USER_NAME, new NetworkManager.OnResultListener<ArticleLab>(){
+//
+//                    @Override
+//                    public void onSuccess(ArticleLab result) {
+//                        mAdapter.setItems(result.getArticleList());
+//                    }
+//                    @Override
+//                    public void onFail(int code) {
+//                        Toast.makeText(getActivity(), "error : " + code, Toast.LENGTH_SHORT).show();
+//                    }
+//                });
     }
 
     @Override

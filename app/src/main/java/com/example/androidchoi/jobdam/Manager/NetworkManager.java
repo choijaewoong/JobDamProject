@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.begentgroup.xmlparser.XMLParser;
+import com.example.androidchoi.jobdam.Model.ArticleLab;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.JobList;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
@@ -219,7 +220,7 @@ public class NetworkManager {
 
     //게시글 보기
     public static final String SHOW_ARTICLE = SERVER + "/boardlist/%s";
-    public void showArticle(Context context, String userName, final OnResultListener<MyCardLab> listener){
+    public void showArticle(Context context, String userName, final OnResultListener<ArticleLab> listener){
         RequestParams params = new RequestParams();
         String url = String.format(SHOW_MY_MEMO, userName);
         Header[] headers = new Header[1];
@@ -231,10 +232,11 @@ public class NetworkManager {
             }
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-
-                listener.onSuccess(MyCardLab.get(MyApplication.getContext()));
+                ArticleLab.get(MyApplication.getContext(), gson.fromJson(responseString.toString(), ArticleLab.class));
+                listener.onSuccess(ArticleLab.get(MyApplication.getContext()));
             }
-        });    }
+        });
+    }
 
     // 게시글 추가
     private static final String ADD_ARTICLE = SERVER + "/addboard";
