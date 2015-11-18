@@ -39,7 +39,7 @@ public class MainActivity extends SlidingFragmentActivity
 
         ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
                 ActionBar.LayoutParams.MATCH_PARENT, Gravity.CENTER);
-        View customToolbar = getLayoutInflater().inflate(R.layout.view_toolbar_custom, null);
+        View customToolbar = getLayoutInflater().inflate(R.layout.toolbar_main, null);
         ImageView titleImage = (ImageView)customToolbar.findViewById(R.id.image_app_title);
         titleImage.setOnClickListener(new View.OnClickListener() {
             @Override

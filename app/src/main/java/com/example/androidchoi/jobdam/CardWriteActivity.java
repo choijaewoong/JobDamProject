@@ -34,7 +34,6 @@ public class CardWriteActivity extends AppCompatActivity {
     TextView mCancelButton;
     TextView mSaveButton;
     boolean isNew;
-    boolean isFocused = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +83,7 @@ public class CardWriteActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(String result) {
                             Toast.makeText(CardWriteActivity.this, jsonString, Toast.LENGTH_SHORT).show();
-                        Log.i("dd", jsonString);
+//                             Log.i("dd", jsonString);
                         }
 
                         @Override
@@ -129,22 +128,6 @@ public class CardWriteActivity extends AppCompatActivity {
 
             }
         });
-//        mEditTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (!isFocused) {
-//                    changeMode();
-//                }
-//            }
-//        });//
-//        mEditContent.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (!isFocused) {
-//                    changeMode();
-//                }
-//            }
-//        });
     }
 
     public String jsonStringFromData() {
@@ -154,18 +137,11 @@ public class CardWriteActivity extends AppCompatActivity {
         Gson gson = new Gson();
         return gson.toJson(mData);
     }
-
-//    public void changeMode() {
-//        isFocused = true;
-//        mCancelSaveLayout.setVisibility(View.VISIBLE);
-//    }
-
     public void changeWriteMode(){
         mCancelSaveLayout.setVisibility(View.VISIBLE);
         scrollView.setVisibility(View.GONE);
         mTextTitle.setVisibility(View.GONE);
         mEditTitle.setVisibility(View.VISIBLE);
-//        mTextContent.setVisibility(View.GONE);
         mEditContent.setVisibility(View.VISIBLE);
         mEditTitle.setText(mTextTitle.getText());
         mEditContent.setText(mTextContent.getText());

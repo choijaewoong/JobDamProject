@@ -55,8 +55,8 @@
         app:menu_labels_singleLine="false"
         app:menu_labels_textColor="#FFFFFF"
         app:menu_labels_textSize="14sp"
-        android:paddingRight="@dimen/fab_margin"
-        android:paddingBottom="@dimen/fab_margin">
+        android:paddingRight="@dimen/default_small_dimen"
+        android:paddingBottom="@dimen/default_small_dimen">
         <!--app:menu_shadowColor="#66000000"-->
         <!--app:menu_shadowRadius="4dp"-->
         <!--app:menu_shadowXOffset="1dp"-->

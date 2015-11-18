@@ -21,12 +21,14 @@
     <string name="education_level"><b>학력 : </b></string>
     <string name="location"><b>지역 : </b></string>
     <string name="salary"><b>급여 : </b></string>
+
     <!-- setting activity-->
     <string name="help_desk">Help Desk</string>
     <string name="privacy">Privacy</string>
     <string name="legal">Legal</string>
     <string name="alarm">Alarm</string>
     <string name="version">Version</string>
+
     <!-- floating button label-->
     <string name="write_card">카드 작성</string>
     <string name="add_cartegory">카테고리 추가</string>
@@ -41,10 +43,13 @@
     <string name="user_password_check">비밀번호 확인</string>
     <string name="submit_user_info">입력 완료</string>
 
+    <!-- JobDam Talk -->
+    <string name="save_article">저장</string>
+
     <!-- Check Message-->
     <string name="check_scrap">스크랩 되었습니다.</string>
     <string name="check_not_scrap">이미 스크랩 되어있습니다.</string>
 
-<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

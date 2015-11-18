@@ -3,8 +3,10 @@ package com.example.androidchoi.jobdam;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -12,10 +14,18 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.example.androidchoi.jobdam.Manager.NetworkManager;
+import com.example.androidchoi.jobdam.Model.Article;
+import com.example.androidchoi.jobdam.Model.ArticleLab;
+import com.example.androidchoi.jobdam.Model.User;
+import com.google.gson.Gson;
 
 public class ArticleWriteActivity extends AppCompatActivity {
 
+    Article mArticle;
     EditText mEditText;
 
     @Override
@@ -26,10 +36,30 @@ public class ArticleWriteActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
+                ActionBar.LayoutParams.MATCH_PARENT, Gravity.CENTER);
 
+        View customToolbar = getLayoutInflater().inflate(R.layout.toolbar_write_article, null);
+        ImageView imageEmotion = (ImageView)customToolbar.findViewById(R.id.image_article_emotion);
+        imageEmotion .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ArticleWriteActivity.this, "emotion", Toast.LENGTH_SHORT).show();
+            }
+        });
+        getSupportActionBar().setCustomView(customToolbar, params);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
 
         mEditText = (EditText)findViewById(R.id.edit_text_article);
+
+        /* intent 가져오고 Data가 없다면
+         새로 작성하는 article , Data가 있다면 article 수정 */
+        if(mArticle != null){
+            mEditText.setText(mArticle.getContent());
+        } else{
+
+        }
 
         FrameLayout touchInterceptor = (FrameLayout)findViewById(R.id.touchInterceptor);
         touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
@@ -67,6 +97,23 @@ public class ArticleWriteActivity extends AppCompatActivity {
         }
         //noinspection SimplifiableIfStatement
         else if (id == R.id.action_save) {
+            mArticle = new Article();
+            mArticle.setArticle(User.USER_NAME,
+                    0, false, mEditText.getText().toString(), 0);
+            ArticleLab.get(getApplicationContext()).modifyArticleData(mArticle);
+            Gson gson = new Gson();
+            final String jsonString = gson.toJson(mArticle);
+            NetworkManager.getInstance().addArticle(ArticleWriteActivity.this, jsonString, new NetworkManager.OnResultListener<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    Toast.makeText(ArticleWriteActivity.this, jsonString, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFail(int code) {
+                    Toast.makeText(ArticleWriteActivity.this, "실패.", Toast.LENGTH_SHORT).show();
+                }
+            });
             Toast.makeText(ArticleWriteActivity.this, "저장되었습니다." ,Toast.LENGTH_SHORT).show();
             finish();
             return true;
