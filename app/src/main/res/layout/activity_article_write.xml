@@ -7,25 +7,32 @@
     android:layout_height="match_parent"
     tools:context="com.example.androidchoi.jobdam.ArticleWriteActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/view"
+    <!--android:theme="@style/AppTheme.AppBarOverlay">-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    </android.support.v7.widget.Toolbar>
+    <View
+        android:id="@+id/toolbar_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/shadow_depth"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar"
+        android:layout_gravity="center"
+        android:background="@drawable/shadow_bottom"/>
+
 
     <EditText
         android:id="@+id/edit_text_article"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/view"
+        android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
         android:autoText="false"
         android:background="@android:color/transparent"
@@ -37,5 +44,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible">
+
     </FrameLayout>
 </RelativeLayout>

@@ -153,10 +153,10 @@
         android:verticalSpacing="@dimen/calendar_grid_separator">
     </GridView>
 
-    <ImageView
+    <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/calendar_shadow"
+        android:layout_height="@dimen/shadow_depth"
         android:id="@+id/imageView11"
-        android:src="@drawable/card_shadow"/>
+        android:background="@drawable/shadow_bottom"/>
 
 </LinearLayout>

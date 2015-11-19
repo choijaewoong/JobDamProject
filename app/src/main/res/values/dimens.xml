@@ -8,6 +8,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="divider_height">0.25dp</dimen>
     <dimen name="image_button_size">20dp</dimen>
+    <dimen name="shadow_depth">3dp</dimen>
 
     <!-- navigation bar-->
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
@@ -20,7 +21,7 @@
     <!--<dimen name="nav_header_setting_icon_size">20dp</dimen>-->
     <dimen name="nav_header_profile_top_margin">40dp</dimen>
     <dimen name="menu_width">280dp</dimen>
-    <dimen name="shadow_width">6dp</dimen>
+    <dimen name="shadow_menu_width">6dp</dimen>
     <!-- tab layout-->
     <dimen name="tab_indicator_height">5dp</dimen>
     <!-- view count list header-->
