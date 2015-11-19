@@ -5,8 +5,8 @@ import android.widget.Toast;
 
 import com.begentgroup.xmlparser.XMLParser;
 import com.example.androidchoi.jobdam.Model.ArticleLab;
-import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.JobList;
+import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -142,11 +142,12 @@ public class NetworkManager {
         RequestParams params = new RequestParams();
         String url = String.format(ADD_MY_JOB, userName);
         try {
-            client.post(context, url, new StringEntity(jsonString), "application/json", new TextHttpResponseHandler() {
+            client.post(context, url, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                     listener.onFail(statusCode);
                 }
+
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
                     listener.onSuccess(responseString);
@@ -182,7 +183,7 @@ public class NetworkManager {
 //        Header[] headers = new Header[1];
 //        headers[0] = new BasicHeader("Accept", "application/json");
         try {
-            client.post(context, ADD_MEMO, new StringEntity(jsonString), "application/json", new TextHttpResponseHandler() {
+            client.post(context, ADD_MEMO, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable){
 
@@ -201,7 +202,7 @@ public class NetworkManager {
     private static final String UPDATE_MEMO = SERVER + "/memo/update";
     public void updateMemo(Context context, final String jsonString, final OnResultListener<String> listener){
         try {
-            client.post(context, UPDATE_MEMO, new StringEntity(jsonString), "application/json", new TextHttpResponseHandler() {
+            client.post(context, UPDATE_MEMO, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
@@ -246,7 +247,7 @@ public class NetworkManager {
 //        Header[] headers = new Header[1];
 //        headers[0] = new BasicHeader("Accept", "application/json");
         try {
-            client.post(context, ADD_ARTICLE, new StringEntity(jsonString), "application/json", new TextHttpResponseHandler() {
+            client.post(context, ADD_ARTICLE, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable){
 
@@ -265,7 +266,7 @@ public class NetworkManager {
     private static final String UPDATE_ARTICLE = SERVER + "/board/update";
     public void updateArticle(Context context, final String jsonString, final OnResultListener<String> listener){
         try {
-            client.post(context, UPDATE_ARTICLE, new StringEntity(jsonString), "application/json", new TextHttpResponseHandler() {
+            client.post(context, UPDATE_ARTICLE, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
