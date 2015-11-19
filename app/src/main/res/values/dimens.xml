@@ -3,12 +3,12 @@
     <dimen name="default_small_dimen">8dp</dimen>
     <dimen name="default_dimen">16dp</dimen>
     <dimen name="default_large_dimen">24dp</dimen>
-
+    <dimen name="icon_size">30dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="divider_height">0.25dp</dimen>
     <dimen name="image_button_size">20dp</dimen>
-    <dimen name="shadow_depth">3dp</dimen>
+    <dimen name="shadow_depth">4dp</dimen>
 
     <!-- navigation bar-->
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
@@ -54,11 +54,12 @@
     <dimen name="toolbar_gap">2dp</dimen>
     <dimen name="toolbar_image_width">108dp</dimen>
     <dimen name="toolbar_image_height">24dp</dimen>
-    <!-- corp header -->
+    <!-- view header -->
     <dimen name="top_margin">30dp</dimen>
+    <dimen name="title_bottom_divider">12dp</dimen>
+
     <!-- image size-->
     <dimen name="corp_logo_size">80dp</dimen>
-    <dimen name="icon_size">30dp</dimen>
     <!-- login profile-->
     <dimen name="login_profile">150dp</dimen>
     <dimen name="login_layout_padding">24dp</dimen>
