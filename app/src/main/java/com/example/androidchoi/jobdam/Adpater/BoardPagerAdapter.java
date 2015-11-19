@@ -8,6 +8,7 @@ import com.example.androidchoi.jobdam.ArticleFragment;
 import com.example.androidchoi.jobdam.Model.Articles;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Choi on 2015-11-11.
@@ -18,6 +19,7 @@ public class BoardPagerAdapter extends FragmentPagerAdapter {
 
     public void setItems(ArrayList<Articles> items){
         mItems = items;
+        Collections.reverse(mItems);
         notifyDataSetChanged();
     }
 

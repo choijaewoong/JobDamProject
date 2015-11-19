@@ -8,6 +8,7 @@ import com.example.androidchoi.jobdam.JobItemView;
 import com.example.androidchoi.jobdam.Model.Job;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Choi on 2015-10-19.
@@ -15,12 +16,11 @@ import java.util.ArrayList;
 public class JobItemAdapter extends BaseAdapter {
 
     ArrayList<Job> mItems = new ArrayList<Job>();
-
     public void setItems(ArrayList items){
         mItems.addAll(items);
+        Collections.reverse(mItems);
         notifyDataSetChanged();
     }
-
     public void add(Job item){
         mItems.add(item);
         notifyDataSetChanged();

@@ -130,7 +130,7 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 // 싱글톤 MyJobList
-               MyJobLab.get(MyApplication.getContext(), gson.fromJson(responseString.toString(), MyJobLab.class));
+               MyJobLab.get(MyApplication.getContext(), gson.fromJson(responseString, MyJobLab.class));
                 Toast.makeText(MyApplication.getContext(),"Network Success", Toast.LENGTH_SHORT).show();
                 listener.onSuccess(MyJobLab.get(MyApplication.getContext()));
             }
@@ -171,7 +171,7 @@ public class NetworkManager {
             }
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                MyCardLab.get(MyApplication.getContext(), gson.fromJson(responseString.toString(), MyCardLab.class));
+                MyCardLab.get(MyApplication.getContext(), gson.fromJson(responseString, MyCardLab.class));
                 listener.onSuccess(MyCardLab.get(MyApplication.getContext()));
             }
         });
@@ -232,8 +232,10 @@ public class NetworkManager {
             }
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                ArticleLab.get(MyApplication.getContext(), gson.fromJson(responseString.toString(), ArticleLab.class));
-                listener.onSuccess(ArticleLab.get(MyApplication.getContext()));
+
+                ArticleLab articleLab = gson.fromJson(responseString, ArticleLab.class);
+                //ArticleLab.get(MyApplication.getContext(), gson.fromJson(responseString, ArticleLab.class));
+                listener.onSuccess(articleLab);
             }
         });
     }

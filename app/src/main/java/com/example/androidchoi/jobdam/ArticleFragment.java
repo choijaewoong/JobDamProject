@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Model.Article;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -26,14 +25,10 @@ public class ArticleFragment extends Fragment {
         f.setArguments(b);
         return f;
     }
-
-
     public ArticleFragment() {
         // Required empty public constructor
     }
-
     Article mArticle;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Article;
-import com.example.androidchoi.jobdam.Model.ArticleLab;
 import com.example.androidchoi.jobdam.Model.User;
 import com.google.gson.Gson;
 
@@ -56,11 +55,10 @@ public class ArticleWriteActivity extends AppCompatActivity {
         /* intent 가져오고 Data가 없다면
          새로 작성하는 article , Data가 있다면 article 수정 */
         if(mArticle != null){
-            mEditText.setText(mArticle.getContent());
+//            mEditText.setText(mArticle.getContent());
         } else{
 
         }
-
         FrameLayout touchInterceptor = (FrameLayout)findViewById(R.id.touchInterceptor);
         touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -100,7 +98,7 @@ public class ArticleWriteActivity extends AppCompatActivity {
             mArticle = new Article();
             mArticle.setArticle(User.USER_NAME,
                     0, false, mEditText.getText().toString(), 0);
-            ArticleLab.get(getApplicationContext()).modifyArticleData(mArticle);
+//            ArticleLab.get(getApplicationContext()).modifyArticleData(mArticle);
             Gson gson = new Gson();
             final String jsonString = gson.toJson(mArticle);
             NetworkManager.getInstance().addArticle(ArticleWriteActivity.this, jsonString, new NetworkManager.OnResultListener<String>() {
@@ -108,7 +106,6 @@ public class ArticleWriteActivity extends AppCompatActivity {
                 public void onSuccess(String result) {
                     Toast.makeText(ArticleWriteActivity.this, jsonString, Toast.LENGTH_SHORT).show();
                 }
-
                 @Override
                 public void onFail(int code) {
                     Toast.makeText(ArticleWriteActivity.this, "실패.", Toast.LENGTH_SHORT).show();
