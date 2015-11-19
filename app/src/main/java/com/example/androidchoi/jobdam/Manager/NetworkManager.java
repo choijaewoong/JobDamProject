@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.begentgroup.xmlparser.XMLParser;
+import com.example.androidchoi.jobdam.Model.Article;
 import com.example.androidchoi.jobdam.Model.ArticleLab;
 import com.example.androidchoi.jobdam.Model.JobList;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
@@ -117,9 +118,9 @@ public class NetworkManager {
 
     // 내가 담은 채용정보 불러오는 method
     private static final String SHOW_MY_JOB = SERVER + "/showmyscrap/%s";
-    public void showMyJob(Context context, String userName, final OnResultListener<MyJobLab> listener){
+    public void showMyJob(Context context, String user_id, final OnResultListener<MyJobLab> listener){
         RequestParams params = new RequestParams();
-        String url = String.format(SHOW_MY_JOB, userName);
+        String url = String.format(SHOW_MY_JOB, user_id);
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
         client.get(context, url, headers, params, new TextHttpResponseHandler() {
@@ -138,9 +139,9 @@ public class NetworkManager {
     }
     // 채용정보 담기
     private static final String ADD_MY_JOB = SERVER + "/addscrap/%s";
-    public void addMyJob(Context context, String userName, final String jsonString, final OnResultListener<String> listener) {
+    public void addMyJob(Context context, String user_id, final String jsonString, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
-        String url = String.format(ADD_MY_JOB, userName);
+        String url = String.format(ADD_MY_JOB, user_id);
         try {
             client.post(context, url, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
                 @Override
@@ -160,9 +161,9 @@ public class NetworkManager {
 
     //메모 보기
     public static final String SHOW_MY_MEMO = SERVER + "/showmymemo/%s";
-    public void showMyMemo(Context context, String userName, final OnResultListener<MyCardLab> listener){
+    public void showMyMemo(Context context, String user_id, final OnResultListener<MyCardLab> listener){
         RequestParams params = new RequestParams();
-        String url = String.format(SHOW_MY_MEMO, userName);
+        String url = String.format(SHOW_MY_MEMO, user_id);
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
         client.get(context, url, headers, params, new TextHttpResponseHandler() {
@@ -221,9 +222,9 @@ public class NetworkManager {
 
     //게시글 보기
     public static final String SHOW_ARTICLE = SERVER + "/boardlist/%s";
-    public void showArticle(Context context, String userName, final OnResultListener<ArticleLab> listener){
+    public void showArticle(Context context, String user_id, final OnResultListener<ArticleLab> listener){
         RequestParams params = new RequestParams();
-        String url = String.format(SHOW_ARTICLE, userName);
+        String url = String.format(SHOW_ARTICLE, user_id);
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
         client.get(context, url, headers, params, new TextHttpResponseHandler() {
@@ -281,8 +282,25 @@ public class NetworkManager {
             e.printStackTrace();
         }
     }
-
-
+    // 좋아요
+    public void likeArticle(Context context, String user_id, String board_id, final OnResultListener<Article> listener){
+        RequestParams params = new RequestParams();
+        String url = String.format(SHOW_ARTICLE, user_id, board_id);
+        Header[] headers = new Header[1];
+        headers[0] = new BasicHeader("Accept", "application/json");
+        client.get(context, url, headers, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+            }
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Article article= gson.fromJson(responseString, Article.class);
+                //ArticleLab.get(MyApplication.getContext(), gson.fromJson(responseString, ArticleLab.class));
+                listener.onSuccess(article);
+            }
+        });
+    }
     public void cancelAll(Context context) {
         client.cancelRequests(context, true);
     }
