@@ -39,6 +39,5 @@ public class CardItemView extends RelativeLayout{
         mCategoryText.setText(CategoryData.get(getContext()).getCategoryList().get(data.getCategory()).getName());
         mCategoryText.setTextColor(categoryColor);
         mCategoryBar.setBackgroundColor(categoryColor);
-
     }
 }

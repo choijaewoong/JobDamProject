@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam.Model;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 
 import com.example.androidchoi.jobdam.R;
 
@@ -19,16 +20,16 @@ public class CategoryData {
     private CategoryData(Context context) {
         mContext = context;
         mCategoryList = new ArrayList<CategoryData>();
-        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_default), R.drawable.image_category_default, mContext.getResources().getColor(R.color.colorCategoryDefault)));
-        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_scrap), R.drawable.image_category_scrap, mContext.getResources().getColor(R.color.colorCategoryScrap)));
-        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_win), R.drawable.image_category_win, mContext.getResources().getColor(R.color.colorCategoryWin)));
-        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_intern), R.drawable.image_category_intern, mContext.getResources().getColor(R.color.colorCategoryIntern)));
-        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_link), R.drawable.image_category_link, mContext.getResources().getColor(R.color.colorCategoryLink)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_default), R.drawable.image_category_default, ContextCompat.getColor(context, R.color.colorCategoryDefault)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_scrap), R.drawable.image_category_scrap, ContextCompat.getColor(context, R.color.colorCategoryScrap)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_win), R.drawable.image_category_win,ContextCompat.getColor(context, R.color.colorCategoryWin)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_intern), R.drawable.image_category_intern, ContextCompat.getColor(context, R.color.colorCategoryIntern)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_link), R.drawable.image_category_link, ContextCompat.getColor(context, R.color.colorCategoryLink)));
     }
-    private CategoryData(String name, int imageResource, int colorResource) {
+    private CategoryData(String name, int imageResource, int color) {
         this.name = name;
         this.imageResource = imageResource;
-        this.colorResource = colorResource;
+        this.color = color;
     }
 
     public static CategoryData get(Context context){
@@ -39,10 +40,10 @@ public class CategoryData {
     }
 
     private String name;
-    private int colorResource;
+    private int color;
     private int imageResource;
     public String getName() {  return name; }
-    public int getColor() { return colorResource; }
+    public int getColor() { return color; }
     public int getImage() { return imageResource; }
 
     //    public enum Category{ RED,

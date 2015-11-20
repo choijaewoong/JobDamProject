@@ -21,8 +21,6 @@ import com.example.androidchoi.jobdam.Model.MyCard;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-
 public class CardWriteActivity extends AppCompatActivity {
 
     public static final String EXTRA_CARD_DATA = "card data";
@@ -34,6 +32,7 @@ public class CardWriteActivity extends AppCompatActivity {
     EditText mEditTitle;
     EditText mEditContent;
     TextView mTextCategory;
+    ImageView mImageCategory;
     TextView mTextTitle;
     TextView mTextContent;
     ScrollView scrollView;
@@ -45,10 +44,13 @@ public class CardWriteActivity extends AppCompatActivity {
     public MyCard getData() {
         return mData;
     }
+
+    // 카테고리 이름, 색 설정
     public void setCategoryTextView(int position){
-        ArrayList<CategoryData> arrayList = CategoryData.get(getApplicationContext()).getCategoryList();
-        mTextCategory.setText(arrayList.get(position).getName());
-        mTextCategory.setTextColor(arrayList.get(position).getColor());
+        CategoryData categoryData = CategoryData.get(getApplicationContext()).getCategoryList().get(position);
+        mTextCategory.setText(categoryData.getName());
+        mTextCategory.setTextColor(categoryData.getColor());
+        mImageCategory.setBackgroundColor(categoryData.getColor());
     }
 
     @Override
@@ -58,6 +60,7 @@ public class CardWriteActivity extends AppCompatActivity {
 
         mCategoryImage = (ImageView)findViewById(R.id.image_category_select);
         mTextCategory = (TextView)findViewById(R.id.text_card_category_title);
+        mImageCategory = (ImageView)findViewById(R.id.image_card_category_color);
         mEditTitle = (EditText) findViewById(R.id.edit_text_card_title);
         mEditContent = (EditText) findViewById(R.id.edit_text_card_content);
         mTextTitle = (TextView)findViewById(R.id.text_view_card_title);
@@ -83,8 +86,12 @@ public class CardWriteActivity extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(mEditContent, InputMethodManager.SHOW_IMPLICIT);
         }
-        mTextCategory.setText(CategoryData.get(getApplicationContext()).getCategoryList().get(mData.getCategory()).getName());
-        mTextCategory.setTextColor(CategoryData.get(getApplicationContext()).getCategoryList().get(mData.getCategory()).getColor());
+
+        // 카테고리 이름, 색 설정
+        CategoryData categoryData = CategoryData.get(getApplicationContext()).getCategoryList().get(mData.getCategory());
+        mTextCategory.setText(categoryData.getName());
+        mTextCategory.setTextColor(categoryData.getColor());
+        mImageCategory.setBackgroundColor(categoryData.getColor());
 
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +100,7 @@ public class CardWriteActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +111,7 @@ public class CardWriteActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(String result) {
                             Toast.makeText(CardWriteActivity.this, jsonString, Toast.LENGTH_SHORT).show();
-//                             Log.i("dd", jsonString);
+                             Log.i("생성", jsonString);
                         }
 
                         @Override
@@ -117,7 +125,7 @@ public class CardWriteActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(String result) {
                             Toast.makeText(CardWriteActivity.this, jsonString, Toast.LENGTH_SHORT).show();
-                        Log.i("dd", jsonString);
+                        Log.i("수정", jsonString);
                         }
                         @Override
                         public void onFail(int code) {

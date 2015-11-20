@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Choi on 2015-11-10.
@@ -29,6 +30,7 @@ public class MyCardLab {
    private MyCardLab(Context context, ArrayList<MyCards> cardList){
        mContext = context;
        mCardList = cardList;
+       Collections.reverse(mCardList);
    }
 
     public static MyCardLab get(Context context){

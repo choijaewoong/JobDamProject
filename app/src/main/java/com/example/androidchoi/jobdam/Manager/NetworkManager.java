@@ -31,6 +31,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
+import java.util.Collections;
 
 
 /**
@@ -257,8 +258,8 @@ public class NetworkManager {
             }
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-
                 ArticleLab articleLab = gson.fromJson(responseString, ArticleLab.class);
+                Collections.reverse(articleLab.getArticleList());
                 //ArticleLab.get(MyApplication.getContext(), gson.fromJson(responseString, ArticleLab.class));
                 listener.onSuccess(articleLab);
             }

@@ -22,7 +22,7 @@ public class CategoryItemView extends RelativeLayout {
 
     private void init() {
         inflate(getContext(), R.layout.view_category_item, this);
-        mImageView = (ImageView)findViewById(R.id.image_category_item_color);
+        mImageView = (ImageView)findViewById(R.id.image_card_category_color);
         mTextView = (TextView)findViewById(R.id.text_category_item_title);
     }
 

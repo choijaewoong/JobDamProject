@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Choi on 2015-11-12.
@@ -24,6 +25,7 @@ public class MyJobLab {
     private MyJobLab(Context context, ArrayList<MyJobs> jobList){
         mContext = context;
         mJobList = jobList;
+        Collections.reverse(mJobList);
     }
     public static MyJobLab get(Context context){
         if(sMyJobLab == null){

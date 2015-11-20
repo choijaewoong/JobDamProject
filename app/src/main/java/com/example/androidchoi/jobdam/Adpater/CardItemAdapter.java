@@ -8,7 +8,6 @@ import com.example.androidchoi.jobdam.CardItemView;
 import com.example.androidchoi.jobdam.Model.MyCards;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Created by Tacademy on 2015-10-30.
@@ -19,7 +18,6 @@ public class CardItemAdapter extends BaseAdapter {
 
     public void setItems(ArrayList<MyCards> items){
         mItems = items;
-        Collections.reverse(mItems);
         notifyDataSetChanged();
     }
     @Override
