@@ -51,7 +51,7 @@ public class AllJobFragment extends Fragment {
         TextView subTitle = (TextView) getActivity().findViewById(R.id.text_subtitle);
         subTitle.setText(R.string.all_job);
 
-        NetworkManager.getInstance().getJobAPI(getActivity(),
+        NetworkManager.getInstance().getJobAPI(getActivity(), 0, 30,
                 new NetworkManager.OnResultListener<JobList>() {
                     @Override
                     public void onSuccess(JobList result) {
@@ -105,16 +105,24 @@ public class AllJobFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                String string = s.toString();
-                if (!string.equals("")) {
-                    mDeleteImage.setVisibility(View.VISIBLE);
-                } else {
-                    mDeleteImage.setVisibility(View.GONE);
-                }
+                NetworkManager.getInstance().getKewordJob(getActivity(), s.toString(), 0, 30,
+                        new NetworkManager.OnResultListener<JobList>() {
+                            @Override
+                            public void onSuccess(JobList result) {
+                                mAdapter.setItems(result.getJobList());
+                                mTextView.setText("공채정보 총 " + mAdapter.getCount() + "건");
+                            }
+                            @Override
+                            public void onFail(int code) {
+                                Toast.makeText(getActivity(), "error : " + code, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
             }
         });
         mAdapter = new JobItemAdapter();

@@ -91,15 +91,17 @@ public class NetworkManager {
     private static final String STOCK = "kospi+kosdaq";
     private static final String SR = "directhire";
     private static final String FIELDS = "posting-date+expiration-date+keyword-code+count";
-    private static final String COUNT = "10";
+    private static final String START = "start";
+    private static final String COUNT = "count";
 
     // 사람인 api 불러오는 method
-    public void getJobAPI(Context context, final OnResultListener<JobList> listener){
+    public void getJobAPI(Context context, int start, int count, final OnResultListener<JobList> listener){
         final RequestParams params = new RequestParams();
         params.put("stock", STOCK);
         params.put("sr",SR);
         params.put("fields", FIELDS);
-        params.put("count", COUNT);
+        params.put(START, start);
+        params.put(COUNT, count);
         client.get(context, API_ADDRESS, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -107,6 +109,27 @@ public class NetworkManager {
                 JobList jobList = parser.fromXml(bais, "jobs", JobList.class);
                 listener.onSuccess(jobList);
             }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                listener.onFail(statusCode);
+            }
+        });
+    }
+    // 사람인 검색 키워드 method
+    private static final String KEYWORD = "keywords";
+    public void getKewordJob(Context context, String keyword, int start, int count, final OnResultListener<JobList> listener){
+        final RequestParams params = new RequestParams();
+        params.put(KEYWORD, keyword);
+        params.put(START, start);
+        params.put(COUNT, count);
+        client.get(context, API_ADDRESS, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                ByteArrayInputStream bais = new ByteArrayInputStream(responseBody);
+                JobList jobList = parser.fromXml(bais, "jobs", JobList.class);
+                listener.onSuccess(jobList);
+            }
+
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 listener.onFail(statusCode);
