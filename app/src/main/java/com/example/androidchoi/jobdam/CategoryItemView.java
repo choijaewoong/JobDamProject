@@ -1,4 +1,4 @@
-package com.example.androidchoi.jobdam.Adpater;
+package com.example.androidchoi.jobdam;
 
 import android.content.Context;
 import android.widget.ImageView;
@@ -6,7 +6,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Model.CategoryData;
-import com.example.androidchoi.jobdam.R;
 
 /**
  * Created by Choi on 2015-11-20.
@@ -29,7 +28,7 @@ public class CategoryItemView extends RelativeLayout {
 
     public void setItemData(CategoryData data){
         mTextView.setText(data.getName());
-        mImageView.setImageResource(data.getColor());
+        mImageView.setImageResource(data.getImage());
     }
 
 }

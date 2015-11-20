@@ -16,9 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
+import com.example.androidchoi.jobdam.Model.CategoryData;
 import com.example.androidchoi.jobdam.Model.MyCard;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 public class CardWriteActivity extends AppCompatActivity {
 
@@ -26,10 +29,11 @@ public class CardWriteActivity extends AppCompatActivity {
     public static final String EXTRA_CARD_POSITION = "card position";
     private static final String CATEGORY_DIALOG = "category_dialog";
 
-    MyCard mData;
+    private MyCard mData;
     ImageView mCategoryImage;
     EditText mEditTitle;
     EditText mEditContent;
+    TextView mTextCategory;
     TextView mTextTitle;
     TextView mTextContent;
     ScrollView scrollView;
@@ -38,6 +42,14 @@ public class CardWriteActivity extends AppCompatActivity {
     TextView mSaveButton;
     boolean isNew;
 
+    public MyCard getData() {
+        return mData;
+    }
+    public void setCategoryTextView(int position){
+        ArrayList<CategoryData> arrayList = CategoryData.get(getApplicationContext()).getCategoryList();
+        mTextCategory.setText(arrayList.get(position).getName());
+        mTextCategory.setTextColor(arrayList.get(position).getColor());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +57,7 @@ public class CardWriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_card_write);
 
         mCategoryImage = (ImageView)findViewById(R.id.image_category_select);
+        mTextCategory = (TextView)findViewById(R.id.text_card_category_title);
         mEditTitle = (EditText) findViewById(R.id.edit_text_card_title);
         mEditContent = (EditText) findViewById(R.id.edit_text_card_content);
         mTextTitle = (TextView)findViewById(R.id.text_view_card_title);
@@ -59,16 +72,19 @@ public class CardWriteActivity extends AppCompatActivity {
         isNew = intent.getBooleanExtra(MyCard.CARD_NEW, true);
         mData = (MyCard) intent.getSerializableExtra(MyCard.CARD_ITEM);
         // 기존 Data있는 경우 (메모 수정)
-        if (mData != null) {
+        if (isNew == false) {
             mCancelSaveLayout.setVisibility(View.GONE);
             mTextTitle.setText(mData.getTitle());
             mTextContent.setText(mData.getContent());
         } else{ // 기존 Data없는 경우 (메모 추가)
+            mData = new MyCard();
             changeWriteMode();
             mEditContent.requestFocus();
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(mEditContent, InputMethodManager.SHOW_IMPLICIT);
         }
+        mTextCategory.setText(CategoryData.get(getApplicationContext()).getCategoryList().get(mData.getCategory()).getName());
+        mTextCategory.setTextColor(CategoryData.get(getApplicationContext()).getCategoryList().get(mData.getCategory()).getColor());
 
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,8 +97,7 @@ public class CardWriteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final String jsonString;
-                if (mData == null) {  // add CardData
-                    mData = new MyCard();
+                if (isNew == true) {  // add CardData
                     jsonString = jsonStringFromData();
                     NetworkManager.getInstance().addMemo(CardWriteActivity.this, jsonString, new NetworkManager.OnResultListener<String>() {
                         @Override

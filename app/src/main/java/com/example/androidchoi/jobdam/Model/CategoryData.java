@@ -1,19 +1,50 @@
 package com.example.androidchoi.jobdam.Model;
 
+import android.content.Context;
+
+import com.example.androidchoi.jobdam.R;
+
+import java.util.ArrayList;
+
 /**
  * Created by Tacademy on 2015-10-30.
  */
 public class CategoryData {
+    private static CategoryData sCategoryData;
+    private Context mContext;
 
+    private ArrayList<CategoryData> mCategoryList;
+    public ArrayList<CategoryData> getCategoryList() { return mCategoryList; }
+
+    private CategoryData(Context context) {
+        mContext = context;
+        mCategoryList = new ArrayList<CategoryData>();
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_default), R.drawable.image_category_default, mContext.getResources().getColor(R.color.colorCategoryDefault)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_scrap), R.drawable.image_category_scrap, mContext.getResources().getColor(R.color.colorCategoryScrap)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_win), R.drawable.image_category_win, mContext.getResources().getColor(R.color.colorCategoryWin)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_intern), R.drawable.image_category_intern, mContext.getResources().getColor(R.color.colorCategoryIntern)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_link), R.drawable.image_category_link, mContext.getResources().getColor(R.color.colorCategoryLink)));
+    }
+    private CategoryData(String name, int imageResource, int colorResource) {
+        this.name = name;
+        this.imageResource = imageResource;
+        this.colorResource = colorResource;
+    }
+
+    public static CategoryData get(Context context){
+        if(sCategoryData == null){
+            sCategoryData = new CategoryData(context.getApplicationContext());
+        }
+        return sCategoryData;
+    }
 
     private String name;
     private int colorResource;
+    private int imageResource;
     public String getName() {  return name; }
-    public int getColor () { return colorResource; }
-    public CategoryData(String name, int color) {
-        this.name = name;
-        this.colorResource = color;
-    }
+    public int getColor() { return colorResource; }
+    public int getImage() { return imageResource; }
+
     //    public enum Category{ RED,
 //        BLUE, GREEN, GREY, PURPLE, PINK }
 //

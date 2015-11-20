@@ -53,25 +53,17 @@ public class CustomDialogFragment extends DialogFragment {
         mListView = (ListView) view.findViewById(R.id.list_view_category);
 
         mAdapter = new DialogCategoryAdapter();
-        initCategoryList();
+        mCategoryList = CategoryData.get(getActivity()).getCategoryList();
         mAdapter.setItems(mCategoryList);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-//                ((CardWriteActivity)getActivity()).
-//                ((CategoryData)mAdapter.getItem(position)).getName();
+                ((CardWriteActivity) getActivity()).getData().setCategory(position);
+                ((CardWriteActivity) getActivity()).setCategoryTextView(position);
+                dismiss();
             }
         });
         return view;
-    }
-
-    private void initCategoryList() {
-        mCategoryList.add(new CategoryData(getString(R.string.category_default), R.drawable.image_category_default));
-        mCategoryList.add(new CategoryData(getString(R.string.category_scrap), R.drawable.image_category_scrap));
-        mCategoryList.add(new CategoryData(getString(R.string.category_win), R.drawable.image_category_win));
-        mCategoryList.add(new CategoryData(getString(R.string.category_intern), R.drawable.image_category_intern));
-        mCategoryList.add(new CategoryData(getString(R.string.category_link), R.drawable.image_category_link));
     }
 }

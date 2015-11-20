@@ -84,12 +84,12 @@
             android:layout_marginBottom="@dimen/default_small_dimen">
 
             <TextView
-                android:id="@+id/text_category"
+                android:id="@+id/text_category_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="스크랩"
-                android:textColor="#ff0000"
+                android:text="메모"
+                android:textColor="@color/colorCategoryDefault"
                 android:textSize="@dimen/font_size_small"/>
 
             <ImageView

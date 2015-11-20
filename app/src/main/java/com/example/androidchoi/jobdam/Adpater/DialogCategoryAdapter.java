@@ -4,6 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.example.androidchoi.jobdam.CategoryItemView;
 import com.example.androidchoi.jobdam.Model.CategoryData;
 
 import java.util.ArrayList;

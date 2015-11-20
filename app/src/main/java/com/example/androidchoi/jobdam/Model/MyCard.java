@@ -20,7 +20,7 @@ public class MyCard implements Serializable {
     private String userId;
     private String title;
     private String content;
-    private String category;
+    private int category;
 //    private int[] mImageResources;
     private int startDate;
     private int endDate;
@@ -36,12 +36,12 @@ public class MyCard implements Serializable {
 
     public String getId(){ return cardId; }
     public String getUserId() { return userId;}
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() {  return title; }
     public String getContent() {
         return content;
     }
+    public int getCategory() { return category; }
+
     public void setTitle(String title) {
 //        try {
 //            this.title = URLEncoder.encode(title,"euc-kr");
@@ -51,6 +51,7 @@ public class MyCard implements Serializable {
         this.title = title;
     }
     public void setContent(String content) { this.content = content; }
+    public void setCategory(int category){ this.category = category; }
 
     public MyCard(){
         cardId = UUID.randomUUID().toString();
