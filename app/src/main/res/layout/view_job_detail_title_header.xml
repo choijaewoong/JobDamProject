@@ -31,20 +31,20 @@
         android:layout_marginBottom="@dimen/default_dimen">
         <ToggleButton
             android:id="@+id/btn_detail_scrap"
-            android:layout_width="wrap_content"
+            android:layout_width="88dp"
             android:layout_height="32dp"
             android:text="@string/scrap"
             android:textOff="@string/scrap"
             android:textOn="@string/scrap"
             android:background="@drawable/selector_button_scrap"
-            android:paddingLeft="@dimen/default_dimen"
+            android:paddingLeft="20dp"
             android:textColor="@drawable/selector_button_text"
             android:layout_marginRight="@dimen/default_dimen"
             android:checked="false"
             android:textSize="@dimen/font_size_semi_large"/>
         <Button
             android:id="@+id/btn_detail_move_homepage"
-            android:layout_width="wrap_content"
+            android:layout_width="88dp"
             android:layout_height="32dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"

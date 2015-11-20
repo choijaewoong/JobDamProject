@@ -286,7 +286,7 @@
                 android:layout_toEndOf="@+id/image_category_select"
                 android:layout_toRightOf="@+id/image_category_select"
                 android:layout_weight="1"
-                android:background="@drawable/tag_bar_container"
+                android:background="@drawable/container_tag_bar"
                 android:orientation="horizontal">
 
                 <EditText

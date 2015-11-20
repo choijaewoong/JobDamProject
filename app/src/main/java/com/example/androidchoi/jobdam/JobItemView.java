@@ -47,7 +47,7 @@ public class JobItemView extends RelativeLayout{
         mDDay.setText("d-" + d_day);
         if(d_day == 0){
             mDDay.setText("d-day");
-        }else if(d_day > 10){
+        }else if(d_day > 1000){
             mDDay.setText("상시");
             mDDay.setBackgroundResource(R.drawable.image_dday_box_always);
             return;
