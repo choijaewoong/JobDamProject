@@ -28,6 +28,12 @@
     <string name="legal">Legal</string>
     <string name="alarm">Alarm</string>
     <string name="version">Version</string>
+    <!-- Category Name-->
+    <string name="category_default">메모</string>
+    <string name="category_scrap">스크랩</string>
+    <string name="category_win">수상내역</string>
+    <string name="category_intern">인턴</string>
+    <string name="category_link">링크</string>
 
     <!-- floating button label-->
     <string name="write_card">카드 작성</string>

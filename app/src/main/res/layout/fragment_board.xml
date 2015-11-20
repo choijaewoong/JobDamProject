@@ -83,7 +83,7 @@
         </RelativeLayout>
 
         <ImageView
-            android:layout_width="@dimen/divider_height"
+            android:layout_width="@dimen/divider_width"
             android:layout_height="match_parent"
             android:id="@+id/imageView14"
             android:layout_weight="0"

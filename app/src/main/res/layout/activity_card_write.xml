@@ -20,7 +20,7 @@
         >
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/image_category_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -30,14 +30,37 @@
             android:src="@drawable/button_category_folder"/>
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/image_add_picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/imageView2"
-            android:layout_toRightOf="@+id/imageView2"
+            android:layout_toEndOf="@+id/image_category_select"
+            android:layout_toRightOf="@+id/image_category_select"
             android:padding="@dimen/default_small_dimen"
             android:src="@drawable/button_gallery"/>
+
+        <ImageView
+            android:layout_width="@dimen/button_divider_width"
+            android:layout_height="@dimen/button_divider_height"
+            android:id="@+id/image_category_item_color"
+            android:background="@color/colorGray"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/image_add_picture"
+            android:layout_toEndOf="@+id/image_add_picture"
+            android:layout_marginLeft="@dimen/default_small_dimen"
+            android:layout_marginRight="@dimen/default_small_dimen"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="메모"
+            android:id="@+id/text_card_category"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/image_category_item_color"
+            android:layout_toEndOf="@+id/image_category_item_color"
+            android:textStyle="bold"
+            android:textColor="@color/colorCategoryDefault"/>
 
         <LinearLayout
             android:id="@+id/linearLayout_cancel_save_button"
@@ -46,7 +69,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/text_cancel_card"
@@ -55,10 +79,19 @@
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/text_save_card"
                 android:layout_toStartOf="@+id/text_save_card"
-                android:gravity="center_vertical|center_horizontal"
                 android:padding="@dimen/default_small_dimen"
                 android:text="취소"
-                android:textColor="@color/colorGray"/>
+                android:textColor="@color/colorGray"
+                android:gravity="center"/>
+
+            <ImageView
+                android:layout_width="@dimen/divider_width"
+                android:layout_height="@dimen/button_divider_height"
+                android:id="@+id/imageView18"
+                android:background="@color/colorGray"
+                android:layout_marginTop="@dimen/default_small_dimen"
+                android:layout_marginBottom="@dimen/default_small_dimen"
+                android:layout_gravity="center_vertical"/>
 
             <TextView
                 android:id="@+id/text_save_card"
@@ -67,10 +100,10 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:gravity="center_horizontal"
                 android:padding="@dimen/default_small_dimen"
                 android:text="저장"
-                android:textColor="@color/colorGray"/>
+                android:textColor="@color/colorGray"
+                android:gravity="center"/>
 
         </LinearLayout>
 
@@ -107,7 +140,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/imageView2"
+                android:layout_below="@+id/image_category_select"
                 android:paddingBottom="@dimen/default_small_dimen"
                 android:paddingRight="@dimen/default_small_dimen"
                 android:paddingTop="@dimen/default_small_dimen"
@@ -126,8 +159,8 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/linearLayout"
                 android:layout_marginLeft="10dp"
-                android:layout_toEndOf="@+id/imageView5"
-                android:layout_toRightOf="@+id/imageView5"
+                android:layout_toEndOf="@+id/image_add_picture"
+                android:layout_toRightOf="@+id/image_add_picture"
                 android:paddingBottom="@dimen/default_small_dimen"
                 android:paddingRight="@dimen/default_small_dimen"
                 android:paddingTop="@dimen/default_small_dimen"
@@ -165,12 +198,14 @@
             android:layout_alignParentStart="true"
             android:textColor="@android:color/black"
             android:textSize="@dimen/font_size_semi_large"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:visibility="visible"/>
 
         <ImageView
             android:id="@+id/image_divider"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/divider_height"
+            android:layout_height="@dimen/divider_width"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/linearLayout4"
@@ -215,7 +250,6 @@
                 android:layout_below="@+id/image_divider"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_size_semi_large"
-                android:visibility="visible"
                 />
         </ScrollView>
 
@@ -251,8 +285,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/default_small_dimen"
-                android:layout_toEndOf="@+id/imageView2"
-                android:layout_toRightOf="@+id/imageView2"
+                android:layout_toEndOf="@+id/image_category_select"
+                android:layout_toRightOf="@+id/image_category_select"
                 android:layout_weight="1"
                 android:background="@drawable/tag_bar_container"
                 android:orientation="horizontal">

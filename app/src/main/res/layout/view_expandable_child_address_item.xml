@@ -15,7 +15,7 @@
         android:layout_marginBottom="12dp"/>
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_height"
+        android:layout_height="@dimen/divider_width"
         android:background="@color/colorDivider"
         android:layout_below="@+id/btn_move_address"
         android:layout_alignParentLeft="true"

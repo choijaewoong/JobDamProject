@@ -3,7 +3,6 @@ package com.example.androidchoi.jobdam.Model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -15,15 +14,16 @@ public class MyCard implements Serializable {
     public static final String CARD_NEW = "cardNew";
     public static final String CARDPOSITION = "cardposition";
 
-    private String id;
+    @SerializedName("card_id")
+    private String cardId;
     @SerializedName("user_id")
     private String userId;
     private String title;
     private String content;
     private String category;
-    private int[] mImageResources;
-    private Date startDate;
-    private Date endDate;
+//    private int[] mImageResources;
+    private int startDate;
+    private int endDate;
 
     public void setData(String title, String content){
         this.title = title;
@@ -34,7 +34,7 @@ public class MyCard implements Serializable {
         content = cardItem.getContent();
     }
 
-    public String getId(){ return id; }
+    public String getId(){ return cardId; }
     public String getUserId() { return userId;}
     public String getTitle() {
         return title;
@@ -53,7 +53,7 @@ public class MyCard implements Serializable {
     public void setContent(String content) { this.content = content; }
 
     public MyCard(){
-        id = UUID.randomUUID().toString();
+        cardId = UUID.randomUUID().toString();
         userId = User.USER_NAME;
         title = "안녕하세요 제목입니다.";
         content = "1. 코드 최적화는 가장 나중에\n" +
@@ -81,6 +81,5 @@ public class MyCard implements Serializable {
                 "  (만들어져 있는건 굳이 만들지 말자)\n" +
                 "   (gemFile,  JQuery)" +
                 "1. 코드 최적화는 가장 나중에\n";
-
     }
 }

@@ -6,7 +6,7 @@
     <dimen name="icon_size">30dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="divider_height">0.25dp</dimen>
+    <dimen name="divider_width">0.25dp</dimen>
     <dimen name="image_button_size">20dp</dimen>
     <dimen name="shadow_depth">4dp</dimen>
 
@@ -47,7 +47,8 @@
     <dimen name="category_bar_bottom_margin">1.25dp</dimen>
     <dimen name="card_item_vertical_gap">6dp</dimen>
     <!-- card write activity-->
-    <dimen name="button_padding">16dp</dimen>
+    <dimen name="button_divider_height">12dp</dimen>
+    <dimen name="button_divider_width">2dp</dimen>
     <!--CustomToolbar-->
     <dimen name="toolbar_main_padding">60dp</dimen>
     <dimen name="toolbar_article_padding">8dp</dimen>

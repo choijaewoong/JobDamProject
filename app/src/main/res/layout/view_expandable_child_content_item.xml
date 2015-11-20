@@ -19,7 +19,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_height"
+        android:layout_height="@dimen/divider_width"
         android:background="@color/colorDivider"
         android:layout_below="@+id/text_expandable_content"
         android:layout_alignParentLeft="true"

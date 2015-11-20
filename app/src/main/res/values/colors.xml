@@ -25,6 +25,15 @@
     <color name="colorWarning">#ffa726</color>
     <color name="colorSafe">#00731d</color>
 
+    <!-- card Category Color -->
+    <color name="colorCategoryDefault">#606060</color>
+    <color name="colorCategoryScrap">#EF5F74</color>
+    <color name="colorCategoryWin">#F6D642</color>
+    <color name="colorCategoryIntern">#2CA7C1</color>
+    <color name="colorCategoryLink">#96C949</color>
+
+
+
     <color name="colorBackgroundBlur">#66000000</color>
 
     <!-- nav_header_background-->

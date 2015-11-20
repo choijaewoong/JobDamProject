@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -23,8 +24,10 @@ public class CardWriteActivity extends AppCompatActivity {
 
     public static final String EXTRA_CARD_DATA = "card data";
     public static final String EXTRA_CARD_POSITION = "card position";
+    private static final String CATEGORY_DIALOG = "category_dialog";
 
     MyCard mData;
+    ImageView mCategoryImage;
     EditText mEditTitle;
     EditText mEditContent;
     TextView mTextTitle;
@@ -35,11 +38,13 @@ public class CardWriteActivity extends AppCompatActivity {
     TextView mSaveButton;
     boolean isNew;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_write);
 
+        mCategoryImage = (ImageView)findViewById(R.id.image_category_select);
         mEditTitle = (EditText) findViewById(R.id.edit_text_card_title);
         mEditContent = (EditText) findViewById(R.id.edit_text_card_content);
         mTextTitle = (TextView)findViewById(R.id.text_view_card_title);
@@ -126,6 +131,13 @@ public class CardWriteActivity extends AppCompatActivity {
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(mEditContent, InputMethodManager.SHOW_IMPLICIT);
 
+            }
+        });
+        mCategoryImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomDialogFragment dialog = new CustomDialogFragment();
+                dialog.show(getSupportFragmentManager(), CATEGORY_DIALOG);
             }
         });
     }
