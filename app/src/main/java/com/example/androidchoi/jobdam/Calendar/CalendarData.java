@@ -7,5 +7,6 @@ public class CalendarData {
 	public int month;
 	public int weekOfMonth;
 	public int weekOfYear;
+
 	public ArrayList<CalendarItem> days = new ArrayList<CalendarItem>();
 }

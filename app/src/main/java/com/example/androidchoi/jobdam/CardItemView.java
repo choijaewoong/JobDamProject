@@ -18,6 +18,7 @@ public class CardItemView extends RelativeLayout{
     TextView mContent;
     ImageView mCategoryBar;
     TextView mCategoryText;
+    TextView mDateText;
 
     public CardItemView(Context context) {
         super(context);
@@ -30,6 +31,7 @@ public class CardItemView extends RelativeLayout{
         mContent = (TextView)findViewById(R.id.edit_text_card_content);
         mCategoryBar = (ImageView)findViewById(R.id.image_category_bar);
         mCategoryText = (TextView)findViewById(R.id.text_category_title);
+        mDateText = (TextView)findViewById(R.id.text_card_write_date);
     }
 
     public void setItemData(MyCard data){
@@ -39,5 +41,6 @@ public class CardItemView extends RelativeLayout{
         mCategoryText.setText(CategoryData.get(getContext()).getCategoryList().get(data.getCategory()).getName());
         mCategoryText.setTextColor(categoryColor);
         mCategoryBar.setBackgroundColor(categoryColor);
+        mDateText.setText(data.getWriteDate());
     }
 }

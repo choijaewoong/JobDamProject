@@ -104,7 +104,7 @@
                 android:layout_marginBottom="2dp"/>
 
             <TextView
-                android:id="@+id/text_date"
+                android:id="@+id/text_card_write_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

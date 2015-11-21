@@ -1,6 +1,8 @@
 package com.example.androidchoi.jobdam.Calendar;
 
 public class ItemData implements CalendarManager.CalendarComparable<ItemData>{
+
+
 	public int year;
 	public int month;
 	public int day;

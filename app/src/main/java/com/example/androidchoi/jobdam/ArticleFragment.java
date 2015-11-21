@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Article;
@@ -54,6 +55,7 @@ public class ArticleFragment extends Fragment {
         likeCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getActivity(), "좋아요 클릭", Toast.LENGTH_SHORT).show();
                 NetworkManager.getInstance().likeArticle(getActivity(),
                         User.USER_NAME, mArticle.getId(), new NetworkManager.OnResultListener<Article>() {
                             @Override

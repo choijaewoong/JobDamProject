@@ -26,11 +26,11 @@
     <color name="colorSafe">#00731d</color>
 
     <!-- card Category Color -->
-    <color name="colorCategoryDefault">#606060</color>
-    <color name="colorCategoryScrap">#EF5F74</color>
-    <color name="colorCategoryWin">#F6D642</color>
-    <color name="colorCategoryIntern">#2CA7C1</color>
-    <color name="colorCategoryLink">#96C949</color>
+    <color name="colorCategoryDefault">#839097</color>
+    <color name="colorCategoryScrap">#F05F74</color>
+    <color name="colorCategoryWin">#F7D742</color>
+    <color name="colorCategoryIntern">#2CA8C2</color>
+    <color name="colorCategoryLink">#97CA49</color>
 
 
 

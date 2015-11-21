@@ -1,5 +1,6 @@
 package com.example.androidchoi.jobdam.Model;
 
+import com.example.androidchoi.jobdam.Calendar.CurrentTime;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -21,6 +22,7 @@ public class MyCard implements Serializable {
     private String title;
     private String content;
     private int category;
+    private String writeDate;
 //    private int[] mImageResources;
     private int startDate;
     private int endDate;
@@ -41,6 +43,7 @@ public class MyCard implements Serializable {
         return content;
     }
     public int getCategory() { return category; }
+    public String getWriteDate() { return writeDate; }
 
     public void setTitle(String title) {
 //        try {
@@ -56,31 +59,34 @@ public class MyCard implements Serializable {
     public MyCard(){
         cardId = UUID.randomUUID().toString();
         userId = User.USER_NAME;
-        title = "안녕하세요 제목입니다.";
-        content = "1. 코드 최적화는 가장 나중에\n" +
-                "2. 수레바퀴를 다시 만들지 말라.\n" +
-                "  (만들어져 있는건 굳이 만들지 말자)\n" +
-                "   (gemFile,  JQuery)" +
-                "1. 코드 최적화는 가장 나중에\n"+
-                "1. 코드 최적화는 가장 나중에\n" +
-                "2. 수레바퀴를 다시 만들지 말라.\n" +
-                "  (만들어져 있는건 굳이 만들지 말자)\n" +
-                "   (gemFile,  JQuery)" +
-                "1. 코드 최적화는 가장 나중에\n"+
-                "1. 코드 최적화는 가장 나중에\n" +
-                "2. 수레바퀴를 다시 만들지 말라.\n" +
-                "  (만들어져 있는건 굳이 만들지 말자)\n" +
-                "   (gemFile,  JQuery)" +
-                "1. 코드 최적화는 가장 나중에\n"+
-                "1. 코드 최적화는 가장 나중에\n" +
-                "2. 수레바퀴를 다시 만들지 말라.\n" +
-                "  (만들어져 있는건 굳이 만들지 말자)\n" +
-                "   (gemFile,  JQuery)" +
-                "1. 코드 최적화는 가장 나중에\n"+
-                "1. 코드 최적화는 가장 나중에\n" +
-                "2. 수레바퀴를 다시 만들지 말라.\n" +
-                "  (만들어져 있는건 굳이 만들지 말자)\n" +
-                "   (gemFile,  JQuery)" +
-                "1. 코드 최적화는 가장 나중에\n";
+        CurrentTime currentTime = new CurrentTime();
+        writeDate = currentTime.getYear() + ". " + currentTime.getMonth() + ". " + currentTime.getDayOfMonth();
+
+//        title = "안녕하세요 제목입니다.";
+//        content = "1. 코드 최적화는 가장 나중에\n" +
+//                "2. 수레바퀴를 다시 만들지 말라.\n" +
+//                "  (만들어져 있는건 굳이 만들지 말자)\n" +
+//                "   (gemFile,  JQuery)" +
+//                "1. 코드 최적화는 가장 나중에\n"+
+//                "1. 코드 최적화는 가장 나중에\n" +
+//                "2. 수레바퀴를 다시 만들지 말라.\n" +
+//                "  (만들어져 있는건 굳이 만들지 말자)\n" +
+//                "   (gemFile,  JQuery)" +
+//                "1. 코드 최적화는 가장 나중에\n"+
+//                "1. 코드 최적화는 가장 나중에\n" +
+//                "2. 수레바퀴를 다시 만들지 말라.\n" +
+//                "  (만들어져 있는건 굳이 만들지 말자)\n" +
+//                "   (gemFile,  JQuery)" +
+//                "1. 코드 최적화는 가장 나중에\n"+
+//                "1. 코드 최적화는 가장 나중에\n" +
+//                "2. 수레바퀴를 다시 만들지 말라.\n" +
+//                "  (만들어져 있는건 굳이 만들지 말자)\n" +
+//                "   (gemFile,  JQuery)" +
+//                "1. 코드 최적화는 가장 나중에\n"+
+//                "1. 코드 최적화는 가장 나중에\n" +
+//                "2. 수레바퀴를 다시 만들지 말라.\n" +
+//                "  (만들어져 있는건 굳이 만들지 말자)\n" +
+//                "   (gemFile,  JQuery)" +
+//                "1. 코드 최적화는 가장 나중에\n";
     }
 }
