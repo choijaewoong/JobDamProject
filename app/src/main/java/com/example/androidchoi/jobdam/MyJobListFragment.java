@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class MyJobListFragment extends Fragment {
-
+    private static final int REQUEST_DETAIL = 0;
     ListView mListView;
     MyJobItemAdapter mAdapter;
     EditText mSearchEdit;
@@ -49,13 +50,32 @@ public class MyJobListFragment extends Fragment {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode != Activity.RESULT_OK){ return; }
+        Toast.makeText(getActivity(),"MyJob이 갱신 되었습니다." ,Toast.LENGTH_SHORT).show();
+        NetworkManager.getInstance().showMyJob(getActivity(), User.USER_NAME, new NetworkManager.OnResultListener<MyJobLab>() {
+            @Override
+            public void onSuccess(MyJobLab result) {
+                mJobList = result.getJobList();
+                mAdapter.setItems(mJobList);
+                mCountTextView.setText("총 " + mAdapter.getCount() + "건");
+            }
+            @Override
+            public void onFail(int code) {
+                Toast.makeText(getActivity(), code + "", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         NetworkManager.getInstance().showMyJob(getActivity(), User.USER_NAME, new NetworkManager.OnResultListener<MyJobLab>() {
             @Override
             public void onSuccess(MyJobLab result) {
-//                Toast.makeText(getActivity(), "Job 불러오기 성공" + MyJobLab.get(getContext()).getJobList().size(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Job 불러오기 성공" + result.getJobList().size(), Toast.LENGTH_SHORT).show();
                 mJobList = result.getJobList();
                 mAdapter.setItems(mJobList);
                 mCountTextView.setText("총 " + mAdapter.getCount() + "건");
@@ -135,7 +155,7 @@ public class MyJobListFragment extends Fragment {
                 Job data = (Job) mAdapter.getItem(position - mListView.getHeaderViewsCount());
                 Intent intent = new Intent(getActivity(), JobDetailActivity.class);
                 intent.putExtra(Job.JOBITEM, data);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_DETAIL);
             }
         });
         mCountTextView = (TextView)view.findViewById(R.id.text_item_count);

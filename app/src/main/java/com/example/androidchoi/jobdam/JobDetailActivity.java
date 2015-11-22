@@ -1,5 +1,6 @@
 package com.example.androidchoi.jobdam;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,7 +22,6 @@ import com.example.androidchoi.jobdam.Model.AddressData;
 import com.example.androidchoi.jobdam.Model.ContentData;
 import com.example.androidchoi.jobdam.Model.Job;
 import com.example.androidchoi.jobdam.Model.MyJob;
-import com.example.androidchoi.jobdam.Model.MyJobLab;
 import com.example.androidchoi.jobdam.Model.User;
 import com.google.gson.Gson;
 
@@ -29,8 +29,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class JobDetailActivity extends AppCompatActivity {
-
-    public static final String EXTRA_JOB_DATA = "jobdata";
 
     Job mData;
     TextView mCorpName;
@@ -49,42 +47,37 @@ public class JobDetailActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
 
         Intent intent = getIntent();
-        mData = (Job)intent.getSerializableExtra(Job.JOBITEM);
+        mData = (Job) intent.getSerializableExtra(Job.JOBITEM);
 //        if(mData == null){
 //            int id = intent.getIntExtra(Job.JOBID, 0);
 //            mData = MyJobLab.get(getApplicationContext()).getJobData(id);
 //        }
 //        Toast.makeText(JobDetailActivity.this, mData.getId()+" " ,Toast.LENGTH_SHORT).show();
 
-        mExpandableListView = (ExpandableListView)findViewById(R.id.listview_job_detail_expandable);
+        mExpandableListView = (ExpandableListView) findViewById(R.id.listview_job_detail_expandable);
         mExpandableAdapter = new JobDetailAdapter();
         // 헤더뷰 설정
         View corpHeaderView = getLayoutInflater().inflate(R.layout.view_job_detail_corp_header, null);
-        View titleHeaderView = getLayoutInflater().inflate(R.layout.view_job_detail_title_header,null);
-        ToggleButton scrapButton = (ToggleButton)titleHeaderView.findViewById(R.id.btn_detail_scrap);
+        View titleHeaderView = getLayoutInflater().inflate(R.layout.view_job_detail_title_header, null);
+        ToggleButton scrapButton = (ToggleButton) titleHeaderView.findViewById(R.id.btn_detail_scrap);
         scrapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MyJob job = new MyJob();
                 job.setData(mData);
-               MyJobLab.get(getApplicationContext()).addJobData(job);
-               Gson gson = new Gson();
-               final String json = gson.toJson(job);
-               Toast.makeText(JobDetailActivity.this, getString(R.string.check_scrap), Toast.LENGTH_SHORT).show();
-
+                Gson gson = new Gson();
+                final String json = gson.toJson(job);
                 NetworkManager.getInstance().addMyJob(JobDetailActivity.this, User.USER_NAME, json, new NetworkManager.OnResultListener<String>() {
-
                     @Override
                     public void onSuccess(String result) {
+                        Toast.makeText(JobDetailActivity.this, getString(R.string.check_scrap), Toast.LENGTH_SHORT).show();
                         Log.i("json", json);
+                        setResult(Activity.RESULT_OK);
                     }
-
                     @Override
                     public void onFail(int code) {
-
                     }
                 });
-
 //                if(MyJobLab.get(getApplication()).getJobData(mData.getId()) == null) {
 //                    MyJobLab.get(getApplicationContext()).addJobData(mData);
 //                    Toast.makeText(JobDetailActivity.this, getString(R.string.check_scrap), Toast.LENGTH_SHORT).show();
@@ -93,7 +86,7 @@ public class JobDetailActivity extends AppCompatActivity {
 //                }
             }
         });
-        Button corpLink = (Button)titleHeaderView.findViewById(R.id.btn_detail_move_homepage);
+        Button corpLink = (Button) titleHeaderView.findViewById(R.id.btn_detail_move_homepage);
         corpLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,9 +97,9 @@ public class JobDetailActivity extends AppCompatActivity {
         });
 
 
-        mCorpName = (TextView)corpHeaderView.findViewById(R.id.text_detail_corp_name);
+        mCorpName = (TextView) corpHeaderView.findViewById(R.id.text_detail_corp_name);
         mCorpName.setText(mData.getCompanyName());
-        mJobTitle = (TextView)titleHeaderView.findViewById(R.id.text_detail_job_title);
+        mJobTitle = (TextView) titleHeaderView.findViewById(R.id.text_detail_job_title);
         mJobTitle.setText(mData.getJobTitle());
         mExpandableListView.addHeaderView(corpHeaderView);
         mExpandableListView.addHeaderView(titleHeaderView);
@@ -115,7 +108,7 @@ public class JobDetailActivity extends AppCompatActivity {
         mExpandableListView.setGroupIndicator(null);
 
         initJobDetailMenu(); // 상세 채용 정보 카테고리 생성
-        for(int i=0; i<mExpandableAdapter.getGroupCount(); i++){
+        for (int i = 0; i < mExpandableAdapter.getGroupCount(); i++) {
             mExpandableListView.expandGroup(i);
         }
     }
@@ -132,6 +125,7 @@ public class JobDetailActivity extends AppCompatActivity {
         return getString(R.string.experience_level) + mData.getExperienceLevel() + "\n"
                 + getString(R.string.education_level) + mData.getEducationLevel();
     }
+
     public String getConditions() {
         return getString(R.string.location) + Html.fromHtml(mData.getLocation()) + "\n"
                 + getString(R.string.salary) + mData.getSalary();

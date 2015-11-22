@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -21,9 +22,6 @@ import java.util.List;
  */
 public class MyJobFragment extends Fragment {
 
-    private static final String LIST = "joblist";
-    private static final String CALENDAR = "jobcalendar";
-
     ViewPager mViewPager;
     TabLayout mTabLayout;
     MyFragmentPagerAdapter mAdapter;
@@ -31,14 +29,22 @@ public class MyJobFragment extends Fragment {
     public MyJobFragment() {
         // Required empty public constructor
     }
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        List<Fragment> fragments = getChildFragmentManager().getFragments();
+        if (fragments != null) {
+            for (Fragment fragment : fragments) {
+                fragment.onActivityResult(requestCode, resultCode, data);
+            }
+        }
+    }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         TextView subTitle = (TextView)getActivity().findViewById(R.id.text_subtitle);
         subTitle.setText(R.string.my_job);
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

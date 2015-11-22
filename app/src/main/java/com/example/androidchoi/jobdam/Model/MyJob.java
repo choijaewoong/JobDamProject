@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class MyJob extends Job implements Serializable{
 
-    private int jobid;
+    private int job_id;
     private String url;
     private String posting_date;
     private int opening_date = 0;
@@ -25,14 +25,14 @@ public class MyJob extends Job implements Serializable{
     private int apply_cnt;
     private int reply_cnt;
     private String salary_code;
-    private List<String> scrap_userID;
+    private List<MyJobUser> scrap_userID;
 
     public MyJob() {
         init();
     }
     @Override
     public void init(){
-        jobid = 0;
+        job_id = 0;
         company = "empty";
         jobtitle = "empty";
         opening_date = 0;
@@ -44,7 +44,7 @@ public class MyJob extends Job implements Serializable{
     }
 
     @Override
-    public int getId() { return jobid; }
+    public int getId() { return job_id; }
     @Override
     public String getCompanyName() {
         return company;
@@ -71,7 +71,7 @@ public class MyJob extends Job implements Serializable{
     public int getEnd() {return closing_date;}
 
     public void setData(Job data){
-     jobid = data.getId();
+     job_id = data.getId();
      company = data.getCompanyName();
      companySite = data.getCompanyLink();
      url = data.getSiteUrl();
