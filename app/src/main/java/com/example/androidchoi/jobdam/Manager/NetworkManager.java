@@ -197,8 +197,10 @@ public class NetworkManager {
             }
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                MyCardLab.get(MyApplication.getContext(), gson.fromJson(responseString, MyCardLab.class));
-                listener.onSuccess(MyCardLab.get(MyApplication.getContext()));
+//                MyCardLab.get(MyApplication.getContext(), gson.fromJson(responseString, MyCardLab.class));
+                MyCardLab myCardLab = gson.fromJson(responseString, MyCardLab.class);
+                listener.onSuccess(myCardLab);
+//                listener.onSuccess(MyCardLab.get(MyApplication.getContext()));
             }
         });
     }

@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.CategoryData;
 import com.example.androidchoi.jobdam.Model.MyCard;
-import com.example.androidchoi.jobdam.Model.MyCardLab;
+import com.example.androidchoi.jobdam.Model.MyCards;
 import com.google.gson.Gson;
 
 public class CardWriteActivity extends AppCompatActivity {
@@ -28,7 +28,7 @@ public class CardWriteActivity extends AppCompatActivity {
     private static final String CATEGORY_DIALOG = "category_dialog";
     private static final String Calendar_DIALOG = "calendar_dialog";
 
-    private MyCard mData;
+    private MyCards mData;
     ImageView mCategoryImage; //카테고리 선택 버튼
     TextView mTextCategory; // 카테고리 이름
     ImageView mImageCategory; //카테고리 색 바
@@ -48,24 +48,23 @@ public class CardWriteActivity extends AppCompatActivity {
     TextView mTextContent;
 
 
-
     public MyCard getData() {
-        return mData;
+        return mData.getCard();
     }
 
-    public void setDate(String date){
-        if(isStartDate){
-            mData.setStartDate(date);
+    public void setDate(String date) {
+        if (isStartDate) {
+            mData.getCard().setStartDate(date);
             mTextStartDate.setText(date);
-        }else{
-            mData.setEndDate(date);
+        } else {
+            mData.getCard().setEndDate(date);
             mTextEndDate.setText(date);
         }
     }
 
     // 카테고리 이름, 색 설정
-    public void setCategory(int position){
-        mData.setCategory(position);
+    public void setCategory(int position) {
+        mData.getCard().setCategory(position);
         CategoryData categoryData = CategoryData.get(getApplicationContext()).getCategoryList().get(position);
         mTextCategory.setText(categoryData.getName());
         mTextCategory.setTextColor(categoryData.getColor());
@@ -77,30 +76,30 @@ public class CardWriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_write);
 
-        mCategoryImage = (ImageView)findViewById(R.id.image_category_select);
-        mTextCategory = (TextView)findViewById(R.id.text_card_category_title);
-        mImageCategory = (ImageView)findViewById(R.id.image_card_category_color);
-        scrollView = (ScrollView)findViewById(R.id.scroll_view_content);
+        mCategoryImage = (ImageView) findViewById(R.id.image_category_select);
+        mTextCategory = (TextView) findViewById(R.id.text_card_category_title);
+        mImageCategory = (ImageView) findViewById(R.id.image_card_category_color);
+        scrollView = (ScrollView) findViewById(R.id.scroll_view_content);
         mCancelSaveLayout = (LinearLayout) findViewById(R.id.linearLayout_cancel_save_button);
         mCancelButton = (TextView) findViewById(R.id.text_cancel_card);
         mSaveButton = (TextView) findViewById(R.id.text_save_card);
-        mTextStartDate = (TextView)findViewById(R.id.text_start_date);
-        mTextEndDate = (TextView)findViewById(R.id.text_end_date);
+        mTextStartDate = (TextView) findViewById(R.id.text_start_date);
+        mTextEndDate = (TextView) findViewById(R.id.text_end_date);
         mEditTitle = (EditText) findViewById(R.id.edit_text_card_title);
         mEditContent = (EditText) findViewById(R.id.edit_text_card_content);
-        mTextTitle = (TextView)findViewById(R.id.text_view_card_title);
+        mTextTitle = (TextView) findViewById(R.id.text_view_card_title);
         mTextContent = (TextView) findViewById(R.id.text_view_card_content);
 
         Intent intent = getIntent();
         isNew = intent.getBooleanExtra(MyCard.CARD_NEW, true);
-        mData = (MyCard) intent.getSerializableExtra(MyCard.CARD_ITEM);
         // 기존 Data있는 경우 (메모 수정)
         if (isNew == false) {
+            mData = (MyCards) intent.getSerializableExtra(MyCard.CARD_ITEM);
             mCancelSaveLayout.setVisibility(View.GONE);
-            mTextTitle.setText(mData.getTitle());
-            mTextContent.setText(mData.getContent());
-        } else{ // 기존 Data없는 경우 (메모 추가)
-            mData = new MyCard();
+            mTextTitle.setText(mData.getCard().getTitle());
+            mTextContent.setText(mData.getCard().getContent());
+        } else { // 기존 Data없는 경우 (메모 추가)
+            mData = new MyCards();
             changeWriteMode();
             mEditContent.requestFocus();
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -108,7 +107,7 @@ public class CardWriteActivity extends AppCompatActivity {
         }
 
         // 카테고리 이름, 색 설정
-        CategoryData categoryData = CategoryData.get(getApplicationContext()).getCategoryList().get(mData.getCategory());
+        CategoryData categoryData = CategoryData.get(getApplicationContext()).getCategoryList().get(mData.getCard().getCategory());
         mTextCategory.setText(categoryData.getName());
         mTextCategory.setTextColor(categoryData.getColor());
         mImageCategory.setBackgroundColor(categoryData.getColor());
@@ -126,35 +125,42 @@ public class CardWriteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String jsonString;
                 if (isNew == true) {  // add CardData
-                    jsonString = jsonStringFromData();
+                    jsonString = addJsonString();
                     NetworkManager.getInstance().addMemo(CardWriteActivity.this, jsonString, new NetworkManager.OnResultListener<String>() {
                         @Override
                         public void onSuccess(String result) {
                             Toast.makeText(CardWriteActivity.this, jsonString, Toast.LENGTH_SHORT).show();
-                             Log.i("생성", jsonString);
+                            Log.i("생성", jsonString);
+                            setResult(Activity.RESULT_OK);
+                            finish();
+                        }
+                        @Override
+                        public void onFail(int code) {
+                            Toast.makeText(CardWriteActivity.this, "실패.", Toast.LENGTH_SHORT).show();
+                            setResult(Activity.RESULT_CANCELED);
+                            finish();
+                        }
+                    });
+                } else { //modify CardData
+                    jsonString = modifyJsonString();
+                    NetworkManager.getInstance().updateMemo(CardWriteActivity.this, jsonString, new NetworkManager.OnResultListener<String>() {
+                        @Override
+                        public void onSuccess(String result) {
+                            Toast.makeText(CardWriteActivity.this, jsonString, Toast.LENGTH_SHORT).show();
+                            Log.i("수정", jsonString);
+                            setResult(Activity.RESULT_OK);
+                            finish();
                         }
 
                         @Override
                         public void onFail(int code) {
                             Toast.makeText(CardWriteActivity.this, "실패.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } else { //modify CardData
-                    jsonString = jsonStringFromData();
-                    NetworkManager.getInstance().updateMemo(CardWriteActivity.this, jsonString, new NetworkManager.OnResultListener<String>() {
-                        @Override
-                        public void onSuccess(String result) {
-                            Toast.makeText(CardWriteActivity.this, jsonString, Toast.LENGTH_SHORT).show();
-                        Log.i("수정", jsonString);
-                        }
-                        @Override
-                        public void onFail(int code) {
-                            Toast.makeText(CardWriteActivity.this, "실패.", Toast.LENGTH_SHORT).show();
+                            setResult(Activity.RESULT_CANCELED);
+                            finish();
                         }
                     });
                 }
-                setResult(Activity.RESULT_OK);
-                finish();
+
             }
         });
         mTextTitle.setOnClickListener(new View.OnClickListener() {
@@ -201,14 +207,21 @@ public class CardWriteActivity extends AppCompatActivity {
         });
     }
 
-    public String jsonStringFromData() {
-        mData.setData(mEditTitle.getText().toString()
+    public String addJsonString() {
+        mData.getCard().setData(mEditTitle.getText().toString()
                 , mEditContent.getText().toString());
-        MyCardLab.get(getApplicationContext()).modifyCardData(mData);
+        Gson gson = new Gson();
+        return gson.toJson(mData.getCard());
+    }
+
+    public String modifyJsonString() {
+        mData.getCard().setData(mEditTitle.getText().toString()
+                , mEditContent.getText().toString());
         Gson gson = new Gson();
         return gson.toJson(mData);
     }
-    public void changeWriteMode(){
+
+    public void changeWriteMode() {
         mCancelSaveLayout.setVisibility(View.VISIBLE);
         scrollView.setVisibility(View.GONE);
         mTextTitle.setVisibility(View.GONE);

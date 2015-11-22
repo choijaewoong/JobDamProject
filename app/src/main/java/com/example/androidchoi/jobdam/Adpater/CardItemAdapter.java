@@ -26,7 +26,7 @@ public class CardItemAdapter extends BaseAdapter {
     }
     @Override
     public Object getItem(int position) {
-        return mItems.get(position).getCard();
+        return mItems.get(position);
     }
     @Override
     public long getItemId(int position) {

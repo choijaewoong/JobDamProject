@@ -12,7 +12,6 @@ public class MyCard implements Serializable {
 
     public static final String CARD_ITEM = "cardItem";
     public static final String CARD_NEW = "cardNew";
-    public static final String CARDPOSITION = "cardposition";
 
     @SerializedName("user_id")
     private String userId;
@@ -43,11 +42,6 @@ public class MyCard implements Serializable {
     public String getWriteDate() { return writeDate; }
 
     public void setTitle(String title) {
-//        try {
-//            this.title = URLEncoder.encode(title,"euc-kr");
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
         this.title = title;
     }
     public void setContent(String content) { this.content = content; }
@@ -57,34 +51,8 @@ public class MyCard implements Serializable {
 
     public MyCard(){
         userId = User.USER_NAME;
+        category = 0;
         CurrentTime currentTime = new CurrentTime();
         writeDate = currentTime.getYear() + ". " + currentTime.getMonth() + ". " + currentTime.getDayOfMonth();
-
-//        title = "안녕하세요 제목입니다.";
-//        content = "1. 코드 최적화는 가장 나중에\n" +
-//                "2. 수레바퀴를 다시 만들지 말라.\n" +
-//                "  (만들어져 있는건 굳이 만들지 말자)\n" +
-//                "   (gemFile,  JQuery)" +
-//                "1. 코드 최적화는 가장 나중에\n"+
-//                "1. 코드 최적화는 가장 나중에\n" +
-//                "2. 수레바퀴를 다시 만들지 말라.\n" +
-//                "  (만들어져 있는건 굳이 만들지 말자)\n" +
-//                "   (gemFile,  JQuery)" +
-//                "1. 코드 최적화는 가장 나중에\n"+
-//                "1. 코드 최적화는 가장 나중에\n" +
-//                "2. 수레바퀴를 다시 만들지 말라.\n" +
-//                "  (만들어져 있는건 굳이 만들지 말자)\n" +
-//                "   (gemFile,  JQuery)" +
-//                "1. 코드 최적화는 가장 나중에\n"+
-//                "1. 코드 최적화는 가장 나중에\n" +
-//                "2. 수레바퀴를 다시 만들지 말라.\n" +
-//                "  (만들어져 있는건 굳이 만들지 말자)\n" +
-//                "   (gemFile,  JQuery)" +
-//                "1. 코드 최적화는 가장 나중에\n"+
-//                "1. 코드 최적화는 가장 나중에\n" +
-//                "2. 수레바퀴를 다시 만들지 말라.\n" +
-//                "  (만들어져 있는건 굳이 만들지 말자)\n" +
-//                "   (gemFile,  JQuery)" +
-//                "1. 코드 최적화는 가장 나중에\n";
     }
 }

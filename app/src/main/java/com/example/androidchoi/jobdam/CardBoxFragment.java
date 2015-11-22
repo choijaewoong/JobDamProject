@@ -58,14 +58,26 @@ public class CardBoxFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode != Activity.RESULT_OK) return;
+        if(resultCode != Activity.RESULT_OK){ return; }
+        NetworkManager.getInstance().showMyMemo(getActivity(),
+                User.USER_NAME, new NetworkManager.OnResultListener<MyCardLab>() {
+                    @Override
+                    public void onSuccess(MyCardLab result) {
+                        mCardList = result.getCardList();
+                        mAdapter.setItems(mCardList);
+                        mCountTextView.setText("총 " + mAdapter.getCount() + "건");
+                    }
+
+                    @Override
+                    public void onFail(int code) {
+                        Toast.makeText(MyApplication.getContext(), code + "", Toast.LENGTH_SHORT).show();
+                    }
+                });
         if(requestCode == REQUEST_MODIFY){
 //            Toast.makeText(getActivity(), CardLab.get(getActivity()).getCardList().get(0).getTitle(), Toast.LENGTH_SHORT).show();
         }else if(requestCode == REQUEST_NEW){
             mListView.smoothScrollToPositionFromTop(0, 0, 500);
         }
-        mCountTextView.setText("총 " + mAdapter.getCount() + "건");
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -153,9 +165,10 @@ public class CardBoxFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MyCard data = (MyCard) mAdapter.getItem(position - mListView.getHeaderViewsCount());
+//                MyCard data = (MyCard) mAdapter.getItem(position - mListView.getHeaderViewsCount());
+                MyCards myCards =  (MyCards)mAdapter.getItem(position - mListView.getHeaderViewsCount());
                 Intent intent = new Intent(getActivity(), CardWriteActivity.class);
-                intent.putExtra(MyCard.CARD_ITEM, data);
+                intent.putExtra(MyCard.CARD_ITEM, myCards);
                 intent.putExtra(MyCard.CARD_NEW, false);
 //                intent.putExtra(CardData.CARDPOSITION, position - mListView.getHeaderViewsCount());
                 startActivityForResult(intent, REQUEST_MODIFY);
@@ -173,8 +186,12 @@ public class CardBoxFragment extends Fragment {
             }
         });
         FloatingActionButton addCategoryButton = (FloatingActionButton) view.findViewById(R.id.fab_add_category);
-
         mCountTextView = (TextView) view.findViewById(R.id.text_item_count);
         return view;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 }
