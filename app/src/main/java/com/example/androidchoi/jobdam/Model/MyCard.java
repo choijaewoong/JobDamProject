@@ -4,6 +4,7 @@ import com.example.androidchoi.jobdam.Calendar.CurrentTime;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by Tacademy on 2015-10-29.
@@ -18,8 +19,10 @@ public class MyCard implements Serializable {
     private String title;
     private String content;
     private int category;
+    private String currentDate;
     private String writeDate;
-    private String[] tag;
+    @SerializedName("tag")
+    private ArrayList<String> tags = new ArrayList<String>();
 //    private int[] mImageResources;
     private String startDate;
     private String endDate;
@@ -35,12 +38,12 @@ public class MyCard implements Serializable {
 
     public String getUserId() { return userId;}
     public String getTitle() {  return title; }
-    public String getContent() {
-        return content;
-    }
+    public String getContent() {  return content;}
+    public ArrayList<String> getTags() { return tags; }
     public int getCategory() { return category; }
     public String getWriteDate() { return writeDate; }
-
+    public void addTag(String tag){ tags.add(tag);}
+    public void removeTag(int index){ tags.remove(index);}
     public void setTitle(String title) {
         this.title = title;
     }

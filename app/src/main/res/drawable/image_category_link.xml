@@ -5,8 +5,10 @@
     <solid
         android:color="@color/colorCategoryLink" >
     </solid>
+    <stroke android:color="@android:color/transparent"
+            android:width="4dp"/>
     <corners
-        android:radius="10dp">
+        android:radius="15dp">
     </corners>
 
 </shape>
