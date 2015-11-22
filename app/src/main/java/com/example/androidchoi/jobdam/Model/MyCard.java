@@ -4,7 +4,6 @@ import com.example.androidchoi.jobdam.Calendar.CurrentTime;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * Created by Tacademy on 2015-10-29.
@@ -15,14 +14,13 @@ public class MyCard implements Serializable {
     public static final String CARD_NEW = "cardNew";
     public static final String CARDPOSITION = "cardposition";
 
-    @SerializedName("card_id")
-    private String cardId;
     @SerializedName("user_id")
     private String userId;
     private String title;
     private String content;
     private int category;
     private String writeDate;
+    private String[] tag;
 //    private int[] mImageResources;
     private String startDate;
     private String endDate;
@@ -36,7 +34,6 @@ public class MyCard implements Serializable {
         content = cardItem.getContent();
     }
 
-    public String getId(){ return cardId; }
     public String getUserId() { return userId;}
     public String getTitle() {  return title; }
     public String getContent() {
@@ -59,7 +56,6 @@ public class MyCard implements Serializable {
     public void setEndDate(String endDate){ this.endDate = endDate; }
 
     public MyCard(){
-        cardId = UUID.randomUUID().toString();
         userId = User.USER_NAME;
         CurrentTime currentTime = new CurrentTime();
         writeDate = currentTime.getYear() + ". " + currentTime.getMonth() + ". " + currentTime.getDayOfMonth();

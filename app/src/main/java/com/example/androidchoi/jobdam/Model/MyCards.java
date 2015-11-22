@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class MyCards {
 
+    private String _id;
     @SerializedName("memo")
     private MyCard card;
     public MyCard getCard() {

@@ -232,12 +232,12 @@
             android:id="@+id/scroll_view_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/linearLayout6"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/image_divider"
             android:fillViewport="true"
-            android:visibility="visible">
+            android:visibility="visible"
+            android:layout_above="@+id/tag_box">
 
             <TextView
                 android:id="@+id/text_view_card_content"
@@ -251,6 +251,16 @@
                 android:textSize="@dimen/font_size_semi_large"
                 android:visibility="visible"/>
         </ScrollView>
+
+        <com.example.androidchoi.jobdam.PredicateLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/linearLayout6"
+            android:id="@+id/tag_box">
+
+        </com.example.androidchoi.jobdam.PredicateLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout6"
@@ -311,7 +321,6 @@
                     android:src="@drawable/button_plus"/>
             </LinearLayout>
         </LinearLayout>
-
     </RelativeLayout>
     <!--</ScrollView>-->
 
