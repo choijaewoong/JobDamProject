@@ -24,8 +24,8 @@ public class MyCard implements Serializable {
     private int category;
     private String writeDate;
 //    private int[] mImageResources;
-    private int startDate;
-    private int endDate;
+    private String startDate;
+    private String endDate;
 
     public void setData(String title, String content){
         this.title = title;
@@ -55,6 +55,8 @@ public class MyCard implements Serializable {
     }
     public void setContent(String content) { this.content = content; }
     public void setCategory(int category){ this.category = category; }
+    public void setStartDate(String startDate){ this.startDate = startDate; }
+    public void setEndDate(String endDate){ this.endDate = endDate; }
 
     public MyCard(){
         cardId = UUID.randomUUID().toString();

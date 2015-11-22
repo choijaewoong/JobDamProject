@@ -26,27 +26,46 @@ public class CardWriteActivity extends AppCompatActivity {
     public static final String EXTRA_CARD_DATA = "card data";
     public static final String EXTRA_CARD_POSITION = "card position";
     private static final String CATEGORY_DIALOG = "category_dialog";
+    private static final String Calendar_DIALOG = "calendar_dialog";
 
     private MyCard mData;
-    ImageView mCategoryImage;
+    ImageView mCategoryImage; //카테고리 선택 버튼
+    TextView mTextCategory; // 카테고리 이름
+    ImageView mImageCategory; //카테고리 색 바
+    ScrollView scrollView;
+    LinearLayout mCancelSaveLayout; // 취소, 저장 버튼
+    TextView mCancelButton; // 취소 버튼
+    TextView mSaveButton; // 저장 버튼
+    TextView mTextStartDate;
+    TextView mTextEndDate;
+    boolean isNew;
+    boolean isStartDate = true;
+
+    //작성 기능
     EditText mEditTitle;
     EditText mEditContent;
-    TextView mTextCategory;
-    ImageView mImageCategory;
     TextView mTextTitle;
     TextView mTextContent;
-    ScrollView scrollView;
-    LinearLayout mCancelSaveLayout;
-    TextView mCancelButton;
-    TextView mSaveButton;
-    boolean isNew;
+
+
 
     public MyCard getData() {
         return mData;
     }
 
+    public void setDate(String date){
+        if(isStartDate){
+            mData.setStartDate(date);
+            mTextStartDate.setText(date);
+        }else{
+            mData.setEndDate(date);
+            mTextEndDate.setText(date);
+        }
+    }
+
     // 카테고리 이름, 색 설정
-    public void setCategoryTextView(int position){
+    public void setCategory(int position){
+        mData.setCategory(position);
         CategoryData categoryData = CategoryData.get(getApplicationContext()).getCategoryList().get(position);
         mTextCategory.setText(categoryData.getName());
         mTextCategory.setTextColor(categoryData.getColor());
@@ -61,15 +80,16 @@ public class CardWriteActivity extends AppCompatActivity {
         mCategoryImage = (ImageView)findViewById(R.id.image_category_select);
         mTextCategory = (TextView)findViewById(R.id.text_card_category_title);
         mImageCategory = (ImageView)findViewById(R.id.image_card_category_color);
+        scrollView = (ScrollView)findViewById(R.id.scroll_view_content);
+        mCancelSaveLayout = (LinearLayout) findViewById(R.id.linearLayout_cancel_save_button);
+        mCancelButton = (TextView) findViewById(R.id.text_cancel_card);
+        mSaveButton = (TextView) findViewById(R.id.text_save_card);
+        mTextStartDate = (TextView)findViewById(R.id.text_start_date);
+        mTextEndDate = (TextView)findViewById(R.id.text_end_date);
         mEditTitle = (EditText) findViewById(R.id.edit_text_card_title);
         mEditContent = (EditText) findViewById(R.id.edit_text_card_content);
         mTextTitle = (TextView)findViewById(R.id.text_view_card_title);
         mTextContent = (TextView) findViewById(R.id.text_view_card_content);
-        scrollView = (ScrollView)findViewById(R.id.scroll_view_content);
-
-        mCancelSaveLayout = (LinearLayout) findViewById(R.id.linearLayout_cancel_save_button);
-        mCancelButton = (TextView) findViewById(R.id.text_cancel_card);
-        mSaveButton = (TextView) findViewById(R.id.text_save_card);
 
         Intent intent = getIntent();
         isNew = intent.getBooleanExtra(MyCard.CARD_NEW, true);
@@ -154,6 +174,22 @@ public class CardWriteActivity extends AppCompatActivity {
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(mEditContent, InputMethodManager.SHOW_IMPLICIT);
 
+            }
+        });
+        mTextStartDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isStartDate = true;
+                CustomCalendarDialogFragment dialog = new CustomCalendarDialogFragment();
+                dialog.show(getSupportFragmentManager(), CATEGORY_DIALOG);
+            }
+        });
+        mTextEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isStartDate = false;
+                CustomCalendarDialogFragment dialog = new CustomCalendarDialogFragment();
+                dialog.show(getSupportFragmentManager(), CATEGORY_DIALOG);
             }
         });
         mCategoryImage.setOnClickListener(new View.OnClickListener() {

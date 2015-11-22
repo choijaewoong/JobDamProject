@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -35,8 +34,8 @@ public class CustomDialogFragment extends DialogFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         Dialog dialog = getDialog();
         dialog.getWindow().setLayout(450, 500);
         dialog.getWindow().setBackgroundDrawable(getResources().getDrawable(android.R.color.transparent));
@@ -59,8 +58,7 @@ public class CustomDialogFragment extends DialogFragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ((CardWriteActivity) getActivity()).getData().setCategory(position);
-                ((CardWriteActivity) getActivity()).setCategoryTextView(position);
+                ((CardWriteActivity) getActivity()).setCategory(position);
                 dismiss();
             }
         });

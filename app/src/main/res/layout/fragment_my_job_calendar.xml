@@ -1,162 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+                             android:layout_width="match_parent"
+                             android:layout_height="match_parent"
+                             android:orientation="vertical">
 
 
-    <RelativeLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/calendar_title_height"
-        android:orientation="horizontal"
-        android:background="@android:color/white"
-        >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/image_prev_month_button"
-            android:src="@drawable/button_calendar_left"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:paddingLeft="@dimen/default_dimen"
-            android:paddingRight="@dimen/default_dimen"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/image_next_month_button"
-            android:src="@drawable/button_calendar_right"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:paddingRight="@dimen/default_dimen"
-            android:paddingLeft="@dimen/default_dimen"/>
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/font_size_semi_large"
-            android:textStyle="bold"/>
-
-    </RelativeLayout>
+<RelativeLayout
+    android:id="@+id/linearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/calendar_title_height"
+    android:orientation="horizontal"
+    android:background="@android:color/white"
+    >
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_width"
-        android:id="@+id/image_category_select"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/colorDivider"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/calendar_header_height"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/colorBackground">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="일"
-            android:id="@+id/textView7"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/colorCalendarSun"
-            android:textSize="@dimen/font_size_min"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="월"
-            android:id="@+id/textView"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="@dimen/font_size_min"
-            android:textColor="@color/colorCalendarInMonth"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="화"
-            android:id="@+id/textView2"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/colorCalendarInMonth"
-            android:textSize="@dimen/font_size_min"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="수"
-            android:id="@+id/textView3"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/colorCalendarInMonth"
-            android:textSize="@dimen/font_size_min"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="목"
-            android:id="@+id/textView4"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/colorCalendarInMonth"
-            android:textSize="@dimen/font_size_min"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="금"
-            android:id="@+id/textView5"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/colorCalendarInMonth"
-            android:textSize="@dimen/font_size_min"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="토"
-            android:id="@+id/textView6"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/colorCalendarSat"
-            android:textSize="@dimen/font_size_min"/>
-
-    </LinearLayout>
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/image_prev_month_button"
+        android:src="@drawable/button_calendar_left"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingLeft="@dimen/default_dimen"
+        android:paddingRight="@dimen/default_dimen"/>
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_width"
-        android:id="@+id/imageView"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/colorDivider"/>
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/image_next_month_button"
+        android:src="@drawable/button_calendar_right"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:paddingRight="@dimen/default_dimen"
+        android:paddingLeft="@dimen/default_dimen"/>
 
-    <GridView
-        android:id="@+id/gridView1"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorDivider"
-        android:horizontalSpacing="@dimen/calendar_grid_separator"
-        android:numColumns="7"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="@dimen/calendar_grid_separator">
-    </GridView>
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/font_size_semi_large"
+        android:textStyle="bold"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/shadow_depth"
-        android:id="@+id/imageView11"
-        android:background="@drawable/shadow_bottom"/>
+</RelativeLayout>
+
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/divider_width"
+    android:id="@+id/image_category_select"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/colorDivider"/>
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/calendar_header_height"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/colorBackground">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="일"
+        android:id="@+id/textView7"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/colorCalendarSun"
+        android:textSize="@dimen/font_size_min"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="월"
+        android:id="@+id/textView"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="@dimen/font_size_min"
+        android:textColor="@color/colorCalendarInMonth"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="화"
+        android:id="@+id/textView2"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/colorCalendarInMonth"
+        android:textSize="@dimen/font_size_min"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="수"
+        android:id="@+id/textView3"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/colorCalendarInMonth"
+        android:textSize="@dimen/font_size_min"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="목"
+        android:id="@+id/textView4"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/colorCalendarInMonth"
+        android:textSize="@dimen/font_size_min"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="금"
+        android:id="@+id/textView5"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/colorCalendarInMonth"
+        android:textSize="@dimen/font_size_min"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="토"
+        android:id="@+id/textView6"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/colorCalendarSat"
+        android:textSize="@dimen/font_size_min"/>
+
+</LinearLayout>
+
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/divider_width"
+    android:id="@+id/imageView"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/colorDivider"/>
+
+<GridView
+    android:id="@+id/gridView1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorDivider"
+    android:horizontalSpacing="@dimen/calendar_grid_separator"
+    android:numColumns="7"
+    android:stretchMode="columnWidth"
+    android:verticalSpacing="@dimen/calendar_grid_separator">
+</GridView>
+
+<View
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/shadow_depth"
+    android:id="@+id/imageView11"
+    android:background="@drawable/shadow_bottom"/>
 
 </LinearLayout>

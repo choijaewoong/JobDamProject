@@ -27,10 +27,10 @@ public class CalendarItemView extends LinearLayout implements Checkable{
 	public CalendarItemView(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
-		LayoutInflater.from(context).inflate(R.layout.view_calendar_item, this);
+		LayoutInflater.from(context).inflate(R.layout.view_job_calendar_item, this);
 		mLinearLayout = (LinearLayout)findViewById(R.id.calendar_item_view);
-		numberView = (TextView)findViewById(R.id.calendar_num);
-		contentView = (TextView)findViewById(R.id.calendar_content);
+		numberView = (TextView)findViewById(R.id.job_calendar_num);
+		contentView = (TextView)findViewById(R.id.job_calendar_content);
 	}
 	
 	public void setData(CalendarItem item) {
