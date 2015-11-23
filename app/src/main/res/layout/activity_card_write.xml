@@ -310,8 +310,9 @@
                     android:layout_marginRight="@dimen/default_dimen"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
-                    android:hint="태그"
-                    android:textColorHint="@color/colorLightGray"/>
+                    android:hint="태그를 입력하세요"
+                    android:textColorHint="@color/colorLightGray"
+                    android:textSize="@dimen/font_size_default"/>
 
                 <ImageView
                     android:id="@+id/btn_add_tag"

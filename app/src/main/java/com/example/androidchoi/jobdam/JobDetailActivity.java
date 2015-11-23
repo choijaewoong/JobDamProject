@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -106,7 +107,8 @@ public class JobDetailActivity extends AppCompatActivity {
 
         mExpandableListView.setAdapter(mExpandableAdapter);
         mExpandableListView.setGroupIndicator(null);
-
+        mExpandableListView.setDivider(ContextCompat.getDrawable(JobDetailActivity.this, android.R.color.transparent));
+        mExpandableListView.setChildDivider(ContextCompat.getDrawable(JobDetailActivity.this, android.R.color.transparent));
         initJobDetailMenu(); // 상세 채용 정보 카테고리 생성
         for (int i = 0; i < mExpandableAdapter.getGroupCount(); i++) {
             mExpandableListView.expandGroup(i);

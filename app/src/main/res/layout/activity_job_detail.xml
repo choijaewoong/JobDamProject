@@ -48,5 +48,6 @@
         android:scrollbars="none"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="0dp"
-        android:layout_below="@+id/toolbar"/>
+        android:layout_below="@+id/toolbar"
+        android:footerDividersEnabled="false"/>
 </RelativeLayout>

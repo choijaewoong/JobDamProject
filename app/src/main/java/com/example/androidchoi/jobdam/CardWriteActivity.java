@@ -99,8 +99,7 @@ public class CardWriteActivity extends AppCompatActivity {
             mCancelSaveLayout.setVisibility(View.GONE);
             mTextTitle.setText(mData.getCard().getTitle());
             mTextContent.setText(mData.getCard().getContent());
-            mEditTitle.setText(mData.getCard().getTitle());
-            mEditContent.setText(mData.getCard().getContent());
+
         } else { // 기존 Data없는 경우 (메모 추가)
             mData = new MyCards();
             changeWriteMode();
@@ -192,7 +191,7 @@ public class CardWriteActivity extends AppCompatActivity {
         mEditTag.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                mCancelSaveLayout.setVisibility(View.VISIBLE);
+                changeWriteMode();
             }
         });
         mTextStartDate = (TextView) findViewById(R.id.text_start_date);
@@ -290,5 +289,7 @@ public class CardWriteActivity extends AppCompatActivity {
         mTextTitle.setVisibility(View.GONE);
         mEditTitle.setVisibility(View.VISIBLE);
         mEditContent.setVisibility(View.VISIBLE);
+        mEditTitle.setText(mData.getCard().getTitle());
+        mEditContent.setText(mData.getCard().getContent());
     }
 }

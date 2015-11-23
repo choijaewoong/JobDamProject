@@ -2,17 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/top_margin"
-    android:paddingBottom="@dimen/default_small_dimen"
-              android:paddingLeft="@dimen/default_dimen"
-              android:paddingRight="@dimen/default_dimen">
+    >
 
     <ImageView
         android:layout_width="@dimen/corp_logo_size"
         android:layout_height="@dimen/corp_logo_size"
         android:id="@+id/image_detail_corp_logo"
         android:layout_gravity="center_horizontal"
-        android:background="#808080" />
+        android:background="#808080"
+        android:layout_marginTop="@dimen/top_margin"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,6 +19,18 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/default_small_dimen"
         android:textSize="@dimen/font_size_large"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="@dimen/default_dimen"
+        android:layout_marginRight="@dimen/default_dimen"
+        android:layout_marginBottom="@dimen/default_small_dimen"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:id="@+id/imageView5"
+        android:background="@color/colorDivider"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
 </LinearLayout>
