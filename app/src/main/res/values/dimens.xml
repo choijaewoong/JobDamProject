@@ -63,7 +63,7 @@
     <dimen name="title_bottom_divider">12dp</dimen>
 
     <!-- image size-->
-    <dimen name="corp_logo_size">80dp</dimen>
+    <dimen name="corp_logo_size">64dp</dimen>
     <!-- login profile-->
     <dimen name="login_profile">150dp</dimen>
     <dimen name="login_layout_padding">24dp</dimen>

@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam.Model;
 
 import com.begentgroup.xmlparser.SerializedName;
+import com.example.androidchoi.jobdam.R;
 
 import java.io.Serializable;
 
@@ -53,7 +54,7 @@ public class JobData extends Job implements Serializable {
         position = new JobContentData();
         keyword = "";
         salary = "";
-        mLogoResourceId = android.R.mipmap.sym_def_app_icon;
+        mLogoResourceId = R.drawable.image_default_corp_logo;
     }
 
     @Override

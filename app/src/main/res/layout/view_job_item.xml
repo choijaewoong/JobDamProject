@@ -11,7 +11,7 @@
         android:layout_height="@dimen/item_height"
         android:layout_alignParentTop="true"
         android:background="@drawable/container_job_item"
-        android:paddingLeft="@dimen/default_small_dimen"
+        android:paddingLeft="@dimen/default_dimen"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
@@ -26,13 +26,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:src="@android:mipmap/sym_def_app_icon"/>
+        android:src="@drawable/image_default_corp_logo"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="@dimen/default_dimen"
         android:id="@+id/linearLayout7"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/image_job_logo"

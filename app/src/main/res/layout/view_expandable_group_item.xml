@@ -23,7 +23,7 @@
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="@dimen/default_large_dimen"/>
+        android:layout_marginRight="@dimen/default_small_dimen"/>
 
     <TextView
         android:layout_width="wrap_content"
