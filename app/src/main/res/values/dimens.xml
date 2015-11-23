@@ -51,6 +51,7 @@
     <!-- card write activity-->
     <dimen name="button_divider_height">12dp</dimen>
     <dimen name="button_divider_width">2dp</dimen>
+    <dimen name="tag_max_width">108dp</dimen>
     <!--CustomToolbar-->
     <dimen name="toolbar_main_padding">60dp</dimen>
     <dimen name="toolbar_article_padding">8dp</dimen>

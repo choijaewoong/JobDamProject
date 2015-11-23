@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -166,7 +167,6 @@ public class CardWriteActivity extends AppCompatActivity {
                         }
                     });
                 }
-
             }
         });
         mTextTitle.setOnClickListener(new View.OnClickListener() {
@@ -191,7 +191,7 @@ public class CardWriteActivity extends AppCompatActivity {
         mEditTag.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                changeWriteMode();
+                mCancelSaveLayout.setVisibility(View.VISIBLE);
             }
         });
         mTextStartDate = (TextView) findViewById(R.id.text_start_date);
@@ -248,9 +248,11 @@ public class CardWriteActivity extends AppCompatActivity {
         t.setTextColor(ContextCompat.getColor(this, android.R.color.white));
         t.setBackgroundResource(CategoryData.get(getApplicationContext()).getCategoryList().get(mData.getCard().getCategory()).getImage());
         t.setPadding(10, 5, 10, 5);
-        t.setMaxWidth(210);
+        int width = getResources().getDimensionPixelSize(R.dimen.tag_max_width);
+        t.setMaxWidth(width);
         t.setSingleLine(true);
         t.setEllipsize(TextUtils.TruncateAt.END);
+        t.setGravity(Gravity.CENTER);
         t.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -289,7 +291,7 @@ public class CardWriteActivity extends AppCompatActivity {
         mTextTitle.setVisibility(View.GONE);
         mEditTitle.setVisibility(View.VISIBLE);
         mEditContent.setVisibility(View.VISIBLE);
-        mEditTitle.setText(mData.getCard().getTitle());
-        mEditContent.setText(mData.getCard().getContent());
+        mEditTitle.setText(mTextTitle.getText());
+        mEditContent.setText(mTextContent.getText());
     }
 }
