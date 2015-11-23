@@ -37,7 +37,9 @@ public class CustomDialogFragment extends DialogFragment {
 //        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 //        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         Dialog dialog = getDialog();
-        dialog.getWindow().setLayout(450, 500);
+        int width = getResources().getDimensionPixelSize(R.dimen.category_dialog_width);
+        int height = getResources().getDimensionPixelSize(R.dimen.category_dialog_height);
+        dialog.getWindow().setLayout(width, height);
         dialog.getWindow().setBackgroundDrawable(getResources().getDrawable(android.R.color.transparent));
         WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
