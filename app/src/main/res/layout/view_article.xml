@@ -38,17 +38,23 @@
             android:orientation="horizontal"
             android:padding="@dimen/default_small_dimen">
 
-            <ToggleButton
-                android:id="@+id/image_like_button"
+            <!--<ToggleButton-->
+                <!--android:id="@+id/image_like_button"-->
+                <!--android:layout_width="25dp"-->
+                <!--android:layout_height="17dp"-->
+                <!--android:background="@drawable/selector_button_article_like"-->
+                <!--android:checked="false"-->
+                <!--android:padding="50dp"-->
+                <!--android:text=""-->
+                <!--android:textOff=""-->
+                <!--android:textOn="">-->
+            <!--</ToggleButton>-->
+            <ImageView
                 android:layout_width="25dp"
                 android:layout_height="17dp"
+                android:id="@+id/image_like_button"
                 android:background="@drawable/selector_button_article_like"
-                android:checked="false"
-                android:padding="50dp"
-                android:text=""
-                android:textOff=""
-                android:textOn="">
-            </ToggleButton>
+                />
 
 
             <TextView

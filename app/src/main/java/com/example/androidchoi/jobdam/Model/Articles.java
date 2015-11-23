@@ -14,9 +14,11 @@ public class Articles implements Serializable{
     private Article article;
     public Article getArticle() { return article; }
     public void setArticle(Articles articles) {
-//        this.article.setArticle(articles.getArticle());
-//        _id = articles.getId();
-
+        this.article.setArticle(articles.getArticle());
+        _id = articles.getId();
     }
     public String getId() { return _id; }
+    public Articles(){
+        article = new Article();
+    }
 }

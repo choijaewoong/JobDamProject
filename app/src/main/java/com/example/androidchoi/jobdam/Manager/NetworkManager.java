@@ -5,8 +5,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.begentgroup.xmlparser.XMLParser;
-import com.example.androidchoi.jobdam.Model.Article;
 import com.example.androidchoi.jobdam.Model.ArticleLab;
+import com.example.androidchoi.jobdam.Model.Articles;
 import com.example.androidchoi.jobdam.Model.JobList;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
@@ -307,9 +307,10 @@ public class NetworkManager {
 
     // 좋아요
     public static final String LIKE_ARTICLE = SERVER + "/like/%s/push/%s";
-    public void likeArticle(Context context, String user_id, String board_id, final OnResultListener<Article> listener){
+    public void likeArticle(Context context, String user_id, String board_id, final OnResultListener<Articles> listener){
         RequestParams params = new RequestParams();
         String url = String.format(LIKE_ARTICLE, user_id, board_id);
+        Log.i("url", url);
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
         client.get(context, url, headers, params, new TextHttpResponseHandler() {
@@ -319,10 +320,10 @@ public class NetworkManager {
             }
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Article article= gson.fromJson(responseString, Article.class);
-                Log.i("ddd", new Gson().toJson(article));
+                Articles articles= gson.fromJson(responseString, Articles.class);
+                Log.i("ddd", new Gson().toJson(articles));
                 //ArticleLab.get(MyApplication.getContext(), gson.fromJson(responseString, ArticleLab.class));
-                listener.onSuccess(article);
+                listener.onSuccess(articles);
             }
         });
     }

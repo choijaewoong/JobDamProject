@@ -7,13 +7,12 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
-import com.example.androidchoi.jobdam.Model.Article;
 import com.example.androidchoi.jobdam.Model.Articles;
 import com.example.androidchoi.jobdam.Model.User;
 
@@ -26,7 +25,7 @@ public class ArticleFragment extends Fragment {
     Articles mArticles;
     TextView mTextContent;
     TextView mTextLikeCount;
-    ToggleButton mToggleLikeButton;
+    ImageView mToggleLikeButton;
     LinearLayout mLinearLayout;
 
     public static ArticleFragment newInstance(Articles article){
@@ -56,25 +55,23 @@ public class ArticleFragment extends Fragment {
         View view = inflater.inflate(R.layout.view_article, container, false);
         mTextContent = (TextView)view.findViewById(R.id.text_article);
         mTextLikeCount = (TextView)view.findViewById(R.id.text_like_cnt);
-        mToggleLikeButton = (ToggleButton)view.findViewById(R.id.image_like_button);
-        mToggleLikeButton.setSelected(mArticles.getArticle().getLikeBool());
+        mToggleLikeButton = (ImageView)view.findViewById(R.id.image_like_button);
+        mToggleLikeButton.setSelected(true);
         mLinearLayout = (LinearLayout)view.findViewById(R.id.layout_article_like);
         mTextContent.setMovementMethod(new ScrollingMovementMethod());
         mTextContent.setText(mArticles.getArticle().getContent());
         mTextLikeCount.setText(mArticles.getArticle().getLikeCount() + "");
-        mLinearLayout.setOnClickListener(new View.OnClickListener() {
+        mToggleLikeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "좋아요 클릭", Toast.LENGTH_SHORT).show();
                 NetworkManager.getInstance().likeArticle(getActivity(),
-                        User.USER_NAME, mArticles.getId(), new NetworkManager.OnResultListener<Article>() {
+                        User.USER_NAME, mArticles.getId(), new NetworkManager.OnResultListener<Articles>() {
                             @Override
-                            public void onSuccess(Article result) {
-                                mToggleLikeButton.toggle();
-                                mArticles.getArticle().setArticle(result);
+                            public void onSuccess(Articles result) {
+                                mArticles.setArticle(result);
                                 mTextLikeCount.setText(mArticles.getArticle().getLikeCount() + "");
                             }
-
                             @Override
                             public void onFail(int code) {
                             }
