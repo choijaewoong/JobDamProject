@@ -12,15 +12,4 @@ public class ArticleLab {
     private ArrayList<Articles> mArticleList;
     public ArrayList<Articles> getArticleList() { return mArticleList; }
 
-    public void modifyArticleData(Article article){
-        Articles articles = new Articles();
-        articles.setArticle(article);
-        for(int i = 0; i<mArticleList.size(); i++){
-            if(mArticleList.get(i).getArticle().getId().equals(article.getId())){
-                mArticleList.set(i, articles);
-                return;
-            }
-        }
-        mArticleList.add(0,articles);
-    }
 }

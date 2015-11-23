@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam.Manager;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.begentgroup.xmlparser.XMLParser;
@@ -303,10 +304,12 @@ public class NetworkManager {
             e.printStackTrace();
         }
     }
+
     // 좋아요
+    public static final String LIKE_ARTICLE = SERVER + "/like/%s/push/%s";
     public void likeArticle(Context context, String user_id, String board_id, final OnResultListener<Article> listener){
         RequestParams params = new RequestParams();
-        String url = String.format(SHOW_ARTICLE, user_id, board_id);
+        String url = String.format(LIKE_ARTICLE, user_id, board_id);
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
         client.get(context, url, headers, params, new TextHttpResponseHandler() {
@@ -317,6 +320,7 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Article article= gson.fromJson(responseString, Article.class);
+                Log.i("ddd", new Gson().toJson(article));
                 //ArticleLab.get(MyApplication.getContext(), gson.fromJson(responseString, ArticleLab.class));
                 listener.onSuccess(article);
             }

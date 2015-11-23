@@ -35,7 +35,7 @@ public class BoardPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return ArticleFragment.newInstance(mItems.get(position).getArticle());
+        return ArticleFragment.newInstance(mItems.get(position));
     }
     @Override
     public int getCount() {

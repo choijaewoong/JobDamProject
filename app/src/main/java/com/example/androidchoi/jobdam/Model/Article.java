@@ -4,14 +4,12 @@ package com.example.androidchoi.jobdam.Model;
 import com.example.androidchoi.jobdam.Calendar.CurrentTime;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * Created by Choi on 2015-11-18.
  */
 public class Article implements Serializable {
 
-    private String board_id; // 게시글 id
     private String user_id; // 게시글 작성한 유저 id
     private String timestamp; //  게시글 작성 시간
     private int emotionIndex; // 감정 인덱스
@@ -21,12 +19,11 @@ public class Article implements Serializable {
     private String writeDate;
 
     public Article() {
-        board_id = UUID.randomUUID().toString();
         CurrentTime currentTime = new CurrentTime();
         writeDate = currentTime.getYear() + ". " + currentTime.getMonth() + ". " + currentTime.getDayOfMonth();
     }
 
-    public String getId(){return board_id;}
+    public String getUser(){return user_id;}
     public String getContent() { return content; }
     public int getLikeCount() { return like_cnt; }
     public boolean getLikeBool(){ return likebool;}
@@ -40,7 +37,7 @@ public class Article implements Serializable {
     }
 //    public void setContent(String content) { this.content = content; }
     public void setArticle(Article article){
-        setArticle(article.getId(), article.emotionIndex,
+        setArticle(article.getUser(), article.emotionIndex,
                 article.getLikeBool(), article.getContent(), article.getLikeCount());
     }
     public void setArticle(String user_id,
