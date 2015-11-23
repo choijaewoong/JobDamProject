@@ -1,11 +1,11 @@
 package com.example.androidchoi.jobdam;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,21 +41,20 @@ public class BoardFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Toast.makeText(getActivity(), "jjj", Toast.LENGTH_SHORT).show();
+        if(resultCode != Activity.RESULT_OK){ return; }
         NetworkManager.getInstance().showArticle(getActivity(),
                 User.USER_NAME, new NetworkManager.OnResultListener<ArticleLab>() {
                     @Override
                     public void onSuccess(ArticleLab result) {
                         //서버에서 게시글 리스트 가져와 저장
                         mAdapter.setItems(result.getArticleList());
+                        pager.setCurrentItem(0,true);
                     }
                     @Override
                     public void onFail(int code) {
                         Toast.makeText(getActivity(), "error : " + code, Toast.LENGTH_SHORT).show();
                     }
                 });
-        Log.i("ddd", "어댑터" + mAdapter.getCount());
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -71,8 +70,6 @@ public class BoardFragment extends Fragment {
                     public void onSuccess(ArticleLab result) {
                         //서버에서 게시글 리스트 가져와 저장
                         mAdapter.setItems(result.getArticleList());
-                        Toast.makeText(getActivity(), "mArtistList" + mArticlesList.size() + "", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getActivity(), "result.getArticleList" + result.getArticleList().size()+"", Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onFail(int code) {

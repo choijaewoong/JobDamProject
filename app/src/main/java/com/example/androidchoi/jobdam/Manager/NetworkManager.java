@@ -278,7 +278,6 @@ public class NetworkManager {
                 }
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                    Toast.makeText(MyApplication.getContext(), "게시글 추가!", Toast.LENGTH_SHORT).show();
                     listener.onSuccess(responseString);
                 }
             });
@@ -297,7 +296,6 @@ public class NetworkManager {
                 }
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                    Toast.makeText(MyApplication.getContext(), "게시글 수정!", Toast.LENGTH_SHORT).show();
                     listener.onSuccess(responseString);
                 }
             });

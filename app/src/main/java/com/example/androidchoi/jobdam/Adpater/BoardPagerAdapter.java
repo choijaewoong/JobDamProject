@@ -28,6 +28,12 @@ public class BoardPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    public int getItemPosition(Object object) {
+           // after this, onCreateView() of Fragment is ca lled.
+            return POSITION_NONE;   // notifyDataSetChanged
+    }
+
+    @Override
     public Fragment getItem(int position) {
         return ArticleFragment.newInstance(mItems.get(position).getArticle());
     }

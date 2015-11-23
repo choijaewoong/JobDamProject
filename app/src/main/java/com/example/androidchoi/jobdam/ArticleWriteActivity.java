@@ -1,11 +1,13 @@
 package com.example.androidchoi.jobdam;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -104,15 +106,17 @@ public class ArticleWriteActivity extends AppCompatActivity {
             NetworkManager.getInstance().addArticle(ArticleWriteActivity.this, jsonString, new NetworkManager.OnResultListener<String>() {
                 @Override
                 public void onSuccess(String result) {
-                    Toast.makeText(ArticleWriteActivity.this, jsonString, Toast.LENGTH_SHORT).show();
+                    Log.i("게시글 생성" , jsonString);
+                    setResult(Activity.RESULT_OK);
+                    Toast.makeText(ArticleWriteActivity.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
                 @Override
                 public void onFail(int code) {
                     Toast.makeText(ArticleWriteActivity.this, "실패.", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             });
-            Toast.makeText(ArticleWriteActivity.this, "저장되었습니다." ,Toast.LENGTH_SHORT).show();
-            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
