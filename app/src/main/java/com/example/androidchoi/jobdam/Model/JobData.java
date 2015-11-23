@@ -49,6 +49,10 @@ public class JobData extends Job implements Serializable {
     public String getSalary() {return salary;}
 
     public JobData() {
+        company = new JobCompanyData();
+        position = new JobContentData();
+        keyword = "";
+        salary = "";
         mLogoResourceId = android.R.mipmap.sym_def_app_icon;
     }
 

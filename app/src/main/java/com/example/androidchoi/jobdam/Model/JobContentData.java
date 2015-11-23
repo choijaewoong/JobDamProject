@@ -19,6 +19,14 @@ public class JobContentData implements Serializable {
     @SerializedName("required-education-level")
     private String educationLevel;
 
+    public JobContentData(){
+        title = "";
+        location = "";
+        jobType = "";
+        jobCategory = "";
+        experienceLevel = "";
+        educationLevel = "";
+    }
     public String getTitle() {
         return title;
     }

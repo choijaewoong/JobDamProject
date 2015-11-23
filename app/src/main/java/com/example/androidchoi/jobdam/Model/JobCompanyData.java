@@ -7,8 +7,8 @@ import java.io.Serializable;
  */
 public class JobCompanyData implements Serializable {
     private JobCompanyNameData name;
-
     public JobCompanyNameData getName() {
         return name;
     }
+    public JobCompanyData(){ name = new JobCompanyNameData();}
 }

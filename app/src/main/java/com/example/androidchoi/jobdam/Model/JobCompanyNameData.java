@@ -22,4 +22,9 @@ public class JobCompanyNameData implements Serializable {
         return value;
     }
 
+    public JobCompanyNameData(){
+        link = "";
+        value = "";
+    }
+
 }
