@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="job_ordering">
-        <item>최신순</item>
-        <item>마감순</item>
+    <string-array name="job_region">
+        <item>지역</item>
+        <item>서울</item>
+        <item>경기·인천</item>
+        <item>광주</item>
+        <item>대구</item>
+        <item>대전</item>
+        <item>부산·울산</item>
+        <item>강원</item>
+        <item>경남·경북</item>
+        <item>전남·전북</item>
+        <item>충남·충북</item>
+        <item>제주</item>
+        <item>해외</item>
     </string-array>
 
     <string-array name="job_kind">
@@ -25,6 +36,7 @@
     <string-array name="job_type">
         <item>채용형태</item>
         <item>정규직</item>
+        <item>계약직</item>
         <item>인턴직</item>
         <item>시간제·일용직</item>
         <item>프리랜서</item>

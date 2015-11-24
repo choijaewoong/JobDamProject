@@ -89,20 +89,23 @@ public class NetworkManager {
     private static final String API_ADDRESS = "http://api.saramin.co.kr/job-search";
 //    ?stock=kospi+kosdaq&sr=directhire&fields=posting-date+expiration-date+keyword-code+count&count=10
 
-    private static final String STOCK = "kospi+kosdaq";
-    private static final String SR = "directhire";
-    private static final String FIELDS = "posting-date+expiration-date+keyword-code+count";
+    private static final String JOB_ORDER = "sort";
+    private static final String JOB_REGION = "loc_mcd";
+    private static final String JOB_KIND = "job_category";
+    private static final String JOB_TYPE = "job_type";
     private static final String START = "start";
     private static final String COUNT = "count";
+    private static final String KEYWORD = "keywords";
 
     // 사람인 api 불러오는 method
-    public void getJobAPI(Context context, String keyword, int start, int count, final OnResultListener<JobList> listener){
+    public void getJobAPI(Context context, String keyword, String job_ordering, String job_region, String job_kind, String job_type,
+                          int start, int count, final OnResultListener<JobList> listener){
         final RequestParams params = new RequestParams();
-        params.put("loc_cd",101010);
-        params.put("stock", STOCK);
-        params.put("sr",SR);
-        params.put("fields", FIELDS);
         params.put(KEYWORD, keyword);
+        params.put(JOB_ORDER, job_ordering);
+        params.put(JOB_REGION, job_region);
+        params.put(JOB_KIND, job_kind);
+        params.put(JOB_TYPE, job_type);
         params.put(START, start);
         params.put(COUNT, count);
         client.get(context, API_ADDRESS, params, new AsyncHttpResponseHandler() {
@@ -119,27 +122,27 @@ public class NetworkManager {
             }
         });
     }
-    // 사람인 검색 키워드 method
-    private static final String KEYWORD = "keywords";
-    public void getKewordJob(Context context, String keyword, int start, int count, final OnResultListener<JobList> listener){
-        final RequestParams params = new RequestParams();
-        params.put(KEYWORD, keyword);
-        params.put(START, start);
-        params.put(COUNT, count);
-        client.get(context, API_ADDRESS, params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                ByteArrayInputStream bais = new ByteArrayInputStream(responseBody);
-                JobList jobList = parser.fromXml(bais, "jobs", JobList.class);
-                listener.onSuccess(jobList);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                listener.onFail(statusCode);
-            }
-        });
-    }
+//    // 사람인 검색 키워드 method
+//    private static final String KEYWORD = "keywords";
+//    public void getKewordJob(Context context, String keyword, int start, int count, final OnResultListener<JobList> listener){
+//        final RequestParams params = new RequestParams();
+//        params.put(KEYWORD, keyword);
+//        params.put(START, start);
+//        params.put(COUNT, count);
+//        client.get(context, API_ADDRESS, params, new AsyncHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+//                ByteArrayInputStream bais = new ByteArrayInputStream(responseBody);
+//                JobList jobList = parser.fromXml(bais, "jobs", JobList.class);
+//                listener.onSuccess(jobList);
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+//                listener.onFail(statusCode);
+//            }
+//        });
+//    }
 
     private static final String SERVER = "http://52.69.235.46:3000";
 

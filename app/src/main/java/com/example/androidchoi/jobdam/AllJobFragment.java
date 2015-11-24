@@ -38,6 +38,7 @@ public class AllJobFragment extends Fragment {
 
     private final static int SHOW_JOB_MAX = 110;
     private String job_ordering;
+    private String job_region;
     private String job_kind;
     private String job_type;
     private String job_keyword;
@@ -146,38 +147,159 @@ public class AllJobFragment extends Fragment {
         });
         mTextView = (TextView) view.findViewById(R.id.text_item_count);
         initArrayAdapter();
-        mSpinnerJobOrder = (Spinner)view.findViewById(R.id.spinner_job_ordering);
+
+        //최신순, 마감순
+        mSpinnerJobOrder = (Spinner)view.findViewById(R.id.spinner_job_region);
         mSpinnerJobOrder.setAdapter(mArrayAdapters[0]);
         mSpinnerJobOrder.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), mArrayAdapters[0].getItem(position).toString(), Toast.LENGTH_SHORT).show();
-            }
+                switch (position){
+                    case 1: // 서울
+                        job_region = "101000";
+                        break;
+                    case 2: // 경기,인천
+                        job_region = "102000+108000";
+                        break;
+                    case 3: // 광주
+                        job_region = "103000";
+                        break;
+                    case 4: // 대구
+                        job_region = "104000";
+                        break;
+                    case 5: // 대전
+                        job_region = "101000+118000";
+                        break;
+                    case 6: // 부산, 울산
+                        job_region = "106000 + 107000";
+                        break;
+                    case 7: // 강원
+                        job_region = "109000";
+                        break;
+                    case 8: // 경남,경북
+                        job_region = "110000+111000";
+                        break;
+                    case 9: // 전남, 전북
+                        job_region = "112000+113000";
+                        break;
+                    case 10: // 충남, 충북
+                        job_region = "114000+115000";
+                        break;
+                    case 11: // 제주
+                        job_region = "116000";
+                        break;
+                    case 12: // 해외
+                        job_region = "210000+220000+230000+240000+" +
+                                "250000+260000+270000+280000";
 
+                        break;
+                    case 0: // 전체
+                    default:
+                        job_region = "117000";
+                        break;
+                }
+                searchJob();
+            }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
+        // 직무별
         mSpinnerJobKind = (Spinner)view.findViewById(R.id.spinner_job_kind);
         mSpinnerJobKind.setAdapter(mArrayAdapters[1]);
         mSpinnerJobKind.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), mArrayAdapters[1].getItem(position).toString(), Toast.LENGTH_SHORT).show();
+                switch (position){
+                    case 1: // 경영, 사무
+                        job_kind = "1";
+                        break;
+                    case 2: // 영업, 고객상담
+                        job_kind = "2";
+                        break;
+                    case 3: // 생산, 제조
+                        job_kind = "3";
+                        break;
+                    case 4: // IT, 인터넷
+                        job_kind = "4";
+                        break;
+                    case 5: // 전문직
+                        job_kind = "5";
+                        break;
+                    case 6: // 교육
+                        job_kind = "6";
+                        break;
+                    case 7: // 미디어
+                        job_kind = "7";
+                        break;
+                    case 8: // 건설
+                        job_kind = "9";
+                        break;
+                    case 9: // 유통,무역
+                        job_kind = "10";
+                        break;
+                    case 10: // 서비스
+                        job_kind = "11";
+                        break;
+                    case 11: // 디자인
+                        job_kind = "12";
+                        break;
+                    case 12: // 의료
+                        job_kind = "13";
+                        break;
+                    case 13: // 기타
+                        job_kind = "8";
+                        break;
+                    case 0:
+                    default:
+                        job_kind = null;
+                        break;
+                }
+                searchJob();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
+        // 채용 형태
         mSpinnerJobType = (Spinner)view.findViewById(R.id.spinner_job_type);
         mSpinnerJobType.setAdapter(mArrayAdapters[2]);
         mSpinnerJobType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), mArrayAdapters[2].getItem(position).toString(), Toast.LENGTH_SHORT).show();
+                switch (position){
+                    case 1: //정규직
+                        job_type = "1";
+                        break;
+                    case 2: //계약직
+                        job_type = "2+10";
+                        break;
+                    case 3: //인턴직
+                        job_type = "4+11";
+                        break;
+                    case 4: //시간제,일용직
+                        job_type = "5";
+                        break;
+                    case 5: //프리랜서
+                        job_type = "9";
+                        break;
+                    case 6: //전임
+                        job_type = "15";
+                        break;
+                    case 7: //해외
+                        job_type = "6+7";
+                        break;
+                    case 8: //기타
+                        job_type = "3+8+12+13+14";
+                        break;
+                    case 0: // 최신순
+                    default:
+                        job_type = null;
+                        break;
+                }
+                searchJob();
             }
 
             @Override
@@ -192,7 +314,8 @@ public class AllJobFragment extends Fragment {
             final int startIndex = mAdapter.getStartIndex();
             if (startIndex != -1) {
                 isUpdate = true;
-                NetworkManager.getInstance().getJobAPI(getActivity(), job_keyword, page, 110, new NetworkManager.OnResultListener<JobList>() {
+                NetworkManager.getInstance().getJobAPI(getActivity(), job_keyword, job_ordering, job_region, job_kind, job_type,
+                        page, SHOW_JOB_MAX, new NetworkManager.OnResultListener<JobList>() {
                     @Override
                     public void onSuccess(JobList result) {
 //                        Toast.makeText(getActivity(), startIndex+"/" + result.getJobList().size() + "/ " + mAdapter.getCount(), Toast.LENGTH_SHORT).show();
@@ -214,8 +337,8 @@ public class AllJobFragment extends Fragment {
 
     public void searchJob(){
         page = 0;
-        NetworkManager.getInstance().getJobAPI(getActivity(), job_keyword, page, SHOW_JOB_MAX,
-                new NetworkManager.OnResultListener<JobList>() {
+        NetworkManager.getInstance().getJobAPI(getActivity(), job_keyword, job_ordering, job_region, job_kind, job_type,
+                page, SHOW_JOB_MAX, new NetworkManager.OnResultListener<JobList>() {
                     @Override
                     public void onSuccess(JobList result) {
                         page++;
@@ -234,12 +357,12 @@ public class AllJobFragment extends Fragment {
     private void initArrayAdapter() {
         mArrayAdapters = new ArrayAdapter[3];
         String[][] StringArray = new String[3][];
-        StringArray[0] = getResources().getStringArray(R.array.job_ordering);
+        StringArray[0] = getResources().getStringArray(R.array.job_region);
         StringArray[1] = getResources().getStringArray(R.array.job_kind);
         StringArray[2] = getResources().getStringArray(R.array.job_type);
         for(int i=0; i<mArrayAdapters.length; i++){
             mArrayAdapters[i] = new ArrayAdapter<String>(getActivity(),R.layout.spinner_header_item);
-            mArrayAdapters[i].setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+            mArrayAdapters[i].setDropDownViewResource(R.layout.spinner_dropdown_item);
             mArrayAdapters[i].addAll(StringArray[i]);
         }
     }
