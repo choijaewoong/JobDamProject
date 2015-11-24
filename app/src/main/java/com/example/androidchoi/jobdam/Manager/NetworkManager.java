@@ -2,7 +2,6 @@ package com.example.androidchoi.jobdam.Manager;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.begentgroup.xmlparser.XMLParser;
 import com.example.androidchoi.jobdam.Model.ArticleLab;
@@ -161,7 +160,6 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 MyJobLab myJobLab = gson.fromJson(responseString, MyJobLab.class);
-                Toast.makeText(MyApplication.getContext(),"Network Success" + myJobLab.getJobList().size(), Toast.LENGTH_SHORT).show();
                 listener.onSuccess(myJobLab);
             }
         });
@@ -220,7 +218,6 @@ public class NetworkManager {
                 }
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                    Toast.makeText(MyApplication.getContext(), "메모 추가!", Toast.LENGTH_SHORT).show();
                     listener.onSuccess(responseString);
                 }
             });
@@ -240,7 +237,6 @@ public class NetworkManager {
 
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                    Toast.makeText(MyApplication.getContext(), "메모 수정!", Toast.LENGTH_SHORT).show();
                     listener.onSuccess(responseString);
                 }
             });
@@ -315,7 +311,6 @@ public class NetworkManager {
     public void likeArticle(Context context, String user_id, String board_id, final OnResultListener<Articles> listener){
         RequestParams params = new RequestParams();
         String url = String.format(LIKE_ARTICLE, user_id, board_id);
-        Log.i("url", url);
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
         client.get(context, url, headers, params, new TextHttpResponseHandler() {
@@ -326,7 +321,6 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Articles articles= gson.fromJson(responseString, Articles.class);
-                Log.i("ddd", new Gson().toJson(articles));
                 //ArticleLab.get(MyApplication.getContext(), gson.fromJson(responseString, ArticleLab.class));
                 listener.onSuccess(articles);
             }

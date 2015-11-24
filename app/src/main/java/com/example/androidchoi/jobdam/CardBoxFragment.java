@@ -74,7 +74,6 @@ public class CardBoxFragment extends Fragment {
                     }
                 });
         if(requestCode == REQUEST_MODIFY){
-//            Toast.makeText(getActivity(), CardLab.get(getActivity()).getCardList().get(0).getTitle(), Toast.LENGTH_SHORT).show();
         }else if(requestCode == REQUEST_NEW){
             mListView.smoothScrollToPositionFromTop(0, 0, 500);
         }
@@ -86,7 +85,6 @@ public class CardBoxFragment extends Fragment {
         TextView subTitle = (TextView) getActivity().findViewById(R.id.text_subtitle);
         subTitle.setText(R.string.card_box);
 
-        Toast.makeText(getActivity(),"카드를 불러옵니다!", Toast.LENGTH_SHORT).show();
         NetworkManager.getInstance().showMyMemo(getActivity(),
                 User.USER_NAME, new NetworkManager.OnResultListener<MyCardLab>() {
             @Override

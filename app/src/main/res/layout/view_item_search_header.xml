@@ -40,8 +40,9 @@
         android:background="@android:color/transparent"
         android:inputType="text"
         android:maxLength="17"
-        android:maxLines="1"
+        android:singleLine="true"
         android:textSize="@dimen/font_size_default"
+        android:imeOptions="actionDone"
         android:textColorHint="@color/colorLightGray"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>

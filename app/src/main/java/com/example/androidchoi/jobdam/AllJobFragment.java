@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -38,7 +40,7 @@ import com.example.androidchoi.jobdam.Model.JobList;
  */
 public class AllJobFragment extends Fragment {
 
-    private final static int SHOW_JOB_MAX = 110;
+    private final static int SHOW_JOB_MAX = 30;
     private String job_ordering;
     private String job_region;
     private String job_kind;
@@ -134,6 +136,13 @@ public class AllJobFragment extends Fragment {
         mListView.addHeaderView(searchHeaderView);
         mListView.addHeaderView(countHeaderView, null, false);
         mDeleteImage = (ImageView) searchHeaderView.findViewById(R.id.image_search_delete);
+        mDeleteImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSearchEdit.setText("");
+                searchJob();
+            }
+        });
         mSearchEdit = (EditText) searchHeaderView.findViewById(R.id.editText_search_bar);
         mSearchEdit.setHint("기업을 검색해주세요");
         mSearchEdit.setOnEditorActionListener(new EditText.OnEditorActionListener() {
@@ -141,14 +150,31 @@ public class AllJobFragment extends Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     //do here your stuff
-                    Toast.makeText(getActivity(), v.getText(), Toast.LENGTH_SHORT).show();
                     job_keyword = v.getText().toString();
+                    InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                     searchJob();
                     return true;
                 }
                 return false;
             }
         });
+        mSearchEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            @Override
+            public void afterTextChanged(Editable s) {
+                String string = s.toString();
+                if (!string.equals("")) {
+                    mDeleteImage.setVisibility(View.VISIBLE);
+                } else {
+                    mDeleteImage.setVisibility(View.GONE);
+                }
+            }
+        });
+
         mAdapter = new JobItemAdapter();
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -333,7 +359,6 @@ public class AllJobFragment extends Fragment {
                         page, SHOW_JOB_MAX, new NetworkManager.OnResultListener<JobList>() {
                     @Override
                     public void onSuccess(JobList result) {
-//                        Toast.makeText(getActivity(), startIndex+"/" + result.getJobList().size() + "/ " + mAdapter.getCount(), Toast.LENGTH_SHORT).show();
                         page++;
                         for (Job item : result.getJobList()) {
                             mAdapter.add(item);
