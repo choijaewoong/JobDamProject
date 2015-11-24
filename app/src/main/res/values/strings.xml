@@ -51,6 +51,9 @@
 
     <!-- JobDam Talk -->
     <string name="save_article">저장</string>
+    <!-- Job List Header -->
+    <string name="order_latest">최신순</string>
+    <string name="order_dead_line">마감순</string>
 
     <!-- Check Message-->
     <string name="check_scrap">스크랩 되었습니다.</string>

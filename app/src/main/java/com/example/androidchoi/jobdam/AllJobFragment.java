@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -23,6 +24,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.example.androidchoi.jobdam.Adpater.JobItemAdapter;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
@@ -111,7 +113,20 @@ public class AllJobFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_all_job, container, false);
         View searchHeaderView = inflater.inflate(R.layout.view_item_search_header, null);
-        View countHeaderView = inflater.inflate(R.layout.view_item_count_header, null);
+        View countHeaderView = inflater.inflate(R.layout.view_all_job_count_header, null);
+        ToggleButton toggleButton = (ToggleButton)countHeaderView.findViewById(R.id.btn_order_toggle);
+        toggleButton.setVisibility(View.VISIBLE);
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    job_ordering = "da";
+                }else {
+                    job_ordering = "pd";
+                }
+                searchJob();
+            }
+        });
 
         View shadowToolbar = getActivity().findViewById(R.id.toolbar_shadow);
         shadowToolbar.setVisibility(View.GONE);

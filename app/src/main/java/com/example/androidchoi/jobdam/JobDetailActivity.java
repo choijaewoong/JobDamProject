@@ -49,11 +49,6 @@ public class JobDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mData = (Job) intent.getSerializableExtra(Job.JOBITEM);
-//        if(mData == null){
-//            int id = intent.getIntExtra(Job.JOBID, 0);
-//            mData = MyJobLab.get(getApplicationContext()).getJobData(id);
-//        }
-//        Toast.makeText(JobDetailActivity.this, mData.getId()+" " ,Toast.LENGTH_SHORT).show();
 
         mExpandableListView = (ExpandableListView) findViewById(R.id.listview_job_detail_expandable);
         mExpandableAdapter = new JobDetailAdapter();
@@ -102,8 +97,8 @@ public class JobDetailActivity extends AppCompatActivity {
         mCorpName.setText(mData.getCompanyName());
         mJobTitle = (TextView) titleHeaderView.findViewById(R.id.text_detail_job_title);
         mJobTitle.setText(mData.getJobTitle());
-        mExpandableListView.addHeaderView(corpHeaderView);
-        mExpandableListView.addHeaderView(titleHeaderView);
+        mExpandableListView.addHeaderView(corpHeaderView, null, false);
+        mExpandableListView.addHeaderView(titleHeaderView, null, false);
 
         mExpandableListView.setAdapter(mExpandableAdapter);
         mExpandableListView.setGroupIndicator(null);

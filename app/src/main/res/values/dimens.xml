@@ -59,7 +59,6 @@
     <dimen name="toolbar_image_width">108dp</dimen>
     <dimen name="toolbar_image_height">24dp</dimen>
     <!-- view header -->
-    <dimen name="top_margin">30dp</dimen>
     <dimen name="title_bottom_divider">12dp</dimen>
 
     <!-- image size-->

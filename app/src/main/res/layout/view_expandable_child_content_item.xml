@@ -17,12 +17,4 @@
         android:textColor="@android:color/black"
         android:layout_marginBottom="@dimen/default_dimen"/>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_width"
-        android:background="@color/colorDivider"
-        android:layout_below="@+id/text_expandable_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        />
 </RelativeLayout>
