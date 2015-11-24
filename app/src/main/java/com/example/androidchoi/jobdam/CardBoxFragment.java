@@ -122,7 +122,8 @@ public class CardBoxFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        View shadowToolbar = getActivity().findViewById(R.id.toolbar_shadow);
+        shadowToolbar.setVisibility(View.VISIBLE);
         View view = inflater.inflate(R.layout.fragment_card_box, container, false);
         View searchHeaderView = inflater.inflate(R.layout.view_item_search_header, null);
         View countHeaderView = inflater.inflate(R.layout.view_item_count_header, null);

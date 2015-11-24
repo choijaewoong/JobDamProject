@@ -15,10 +15,12 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +30,6 @@ import com.example.androidchoi.jobdam.Model.Job;
 import com.example.androidchoi.jobdam.Model.JobData;
 import com.example.androidchoi.jobdam.Model.JobList;
 
-import java.util.List;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,7 +37,7 @@ import java.util.List;
 public class AllJobFragment extends Fragment {
 
     private final static int SHOW_JOB_MAX = 110;
-    private String job_sort;
+    private String job_ordering;
     private String job_kind;
     private String job_type;
     private String job_keyword;
@@ -46,9 +46,12 @@ public class AllJobFragment extends Fragment {
     ListView mListView;
     TextView mTextView;
     JobItemAdapter mAdapter;
-    private List<JobData> mJobDataList;
     EditText mSearchEdit;
     ImageView mDeleteImage;
+    Spinner mSpinnerJobOrder;
+    Spinner mSpinnerJobKind;
+    Spinner mSpinnerJobType;
+    ArrayAdapter<String>[] mArrayAdapters;
     boolean isUpdate = false;
     boolean isLastItem = false;
 
@@ -109,6 +112,8 @@ public class AllJobFragment extends Fragment {
         View searchHeaderView = inflater.inflate(R.layout.view_item_search_header, null);
         View countHeaderView = inflater.inflate(R.layout.view_item_count_header, null);
 
+        View shadowToolbar = getActivity().findViewById(R.id.toolbar_shadow);
+        shadowToolbar.setVisibility(View.GONE);
         mListView = (ListView) view.findViewById(R.id.listview_all_job);
         mListView.addHeaderView(searchHeaderView);
         mListView.addHeaderView(countHeaderView, null, false);
@@ -120,7 +125,7 @@ public class AllJobFragment extends Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     //do here your stuff
-                    Toast.makeText(getActivity(), v.getText() , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), v.getText(), Toast.LENGTH_SHORT).show();
                     job_keyword = v.getText().toString();
                     searchJob();
                     return true;
@@ -140,6 +145,46 @@ public class AllJobFragment extends Fragment {
             }
         });
         mTextView = (TextView) view.findViewById(R.id.text_item_count);
+        initArrayAdapter();
+        mSpinnerJobOrder = (Spinner)view.findViewById(R.id.spinner_job_ordering);
+        mSpinnerJobOrder.setAdapter(mArrayAdapters[0]);
+        mSpinnerJobOrder.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(), mArrayAdapters[0].getItem(position).toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        mSpinnerJobKind = (Spinner)view.findViewById(R.id.spinner_job_kind);
+        mSpinnerJobKind.setAdapter(mArrayAdapters[1]);
+        mSpinnerJobKind.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(), mArrayAdapters[1].getItem(position).toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        mSpinnerJobType = (Spinner)view.findViewById(R.id.spinner_job_type);
+        mSpinnerJobType.setAdapter(mArrayAdapters[2]);
+        mSpinnerJobType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(), mArrayAdapters[2].getItem(position).toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         return view;
     }
     private void getMoreItem() {
@@ -185,5 +230,17 @@ public class AllJobFragment extends Fragment {
                         Toast.makeText(getActivity(), "error : " + code, Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+    private void initArrayAdapter() {
+        mArrayAdapters = new ArrayAdapter[3];
+        String[][] StringArray = new String[3][];
+        StringArray[0] = getResources().getStringArray(R.array.job_ordering);
+        StringArray[1] = getResources().getStringArray(R.array.job_kind);
+        StringArray[2] = getResources().getStringArray(R.array.job_type);
+        for(int i=0; i<mArrayAdapters.length; i++){
+            mArrayAdapters[i] = new ArrayAdapter<String>(getActivity(),R.layout.spinner_header_item);
+            mArrayAdapters[i].setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+            mArrayAdapters[i].addAll(StringArray[i]);
+        }
     }
 }

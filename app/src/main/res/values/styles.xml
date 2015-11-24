@@ -20,4 +20,11 @@
         <item name="android:windowEnterAnimation">@anim/dialog_slide_up_dialog</item>
         <item name="android:windowExitAnimation">@anim/dialog_slide_out_down</item>
     </style>
+    <style name="PopupMenuListView" parent="@style/Widget.AppCompat.ListView.DropDown">
+        <item name="android:divider">@color/colorDivider</item>
+        <item name="android:dividerHeight">@dimen/divider_width</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:shadowColor">@android:color/transparent</item>
+    </style>
 </resources>
