@@ -47,7 +47,6 @@ public class NetworkManager {
         }
         return instance;
     }
-
     AsyncHttpClient client;
     XMLParser parser;
     Gson gson;
@@ -97,11 +96,13 @@ public class NetworkManager {
     private static final String COUNT = "count";
 
     // 사람인 api 불러오는 method
-    public void getJobAPI(Context context, int start, int count, final OnResultListener<JobList> listener){
+    public void getJobAPI(Context context, String keyword, int start, int count, final OnResultListener<JobList> listener){
         final RequestParams params = new RequestParams();
+        params.put("loc_cd",101010);
         params.put("stock", STOCK);
         params.put("sr",SR);
         params.put("fields", FIELDS);
+        params.put(KEYWORD, keyword);
         params.put(START, start);
         params.put(COUNT, count);
         client.get(context, API_ADDRESS, params, new AsyncHttpResponseHandler() {
@@ -109,6 +110,7 @@ public class NetworkManager {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 ByteArrayInputStream bais = new ByteArrayInputStream(responseBody);
                 JobList jobList = parser.fromXml(bais, "jobs", JobList.class);
+                Log.i("개수 :" , jobList.getTotal() + " / " );
                 listener.onSuccess(jobList);
             }
             @Override

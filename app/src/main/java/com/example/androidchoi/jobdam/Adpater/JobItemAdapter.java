@@ -15,6 +15,8 @@ import java.util.ArrayList;
 public class JobItemAdapter extends BaseAdapter {
 
     ArrayList<Job> mItems = new ArrayList<Job>();
+    int totalCount;
+
     public void setItems(ArrayList items){
         mItems.clear();
         mItems.addAll(items);
@@ -24,11 +26,18 @@ public class JobItemAdapter extends BaseAdapter {
         mItems.add(item);
         notifyDataSetChanged();
     }
-
+    public void setTotalCount(int totalCount) { this.totalCount = totalCount; }
+    public int getStartIndex() {
+        if (mItems.size() < totalCount) {
+            return mItems.size() + 1;
+        }
+        return -1;
+    }
     @Override
     public int getCount() {
         return mItems.size();
     }
+
 
     @Override
     public Object getItem(int position) {
