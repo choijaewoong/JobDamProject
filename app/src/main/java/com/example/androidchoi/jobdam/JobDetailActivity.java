@@ -27,6 +27,7 @@ import com.example.androidchoi.jobdam.Model.User;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class JobDetailActivity extends AppCompatActivity {
@@ -130,6 +131,12 @@ public class JobDetailActivity extends AppCompatActivity {
 
     public String getPeriod() {
         Date end = new Date(mData.getEnd() * 1000L);
+        Calendar endDay = Calendar.getInstance();
+        endDay.setTime(end);
+        long gap = (endDay.getTimeInMillis() - Calendar.getInstance().getTimeInMillis())/JobItemView.ONE_DAY_TIME_STAMP;
+        if((int)gap > 200){
+            return "상시 모집";
+        }
         SimpleDateFormat dateFormat = new SimpleDateFormat("~ yyyy년 MM월 dd일 E요일 HH시 mm분");
         return dateFormat.format(end);
     }
