@@ -170,7 +170,7 @@ public class AllJobFragment extends Fragment {
                 if (!string.equals("")) {
                     mDeleteImage.setVisibility(View.VISIBLE);
                 } else {
-                    mDeleteImage.setVisibility(View.GONE);
+                    mDeleteImage.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -232,7 +232,6 @@ public class AllJobFragment extends Fragment {
                     case 12: // 해외
                         job_region = "210000+220000+230000+240000+" +
                                 "250000+260000+270000+280000";
-
                         break;
                     case 0: // 전체
                     default:
@@ -385,9 +384,7 @@ public class AllJobFragment extends Fragment {
                         mAdapter.setItems(result.getJobList());
                         mAdapter.setTotalCount(result.getTotal());
                         mTextView.setText("공채정보 총 " + result.getTotal() + "건");
-                        job_keyword = null;
                     }
-
                     @Override
                     public void onFail(int code) {
                         Toast.makeText(getActivity(), "error : " + code, Toast.LENGTH_SHORT).show();

@@ -129,6 +129,12 @@ public class CardBoxFragment extends Fragment {
         mListView.addHeaderView(searchHeaderView);
         mListView.addHeaderView(countHeaderView, null, false);
         mDeleteImage = (ImageView)searchHeaderView.findViewById(R.id.image_search_delete);
+        mDeleteImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSearchEdit.setText("");
+            }
+        });
         mSearchEdit = (EditText)searchHeaderView.findViewById(R.id.editText_search_bar);
         mSearchEdit.setHint("태그를 검색해주세요");
         mSearchEdit.addTextChangedListener(new TextWatcher() {
@@ -155,7 +161,7 @@ public class CardBoxFragment extends Fragment {
                 if (!string.equals("")) {
                     mDeleteImage.setVisibility(View.VISIBLE);
                 } else {
-                    mDeleteImage.setVisibility(View.GONE);
+                    mDeleteImage.setVisibility(View.INVISIBLE);
                 }
             }
         });

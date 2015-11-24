@@ -30,7 +30,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/default_small_dimen"
             android:scaleType="center"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:src="@drawable/button_search_delete"/>
 
         <EditText
