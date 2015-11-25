@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.R;
 
 
@@ -34,7 +33,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 final String email = "EMAIL";
                 final String password = "PASSWORD";
-                NetworkManager.getInstance().login(email, password);
+//                NetworkManager.getInstance().login(email, password);
 //                        new NetworkManager.OnResultListener<String>() {
 //                    @Override
 //                    public void onSuccess(String result) {

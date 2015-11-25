@@ -25,6 +25,9 @@ public class MyJobFragment extends Fragment {
     ViewPager mViewPager;
     TabLayout mTabLayout;
     MyFragmentPagerAdapter mAdapter;
+//    private ArrayList<MyJobs> mJobList;
+//    public ArrayList<MyJobs> getJobList() { return mJobList; }
+//    public void setJobList(ArrayList<MyJobs> jobList) { mJobList = jobList; }
 
     public MyJobFragment() {
         // Required empty public constructor

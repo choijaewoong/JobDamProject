@@ -4,33 +4,40 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.widget.Checkable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.R;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class CalendarItemView extends LinearLayout implements Checkable{
 
 	TextView numberView;
-	TextView contentView;
+	TextView startView;
+	TextView endView;
+	ImageView imageRedBall;
+	ImageView imageBlueBall;
 	CalendarItem mItem;
-	LinearLayout mLinearLayout;
+	RelativeLayout mRelativeLayout;
 	int backgroundColor;
 
-	public LinearLayout getLinearLayout() {
-		return mLinearLayout;
+	public RelativeLayout getRelativeLayout() {
+		return mRelativeLayout;
 	}
 
 	public CalendarItemView(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
 		LayoutInflater.from(context).inflate(R.layout.view_job_calendar_item, this);
-		mLinearLayout = (LinearLayout)findViewById(R.id.calendar_item_view);
+		mRelativeLayout = (RelativeLayout)findViewById(R.id.calendar_item_view);
 		numberView = (TextView)findViewById(R.id.job_calendar_num);
-		contentView = (TextView)findViewById(R.id.job_calendar_content);
+		startView = (TextView)findViewById(R.id.job_calendar_start_count);
+		endView = (TextView)findViewById(R.id.job_calendar_end_count);
+		imageRedBall = (ImageView)findViewById(R.id.image_red_ball);
+		imageBlueBall = (ImageView)findViewById(R.id.image_blue_ball);
 	}
 	
 	public void setData(CalendarItem item) {
@@ -56,14 +63,27 @@ public class CalendarItemView extends LinearLayout implements Checkable{
 			}
 		}
 		numberView.setTextColor(textColor);
-		mLinearLayout.setBackgroundColor(backgroundColor);
+		mRelativeLayout.setBackgroundColor(backgroundColor);
 		numberView.setText("" + item.dayOfMonth);
 
-		ArrayList items = item.items;
-		int size = items.size();
-		StringBuilder sb = new StringBuilder();
-		sb.append(size + "개");
-		contentView.setText(sb.toString());
+		int start = item.getStartItems().size();
+		int end = item.getEndItems().size();
+		if(start == 0){
+			imageBlueBall.setVisibility(GONE);
+			startView.setVisibility(GONE);
+		}else{
+			imageBlueBall.setVisibility(VISIBLE);
+			startView.setVisibility(VISIBLE);
+		}
+		if(end == 0){
+			endView.setVisibility(INVISIBLE);
+			imageRedBall.setVisibility(INVISIBLE);
+		}else{
+			endView.setVisibility(VISIBLE);
+			imageRedBall.setVisibility(VISIBLE);
+		}
+		startView.setText(start + "개");
+		endView.setText(end + "개");
 	}
 
 	private boolean checked = false;
@@ -71,9 +91,9 @@ public class CalendarItemView extends LinearLayout implements Checkable{
 	public void setChecked(boolean checked) {
 		this.checked = checked;
 		if(checked){
-			mLinearLayout.setBackgroundResource(R.color.colorPrimary);
+			mRelativeLayout.setBackgroundResource(R.color.colorPrimary);
 		}else{
-			mLinearLayout.setBackgroundColor(backgroundColor);
+			mRelativeLayout.setBackgroundColor(backgroundColor);
 		}
 	}
 

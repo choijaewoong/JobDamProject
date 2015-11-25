@@ -29,7 +29,8 @@
     <dimen name="tab_indicator_height">5dp</dimen>
     <!-- view count list header-->
     <dimen name="count_header_height">40dp</dimen>
-    <dimen name="count_header_left_padding">24dp</dimen>
+
+
     <!--listview-->
     <dimen name="listview_padding">16dp</dimen>
     <!--item-->
@@ -73,7 +74,7 @@
     <dimen name="write_article_button">60dp</dimen>
     <!-- Calendar -->
     <dimen name="calendar_header_height">24dp</dimen>
-    <dimen name="calendar_item_content_height">50dp</dimen>
+    <dimen name="calendar_item_content_height">24dp</dimen>
     <dimen name="calendar_title_height">48dp</dimen>
     <dimen name="calendar_grid_separator">0.5dp</dimen>
     <dimen name="calendar_shadow">12dp</dimen>

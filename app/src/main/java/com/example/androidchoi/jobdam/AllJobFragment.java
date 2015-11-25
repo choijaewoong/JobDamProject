@@ -382,7 +382,7 @@ public class AllJobFragment extends Fragment {
                     public void onSuccess(JobList result) {
                         page++;
                         mAdapter.setItems(result.getJobList());
-                        mAdapter.setTotalCount(result.getTotal());
+                        mAdapter.setTotalCount(Integer.parseInt(result.getTotal()));
                         mTextView.setText("공채정보 총 " + result.getTotal() + "건");
                     }
                     @Override

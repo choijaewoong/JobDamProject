@@ -54,37 +54,13 @@ public class MyJobListFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode != Activity.RESULT_OK){ return; }
         Toast.makeText(getActivity(),"MyJob이 갱신 되었습니다." ,Toast.LENGTH_SHORT).show();
-        NetworkManager.getInstance().showMyJob(getActivity(), User.USER_NAME, new NetworkManager.OnResultListener<MyJobLab>() {
-            @Override
-            public void onSuccess(MyJobLab result) {
-                mJobList = result.getJobList();
-                mAdapter.setItems(mJobList);
-                mCountTextView.setText("총 " + mAdapter.getCount() + "건");
-            }
-            @Override
-            public void onFail(int code) {
-                Toast.makeText(getActivity(), code + "", Toast.LENGTH_SHORT).show();
-            }
-        });
+        showMyJob();
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        NetworkManager.getInstance().showMyJob(getActivity(), User.USER_NAME, new NetworkManager.OnResultListener<MyJobLab>() {
-            @Override
-            public void onSuccess(MyJobLab result) {
-                mJobList = result.getJobList();
-                mAdapter.setItems(mJobList);
-                mCountTextView.setText("총 " + mAdapter.getCount() + "건");
-            }
-            @Override
-            public void onFail(int code) {
-                Toast.makeText(getActivity(), code + "", Toast.LENGTH_SHORT).show();
-            }
-        });
-
+//        showMyJob();
         FrameLayout touchInterceptor = (FrameLayout)getActivity().findViewById(R.id.touchInterceptor);
         touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -109,6 +85,7 @@ public class MyJobListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Toast.makeText(getActivity(),"1" , Toast.LENGTH_SHORT).show();
         View view = inflater.inflate(R.layout.fragment_my_job_list, container, false);
         View searchHeaderView = inflater.inflate(R.layout.view_item_search_header, null);
         View countHeaderView = inflater.inflate(R.layout.view_item_count_header, null);
@@ -164,6 +141,7 @@ public class MyJobListFragment extends Fragment {
             }
         });
         mCountTextView = (TextView)view.findViewById(R.id.text_item_count);
+        showMyJob();
         return view;
     }
 
@@ -171,5 +149,22 @@ public class MyJobListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         mAdapter.notifyDataSetChanged();
+    }
+
+    public void showMyJob(){
+        NetworkManager.getInstance().showMyJob(getActivity(), User.USER_NAME, new NetworkManager.OnResultListener<MyJobLab>() {
+            @Override
+            public void onSuccess(MyJobLab result) {
+//                ((MyJobFragment)getParentFragment()).setJobList(result.getJobList());
+//                mAdapter.setItems(((MyJobFragment) getParentFragment()).getJobList());
+                mJobList = result.getJobList();
+                mAdapter.setItems(mJobList);
+                mCountTextView.setText("총 " + mAdapter.getCount() + "건");
+            }
+            @Override
+            public void onFail(int code) {
+                Toast.makeText(getActivity(), code + "", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

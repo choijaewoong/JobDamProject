@@ -44,13 +44,12 @@ public class CalendarAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
-		CalendarItemView view = (CalendarItemView)convertView;
-		if (view == null) {
-			view = new CalendarItemView(mContext);
-		}
-		view.setData(mData.days.get(position));
-		return view;
+			// TODO Auto-generated method stub
+			CalendarItemView view = (CalendarItemView)convertView;
+			if (view == null) {
+				view = new CalendarItemView(mContext);
+			}
+			view.setData(mData.days.get(position));
+			return view;
 	}
-
 }

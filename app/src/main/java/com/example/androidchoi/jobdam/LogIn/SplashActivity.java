@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
 import com.example.androidchoi.jobdam.MainActivity;
-import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Manager.PropertyManager;
 import com.example.androidchoi.jobdam.R;
 
@@ -22,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
         String id = PropertyManager.getInstance().getId();
         if (!TextUtils.isEmpty(id)) {
             String password = PropertyManager.getInstance().getPassword();
-            NetworkManager.getInstance().login(id, password);
+//            NetworkManager.getInstance().login(id, password);
 
 //            new NetworkManager.OnResultListener<String>() {
 //                @Override

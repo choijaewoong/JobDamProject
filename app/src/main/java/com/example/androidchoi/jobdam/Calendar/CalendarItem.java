@@ -9,8 +9,12 @@ public class CalendarItem {
 	public int dayOfMonth;
 	public int dayOfWeek;
 	public boolean inMonth;
-	ArrayList items = new ArrayList();
-	public ArrayList getItems() {
-		return items;
+	private ArrayList startItems = new ArrayList();
+	private ArrayList endItems = new ArrayList();
+	public ArrayList getStartItems() {
+		return startItems;
+	}
+	public ArrayList getEndItems() {
+		return endItems;
 	}
 }

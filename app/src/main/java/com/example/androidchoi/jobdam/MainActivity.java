@@ -20,7 +20,7 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 public class MainActivity extends SlidingFragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String TAG_MY_JOB = "myJob";
+    private static final String TAG_MY_JOB = "text";
     private static final String TAG_CARD_BOX = "cardBox";
     private static final String TAG_ALL_JOB = "jobInfo";
     private static final String TAG_BOARD = "board";

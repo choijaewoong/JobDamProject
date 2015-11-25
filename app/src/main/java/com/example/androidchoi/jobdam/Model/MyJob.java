@@ -11,8 +11,8 @@ public class MyJob extends Job implements Serializable{
     private int job_id;
     private String url;
     private String posting_date;
-    private int opening_date = 0;
-    private int closing_date = 0;
+    private int opening_date;
+    private int closing_date;
     private String company;
     private String companySite;
     private String jobtitle;

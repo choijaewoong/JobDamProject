@@ -112,7 +112,7 @@ public class NetworkManager {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 ByteArrayInputStream bais = new ByteArrayInputStream(responseBody);
                 JobList jobList = parser.fromXml(bais, "jobs", JobList.class);
-                Log.i("개수 :" , jobList.getTotal() + " / " );
+                Log.i("개수 :" , jobList.getTotal() + " / " + jobList.getJobList().size());
                 listener.onSuccess(jobList);
             }
             @Override
@@ -330,7 +330,59 @@ public class NetworkManager {
         client.cancelRequests(context, true);
     }
 
-//    ThreadPoolExecutor mExecutor;
+//    public static final String LOG_IN = SERVER;
+//    public void login(Context context, String userid, String password, final OnResultListener<String> listener) {
+////        mHandler.postDelayed(new Runnable() {
+////            @Override
+////            public void run() {
+////                OnResultListener<String> listener = null;
+////                listener.onSuccess(null, "ok");
+////            }
+////        }, 1000);
+//        RequestParams params = new RequestParams();
+//        client.post(context, LOG_IN, params, new TextHttpResponseHandler() {
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+//
+//            }
+//
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+//
+//            }
+//        });
+//    }
+
+//    private static final String UPDATE_ARTICLE = SERVER + "/board/update";
+//    public void updateArticle(Context context, final String jsonString, final OnResultListener<String> listener){
+//        try {
+//            client.post(context, UPDATE_ARTICLE, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
+//                @Override
+//                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+//
+//                }
+//                @Override
+//                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+//                    listener.onSuccess(responseString);
+//                }
+//            });
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+
+    public void signup(String userid, String password) {
+//        mHandler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                OnResultListener<String> listener = null;
+//                listener.onSuccess(null, "ok");
+//            }
+//        }, 1000);
+    }
+
+    //    ThreadPoolExecutor mExecutor;
 //    public static final int CORE_POOL_SIZE = 5;
 //    public static final int MAXIMUN_POOL_SIZE = 64;
 //    public static final int KEEP_ALIVE_TIME = 5000;
@@ -425,23 +477,4 @@ public class NetworkManager {
 //
 //
 //
-    public void login(String userid, String password) {
-//        mHandler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                OnResultListener<String> listener = null;
-//                listener.onSuccess(null, "ok");
-//            }
-//        }, 1000);
-    }
-
-    public void signup(String userid, String password) {
-//        mHandler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                OnResultListener<String> listener = null;
-//                listener.onSuccess(null, "ok");
-//            }
-//        }, 1000);
-    }
 }

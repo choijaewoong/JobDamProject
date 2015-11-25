@@ -94,7 +94,8 @@ public class CalendarManager {
 			} else if (compare > 0) {
 				calendarIndex++;
 			} else {
-				item.items.add(cc);
+				item.getStartItems().add(cc);
+				item.getEndItems().add(cc);
 				dataIndex++;
 			}
 		}		
@@ -184,7 +185,11 @@ public class CalendarManager {
 			} else if (compare > 0) {
 				calendarIndex++;
 			} else {
-				item.items.add(cc);
+				if(((ItemData)mData.get(dataIndex)).isStart()) {
+					item.getStartItems().add(cc);
+				}else {
+					item.getEndItems().add(cc);
+				}
 				dataIndex++;
 			}
 		}

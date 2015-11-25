@@ -30,12 +30,12 @@ public class SampleCalenarActivity extends AppCompatActivity {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.fragment_my_job_calendar);
 
-			mItemdata.add(new ItemData(2015,9,10,"A"));
-        mItemdata.add(new ItemData(2015,9,11,"B"));
-        mItemdata.add(new ItemData(2015,9,12,"C"));
-        mItemdata.add(new ItemData(2015,9,15,"D"));
-        mItemdata.add(new ItemData(2015,9,21,"E"));
-        mItemdata.add(new ItemData(2015,9,21,"F"));
+//			mItemdata.add(new ItemData(2015,9,10,"A"));
+//        mItemdata.add(new ItemData(2015,9,11,"B"));
+//        mItemdata.add(new ItemData(2015,9,12,"C"));
+//        mItemdata.add(new ItemData(2015,9,15,"D"));
+//        mItemdata.add(new ItemData(2015,9,21,"E"));
+//        mItemdata.add(new ItemData(2015,9,21,"F"));
         
         titleView = (TextView)findViewById(R.id.title);
         ImageView imageCalendarButton = (ImageView)findViewById(R.id.image_next_month_button);
@@ -96,7 +96,7 @@ public class SampleCalenarActivity extends AppCompatActivity {
 									long id) {
 				// TODO Auto-generated method stub
 				CalendarItem item = (CalendarItem) mAdapter.getItem(position);
-				item.items.size();
+				item.getStartItems().size();
 			}
 		});
         

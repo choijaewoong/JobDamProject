@@ -6,8 +6,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/count_header_height"
-        android:paddingLeft="@dimen/count_header_left_padding"
-        android:paddingRight="@dimen/count_header_left_padding">
+        android:paddingLeft="@dimen/default_large_dimen"
+        android:paddingRight="@dimen/default_dimen">
         <TextView
             android:id="@+id/text_item_count"
             android:layout_width="wrap_content"
@@ -19,15 +19,15 @@
 
         <ToggleButton
             android:id="@+id/btn_order_toggle"
-            android:layout_width="38dp"
-            android:layout_height="16dp"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
             android:text="@string/order_latest"
             android:textOff="@string/order_latest"
             android:textOn="@string/order_dead_line"
             android:background="@drawable/selector_button_order"
             android:textColor="@drawable/selector_button_order_text"
             android:checked="false"
-            android:textSize="@dimen/font_size_min"
+            android:textSize="@dimen/font_size_small"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"/>
