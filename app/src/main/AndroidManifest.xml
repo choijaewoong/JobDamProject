@@ -21,11 +21,6 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustNothing">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".JobDetailActivity"
@@ -39,6 +34,11 @@
         <activity
             android:name=".LogIn.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".LogIn.LoginActivity"

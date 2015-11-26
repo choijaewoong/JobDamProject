@@ -4,11 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.androidchoi.jobdam.LogIn.SplashActivity">
+    tools:context="com.example.androidchoi.jobdam.LogIn.SplashActivity"
+    android:background="@drawable/image_splash_background">
+
+
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/splash"
-        android:scaleType="fitXY"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView20"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/image_splash_cloud"
+        android:scaleType="centerCrop"/>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView21"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/image_splash_logo"
+        android:layout_marginTop="50dp"/>
 </RelativeLayout>

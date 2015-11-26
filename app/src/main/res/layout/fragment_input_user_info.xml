@@ -32,29 +32,27 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="left|top"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:background="@color/colorPrimary">
 
-        <FrameLayout
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:id="@+id/imageView8"
+            android:src="@drawable/m_image_icon"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:padding="@dimen/default_small_dimen"/>
 
-            <ImageView
-                android:layout_width="@dimen/login_profile"
-                android:layout_height="@dimen/login_profile"
-                android:id="@+id/imageView8"
-                android:background="#939393"/>
-
-            <ImageView
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                android:id="@+id/imageView9"
-                android:layout_gravity="right|bottom"
-                android:background="#000000"/>
-        </FrameLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView9"
+            android:layout_gravity="right|bottom"
+            android:src="@drawable/m_camera_icon"
+            android:layout_alignBottom="@+id/imageView8"
+            android:layout_alignRight="@+id/imageView8"
+            android:layout_alignEnd="@+id/imageView8"/>
 
 
     </RelativeLayout>
@@ -63,7 +61,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="2"
         android:padding="@dimen/login_layout_padding">
 
         <EditText
@@ -73,7 +71,9 @@
             android:layout_gravity="center_horizontal"
             android:hint="@string/user_name"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:textIsSelectable="false"
+            android:textColorHint="@color/colorLightGray"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -82,7 +82,8 @@
             android:layout_gravity="center_horizontal"
             android:hint="@string/user_email"
             android:layout_below="@+id/editText3"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:textColorHint="@color/colorLightGray"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -92,7 +93,8 @@
             android:layout_gravity="center_horizontal"
             android:hint="@string/user_password"
             android:layout_below="@+id/editText4"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:textColorHint="@color/colorLightGray"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -102,7 +104,8 @@
             android:layout_gravity="center_horizontal"
             android:hint="@string/user_password_check"
             android:layout_below="@+id/editText5"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:textColorHint="@color/colorLightGray"/>
 
         <Button
             android:layout_width="match_parent"

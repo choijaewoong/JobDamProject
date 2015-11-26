@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam.LogIn;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -10,16 +11,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
+import com.example.androidchoi.jobdam.MainActivity;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
+import com.example.androidchoi.jobdam.Manager.PropertyManager;
 import com.example.androidchoi.jobdam.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InputUserInfoFragment extends Fragment{
+public class InputUserInfoFragment extends Fragment {
 
+    EditText mEditName;
+    EditText mEditEmail;
+    EditText mEditPassword;
 
     public InputUserInfoFragment() {
         // Required empty public constructor
@@ -34,35 +41,37 @@ public class InputUserInfoFragment extends Fragment{
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+        mEditEmail = (EditText) view.findViewById(R.id.editText_login_email);
+        mEditPassword = (EditText) view.findViewById(R.id.editText_login_password);
 
         Button btn = (Button) view.findViewById(R.id.btn_input_complete);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NetworkManager.getInstance().signup("aaa", "1111");
-
-//                        , new NetworkManager.OnResultListener<String>() {
-//                    @Override
-//                    public void onSuccess(String result) {
-//                        if (result.equals("ok")) {
-//                            PropertyManager.getInstance().setId("aaa");
-//                            PropertyManager.getInstance().setPassword("1111");
-//                            startActivity(new Intent(getContext(), MainActivity.class));
-//                            getActivity().finish();
-//                        } else {
-//                            //
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFail(int code) {
-//                        // ...
-//                    }
-//                });
+                NetworkManager.getInstance().signup(getActivity(), mEditEmail.getText().toString(), mEditPassword.getText().toString()
+                    , new NetworkManager.OnResultListener<String>() {
+                        @Override
+                    public void onSuccess(String result) {
+                        if (result.equals("ok")) {
+                            PropertyManager.getInstance().setId(mEditEmail.getText().toString());
+                            PropertyManager.getInstance().setPassword(mEditPassword.getText().toString());
+                            startActivity(new Intent(getContext(), MainActivity.class));
+                            getActivity().finish();
+                        } else {
+                            // ...
+                        }
+                    }
+                    @Override
+                    public void onFail(int code) {
+                        // ...
+                    }
+                });
             }
         });
         return view;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

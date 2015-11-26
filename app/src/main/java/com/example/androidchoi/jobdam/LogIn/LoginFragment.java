@@ -1,14 +1,21 @@
 package com.example.androidchoi.jobdam.LogIn;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.androidchoi.jobdam.MainActivity;
+import com.example.androidchoi.jobdam.Manager.NetworkManager;
+import com.example.androidchoi.jobdam.Manager.PropertyManager;
+import com.example.androidchoi.jobdam.Model.NetworkMessage;
 import com.example.androidchoi.jobdam.R;
 
 
@@ -16,8 +23,11 @@ import com.example.androidchoi.jobdam.R;
  * A simple {@link Fragment} subclass.
  */
 public class LoginFragment extends Fragment {
+    public static final String MESSAGE_LOGIN_SUCCESS = "Login success";
 
-    TextView mTextView;
+    TextView mTextSignUp;
+    EditText mEditEmail;
+    EditText mEditPassWord;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -31,38 +41,40 @@ public class LoginFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String email = "EMAIL";
-                final String password = "PASSWORD";
-//                NetworkManager.getInstance().login(email, password);
-//                        new NetworkManager.OnResultListener<String>() {
-//                    @Override
-//                    public void onSuccess(String result) {
-//                        if (result.equals("ok")) {
-//                            PropertyManager.getInstance().setId(email);
-//                            PropertyManager.getInstance().setPassword(password);
-//                            startActivity(new Intent(getContext(), MainActivity.class));
-//                            getActivity().finish();
-//                        } else {
-//                            // ...
-//                            Toast.makeText(getActivity(), "사용자 정보가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFail(int code) {
-//
-//                    }
-//                });
+                final String email = mEditEmail.getText().toString();
+                final String password = mEditPassWord.getText().toString();
+                NetworkManager.getInstance().login(getActivity(), email, password,
+                        new NetworkManager.OnResultListener<NetworkMessage>() {
+                    @Override
+                    public void onSuccess(NetworkMessage result) {
+                        if (result.getMessage().equals(MESSAGE_LOGIN_SUCCESS)){
+                            PropertyManager.getInstance().setId(email);
+                            PropertyManager.getInstance().setPassword(password);
+                            startActivity(new Intent(getContext(), MainActivity.class));
+                            getActivity().finish();
+                        } else {
+                            mEditEmail.setText("");
+                            mEditPassWord.setText("");
+                            Toast.makeText(getActivity(), "사용자 정보가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    @Override
+                    public void onFail(int code) {
+
+                    }
+                });
             }
         });
 
-       mTextView = (TextView)view.findViewById(R.id.text_sign_up);
-        mTextView.setOnClickListener(new View.OnClickListener() {
+       mTextSignUp = (TextView)view.findViewById(R.id.text_sign_up);
+        mTextSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.login_container, new ServiceAgreementFragment()).addToBackStack(null).commit();
             }
         });
+        mEditEmail = (EditText)view.findViewById(R.id.editText_login_email);
+        mEditPassWord = (EditText)view.findViewById(R.id.editText_login_password);
         return view;
     }
 

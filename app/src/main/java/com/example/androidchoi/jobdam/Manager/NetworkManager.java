@@ -9,6 +9,7 @@ import com.example.androidchoi.jobdam.Model.Articles;
 import com.example.androidchoi.jobdam.Model.JobList;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
+import com.example.androidchoi.jobdam.Model.NetworkMessage;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -46,11 +47,12 @@ public class NetworkManager {
         }
         return instance;
     }
+
     AsyncHttpClient client;
     XMLParser parser;
     Gson gson;
 
-    private NetworkManager(){
+    private NetworkManager() {
         try {
             KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
             trustStore.load(null, null);
@@ -76,12 +78,14 @@ public class NetworkManager {
         gson = new Gson();
         client.setCookieStore(new PersistentCookieStore(MyApplication.getContext()));
     }
+
     public HttpClient getHttpClient() {
         return client.getHttpClient();
     }
 
     public interface OnResultListener<T> {
         public void onSuccess(T result);
+
         public void onFail(int code);
     }
 
@@ -98,7 +102,7 @@ public class NetworkManager {
 
     // 사람인 api 불러오는 method
     public void getJobAPI(Context context, String keyword, String job_ordering, String job_region, String job_kind, String job_type,
-                          int start, int count, final OnResultListener<JobList> listener){
+                          int start, int count, final OnResultListener<JobList> listener) {
         final RequestParams params = new RequestParams();
         params.put(KEYWORD, keyword);
         params.put(JOB_ORDER, job_ordering);
@@ -112,9 +116,10 @@ public class NetworkManager {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 ByteArrayInputStream bais = new ByteArrayInputStream(responseBody);
                 JobList jobList = parser.fromXml(bais, "jobs", JobList.class);
-                Log.i("개수 :" , jobList.getTotal() + " / " + jobList.getJobList().size());
+                Log.i("개수 :", jobList.getTotal() + " / " + jobList.getJobList().size());
                 listener.onSuccess(jobList);
             }
+
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 listener.onFail(statusCode);
@@ -147,7 +152,8 @@ public class NetworkManager {
 
     // 내가 담은 채용정보 불러오는 method
     private static final String SHOW_MY_JOB = SERVER + "/showmyscrap/%s";
-    public void showMyJob(Context context, String user_id, final OnResultListener<MyJobLab> listener){
+
+    public void showMyJob(Context context, String user_id, final OnResultListener<MyJobLab> listener) {
         RequestParams params = new RequestParams();
         String url = String.format(SHOW_MY_JOB, user_id);
         Header[] headers = new Header[1];
@@ -157,6 +163,7 @@ public class NetworkManager {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 MyJobLab myJobLab = gson.fromJson(responseString, MyJobLab.class);
@@ -164,8 +171,10 @@ public class NetworkManager {
             }
         });
     }
+
     // 채용정보 담기
     private static final String ADD_MY_JOB = SERVER + "/addscrap/%s";
+
     public void addMyJob(Context context, String user_id, final String jsonString, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
         String url = String.format(ADD_MY_JOB, user_id);
@@ -188,7 +197,8 @@ public class NetworkManager {
 
     //메모 보기
     public static final String SHOW_MY_MEMO = SERVER + "/showmymemo/%s";
-    public void showMyMemo(Context context, String user_id, final OnResultListener<MyCardLab> listener){
+
+    public void showMyMemo(Context context, String user_id, final OnResultListener<MyCardLab> listener) {
         RequestParams params = new RequestParams();
         String url = String.format(SHOW_MY_MEMO, user_id);
         Header[] headers = new Header[1];
@@ -198,6 +208,7 @@ public class NetworkManager {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 MyCardLab myCardLab = gson.fromJson(responseString, MyCardLab.class);
@@ -205,17 +216,20 @@ public class NetworkManager {
             }
         });
     }
+
     // 메모 추가
     private static final String ADD_MEMO = SERVER + "/addmemo";
-    public void addMemo(Context context, final String jsonString, final OnResultListener<String> listener){
+
+    public void addMemo(Context context, final String jsonString, final OnResultListener<String> listener) {
 //        Header[] headers = new Header[1];
 //        headers[0] = new BasicHeader("Accept", "application/json");
         try {
             client.post(context, ADD_MEMO, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
                 @Override
-                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable){
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
                 }
+
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
                     listener.onSuccess(responseString);
@@ -225,9 +239,11 @@ public class NetworkManager {
             e.printStackTrace();
         }
     }
+
     //메모 수정
     private static final String UPDATE_MEMO = SERVER + "/memo/update";
-    public void updateMemo(Context context, final String jsonString, final OnResultListener<String> listener){
+
+    public void updateMemo(Context context, final String jsonString, final OnResultListener<String> listener) {
         try {
             client.post(context, UPDATE_MEMO, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
                 @Override
@@ -247,7 +263,8 @@ public class NetworkManager {
 
     //게시글 보기
     public static final String SHOW_ARTICLE = SERVER + "/boardlist/%s";
-    public void showArticle(Context context, String user_id, final OnResultListener<ArticleLab> listener){
+
+    public void showArticle(Context context, String user_id, final OnResultListener<ArticleLab> listener) {
         RequestParams params = new RequestParams();
         String url = String.format(SHOW_ARTICLE, user_id);
         Header[] headers = new Header[1];
@@ -257,6 +274,7 @@ public class NetworkManager {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 ArticleLab articleLab = gson.fromJson(responseString, ArticleLab.class);
@@ -269,15 +287,17 @@ public class NetworkManager {
 
     // 게시글 추가
     private static final String ADD_ARTICLE = SERVER + "/addboard";
-    public void addArticle(Context context, final String jsonString, final OnResultListener<String> listener){
+
+    public void addArticle(Context context, final String jsonString, final OnResultListener<String> listener) {
 //        Header[] headers = new Header[1];
 //        headers[0] = new BasicHeader("Accept", "application/json");
         try {
             client.post(context, ADD_ARTICLE, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
                 @Override
-                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable){
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
                 }
+
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
                     listener.onSuccess(responseString);
@@ -287,15 +307,18 @@ public class NetworkManager {
             e.printStackTrace();
         }
     }
+
     //게시글 수정
     private static final String UPDATE_ARTICLE = SERVER + "/board/update";
-    public void updateArticle(Context context, final String jsonString, final OnResultListener<String> listener){
+
+    public void updateArticle(Context context, final String jsonString, final OnResultListener<String> listener) {
         try {
             client.post(context, UPDATE_ARTICLE, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
                 }
+
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
                     listener.onSuccess(responseString);
@@ -308,7 +331,8 @@ public class NetworkManager {
 
     // 좋아요
     public static final String LIKE_ARTICLE = SERVER + "/like/%s/push/%s";
-    public void likeArticle(Context context, String user_id, String board_id, final OnResultListener<Articles> listener){
+
+    public void likeArticle(Context context, String user_id, String board_id, final OnResultListener<Articles> listener) {
         RequestParams params = new RequestParams();
         String url = String.format(LIKE_ARTICLE, user_id, board_id);
         Header[] headers = new Header[1];
@@ -318,61 +342,60 @@ public class NetworkManager {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Articles articles= gson.fromJson(responseString, Articles.class);
+                Articles articles = gson.fromJson(responseString, Articles.class);
                 //ArticleLab.get(MyApplication.getContext(), gson.fromJson(responseString, ArticleLab.class));
                 listener.onSuccess(articles);
             }
         });
     }
+
     public void cancelAll(Context context) {
         client.cancelRequests(context, true);
     }
 
-//    public static final String LOG_IN = SERVER;
-//    public void login(Context context, String userid, String password, final OnResultListener<String> listener) {
-////        mHandler.postDelayed(new Runnable() {
-////            @Override
-////            public void run() {
-////                OnResultListener<String> listener = null;
-////                listener.onSuccess(null, "ok");
-////            }
-////        }, 1000);
-//        RequestParams params = new RequestParams();
-//        client.post(context, LOG_IN, params, new TextHttpResponseHandler() {
+    public static final String LOG_IN = SERVER + "/login";
+    public void login(Context context, String userid, String password, final OnResultListener<NetworkMessage> listener) {
+//        mHandler.postDelayed(new Runnable() {
 //            @Override
-//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//
+//            public void run() {
+//                OnResultListener<String> listener = null;
+//                listener.onSuccess(null, "ok");
 //            }
-//
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, String responseString) {
-//
-//            }
-//        });
-//    }
+//        }, 1000);
+        RequestParams params = new RequestParams();
+        params.put("user_id", userid);
+        params.put("pw", password);
+        client.post(context, LOG_IN, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+            }
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Log.i("ddd", "로그인");
+                NetworkMessage networkMessage = new Gson().fromJson(responseString, NetworkMessage.class);
+                listener.onSuccess(networkMessage);
+            }
+        });
+    }
 
-//    private static final String UPDATE_ARTICLE = SERVER + "/board/update";
-//    public void updateArticle(Context context, final String jsonString, final OnResultListener<String> listener){
-//        try {
-//            client.post(context, UPDATE_ARTICLE, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
-//                @Override
-//                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//
-//                }
-//                @Override
-//                public void onSuccess(int statusCode, Header[] headers, String responseString) {
-//                    listener.onSuccess(responseString);
-//                }
-//            });
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-
-    public void signup(String userid, String password) {
+    public static final String SIGN_UP = SERVER + "/signup";
+    public void signup(Context context, String userid, String password, final OnResultListener<String> listener) {
+            RequestParams params = new RequestParams();
+            params.put("user_id", userid);
+            params.put("pw", password);
+            client.post(context, SIGN_UP, params, new TextHttpResponseHandler() {
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                }
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    listener.onSuccess(responseString);
+                }
+            });
+        }
 //        mHandler.postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
@@ -381,6 +404,7 @@ public class NetworkManager {
 //            }
 //        }, 1000);
     }
+
 
     //    ThreadPoolExecutor mExecutor;
 //    public static final int CORE_POOL_SIZE = 5;
@@ -477,4 +501,4 @@ public class NetworkManager {
 //
 //
 //
-}
+

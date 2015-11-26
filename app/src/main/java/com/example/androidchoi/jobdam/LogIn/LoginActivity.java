@@ -16,7 +16,4 @@ public class LoginActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.login_container, new LoginFragment()).commit();
         }
     }
-    public void pushSingUpFragment() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.login_container, new ServiceAgreementFragment()).addToBackStack(null).commit();
-    }
 }

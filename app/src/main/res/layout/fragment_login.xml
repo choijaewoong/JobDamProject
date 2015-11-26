@@ -1,56 +1,66 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="com.example.androidchoi.jobdam.LogIn.LoginFragment">
+             tools:context="com.example.androidchoi.jobdam.LogIn.LoginFragment"
+                android:background="@color/colorPrimary">
 
     <!-- TODO: Update blank fragment layout -->
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/login"
-        android:scaleType="fitXY"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/image_login_logo"
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="250dp"
         android:layout_gravity="center_horizontal|bottom"
-        android:padding="24dp">
+        android:padding="24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText"
+            android:layout_width="250dp"
+            android:layout_height="32dp"
+            android:id="@+id/editText_login_email"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:gravity="start"
-            android:hint="Email"/>
+            android:gravity="center_vertical|start"
+            android:hint="E-mail"
+            android:textColorHint="@android:color/white"
+            android:textColor="@android:color/white"
+            android:autoText="false"
+            android:background="@android:color/transparent"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText2"
-            android:layout_below="@+id/editText"
+            android:layout_width="250dp"
+            android:layout_height="32dp"
+            android:id="@+id/editText_login_password"
+            android:layout_below="@+id/editText_login_email"
             android:layout_centerHorizontal="true"
-            android:layout_marginLeft="40dp"
+            android:inputType="textPassword"
             android:hint="Password"
-            android:layout_marginRight="40dp"
-            android:gravity="start" />
+            android:gravity="center_vertical|start"
+            android:textColorHint="@android:color/white"
+            android:textColor="@android:color/white"
+            android:background="@android:color/transparent"/>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:layout_height="35dp"
             android:text="Log-in"
             android:id="@+id/btn_sign_in"
-            android:layout_below="@+id/editText2"
-            android:layout_alignLeft="@+id/editText2"
-            android:layout_alignStart="@+id/editText2"
-            android:layout_alignRight="@+id/editText2"
-            android:layout_alignEnd="@+id/editText2"/>
+            android:background="@drawable/button_login"
+            android:layout_below="@+id/editText_login_password"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorPrimary"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,25 +69,27 @@
             android:id="@+id/textView8"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
+            android:layout_alignParentStart="true"
+            android:textColor="@android:color/white"/>
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
             android:id="@+id/imageView6"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:background="#000000"/>
+            android:src="@drawable/image_google"/>
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
             android:id="@+id/imageView7"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/imageView6"
             android:layout_toStartOf="@+id/imageView6"
-            android:background="#000000"/>
+            android:src="@drawable/image_facebook"
+            android:layout_marginRight="@dimen/default_small_dimen"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,10 +97,12 @@
             android:orientation="horizontal"
             android:layout_below="@+id/btn_sign_in"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="@dimen/default_dimen"
+            android:gravity="center">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="처음 오셨나요?"
                 android:id="@+id/textView10"
@@ -98,21 +112,22 @@
                 android:layout_toLeftOf="@+id/textView9"
                 android:layout_toStartOf="@+id/textView9"
                 android:gravity="right"
-                android:layout_weight="1"/>
+                />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" 가입하기"
                 android:id="@+id/text_sign_up"
                 android:layout_below="@+id/btn_sign_in"
                 android:layout_toLeftOf="@+id/imageView6"
                 android:layout_toStartOf="@+id/imageView6"
-                android:layout_weight="1"
                 android:textColor="#ffffff"/>
 
         </LinearLayout>
 
     </RelativeLayout>
 
-</FrameLayout>
+
+
+</RelativeLayout>
