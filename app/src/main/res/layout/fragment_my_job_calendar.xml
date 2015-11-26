@@ -143,20 +143,68 @@
     android:background="@color/colorDivider"/>
 
 <GridView
-    android:id="@+id/gridView1"
+    android:id="@+id/grid_view_calendar"
+    android:listSelector="@color/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorDivider"
     android:horizontalSpacing="@dimen/calendar_grid_separator"
     android:numColumns="7"
     android:stretchMode="columnWidth"
-    android:verticalSpacing="@dimen/calendar_grid_separator">
+    android:verticalSpacing="@dimen/calendar_grid_separator"
+    >
 </GridView>
 
 <View
     android:layout_width="match_parent"
     android:layout_height="@dimen/shadow_depth"
     android:id="@+id/imageView11"
-    android:background="@drawable/shadow_bottom"/>
+    android:background="@drawable/shadow_bottom"
+    android:visibility="visible"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시작"
+                android:id="@+id/text_start_header"
+                android:layout_marginLeft="@dimen/default_dimen"
+                android:layout_marginTop="@dimen/default_small_dimen"
+                android:layout_marginBottom="@dimen/default_small_dimen"/>
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listView_start_job"
+                android:listSelector="@android:color/transparent"
+                android:divider="@android:color/transparent"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="마감"
+                android:id="@+id/text_end_header"
+                android:layout_marginLeft="@dimen/default_dimen"
+                android:layout_marginBottom="@dimen/default_small_dimen"/>
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listView_end_job"
+                android:listSelector="@android:color/transparent"
+                android:divider="@android:color/transparent"/>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

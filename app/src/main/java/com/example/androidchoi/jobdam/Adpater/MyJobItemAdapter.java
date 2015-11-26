@@ -22,10 +22,12 @@ public class MyJobItemAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 //
-//    public void add(MyJobs item){
-//        mItems.add(item);
-//        notifyDataSetChanged();
-//    }
+    public void add(MyJob item){
+        MyJobs myJobs = new MyJobs();
+        myJobs.setJob(item);
+        mItems.add(myJobs);
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getCount() {

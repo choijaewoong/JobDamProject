@@ -55,8 +55,8 @@ public class MyJobFragment extends Fragment {
         shadowToolbar.setVisibility(View.VISIBLE);
         View view = inflater.inflate(R.layout.fragment_my_job, container, false);
         List<Fragment> fragments = new ArrayList<Fragment>();
-        fragments.add(new MyJobListFragment());
-        fragments.add(new MyJobCalendarFragment());
+        fragments.add(0,new MyJobListFragment());
+        fragments.add(1,new MyJobCalendarFragment());
         mAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), fragments);
         mViewPager = (ViewPager)view.findViewById(R.id.tab_pager);
         mViewPager.setAdapter(mAdapter);

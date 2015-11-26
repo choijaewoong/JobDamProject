@@ -94,8 +94,11 @@ public class CalendarManager {
 			} else if (compare > 0) {
 				calendarIndex++;
 			} else {
-				item.getStartItems().add(cc);
-				item.getEndItems().add(cc);
+				if(((ItemData)mData.get(dataIndex)).isStart()) {
+					item.getStartItems().add(cc);
+				}else {
+					item.getEndItems().add(cc);
+				}
 				dataIndex++;
 			}
 		}		

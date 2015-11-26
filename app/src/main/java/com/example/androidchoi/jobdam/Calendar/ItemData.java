@@ -13,6 +13,7 @@ public class ItemData implements CalendarManager.CalendarComparable<ItemData>{
 	private MyJob myJob;
 	private boolean isStart = true;
 	public boolean isStart() { return isStart; }
+	public MyJob getMyJob() { return myJob; }
 
 	public ItemData(MyJob myJob, boolean isStart) {
 		Date date;

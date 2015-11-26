@@ -3,7 +3,6 @@ package com.example.androidchoi.jobdam.Calendar;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.widget.Checkable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -13,7 +12,7 @@ import com.example.androidchoi.jobdam.R;
 
 import java.util.Calendar;
 
-public class CalendarItemView extends LinearLayout implements Checkable{
+public class CalendarItemView extends LinearLayout{ // implements Checkable {
 
 	TextView numberView;
 	TextView startView;
@@ -23,15 +22,29 @@ public class CalendarItemView extends LinearLayout implements Checkable{
 	CalendarItem mItem;
 	RelativeLayout mRelativeLayout;
 	int backgroundColor;
-
 	public RelativeLayout getRelativeLayout() {
 		return mRelativeLayout;
 	}
 
+//	MyJobCalendarFragment.OnDateCheckCallback callback = new MyJobCalendarFragment.OnDateCheckCallback() {
+//		@Override
+//		public void onDateCheck(int position) {
+//			mRelativeLayout.setBackgroundResource(R.color.colorPrimary);
+////			Toast.makeText(getActivity(), "선택", Toast.LENGTH_SHORT).show();
+//			Log.i("????", numberView.getText()+"");
+////			mCheckDate = item;
+////			notifyDataSetInvalidated();
+//		}
+//	};
+
 	public CalendarItemView(Context context) {
 		super(context);
+//		((MyJobCalendarFragment)((MainActivity) context).
+//				getSupportFragmentManager().findFragmentByTag(MainActivity.TAG_MY_JOB).
+//				getChildFragmentManager().getFragments().get(1)).setOnDateCheckCallback(callback);
 		// TODO Auto-generated constructor stub
 		LayoutInflater.from(context).inflate(R.layout.view_job_calendar_item, this);
+//		((MyJobCalendarFragment)this.getParent()).setOnDateCheckCallback(callback);
 		mRelativeLayout = (RelativeLayout)findViewById(R.id.calendar_item_view);
 		numberView = (TextView)findViewById(R.id.job_calendar_num);
 		startView = (TextView)findViewById(R.id.job_calendar_start_count);
@@ -46,7 +59,6 @@ public class CalendarItemView extends LinearLayout implements Checkable{
 		if (!item.inMonth) {
 			textColor = getResources().getColor(R.color.colorCalendarOutMonth);
 			backgroundColor = getResources().getColor(R.color.colorBackground);
-
 		} else {
 			backgroundColor = Color.WHITE;
 //			mLinearLayout.setBackgroundColor(Color.WHITE);
@@ -84,26 +96,35 @@ public class CalendarItemView extends LinearLayout implements Checkable{
 		}
 		startView.setText(start + "개");
 		endView.setText(end + "개");
-	}
-
-	private boolean checked = false;
-	@Override
-	public void setChecked(boolean checked) {
-		this.checked = checked;
-		if(checked){
+		if(item.checked){
 			mRelativeLayout.setBackgroundResource(R.color.colorPrimary);
-		}else{
-			mRelativeLayout.setBackgroundColor(backgroundColor);
 		}
 	}
 
-	@Override
-	public boolean isChecked() {
-		return checked;
-	}
+//
+//	public void test(){
+//		this.getParent().getClass().toString()
+//	}
 
-	@Override
-	public void toggle() {
-		setChecked(!checked);
-	}
+//	private boolean checked = false;
+//	@Override
+//	public void setChecked(boolean checked) {
+//		this.checked = checked;
+//		if(this.checked){
+//			mRelativeLayout.setBackgroundResource(R.color.colorPrimary);
+////			mCallback.onDateCheck(mItem);
+//		}else{
+//			mRelativeLayout.setBackgroundColor(backgroundColor);
+//		}
+//	}
+//
+//	@Override
+//	public boolean isChecked() {
+//		return checked;
+//	}
+//
+//	@Override
+//	public void toggle() {
+//		setChecked(!checked);
+//	}
 }

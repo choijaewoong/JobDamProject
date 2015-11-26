@@ -117,7 +117,6 @@ public class AllJobFragment extends Fragment {
         View searchHeaderView = inflater.inflate(R.layout.view_item_search_header, null);
         View countHeaderView = inflater.inflate(R.layout.view_all_job_count_header, null);
         ToggleButton toggleButton = (ToggleButton)countHeaderView.findViewById(R.id.btn_order_toggle);
-        toggleButton.setVisibility(View.VISIBLE);
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

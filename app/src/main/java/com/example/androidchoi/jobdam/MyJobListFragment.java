@@ -36,7 +36,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class MyJobListFragment extends Fragment {
-    private static final int REQUEST_DETAIL = 0;
+
     ListView mListView;
     MyJobItemAdapter mAdapter;
     EditText mSearchEdit;
@@ -85,7 +85,6 @@ public class MyJobListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Toast.makeText(getActivity(),"1" , Toast.LENGTH_SHORT).show();
         View view = inflater.inflate(R.layout.fragment_my_job_list, container, false);
         View searchHeaderView = inflater.inflate(R.layout.view_item_search_header, null);
         View countHeaderView = inflater.inflate(R.layout.view_item_count_header, null);
@@ -137,7 +136,7 @@ public class MyJobListFragment extends Fragment {
                 Job data = (Job) mAdapter.getItem(position - mListView.getHeaderViewsCount());
                 Intent intent = new Intent(getActivity(), JobDetailActivity.class);
                 intent.putExtra(Job.JOBITEM, data);
-                startActivityForResult(intent, REQUEST_DETAIL);
+                startActivity(intent);
             }
         });
         mCountTextView = (TextView)view.findViewById(R.id.text_item_count);
