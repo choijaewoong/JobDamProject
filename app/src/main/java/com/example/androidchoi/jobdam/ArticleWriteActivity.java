@@ -100,7 +100,6 @@ public class ArticleWriteActivity extends AppCompatActivity {
             mArticle = new Article();
             mArticle.setArticle(User.getInstance().getUserId(),
                     0, false, mEditText.getText().toString(), 0);
-//            ArticleLab.get(getApplicationContext()).modifyArticleData(mArticle);
             Gson gson = new Gson();
             final String jsonString = gson.toJson(mArticle);
             NetworkManager.getInstance().addArticle(ArticleWriteActivity.this, jsonString, new NetworkManager.OnResultListener<String>() {

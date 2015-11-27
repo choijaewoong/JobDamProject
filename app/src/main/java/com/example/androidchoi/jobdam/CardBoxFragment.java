@@ -34,7 +34,6 @@ import com.example.androidchoi.jobdam.Model.CategoryData;
 import com.example.androidchoi.jobdam.Model.MyCard;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyCards;
-import com.example.androidchoi.jobdam.Model.User;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -243,7 +242,7 @@ public class CardBoxFragment extends Fragment {
 
     public void showMyMemo() {
         NetworkManager.getInstance().showMyMemo(getActivity(),
-                User.getInstance().getUserId(), new NetworkManager.OnResultListener<MyCardLab>() {
+                new NetworkManager.OnResultListener<MyCardLab>() {
                     @Override
                     public void onSuccess(MyCardLab result) {
                         mCardList = result.getCardList();

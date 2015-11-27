@@ -23,7 +23,6 @@ import com.example.androidchoi.jobdam.Model.AddressData;
 import com.example.androidchoi.jobdam.Model.ContentData;
 import com.example.androidchoi.jobdam.Model.Job;
 import com.example.androidchoi.jobdam.Model.MyJob;
-import com.example.androidchoi.jobdam.Model.User;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
@@ -64,7 +63,7 @@ public class JobDetailActivity extends AppCompatActivity {
                 job.setData(mData);
                 Gson gson = new Gson();
                 final String json = gson.toJson(job);
-                NetworkManager.getInstance().addMyJob(JobDetailActivity.this, User.getInstance().getUserId() , json, new NetworkManager.OnResultListener<String>() {
+                NetworkManager.getInstance().addMyJob(JobDetailActivity.this, json, new NetworkManager.OnResultListener<String>() {
                     @Override
                     public void onSuccess(String result) {
                         Toast.makeText(JobDetailActivity.this, getString(R.string.check_scrap), Toast.LENGTH_SHORT).show();

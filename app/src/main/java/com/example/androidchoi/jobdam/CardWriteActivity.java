@@ -265,6 +265,7 @@ public class CardWriteActivity extends AppCompatActivity {
         t.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                mCancelSaveLayout.setVisibility(View.VISIBLE);
                 for(int i=0; i<mTextTags.size(); i++){
                     if(t == mTextTags.get(i)){
                         Toast.makeText(CardWriteActivity.this, "해당 태그가 삭제되었습니다.", Toast.LENGTH_SHORT).show();

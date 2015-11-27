@@ -17,7 +17,6 @@ import com.example.androidchoi.jobdam.Adpater.BoardPagerAdapter;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.ArticleLab;
 import com.example.androidchoi.jobdam.Model.Articles;
-import com.example.androidchoi.jobdam.Model.User;
 
 import java.util.ArrayList;
 
@@ -42,19 +41,7 @@ public class BoardFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode != Activity.RESULT_OK){ return; }
-        NetworkManager.getInstance().showArticle(getActivity(),
-                User.getInstance().getUserId(), new NetworkManager.OnResultListener<ArticleLab>() {
-                    @Override
-                    public void onSuccess(ArticleLab result) {
-                        //서버에서 게시글 리스트 가져와 저장
-                        mAdapter.setItems(result.getArticleList());
-                        pager.setCurrentItem(0,true);
-                    }
-                    @Override
-                    public void onFail(int code) {
-                        Toast.makeText(getActivity(), "error : " + code, Toast.LENGTH_SHORT).show();
-                    }
-                });
+        showArticle();
     }
 
     @Override
@@ -64,18 +51,7 @@ public class BoardFragment extends Fragment {
         subTitle.setText(R.string.board);
 //        mArticlesList = ArticleLab.get(getActivity()).getArticleList();
 //        mAdapter.setItems(mArticlesList);
-        NetworkManager.getInstance().showArticle(getActivity(),
-                User.getInstance().getUserId(), new NetworkManager.OnResultListener<ArticleLab>(){
-                    @Override
-                    public void onSuccess(ArticleLab result) {
-                        //서버에서 게시글 리스트 가져와 저장
-                        mAdapter.setItems(result.getArticleList());
-                    }
-                    @Override
-                    public void onFail(int code) {
-                        Toast.makeText(getActivity(), "error : " + code, Toast.LENGTH_SHORT).show();
-                    }
-                });
+        showArticle();
     }
 
     @Override
@@ -119,5 +95,21 @@ public class BoardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    public void showArticle(){
+        NetworkManager.getInstance().showArticle(getActivity(),
+                new NetworkManager.OnResultListener<ArticleLab>() {
+                    @Override
+                    public void onSuccess(ArticleLab result) {
+                        //서버에서 게시글 리스트 가져와 저장
+                        mAdapter.setItems(result.getArticleList());
+                        pager.setCurrentItem(0,true);
+                    }
+                    @Override
+                    public void onFail(int code) {
+                        Toast.makeText(getActivity(), "error : " + code, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

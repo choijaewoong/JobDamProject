@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Articles;
-import com.example.androidchoi.jobdam.Model.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,7 +65,7 @@ public class ArticleFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "좋아요 클릭", Toast.LENGTH_SHORT).show();
                 NetworkManager.getInstance().likeArticle(getActivity(),
-                        User.getInstance().getUserId(), mArticles.getId(), new NetworkManager.OnResultListener<Articles>() {
+                         mArticles.getId(), new NetworkManager.OnResultListener<Articles>() {
                             @Override
                             public void onSuccess(Articles result) {
                                 mArticles.setArticle(result);

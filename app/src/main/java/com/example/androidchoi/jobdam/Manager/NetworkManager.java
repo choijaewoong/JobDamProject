@@ -126,30 +126,8 @@ public class NetworkManager {
             }
         });
     }
-//    // 사람인 검색 키워드 method
-//    private static final String KEYWORD = "keywords";
-//    public void getKewordJob(Context context, String keyword, int start, int count, final OnResultListener<JobList> listener){
-//        final RequestParams params = new RequestParams();
-//        params.put(KEYWORD, keyword);
-//        params.put(START, start);
-//        params.put(COUNT, count);
-//        client.get(context, API_ADDRESS, params, new AsyncHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-//                ByteArrayInputStream bais = new ByteArrayInputStream(responseBody);
-//                JobList jobList = parser.fromXml(bais, "jobs", JobList.class);
-//                listener.onSuccess(jobList);
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-//                listener.onFail(statusCode);
-//            }
-//        });
-//    }
 
     private static final String SERVER = "http://52.69.235.46:3000";
-
     // 내가 담은 채용정보 불러오는 method
     private static final String SHOW_MY_JOB = SERVER + "/showmyscrap";
     public void showMyJob(Context context, final OnResultListener<MyJobLab> listener) {
@@ -161,7 +139,6 @@ public class NetworkManager {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
-
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 MyJobLab myJobLab = gson.fromJson(responseString, MyJobLab.class);
@@ -171,18 +148,15 @@ public class NetworkManager {
     }
 
     // 채용정보 담기
-    private static final String ADD_MY_JOB = SERVER + "/addscrap/%s";
-
-    public void addMyJob(Context context, String user_id, final String jsonString, final OnResultListener<String> listener) {
+    private static final String ADD_MY_JOB = SERVER + "/addscrap";
+    public void addMyJob(Context context, final String jsonString, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
-        String url = String.format(ADD_MY_JOB, user_id);
         try {
-            client.post(context, url, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
+            client.post(context, ADD_MY_JOB, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                     listener.onFail(statusCode);
                 }
-
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
                     listener.onSuccess(responseString);
@@ -194,19 +168,16 @@ public class NetworkManager {
     }
 
     //메모 보기
-    public static final String SHOW_MY_MEMO = SERVER + "/showmymemo/%s";
-
-    public void showMyMemo(Context context, String user_id, final OnResultListener<MyCardLab> listener) {
+    public static final String SHOW_MY_MEMO = SERVER + "/mymemolist";
+    public void showMyMemo(Context context, final OnResultListener<MyCardLab> listener) {
         RequestParams params = new RequestParams();
-        String url = String.format(SHOW_MY_MEMO, user_id);
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
-        client.get(context, url, headers, params, new TextHttpResponseHandler() {
+        client.get(context, SHOW_MY_MEMO, headers, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
-
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 MyCardLab myCardLab = gson.fromJson(responseString, MyCardLab.class);
@@ -217,10 +188,7 @@ public class NetworkManager {
 
     // 메모 추가
     private static final String ADD_MEMO = SERVER + "/addmemo";
-
     public void addMemo(Context context, final String jsonString, final OnResultListener<String> listener) {
-//        Header[] headers = new Header[1];
-//        headers[0] = new BasicHeader("Accept", "application/json");
         try {
             client.post(context, ADD_MEMO, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
                 @Override
@@ -240,7 +208,6 @@ public class NetworkManager {
 
     //메모 수정
     private static final String UPDATE_MEMO = SERVER + "/memo/update";
-
     public void updateMemo(Context context, final String jsonString, final OnResultListener<String> listener) {
         try {
             client.post(context, UPDATE_MEMO, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
@@ -260,14 +227,14 @@ public class NetworkManager {
     }
 
     //게시글 보기
-    public static final String SHOW_ARTICLE = SERVER + "/boardlist/%s";
-
-    public void showArticle(Context context, String user_id, final OnResultListener<ArticleLab> listener) {
+    public static final String SHOW_ARTICLE = SERVER + "/boardlist";
+    public static final String ARTICLE_PAGE = "page";
+    public void showArticle(Context context, final OnResultListener<ArticleLab> listener) {
         RequestParams params = new RequestParams();
-        String url = String.format(SHOW_ARTICLE, user_id);
+        params.put(ARTICLE_PAGE, 1);
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
-        client.get(context, url, headers, params, new TextHttpResponseHandler() {
+        client.get(context, SHOW_ARTICLE, headers, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
@@ -285,17 +252,12 @@ public class NetworkManager {
 
     // 게시글 추가
     private static final String ADD_ARTICLE = SERVER + "/addboard";
-
     public void addArticle(Context context, final String jsonString, final OnResultListener<String> listener) {
-//        Header[] headers = new Header[1];
-//        headers[0] = new BasicHeader("Accept", "application/json");
         try {
             client.post(context, ADD_ARTICLE, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-
                 }
-
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
                     listener.onSuccess(responseString);
@@ -308,7 +270,6 @@ public class NetworkManager {
 
     //게시글 수정
     private static final String UPDATE_ARTICLE = SERVER + "/board/update";
-
     public void updateArticle(Context context, final String jsonString, final OnResultListener<String> listener) {
         try {
             client.post(context, UPDATE_ARTICLE, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
@@ -328,11 +289,11 @@ public class NetworkManager {
     }
 
     // 좋아요
-    public static final String LIKE_ARTICLE = SERVER + "/like/%s/push/%s";
+    public static final String LIKE_ARTICLE = SERVER + "/like/%s";
 
-    public void likeArticle(Context context, String user_id, String board_id, final OnResultListener<Articles> listener) {
+    public void likeArticle(Context context, String board_id, final OnResultListener<Articles> listener) {
         RequestParams params = new RequestParams();
-        String url = String.format(LIKE_ARTICLE, user_id, board_id);
+        String url = String.format(LIKE_ARTICLE, board_id);
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
         client.get(context, url, headers, params, new TextHttpResponseHandler() {
@@ -350,9 +311,9 @@ public class NetworkManager {
         });
     }
 
-    public void cancelAll(Context context) {
-        client.cancelRequests(context, true);
-    }
+//    public void cancelAll(Context context) {
+//        client.cancelRequests(context, true);
+//    }
 
     public static final String LOG_IN = SERVER + "/login";
     public void login(Context context, String userid, String password, final OnResultListener<LoginData> listener) {
@@ -380,10 +341,11 @@ public class NetworkManager {
     }
 
     public static final String SIGN_UP = SERVER + "/signup";
-    public void signup(Context context, String userid, String password, final OnResultListener<String> listener) {
+    public void signup(Context context, String userid, String password, String name, final OnResultListener<String> listener) {
             RequestParams params = new RequestParams();
             params.put("user_id", userid);
             params.put("pw", password);
+            params.put("name", name);
             client.post(context, SIGN_UP, params, new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {

@@ -45,35 +45,37 @@ public class InputUserInfoFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
         mEditEmail = (EditText) view.findViewById(R.id.editText_signup_email);
-        mEditName = (EditText)view.findViewById(R.id.editText_signup_name);
+        mEditName = (EditText) view.findViewById(R.id.editText_signup_name);
         mEditPassword = (EditText) view.findViewById(R.id.editText_signup_password);
-        mEditPasswordCheck = (EditText)view.findViewById(R.id.editText_signup_password_check);
+        mEditPasswordCheck = (EditText) view.findViewById(R.id.editText_signup_password_check);
 
         Button btn = (Button) view.findViewById(R.id.btn_input_complete);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NetworkManager.getInstance().signup(getActivity(), mEditEmail.getText().toString(), mEditPassword.getText().toString()
-                    , new NetworkManager.OnResultListener<String>() {
-                        @Override
-                    public void onSuccess(String result) {
-                        if (result.equals("success")) {
-                            String email = mEditEmail.getText().toString();
-                            String name = mEditName.getText().toString();
-                            PropertyManager.getInstance().setId(email);
-                            PropertyManager.getInstance().setPassword(mEditPassword.getText().toString());
-                            User.getInstance().setUser(email, name);
-                            startActivity(new Intent(getContext(), MainActivity.class));
-                            getActivity().finish();
-                        } else {
-                                                    // ...
-                        }
-                    }
-                    @Override
-                    public void onFail(int code) {
-                        // ...
-                    }
-                });
+                NetworkManager.getInstance().signup(getActivity(),
+                        mEditEmail.getText().toString(), mEditPassword.getText().toString(), mEditName.getText().toString(),
+                        new NetworkManager.OnResultListener<String>() {
+                            @Override
+                            public void onSuccess(String result) {
+                                if (result.equals("success")) {
+                                    String email = mEditEmail.getText().toString();
+                                    String name = mEditName.getText().toString();
+                                    PropertyManager.getInstance().setId(email);
+                                    PropertyManager.getInstance().setPassword(mEditPassword.getText().toString());
+                                    User.getInstance().setUser(email, name);
+                                    startActivity(new Intent(getContext(), MainActivity.class));
+                                    getActivity().finish();
+                                } else {
+                                    // ...
+                                }
+                            }
+
+                            @Override
+                            public void onFail(int code) {
+                                // ...
+                            }
+                        });
             }
         });
         return view;
