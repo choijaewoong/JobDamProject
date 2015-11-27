@@ -196,37 +196,37 @@ public class AllJobFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 1: // 서울
-                        job_region = "101000";
+                        job_region = "101000+117000";
                         break;
                     case 2: // 경기,인천
-                        job_region = "102000+108000";
+                        job_region = "102000+108000+117000";
                         break;
-                    case 3: // 광주
-                        job_region = "103000";
+                    case 3: // 강원
+                        job_region = "109000+117000";
                         break;
-                    case 4: // 대구
-                        job_region = "104000";
+                    case 4: // 충남/충북
+                        job_region = "114000+115000+117000";
                         break;
-                    case 5: // 대전
-                        job_region = "101000+118000";
+                    case 5: // 광주
+                        job_region = "103000+117000";
                         break;
-                    case 6: // 부산, 울산
-                        job_region = "106000 + 107000";
+                    case 6: // 대전
+                        job_region = "105000+117000";
                         break;
-                    case 7: // 강원
-                        job_region = "109000";
+                    case 7: // 전남/전북
+                        job_region = "112000+113000+117000";
                         break;
-                    case 8: // 경남,경북
-                        job_region = "110000+111000";
+                    case 8: // 경남/경북
+                        job_region = "110000+111000+117000";
                         break;
-                    case 9: // 전남, 전북
-                        job_region = "112000+113000";
+                    case 9: // 대구
+                        job_region = "104000+117000";
                         break;
-                    case 10: // 충남, 충북
-                        job_region = "114000+115000";
+                    case 10: // 부산/울산
+                        job_region = "106000+107000+117000";
                         break;
                     case 11: // 제주
-                        job_region = "116000";
+                        job_region = "116000+117000";
                         break;
                     case 12: // 해외
                         job_region = "210000+220000+230000+240000+" +
@@ -234,7 +234,7 @@ public class AllJobFragment extends Fragment {
                         break;
                     case 0: // 전체
                     default:
-                        job_region = "117000";
+                        job_region = "";
                         break;
                 }
                 searchJob();
