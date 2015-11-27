@@ -113,12 +113,21 @@ public class CardWriteActivity extends AppCompatActivity {
         CategoryData categoryData = CategoryData.get(getApplicationContext()).getCategoryList().get(mData.getCard().getCategory());
         mTextCategory.setText(categoryData.getName());
         mTextCategory.setTextColor(categoryData.getColor());
+        mTextCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomDialogFragment dialog = new CustomDialogFragment();
+                dialog.show(getSupportFragmentManager(), CATEGORY_DIALOG);
+            }
+        });
         mImageCategory.setBackgroundColor(categoryData.getColor());
 
+        // 태그 등록
         for(String tag : mData.getCard().getTags()){
             addTagView(tag);
         }
 
+        //취소,저장 버튼
         TextView mCancelButton = (TextView) findViewById(R.id.text_cancel_card);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -10,11 +10,12 @@
 
     <ImageView
         android:id="@+id/image_article_emotion"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"
-        android:background="@android:color/black"/>
+        android:layout_marginTop="@dimen/default_small_dimen"
+        android:src="@drawable/emotion_smile"
+        android:layout_marginBottom="@dimen/default_small_dimen"/>
 
 
 </LinearLayout>

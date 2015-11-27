@@ -49,11 +49,11 @@
                 >
             </com.example.androidchoi.jobdam.PredicateLayout>
             <ImageView
-                android:layout_width="@dimen/default_large_dimen"
-                android:layout_height="@dimen/default_large_dimen"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:id="@+id/image_tag_box_close_button"
                 android:layout_gravity="right|top"
-                android:background="@color/colorPrimary"/>
+                android:src="@drawable/button_search_delete"/>
         </FrameLayout>
     </com.example.androidchoi.jobdam.MyScrollView>
 

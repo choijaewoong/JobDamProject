@@ -45,7 +45,6 @@
             android:layout_height="@dimen/button_divider_height"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/default_small_dimen"
-            android:layout_marginRight="@dimen/default_small_dimen"
             android:layout_toEndOf="@+id/image_add_picture"
             android:layout_toRightOf="@+id/image_add_picture"
             android:background="@color/colorGray"
@@ -60,7 +59,8 @@
             android:layout_toRightOf="@+id/image_card_category_color"
             android:text="메모"
             android:textColor="@color/colorCategoryDefault"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:padding="@dimen/default_small_dimen"/>
 
         <LinearLayout
             android:id="@+id/linearLayout_cancel_save_button"
@@ -221,7 +221,6 @@
             android:background="@android:color/transparent"
             android:gravity="top"
             android:hint="내용을 입력하세요"
-
             android:inputType="textMultiLine"
             android:textColor="@android:color/black"
             android:textColorHint="@color/colorLightGray"

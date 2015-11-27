@@ -68,7 +68,7 @@
             android:layout_height="35dp"
             android:text="Log-in"
             android:id="@+id/btn_sign_in"
-            android:background="@drawable/button_login"
+            android:background="@drawable/selector_button_login"
             android:layout_below="@+id/editText_login_password"
             android:layout_centerHorizontal="true"
             android:textColor="@color/colorPrimary"

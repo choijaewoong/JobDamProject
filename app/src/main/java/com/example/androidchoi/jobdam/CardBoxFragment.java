@@ -54,12 +54,12 @@ public class CardBoxFragment extends Fragment {
     FloatingActionMenu fam;
     EditText mSearchEdit;
     ImageView mDeleteImage;
-    private ArrayList<MyCards> mCardList;
     TextView mCountTextView;
     PredicateLayout mPredicateLayout;
     ScrollView mScrollView;
     ImageView mImageTagCloseButton;
     ArrayList<TextView> mTextTags = new ArrayList<TextView>();
+    private ArrayList<MyCards> mCardList = new ArrayList<MyCards>();
 
     public CardBoxFragment() {
         // Required empty public constructor
