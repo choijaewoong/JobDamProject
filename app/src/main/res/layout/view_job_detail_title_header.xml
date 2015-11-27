@@ -37,7 +37,7 @@
             android:textOff="@string/scrap"
             android:textOn="@string/scrap"
             android:background="@drawable/selector_button_scrap"
-            android:paddingLeft="20dp"
+            android:paddingLeft="@dimen/default_dimen"
             android:textColor="@drawable/selector_button_text"
             android:layout_marginRight="@dimen/default_dimen"
             android:checked="false"

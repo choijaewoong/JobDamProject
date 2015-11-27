@@ -75,7 +75,7 @@ public class MyJobCalendarFragment extends Fragment {
                 // TODO Auto-generated method stub
                 if (isWeekCalendar) {
                     CalendarData data = CalendarManager.getInstance().getNextWeekCalendarData();
-                    titleView.setText("" + (data.month+1) + "." + (data.weekOfMonth) +"주");
+                    titleView.setText((data.year) + "년 " + (data.month+1) + "월");
                     mCalendarAdapter.setCalendarData(data);
                 } else {
                     CalendarData data = CalendarManager.getInstance().getNextMonthCalendarData();
@@ -91,7 +91,7 @@ public class MyJobCalendarFragment extends Fragment {
                 // TODO Auto-generated method stub
                 if (isWeekCalendar) {
                     CalendarData data = CalendarManager.getInstance().getPrevWeekCalendarData();
-                    titleView.setText("" + (data.month+1) + "." + (data.weekOfMonth) +"주");
+                    titleView.setText((data.year) + "년 " + (data.month+1) + "월");
                     mCalendarAdapter.setCalendarData(data);
                 } else {
                     CalendarData data = CalendarManager.getInstance().getLastMonthCalendarData();
@@ -128,7 +128,6 @@ public class MyJobCalendarFragment extends Fragment {
         textStartHeader = (TextView)view.findViewById(R.id.text_start_header);
         textEndHeader = (TextView)view.findViewById(R.id.text_end_header);
         gridView = (GridView)view.findViewById(R.id.grid_view_calendar);
-        gridView.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -179,7 +178,7 @@ public class MyJobCalendarFragment extends Fragment {
         }
         if (isWeekCalendar) {
             CalendarData data = CalendarManager.getInstance().getWeekCalendarData();
-            titleView.setText("" + (data.month+1) + "." + (data.weekOfMonth) +"주");
+            titleView.setText((data.year) + "년 " + (data.month+1) + "월");
             mCalendarAdapter = new CalendarAdapter(getActivity(), data);
         } else {
             CalendarData data = CalendarManager.getInstance().getCalendarData();

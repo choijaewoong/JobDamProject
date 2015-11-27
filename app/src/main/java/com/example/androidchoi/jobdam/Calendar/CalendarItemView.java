@@ -1,7 +1,6 @@
 package com.example.androidchoi.jobdam.Calendar;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,7 +20,6 @@ public class CalendarItemView extends LinearLayout{ // implements Checkable {
 	ImageView imageBlueBall;
 	CalendarItem mItem;
 	RelativeLayout mRelativeLayout;
-	int backgroundColor;
 	public RelativeLayout getRelativeLayout() {
 		return mRelativeLayout;
 	}
@@ -58,9 +56,7 @@ public class CalendarItemView extends LinearLayout{ // implements Checkable {
 		int textColor;
 		if (!item.inMonth) {
 			textColor = getResources().getColor(R.color.colorCalendarOutMonth);
-			backgroundColor = getResources().getColor(R.color.colorBackground);
 		} else {
-			backgroundColor = Color.WHITE;
 //			mLinearLayout.setBackgroundColor(Color.WHITE);
 			switch (item.dayOfWeek) {
 				case Calendar.SUNDAY :
@@ -75,7 +71,7 @@ public class CalendarItemView extends LinearLayout{ // implements Checkable {
 			}
 		}
 		numberView.setTextColor(textColor);
-		mRelativeLayout.setBackgroundColor(backgroundColor);
+		numberView.setBackgroundResource(android.R.color.transparent);
 		numberView.setText("" + item.dayOfMonth);
 
 		int start = item.getStartItems().size();
@@ -97,7 +93,9 @@ public class CalendarItemView extends LinearLayout{ // implements Checkable {
 		startView.setText(start + "개");
 		endView.setText(end + "개");
 		if(item.checked){
-			mRelativeLayout.setBackgroundResource(R.color.colorPrimary);
+//			mRelativeLayout.setBackgroundResource(R.color.colorPrimary);
+			numberView.setBackgroundResource(R.drawable.image_calendar_selected);
+			numberView.setTextColor(getResources().getColor(android.R.color.white));
 		}
 	}
 
