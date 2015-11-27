@@ -12,7 +12,9 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.androidchoi.jobdam.Model.User;
 import com.example.androidchoi.jobdam.Setting.SettingActivity;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -26,6 +28,8 @@ public class MainActivity extends SlidingFragmentActivity
     private static final String TAG_BOARD = "board";
     private static final String TAG_ALARM = "alarm";
     SlidingMenu mSlidingMenu;
+    TextView mUserName;
+    TextView mUserEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,10 @@ public class MainActivity extends SlidingFragmentActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.addHeaderView(navHeaderView);
+        mUserEmail = (TextView)navHeaderView.findViewById(R.id.text_user_email);
+        mUserName = (TextView)navHeaderView.findViewById(R.id.text_user_name);
+        mUserEmail.setText(User.getInstance().getUserId());
+        mUserName.setText(User.getInstance().getUserName());
         ImageView setting = (ImageView)navHeaderView.findViewById(R.id.btn_setting);
         setting.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -53,7 +53,7 @@ public class MyCard implements Serializable {
     public void setEndDate(String endDate){ this.endDate = endDate; }
 
     public MyCard(){
-        userId = User.USER_NAME;
+        userId = User.getInstance().getUserId();
         category = 0;
         CurrentTime currentTime = new CurrentTime();
         writeDate = currentTime.getYear() + ". " + currentTime.getMonth() + ". " + currentTime.getDayOfMonth();

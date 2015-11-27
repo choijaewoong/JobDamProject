@@ -179,7 +179,7 @@ public class MyJobCalendarFragment extends Fragment {
     }
 
     public void showMyJob(){
-        NetworkManager.getInstance().showMyJob(getActivity(), User.USER_NAME, new NetworkManager.OnResultListener<MyJobLab>() {
+        NetworkManager.getInstance().showMyJob(getActivity(), User.getInstance().getUserId(), new NetworkManager.OnResultListener<MyJobLab>() {
             @Override
             public void onSuccess(MyJobLab result) {
                 mJobList = result.getJobList();

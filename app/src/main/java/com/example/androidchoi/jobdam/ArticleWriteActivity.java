@@ -98,7 +98,7 @@ public class ArticleWriteActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         else if (id == R.id.action_save) {
             mArticle = new Article();
-            mArticle.setArticle(User.USER_NAME,
+            mArticle.setArticle(User.getInstance().getUserId(),
                     0, false, mEditText.getText().toString(), 0);
 //            ArticleLab.get(getApplicationContext()).modifyArticleData(mArticle);
             Gson gson = new Gson();

@@ -66,7 +66,7 @@ public class ArticleFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "좋아요 클릭", Toast.LENGTH_SHORT).show();
                 NetworkManager.getInstance().likeArticle(getActivity(),
-                        User.USER_NAME, mArticles.getId(), new NetworkManager.OnResultListener<Articles>() {
+                        User.getInstance().getUserId(), mArticles.getId(), new NetworkManager.OnResultListener<Articles>() {
                             @Override
                             public void onSuccess(Articles result) {
                                 mArticles.setArticle(result);

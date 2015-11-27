@@ -243,7 +243,7 @@ public class CardBoxFragment extends Fragment {
 
     public void showMyMemo() {
         NetworkManager.getInstance().showMyMemo(getActivity(),
-                User.USER_NAME, new NetworkManager.OnResultListener<MyCardLab>() {
+                User.getInstance().getUserId(), new NetworkManager.OnResultListener<MyCardLab>() {
                     @Override
                     public void onSuccess(MyCardLab result) {
                         mCardList = result.getCardList();

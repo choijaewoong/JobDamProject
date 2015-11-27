@@ -43,7 +43,7 @@ public class BoardFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode != Activity.RESULT_OK){ return; }
         NetworkManager.getInstance().showArticle(getActivity(),
-                User.USER_NAME, new NetworkManager.OnResultListener<ArticleLab>() {
+                User.getInstance().getUserId(), new NetworkManager.OnResultListener<ArticleLab>() {
                     @Override
                     public void onSuccess(ArticleLab result) {
                         //서버에서 게시글 리스트 가져와 저장
@@ -65,7 +65,7 @@ public class BoardFragment extends Fragment {
 //        mArticlesList = ArticleLab.get(getActivity()).getArticleList();
 //        mAdapter.setItems(mArticlesList);
         NetworkManager.getInstance().showArticle(getActivity(),
-                User.USER_NAME, new NetworkManager.OnResultListener<ArticleLab>(){
+                User.getInstance().getUserId(), new NetworkManager.OnResultListener<ArticleLab>(){
                     @Override
                     public void onSuccess(ArticleLab result) {
                         //서버에서 게시글 리스트 가져와 저장

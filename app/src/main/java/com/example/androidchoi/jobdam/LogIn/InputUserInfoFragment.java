@@ -42,8 +42,8 @@ public class InputUserInfoFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
-        mEditEmail = (EditText) view.findViewById(R.id.editText_login_email);
-        mEditPassword = (EditText) view.findViewById(R.id.editText_login_password);
+        mEditEmail = (EditText) view.findViewById(R.id.editText_signup_email);
+        mEditPassword = (EditText) view.findViewById(R.id.editText_signup_password);
 
         Button btn = (Button) view.findViewById(R.id.btn_input_complete);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -53,12 +53,13 @@ public class InputUserInfoFragment extends Fragment {
                     , new NetworkManager.OnResultListener<String>() {
                         @Override
                     public void onSuccess(String result) {
-                        if (result.equals("ok")) {
+                        if (result.equals("success")) {
                             PropertyManager.getInstance().setId(mEditEmail.getText().toString());
                             PropertyManager.getInstance().setPassword(mEditPassword.getText().toString());
                             startActivity(new Intent(getContext(), MainActivity.class));
                             getActivity().finish();
                         } else {
+
                             // ...
                         }
                     }

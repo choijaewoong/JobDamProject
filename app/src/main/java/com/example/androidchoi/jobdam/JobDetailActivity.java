@@ -64,7 +64,7 @@ public class JobDetailActivity extends AppCompatActivity {
                 job.setData(mData);
                 Gson gson = new Gson();
                 final String json = gson.toJson(job);
-                NetworkManager.getInstance().addMyJob(JobDetailActivity.this, User.USER_NAME, json, new NetworkManager.OnResultListener<String>() {
+                NetworkManager.getInstance().addMyJob(JobDetailActivity.this, User.getInstance().getUserId() , json, new NetworkManager.OnResultListener<String>() {
                     @Override
                     public void onSuccess(String result) {
                         Toast.makeText(JobDetailActivity.this, getString(R.string.check_scrap), Toast.LENGTH_SHORT).show();
