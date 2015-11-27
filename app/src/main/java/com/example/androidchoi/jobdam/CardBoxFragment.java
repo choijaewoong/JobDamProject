@@ -58,6 +58,7 @@ public class CardBoxFragment extends Fragment {
     TextView mCountTextView;
     PredicateLayout mPredicateLayout;
     ScrollView mScrollView;
+    ImageView mImageTagCloseButton;
     ArrayList<TextView> mTextTags = new ArrayList<TextView>();
 
     public CardBoxFragment() {
@@ -91,7 +92,6 @@ public class CardBoxFragment extends Fragment {
                         Rect outRect = new Rect();
                         mSearchEdit.getGlobalVisibleRect(outRect);
                         if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                            mScrollView.setVisibility(View.GONE);
                             mSearchEdit.clearFocus();
                             InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
@@ -110,7 +110,6 @@ public class CardBoxFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_card_box, container, false);
         View searchHeaderView = inflater.inflate(R.layout.view_item_search_header, null);
         View countHeaderView = inflater.inflate(R.layout.view_item_count_header, null);
-        mScrollView = (ScrollView) view.findViewById(R.id.scrollView_tag);
         mListView = (ListView) view.findViewById(R.id.listview_card);
         mListView.addHeaderView(searchHeaderView);
         mListView.addHeaderView(countHeaderView, null, false);
@@ -145,7 +144,7 @@ public class CardBoxFragment extends Fragment {
         mSearchEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus) {
+                if (hasFocus) {
                     mScrollView.setVisibility(View.VISIBLE);
                     int total = 0;
                     for (int i = 0; i < mCardList.size(); i++) {
@@ -155,8 +154,8 @@ public class CardBoxFragment extends Fragment {
                             total++;
                         }
                     }
-                    Log.i("count", total+"");
-                } else{
+                    Log.i("count", total + "");
+                } else {
 //                    scrollView.setVisibility(View.GONE);
                 }
             }
@@ -167,7 +166,7 @@ public class CardBoxFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                MyCard data = (MyCard) mAdapter.getItem(position - mListView.getHeaderViewsCount());
-                MyCards myCards =  (MyCards)mAdapter.getItem(position - mListView.getHeaderViewsCount());
+                MyCards myCards = (MyCards) mAdapter.getItem(position - mListView.getHeaderViewsCount());
                 Intent intent = new Intent(getActivity(), CardWriteActivity.class);
                 intent.putExtra(MyCard.CARD_ITEM, myCards);
                 intent.putExtra(MyCard.CARD_NEW, false);
@@ -189,6 +188,14 @@ public class CardBoxFragment extends Fragment {
         FloatingActionButton addCategoryButton = (FloatingActionButton) view.findViewById(R.id.fab_add_category);
         mCountTextView = (TextView) view.findViewById(R.id.text_item_count);
         mPredicateLayout = (PredicateLayout)view.findViewById(R.id.predicateLayout_all_tag_box);
+        mScrollView = (ScrollView) view.findViewById(R.id.scrollView_tag);
+        mImageTagCloseButton = (ImageView)view.findViewById(R.id.image_tag_box_close_button);
+        mImageTagCloseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mScrollView.setVisibility(View.GONE);
+            }
+        });
 
         return view;
     }

@@ -19,24 +19,39 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:id="@+id/scrollView_tag"
         android:fillViewport="false"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginTop="@dimen/search_view_height"
         android:clipToPadding="false"
-        android:padding="@dimen/default_small_dimen"
         android:focusable="false">
-        <com.example.androidchoi.jobdam.PredicateLayout
-            android:id="@+id/predicateLayout_all_tag_box"
-            android:layout_width="match_parent"
+        <FrameLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorBackground"
-            android:layout_above="@+id/linearLayout6"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:padding="@dimen/default_small_dimen"
             >
-        </com.example.androidchoi.jobdam.PredicateLayout>
+
+            <com.example.androidchoi.jobdam.PredicateLayout
+                android:id="@+id/predicateLayout_all_tag_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/linearLayout6"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginRight="30dp"
+                >
+            </com.example.androidchoi.jobdam.PredicateLayout>
+
+            <ImageView
+                android:layout_width="@dimen/default_large_dimen"
+                android:layout_height="@dimen/default_large_dimen"
+                android:id="@+id/image_tag_box_close_button"
+                android:layout_gravity="right|top"
+                android:background="@color/colorPrimary"/>
+
+        </FrameLayout>
     </ScrollView>
 
     <com.github.clans.fab.FloatingActionMenu
