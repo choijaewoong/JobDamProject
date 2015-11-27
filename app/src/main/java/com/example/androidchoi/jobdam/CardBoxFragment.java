@@ -209,7 +209,7 @@ public class CardBoxFragment extends Fragment {
         final TextView t = new TextView(getActivity());
         t.setId(tagID);
         t.setText(tag);
-        t.setTextSize(12);
+        t.setTextSize(14);
         t.setTextColor(ContextCompat.getColor(getActivity(), android.R.color.white));
         t.setBackgroundResource(CategoryData.get(getActivity()).getCategoryList().get(categoryIndex).getImage());
         t.setPadding(20, 10, 20, 10);

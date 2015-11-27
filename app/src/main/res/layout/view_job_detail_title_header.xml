@@ -31,7 +31,7 @@
         android:layout_marginBottom="@dimen/default_dimen">
         <ToggleButton
             android:id="@+id/btn_detail_scrap"
-            android:layout_width="88dp"
+            android:layout_width="72dp"
             android:layout_height="32dp"
             android:text="@string/scrap"
             android:textOff="@string/scrap"
@@ -41,10 +41,10 @@
             android:textColor="@drawable/selector_button_text"
             android:layout_marginRight="@dimen/default_dimen"
             android:checked="false"
-            android:textSize="@dimen/font_size_semi_large"/>
+            android:textSize="@dimen/font_size_default"/>
         <Button
             android:id="@+id/btn_detail_move_homepage"
-            android:layout_width="88dp"
+            android:layout_width="72dp"
             android:layout_height="32dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
@@ -52,7 +52,7 @@
             android:text="@string/homepage"
             android:background="@drawable/selector_button_corp_page"
             android:textColor="@drawable/selector_button_text"
-            android:textSize="@dimen/font_size_semi_large"/>
+            android:textSize="@dimen/font_size_default"/>
     </LinearLayout>
 
     <View

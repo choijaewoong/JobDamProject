@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:app="http://schemas.android.com/apk/res-auto"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
@@ -15,24 +15,29 @@
         android:layout_height="match_parent"
         android:layout_gravity="left|top"
         android:clipToPadding="false"
-        android:divider="@android:color/transparent"/>
+        android:divider="@android:color/transparent"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"/>
 
-    <ScrollView
+    <com.example.androidchoi.jobdam.MyScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/scrollView_tag"
         android:fillViewport="false"
-        android:visibility="visible"
-        android:layout_marginTop="@dimen/search_view_height"
         android:clipToPadding="false"
-        android:focusable="false">
+        android:focusable="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/search_view_height"
+        android:visibility="gone">
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorBackground"
             android:padding="@dimen/default_small_dimen"
             >
-
             <com.example.androidchoi.jobdam.PredicateLayout
                 android:id="@+id/predicateLayout_all_tag_box"
                 android:layout_width="match_parent"
@@ -43,16 +48,14 @@
                 android:layout_marginRight="30dp"
                 >
             </com.example.androidchoi.jobdam.PredicateLayout>
-
             <ImageView
                 android:layout_width="@dimen/default_large_dimen"
                 android:layout_height="@dimen/default_large_dimen"
                 android:id="@+id/image_tag_box_close_button"
                 android:layout_gravity="right|top"
                 android:background="@color/colorPrimary"/>
-
         </FrameLayout>
-    </ScrollView>
+    </com.example.androidchoi.jobdam.MyScrollView>
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/menu"
@@ -86,7 +89,11 @@
         app:menu_labels_textColor="#FFFFFF"
         app:menu_labels_textSize="14sp"
         android:paddingRight="@dimen/default_small_dimen"
-        android:paddingBottom="@dimen/default_small_dimen">
+        android:paddingBottom="@dimen/default_small_dimen"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp">
         <!--app:menu_shadowColor="#66000000"-->
         <!--app:menu_shadowRadius="4dp"-->
         <!--app:menu_shadowXOffset="1dp"-->
@@ -134,4 +141,4 @@
 
     </com.github.clans.fab.FloatingActionMenu>
 
-</FrameLayout>
+</RelativeLayout>
