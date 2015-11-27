@@ -160,13 +160,16 @@
     android:layout_height="@dimen/shadow_depth"
     android:id="@+id/imageView11"
     android:background="@drawable/shadow_bottom"
-    android:visibility="visible"/>
+    android:visibility="visible"
+    />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/scrollView"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/default_small_dimen">
 
         <LinearLayout
             android:orientation="vertical"
@@ -179,11 +182,11 @@
                 android:text="시작"
                 android:id="@+id/text_start_header"
                 android:layout_marginLeft="@dimen/default_dimen"
-                android:layout_marginTop="@dimen/default_small_dimen"
                 android:layout_marginBottom="@dimen/default_small_dimen"
                 android:background="@drawable/button_calendar_start"
                 android:gravity="center"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white"
+                android:visibility="gone"/>
 
             <ListView
                 android:layout_width="wrap_content"
@@ -202,7 +205,9 @@
                 android:layout_marginBottom="@dimen/default_small_dimen"
                 android:gravity="center"
                 android:background="@drawable/button_calendar_end"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white"
+                android:visibility="gone"
+                />
 
             <ListView
                 android:layout_width="wrap_content"

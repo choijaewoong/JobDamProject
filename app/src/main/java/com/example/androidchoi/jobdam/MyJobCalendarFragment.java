@@ -4,7 +4,6 @@ package com.example.androidchoi.jobdam;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +22,7 @@ import com.example.androidchoi.jobdam.Calendar.CalendarManager;
 import com.example.androidchoi.jobdam.Calendar.ItemData;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Job;
+import com.example.androidchoi.jobdam.Model.MyJob;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
 import com.example.androidchoi.jobdam.Model.MyJobs;
 import com.example.androidchoi.jobdam.Model.User;
@@ -41,6 +41,8 @@ public class MyJobCalendarFragment extends Fragment {
     ListView mEndListView;
     MyJobItemAdapter mStartJobAdapter;
     MyJobItemAdapter mEndJobAdapter;
+    TextView textStartHeader;
+    TextView textEndHeader;
 
     private ArrayList<MyJobs> mJobList;
     private static boolean isWeekCalendar = true;
@@ -123,23 +125,33 @@ public class MyJobCalendarFragment extends Fragment {
             }
         });
 
+        textStartHeader = (TextView)view.findViewById(R.id.text_start_header);
+        textEndHeader = (TextView)view.findViewById(R.id.text_end_header);
         gridView = (GridView)view.findViewById(R.id.grid_view_calendar);
         gridView.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 CalendarItem calendarItem =  mCallback.onDateCheck(position);
-                mCalendarAdapter.notifyDataSetChanged();
                 mStartJobAdapter.setItems(new ArrayList<MyJobs>());
                 mEndJobAdapter.setItems(new ArrayList<MyJobs>());
-                Log.i("dd", calendarItem.getStartItems().size() + "");
-                Log.i("dd", calendarItem.getEndItems().size() + "");
-                for(int i = 0 ; i < calendarItem.getStartItems().size(); i++ ) {
-                    mStartJobAdapter.add(((ItemData) calendarItem.getStartItems().get(i)).getMyJob());
+                int startCount =  calendarItem.getStartItems().size();
+                int endCount = calendarItem.getEndItems().size();
+
+                if(startCount != 0){
+                    textStartHeader.setVisibility(View.VISIBLE);
+                    for(int i = 0 ; i < startCount; i++ ) {
+                        mStartJobAdapter.add(findJob(((ItemData) calendarItem.getStartItems().get(i)).getJobId()));
+                    }
                 }
-                for(int i = 0 ; i < calendarItem.getEndItems().size(); i++ ) {
-                    mEndJobAdapter.add(((ItemData) calendarItem.getEndItems().get(i)).getMyJob());
+                else { textStartHeader.setVisibility(View.GONE); }
+                if(endCount != 0) {
+                    textEndHeader.setVisibility(View.VISIBLE);
+                    for(int i = 0 ; i < endCount; i++ ) {
+                        mEndJobAdapter.add(findJob(((ItemData) calendarItem.getEndItems().get(i)).getJobId()));
+                    }
                 }
+                else { textEndHeader.setVisibility(View.GONE); }
                 ListUtils.setDynamicHeight(mStartListView);
                 ListUtils.setDynamicHeight(mEndListView);
                 mStartJobAdapter.notifyDataSetChanged();
@@ -185,16 +197,25 @@ public class MyJobCalendarFragment extends Fragment {
                 mJobList = result.getJobList();
 //                mAdapter.setItems(mJobList);
                 mItemdata = new ArrayList<ItemData>();
-                for(int i=0; i<mJobList.size(); i++){
+                for (int i = 0; i < mJobList.size(); i++) {
                     mItemdata.add(new ItemData(mJobList.get(i).getJob(), true));
                     mItemdata.add(new ItemData(mJobList.get(i).getJob(), false));
                 }
                 refreshView();
             }
+
             @Override
             public void onFail(int code) {
                 Toast.makeText(getActivity(), code + "", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public MyJob findJob(int id){
+        for(MyJobs myJobs : mJobList){
+            if(myJobs.getJob().getId() == id)
+                return myJobs.getJob();
+        }
+        return null;
     }
 }

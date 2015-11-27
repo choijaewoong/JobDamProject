@@ -10,14 +10,14 @@ public class ItemData implements CalendarManager.CalendarComparable<ItemData>{
 	public int year;
 	public int month;
 	public int day;
-	private MyJob myJob;
+	private int JobId;
 	private boolean isStart = true;
 	public boolean isStart() { return isStart; }
-	public MyJob getMyJob() { return myJob; }
+	public int getJobId() { return JobId; }
 
 	public ItemData(MyJob myJob, boolean isStart) {
 		Date date;
-		this.myJob = myJob;
+		this.JobId = myJob.getId();
 		this.isStart = isStart;
 		if(this.isStart){
 			date = new Date(myJob.getStart() * 1000L);

@@ -13,7 +13,7 @@ public class User {
         return instance;
     }
 
-    private String user_id = "test@test.com2";
+    private String user_id = "test@test.com22";
     private String user_name = "user";
     private String message;
 

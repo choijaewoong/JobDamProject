@@ -25,7 +25,7 @@ public class CalendarManager {
 	private Calendar mCalendar;
 	private Calendar mWeekCalendar;
 	
-	private ArrayList mData = new ArrayList();
+	private ArrayList mData = new ArrayList(); //
 	
 	public static CalendarManager getInstance() {
 		if (instance == null) {

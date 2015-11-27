@@ -54,8 +54,6 @@ public class CalendarAdapter extends BaseAdapter {
 	MyJobCalendarFragment.OnDateCheckCallback callback = new MyJobCalendarFragment.OnDateCheckCallback() {
 		@Override
 		public CalendarItem onDateCheck(int position) {
-//			mRelativeLayout.setBackgroundResource(R.color.colorPrimary);
-//			Toast.makeText(getActivity(), "선택", Toast.LENGTH_SHORT).show();
 			Log.i("????", mData.days.get(position).dayOfMonth + "");
 			for(int i =0 ; i<mData.days.size(); i++){
 				mData.days.get(i).checked = false;
@@ -63,8 +61,6 @@ public class CalendarAdapter extends BaseAdapter {
 			mData.days.get(position).checked = true;
 			notifyDataSetChanged();
 			return mData.days.get(position);
-//			mCheckDate = item;
-//			notifyDataSetInvalidated();
 		}
 	};
 	@Override
