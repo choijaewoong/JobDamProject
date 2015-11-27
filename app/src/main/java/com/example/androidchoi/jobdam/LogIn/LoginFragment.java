@@ -23,7 +23,7 @@ import com.example.androidchoi.jobdam.R;
  * A simple {@link Fragment} subclass.
  */
 public class LoginFragment extends Fragment {
-    public static final String MESSAGE_LOGIN_SUCCESS = "Login success";
+    public static final String MESSAGE_LOGIN_SUCCESS = "Login Success";
 
     TextView mTextSignUp;
     EditText mEditEmail;
