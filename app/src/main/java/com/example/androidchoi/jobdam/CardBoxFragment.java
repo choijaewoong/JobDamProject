@@ -7,8 +7,12 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,14 +23,16 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.CardItemAdapter;
 import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
-import com.example.androidchoi.jobdam.Model.MyCardLab;
+import com.example.androidchoi.jobdam.Model.CategoryData;
 import com.example.androidchoi.jobdam.Model.MyCard;
+import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyCards;
 import com.example.androidchoi.jobdam.Model.User;
 import com.github.clans.fab.FloatingActionButton;
@@ -50,29 +56,20 @@ public class CardBoxFragment extends Fragment {
     ImageView mDeleteImage;
     private ArrayList<MyCards> mCardList;
     TextView mCountTextView;
+    PredicateLayout mPredicateLayout;
+    ScrollView mScrollView;
+    ArrayList<TextView> mTextTags = new ArrayList<TextView>();
 
     public CardBoxFragment() {
         // Required empty public constructor
         setHasOptionsMenu(true);
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode != Activity.RESULT_OK){ return; }
-        NetworkManager.getInstance().showMyMemo(getActivity(),
-                User.USER_NAME, new NetworkManager.OnResultListener<MyCardLab>() {
-                    @Override
-                    public void onSuccess(MyCardLab result) {
-                        mCardList = result.getCardList();
-                        mAdapter.setItems(mCardList);
-                        mCountTextView.setText("총 " + mAdapter.getCount() + "건");
-                    }
-
-                    @Override
-                    public void onFail(int code) {
-                        Toast.makeText(MyApplication.getContext(), code + "", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        showMyMemo();
         if(requestCode == REQUEST_MODIFY){
         }else if(requestCode == REQUEST_NEW){
             mListView.smoothScrollToPositionFromTop(0, 0, 500);
@@ -84,29 +81,17 @@ public class CardBoxFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         TextView subTitle = (TextView) getActivity().findViewById(R.id.text_subtitle);
         subTitle.setText(R.string.card_box);
-
-        NetworkManager.getInstance().showMyMemo(getActivity(),
-                User.USER_NAME, new NetworkManager.OnResultListener<MyCardLab>() {
-            @Override
-            public void onSuccess(MyCardLab result) {
-                mCardList = result.getCardList();
-                mAdapter.setItems(mCardList);
-                mCountTextView.setText("총 " + mAdapter.getCount() + "건");
-            }
-            @Override
-            public void onFail(int code) {
-                Toast.makeText(MyApplication.getContext(), code + "", Toast.LENGTH_SHORT).show();
-            }
-        });
+        showMyMemo();
         FrameLayout touchInterceptor = (FrameLayout)getActivity().findViewById(R.id.touchInterceptor);
         touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if (mSearchEdit.isFocused()) {
+                    if (mSearchEdit.isFocused() || mPredicateLayout.isFocused()) {
                         Rect outRect = new Rect();
                         mSearchEdit.getGlobalVisibleRect(outRect);
                         if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
+                            mScrollView.setVisibility(View.GONE);
                             mSearchEdit.clearFocus();
                             InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
@@ -122,9 +107,10 @@ public class CardBoxFragment extends Fragment {
                              Bundle savedInstanceState) {
         View shadowToolbar = getActivity().findViewById(R.id.toolbar_shadow);
         shadowToolbar.setVisibility(View.VISIBLE);
-        View view = inflater.inflate(R.layout.fragment_card_box, container, false);
+        final View view = inflater.inflate(R.layout.fragment_card_box, container, false);
         View searchHeaderView = inflater.inflate(R.layout.view_item_search_header, null);
         View countHeaderView = inflater.inflate(R.layout.view_item_count_header, null);
+        mScrollView = (ScrollView) view.findViewById(R.id.scrollView_tag);
         mListView = (ListView) view.findViewById(R.id.listview_card);
         mListView.addHeaderView(searchHeaderView);
         mListView.addHeaderView(countHeaderView, null, false);
@@ -140,19 +126,10 @@ public class CardBoxFragment extends Fragment {
         mSearchEdit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                ArrayList<CardData> cardList = new ArrayList<CardData>();
-//                for (CardData c : mCardList) {
-//                    if (c.getTitle().contains(s)) {
-//                        cardList.add(c);
-//                    }
-//                }
-//                mAdapter.setItems(cardList);
-//                mCountTextView.setText("총 " + mAdapter.getCount() + "건");
             }
 
             @Override
@@ -162,6 +139,25 @@ public class CardBoxFragment extends Fragment {
                     mDeleteImage.setVisibility(View.VISIBLE);
                 } else {
                     mDeleteImage.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+        mSearchEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus) {
+                    mScrollView.setVisibility(View.VISIBLE);
+                    int total = 0;
+                    for (int i = 0; i < mCardList.size(); i++) {
+                        int categoryIndex = mCardList.get(i).getCard().getCategory();
+                        for (String tag : mCardList.get(i).getCard().getTags()) {
+                            addTagView(tag, categoryIndex, i, total);
+                            total++;
+                        }
+                    }
+                    Log.i("count", total+"");
+                } else{
+//                    scrollView.setVisibility(View.GONE);
                 }
             }
         });
@@ -192,6 +188,8 @@ public class CardBoxFragment extends Fragment {
         });
         FloatingActionButton addCategoryButton = (FloatingActionButton) view.findViewById(R.id.fab_add_category);
         mCountTextView = (TextView) view.findViewById(R.id.text_item_count);
+        mPredicateLayout = (PredicateLayout)view.findViewById(R.id.predicateLayout_all_tag_box);
+
         return view;
     }
     @Override
@@ -199,4 +197,57 @@ public class CardBoxFragment extends Fragment {
         super.onResume();
 
     }
+
+    public void addTagView(String tag, int categoryIndex, final int index, int tagID){
+        final TextView t = new TextView(getActivity());
+        t.setId(tagID);
+        t.setText(tag);
+        t.setTextSize(12);
+        t.setTextColor(ContextCompat.getColor(getActivity(), android.R.color.white));
+        t.setBackgroundResource(CategoryData.get(getActivity()).getCategoryList().get(categoryIndex).getImage());
+        t.setPadding(20, 10, 20, 10);
+        int width = getResources().getDimensionPixelSize(R.dimen.tag_max_width);
+        t.setMaxWidth(width);
+        t.setSingleLine(true);
+        t.setEllipsize(TextUtils.TruncateAt.END);
+        t.setGravity(Gravity.CENTER);
+        t.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(int i=0; i<mTextTags.size(); i++){
+                    if(t == mTextTags.get(i)){
+//                        Toast.makeText(CardWriteActivity.this, "해당 태그가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), CardWriteActivity.class);
+                        intent.putExtra(MyCard.CARD_ITEM, mCardList.get(index));
+                        intent.putExtra(MyCard.CARD_NEW, false);
+                        startActivityForResult(intent, REQUEST_MODIFY);
+                    }
+                }
+            }
+        });
+        for(int i=0; i<mTextTags.size(); i++) {
+            if (t.getId() == mTextTags.get(i).getId()) {
+                return;
+            }
+        }
+        mTextTags.add(t);
+        mPredicateLayout.addView(mTextTags.get(mTextTags.size() - 1));
+    }
+
+    public void showMyMemo() {
+        NetworkManager.getInstance().showMyMemo(getActivity(),
+                User.USER_NAME, new NetworkManager.OnResultListener<MyCardLab>() {
+                    @Override
+                    public void onSuccess(MyCardLab result) {
+                        mCardList = result.getCardList();
+                        mAdapter.setItems(mCardList);
+                        mCountTextView.setText("총 " + mAdapter.getCount() + "건");
+                    }
+                    @Override
+                    public void onFail(int code) {
+                        Toast.makeText(MyApplication.getContext(), code + "", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
 }

@@ -17,12 +17,27 @@
         android:clipToPadding="false"
         android:divider="@android:color/transparent"/>
 
-    <ImageView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/image_background_blur"
-        android:background="#88000000"
-        android:visibility="gone"/>
+        android:layout_height="150dp"
+        android:id="@+id/scrollView_tag"
+        android:fillViewport="false"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/search_view_height"
+        android:clipToPadding="false"
+        android:padding="@dimen/default_small_dimen"
+        android:focusable="false">
+        <com.example.androidchoi.jobdam.PredicateLayout
+            android:id="@+id/predicateLayout_all_tag_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBackground"
+            android:layout_above="@+id/linearLayout6"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            >
+        </com.example.androidchoi.jobdam.PredicateLayout>
+    </ScrollView>
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/menu"
