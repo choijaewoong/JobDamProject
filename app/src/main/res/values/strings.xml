@@ -48,6 +48,8 @@
     <string name="user_password">비밀번호</string>
     <string name="user_password_check">비밀번호 확인</string>
     <string name="submit_user_info">입력 완료</string>
+    <string name="no_user">로그인 실패! 존재하지 않는 아이디입니다.</string>
+    <string name="diff_pw">로그인 실패! 비밀번호가 다릅니다.</string>
 
     <!-- JobDam Talk -->
     <string name="save_article">저장</string>

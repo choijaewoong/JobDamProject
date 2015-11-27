@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.MainActivity;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Manager.PropertyManager;
-import com.example.androidchoi.jobdam.Model.NetworkMessage;
+import com.example.androidchoi.jobdam.Model.LoginData;
+import com.example.androidchoi.jobdam.Model.User;
 import com.example.androidchoi.jobdam.R;
 
 
@@ -23,9 +23,12 @@ import com.example.androidchoi.jobdam.R;
  * A simple {@link Fragment} subclass.
  */
 public class LoginFragment extends Fragment {
-    public static final String MESSAGE_LOGIN_SUCCESS = "Login Success";
+    public static final String MESSAGE_SUCCESS = "Login Success";
+    public static final String MESSAGE_NO_USER  = "사용자가 없습니다.";
+    public static final String MESSAGE_DIFF_PW = "비밀번호가 다릅니다.";
 
     TextView mTextSignUp;
+    TextView mTextFailMessage;
     EditText mEditEmail;
     EditText mEditPassWord;
     public LoginFragment() {
@@ -37,6 +40,7 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+        mTextFailMessage = (TextView)view.findViewById(R.id.text_login_fail_message);
         Button btn = (Button)view.findViewById(R.id.btn_sign_in);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,18 +48,24 @@ public class LoginFragment extends Fragment {
                 final String email = mEditEmail.getText().toString();
                 final String password = mEditPassWord.getText().toString();
                 NetworkManager.getInstance().login(getActivity(), email, password,
-                        new NetworkManager.OnResultListener<NetworkMessage>() {
+                        new NetworkManager.OnResultListener<LoginData>() {
                     @Override
-                    public void onSuccess(NetworkMessage result) {
-                        if (result.getMessage().equals(MESSAGE_LOGIN_SUCCESS)){
+                    public void onSuccess(LoginData result) {
+                        if (result.getMessage().equals(MESSAGE_SUCCESS)){
                             PropertyManager.getInstance().setId(email);
                             PropertyManager.getInstance().setPassword(password);
+                            User.getInstance().setUser(result.getUserId(), result.getName());
                             startActivity(new Intent(getContext(), MainActivity.class));
                             getActivity().finish();
                         } else {
-                            mEditEmail.setText("");
+                            mTextFailMessage.setVisibility(View.VISIBLE);
+                            if(result.getMessage().equals(MESSAGE_NO_USER)){
+                                mTextFailMessage.setText(getString(R.string.no_user));
+                                mEditEmail.setText("");
+                            }else if(result.getMessage().equals(MESSAGE_DIFF_PW)){
+                                mTextFailMessage.setText(getString(R.string.diff_pw));
+                            }
                             mEditPassWord.setText("");
-                            Toast.makeText(getActivity(), "사용자 정보가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                     @Override
@@ -66,7 +76,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-       mTextSignUp = (TextView)view.findViewById(R.id.text_sign_up);
+        mTextSignUp = (TextView)view.findViewById(R.id.text_sign_up);
         mTextSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

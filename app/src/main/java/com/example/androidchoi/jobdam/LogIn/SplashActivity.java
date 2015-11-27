@@ -10,7 +10,8 @@ import android.text.TextUtils;
 import com.example.androidchoi.jobdam.MainActivity;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Manager.PropertyManager;
-import com.example.androidchoi.jobdam.Model.NetworkMessage;
+import com.example.androidchoi.jobdam.Model.LoginData;
+import com.example.androidchoi.jobdam.Model.User;
 import com.example.androidchoi.jobdam.R;
 
 public class SplashActivity extends AppCompatActivity {
@@ -23,16 +24,16 @@ public class SplashActivity extends AppCompatActivity {
         String id = PropertyManager.getInstance().getId();
         if (!TextUtils.isEmpty(id)) {
             String password = PropertyManager.getInstance().getPassword();
-            NetworkManager.getInstance().login(getApplicationContext(), id, password, new NetworkManager.OnResultListener<NetworkMessage>() {
+            NetworkManager.getInstance().login(getApplicationContext(), id, password, new NetworkManager.OnResultListener<LoginData>() {
                 @Override
-                public void onSuccess(NetworkMessage result) {
-                    if (result.getMessage().equals(LoginFragment.MESSAGE_LOGIN_SUCCESS)) {
+                public void onSuccess(LoginData result) {
+                    if (result.getMessage().equals(LoginFragment.MESSAGE_SUCCESS)) {
+                        User.getInstance().setUser(result.getUserId(), result.getName());
                         goMain();
                     } else {
                         goLogin();
                     }
                 }
-
                 @Override
                 public void onFail(int code) {
 
@@ -44,7 +45,8 @@ public class SplashActivity extends AppCompatActivity {
                 public void run() {
                     goLogin();
                 }
-            }, 1000);
+            }, 1500);
+
         }
     }
     Handler mHandler = new Handler(Looper.getMainLooper());

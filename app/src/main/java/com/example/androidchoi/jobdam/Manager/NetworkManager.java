@@ -9,7 +9,7 @@ import com.example.androidchoi.jobdam.Model.Articles;
 import com.example.androidchoi.jobdam.Model.JobList;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
-import com.example.androidchoi.jobdam.Model.NetworkMessage;
+import com.example.androidchoi.jobdam.Model.LoginData;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -151,14 +151,12 @@ public class NetworkManager {
     private static final String SERVER = "http://52.69.235.46:3000";
 
     // 내가 담은 채용정보 불러오는 method
-    private static final String SHOW_MY_JOB = SERVER + "/showmyscrap/%s";
-
-    public void showMyJob(Context context, String user_id, final OnResultListener<MyJobLab> listener) {
+    private static final String SHOW_MY_JOB = SERVER + "/showmyscrap";
+    public void showMyJob(Context context, final OnResultListener<MyJobLab> listener) {
         RequestParams params = new RequestParams();
-        String url = String.format(SHOW_MY_JOB, user_id);
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
-        client.get(context, url, headers, params, new TextHttpResponseHandler() {
+        client.get(context, SHOW_MY_JOB, headers, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
@@ -357,7 +355,7 @@ public class NetworkManager {
     }
 
     public static final String LOG_IN = SERVER + "/login";
-    public void login(Context context, String userid, String password, final OnResultListener<NetworkMessage> listener) {
+    public void login(Context context, String userid, String password, final OnResultListener<LoginData> listener) {
 //        mHandler.postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
@@ -375,8 +373,8 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Log.i("ddd", "로그인");
-                NetworkMessage networkMessage = new Gson().fromJson(responseString, NetworkMessage.class);
-                listener.onSuccess(networkMessage);
+                LoginData loginData = new Gson().fromJson(responseString, LoginData.class);
+                listener.onSuccess(loginData);
             }
         });
     }

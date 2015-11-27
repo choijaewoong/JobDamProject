@@ -13,23 +13,21 @@ public class User {
         return instance;
     }
 
-    private String user_id = "test@test.com22";
-    private String user_name = "user";
+    private String userId = "test@test.com22";
+    private String userName = "user";
     private String message;
 
     public String getUserId() {
-        return user_id;
+        return userId;
     }
     public String getUserName() {
-        return user_name;
+        return userName;
     }
     public String getMessage() {
         return message;
     }
-    public void setUserId(String user_id) {
-        this.user_id = user_id;
-    }
-    public void setUserName(String user_name) {
-        this.user_name = user_name;
+    public void setUser(String userId , String userName) {
+        this.userId = userId;
+        this.userName = userName;
     }
 }

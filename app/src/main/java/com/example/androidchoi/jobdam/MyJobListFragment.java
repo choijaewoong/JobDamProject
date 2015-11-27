@@ -27,7 +27,6 @@ import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Job;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
 import com.example.androidchoi.jobdam.Model.MyJobs;
-import com.example.androidchoi.jobdam.Model.User;
 
 import java.util.ArrayList;
 
@@ -151,7 +150,7 @@ public class MyJobListFragment extends Fragment {
     }
 
     public void showMyJob(){
-        NetworkManager.getInstance().showMyJob(getActivity(), User.getInstance().getUserId(), new NetworkManager.OnResultListener<MyJobLab>() {
+        NetworkManager.getInstance().showMyJob(getActivity(), new NetworkManager.OnResultListener<MyJobLab>() {
             @Override
             public void onSuccess(MyJobLab result) {
 //                ((MyJobFragment)getParentFragment()).setJobList(result.getJobList());

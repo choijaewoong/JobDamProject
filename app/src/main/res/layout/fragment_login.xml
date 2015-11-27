@@ -72,7 +72,8 @@
             android:layout_below="@+id/editText_login_password"
             android:layout_centerHorizontal="true"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/font_size_default"/>
+            android:textSize="@dimen/font_size_default"
+            android:layout_marginBottom="@dimen/default_small_dimen"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -87,7 +88,7 @@
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:id="@+id/imageView6"
+            android:id="@+id/image_google_login_button"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -96,30 +97,29 @@
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:id="@+id/imageView7"
+            android:id="@+id/image_faceBook_login_button"
             android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@+id/imageView6"
-            android:layout_toStartOf="@+id/imageView6"
+            android:layout_toLeftOf="@+id/image_google_login_button"
+            android:layout_toStartOf="@+id/image_google_login_button"
             android:src="@drawable/image_facebook"
             android:layout_marginRight="@dimen/default_small_dimen"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/textView17"
+            android:id="@+id/text_login_fail_message"
             android:layout_below="@+id/btn_sign_in"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/white"
-            android:layout_marginTop="@dimen/default_small_dimen"
-            android:layout_marginBottom="@dimen/default_small_dimen"/>
+            android:layout_marginBottom="@dimen/default_small_dimen"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_below="@+id/textView17"
+            android:layout_below="@+id/text_login_fail_message"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true">
 
@@ -142,8 +142,8 @@
                 android:text=" 가입하기"
                 android:id="@+id/text_sign_up"
                 android:layout_below="@+id/btn_sign_in"
-                android:layout_toLeftOf="@+id/imageView6"
-                android:layout_toStartOf="@+id/imageView6"
+                android:layout_toLeftOf="@+id/image_google_login_button"
+                android:layout_toStartOf="@+id/image_google_login_button"
                 android:textColor="#ffffff"/>
 
         </LinearLayout>

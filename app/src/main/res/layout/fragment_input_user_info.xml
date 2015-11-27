@@ -4,7 +4,8 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
               android:orientation="vertical"
-             tools:context="com.example.androidchoi.jobdam.LogIn.InputUserInfoFragment">
+             tools:context="com.example.androidchoi.jobdam.LogIn.InputUserInfoFragment"
+              android:background="@android:color/white">
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.v7.widget.Toolbar

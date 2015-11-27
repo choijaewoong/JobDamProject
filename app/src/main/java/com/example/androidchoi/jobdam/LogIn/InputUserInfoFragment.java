@@ -16,6 +16,7 @@ import android.widget.EditText;
 import com.example.androidchoi.jobdam.MainActivity;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Manager.PropertyManager;
+import com.example.androidchoi.jobdam.Model.User;
 import com.example.androidchoi.jobdam.R;
 
 
@@ -27,6 +28,7 @@ public class InputUserInfoFragment extends Fragment {
     EditText mEditName;
     EditText mEditEmail;
     EditText mEditPassword;
+    EditText mEditPasswordCheck;
 
     public InputUserInfoFragment() {
         // Required empty public constructor
@@ -43,7 +45,9 @@ public class InputUserInfoFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
         mEditEmail = (EditText) view.findViewById(R.id.editText_signup_email);
+        mEditName = (EditText)view.findViewById(R.id.editText_signup_name);
         mEditPassword = (EditText) view.findViewById(R.id.editText_signup_password);
+        mEditPasswordCheck = (EditText)view.findViewById(R.id.editText_signup_password_check);
 
         Button btn = (Button) view.findViewById(R.id.btn_input_complete);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -54,13 +58,15 @@ public class InputUserInfoFragment extends Fragment {
                         @Override
                     public void onSuccess(String result) {
                         if (result.equals("success")) {
-                            PropertyManager.getInstance().setId(mEditEmail.getText().toString());
+                            String email = mEditEmail.getText().toString();
+                            String name = mEditName.getText().toString();
+                            PropertyManager.getInstance().setId(email);
                             PropertyManager.getInstance().setPassword(mEditPassword.getText().toString());
+                            User.getInstance().setUser(email, name);
                             startActivity(new Intent(getContext(), MainActivity.class));
                             getActivity().finish();
                         } else {
-
-                            // ...
+                                                    // ...
                         }
                     }
                     @Override
