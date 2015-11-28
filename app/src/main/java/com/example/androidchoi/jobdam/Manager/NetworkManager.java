@@ -333,7 +333,6 @@ public class NetworkManager {
             }
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Log.i("ddd", "로그인");
                 LoginData loginData = new Gson().fromJson(responseString, LoginData.class);
                 listener.onSuccess(loginData);
             }
@@ -341,7 +340,7 @@ public class NetworkManager {
     }
 
     public static final String SIGN_UP = SERVER + "/signup";
-    public void signup(Context context, String userid, String password, String name, final OnResultListener<String> listener) {
+    public void signup(Context context, String userid, String password, String name, final OnResultListener<LoginData> listener) {
             RequestParams params = new RequestParams();
             params.put("user_id", userid);
             params.put("pw", password);
@@ -352,7 +351,8 @@ public class NetworkManager {
                 }
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                    listener.onSuccess(responseString);
+                    LoginData loginData = new Gson().fromJson(responseString, LoginData.class);
+                    listener.onSuccess(loginData);
                 }
             });
         }

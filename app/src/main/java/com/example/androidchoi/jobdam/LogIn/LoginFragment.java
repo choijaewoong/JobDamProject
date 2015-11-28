@@ -26,6 +26,8 @@ public class LoginFragment extends Fragment {
     public static final String MESSAGE_SUCCESS = "Login Success";
     public static final String MESSAGE_NO_USER  = "사용자가 없습니다.";
     public static final String MESSAGE_DIFF_PW = "비밀번호가 다릅니다.";
+    public static final String MESSAGE_MISSING = "Missing credentials";
+    public static final String MESSAGE_DUPLICATION = "중복된 id 입니다.";
 
     TextView mTextSignUp;
     TextView mTextFailMessage;
@@ -59,7 +61,10 @@ public class LoginFragment extends Fragment {
                             getActivity().finish();
                         } else {
                             mTextFailMessage.setVisibility(View.VISIBLE);
-                            if(result.getMessage().equals(MESSAGE_NO_USER)){
+                            if(result.getMessage().equals(MESSAGE_MISSING)){
+                                mTextFailMessage.setText(getString(R.string.missing_credentials));
+                            }
+                            else if(result.getMessage().equals(MESSAGE_NO_USER)){
                                 mTextFailMessage.setText(getString(R.string.no_user));
                                 mEditEmail.setText("");
                             }else if(result.getMessage().equals(MESSAGE_DIFF_PW)){
