@@ -61,6 +61,6 @@
     <string name="check_scrap">스크랩 되었습니다.</string>
     <string name="check_not_scrap">이미 스크랩 되어있습니다.</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- notice String -->
 
 </resources>

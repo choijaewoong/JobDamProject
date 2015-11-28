@@ -2,14 +2,16 @@
              xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.dongja94.sampleslidingmenu.TwoFragment"
-             android:padding="24dp">
+    >
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ExpandableListView
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listview_announcement"
+        android:id="@+id/listView_notice"
         android:layout_gravity="left|top"
-        android:scrollbars="none"/>
+        android:listSelector="@android:color/transparent"
+        android:clipToPadding="false"
+        android:divider="@android:color/transparent"/>
 </FrameLayout>

@@ -25,6 +25,7 @@ import com.example.androidchoi.jobdam.Model.Job;
 import com.example.androidchoi.jobdam.Model.MyJob;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
 import com.example.androidchoi.jobdam.Model.MyJobs;
+import com.example.androidchoi.jobdam.Util.ListUtils;
 
 import java.util.ArrayList;
 

@@ -253,7 +253,7 @@
                 android:visibility="visible"/>
         </ScrollView>
 
-        <com.example.androidchoi.jobdam.PredicateLayout
+        <com.example.androidchoi.jobdam.Util.PredicateLayout
             android:id="@+id/tag_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -261,7 +261,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true">
 
-        </com.example.androidchoi.jobdam.PredicateLayout>
+        </com.example.androidchoi.jobdam.Util.PredicateLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout6"

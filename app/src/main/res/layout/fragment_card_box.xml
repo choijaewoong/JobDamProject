@@ -21,7 +21,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"/>
 
-    <com.example.androidchoi.jobdam.MyScrollView
+    <com.example.androidchoi.jobdam.Util.MyScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/scrollView_tag"
@@ -38,7 +38,7 @@
             android:background="@color/colorBackground"
             android:padding="@dimen/default_small_dimen"
             >
-            <com.example.androidchoi.jobdam.PredicateLayout
+            <com.example.androidchoi.jobdam.Util.PredicateLayout
                 android:id="@+id/predicateLayout_all_tag_box"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginRight="30dp"
                 >
-            </com.example.androidchoi.jobdam.PredicateLayout>
+            </com.example.androidchoi.jobdam.Util.PredicateLayout>
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -55,7 +55,7 @@
                 android:layout_gravity="right|top"
                 android:src="@drawable/button_search_delete"/>
         </FrameLayout>
-    </com.example.androidchoi.jobdam.MyScrollView>
+    </com.example.androidchoi.jobdam.Util.MyScrollView>
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/menu"

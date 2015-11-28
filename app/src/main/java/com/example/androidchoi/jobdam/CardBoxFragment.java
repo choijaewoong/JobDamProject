@@ -34,6 +34,7 @@ import com.example.androidchoi.jobdam.Model.CategoryData;
 import com.example.androidchoi.jobdam.Model.MyCard;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyCards;
+import com.example.androidchoi.jobdam.Util.PredicateLayout;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -107,8 +108,8 @@ public class CardBoxFragment extends Fragment {
         View shadowToolbar = getActivity().findViewById(R.id.toolbar_shadow);
         shadowToolbar.setVisibility(View.VISIBLE);
         final View view = inflater.inflate(R.layout.fragment_card_box, container, false);
-        View searchHeaderView = inflater.inflate(R.layout.view_item_search_header, null);
-        View countHeaderView = inflater.inflate(R.layout.view_item_count_header, null);
+        View searchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
+        View countHeaderView = inflater.inflate(R.layout.view_header_item_count, null);
         mListView = (ListView) view.findViewById(R.id.listview_card);
         mListView.addHeaderView(searchHeaderView);
         mListView.addHeaderView(countHeaderView, null, false);

@@ -22,6 +22,7 @@ import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.CategoryData;
 import com.example.androidchoi.jobdam.Model.MyCard;
 import com.example.androidchoi.jobdam.Model.MyCards;
+import com.example.androidchoi.jobdam.Util.PredicateLayout;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

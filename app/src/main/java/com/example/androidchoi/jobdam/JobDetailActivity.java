@@ -53,8 +53,8 @@ public class JobDetailActivity extends AppCompatActivity {
         mExpandableListView = (ExpandableListView) findViewById(R.id.listview_job_detail_expandable);
         mExpandableAdapter = new JobDetailAdapter();
         // 헤더뷰 설정
-        View corpHeaderView = getLayoutInflater().inflate(R.layout.view_job_detail_corp_header, null);
-        View titleHeaderView = getLayoutInflater().inflate(R.layout.view_job_detail_title_header, null);
+        View corpHeaderView = getLayoutInflater().inflate(R.layout.view_header_job_detail_corp, null);
+        View titleHeaderView = getLayoutInflater().inflate(R.layout.view_header_job_detail_title, null);
         ToggleButton scrapButton = (ToggleButton) titleHeaderView.findViewById(R.id.btn_detail_scrap);
         scrapButton.setOnClickListener(new View.OnClickListener() {
             @Override
