@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/colorBackground"
     tools:context="com.example.androidchoi.jobdam.Setting.AlarmSettingActivity">
 
@@ -35,4 +36,296 @@
         android:layout_gravity="center"
         android:background="@drawable/shadow_bottom"/>
 
-</RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="기본설정"
+        android:id="@+id/textView17"
+        android:layout_marginLeft="@dimen/default_dimen"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_size_small"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:background="@color/colorDivider"
+        android:layout_below="@+id/toolbar_shadow"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="알림전체"
+            android:id="@+id/textView21"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/font_size_large"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="@dimen/default_dimen"/>
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New ToggleButton"
+            android:id="@+id/toggleButton_auto_login"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/default_dimen"
+            android:checked="false"/>
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:background="@color/colorDivider"
+        android:layout_below="@+id/toolbar_shadow"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="서비스별 설정"
+        android:id="@+id/textView18"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="@dimen/default_dimen"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_size_small"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:background="@color/colorDivider"
+        android:layout_below="@+id/toolbar_shadow"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="스크랩한 공고 마감 알림"
+            android:id="@+id/text_my_job_alram"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/font_size_large"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="@dimen/default_dimen"/>
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New ToggleButton"
+            android:id="@+id/toggle_my_job_alarm"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/default_dimen"
+            android:checked="false"/>
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:background="@color/colorDivider"
+        android:layout_below="@+id/toolbar_shadow"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="관심기업 신규공고 알림"
+            android:id="@+id/text_new_job_alarm"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/font_size_large"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="@dimen/default_dimen"/>
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New ToggleButton"
+            android:id="@+id/toggle_new_job_alarm"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/default_dimen"
+            android:checked="false"/>
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:background="@color/colorDivider"
+        android:layout_below="@+id/toolbar_shadow"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="공지 및 이벤트 알림"
+            android:id="@+id/text_notice_alarm"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/font_size_large"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="@dimen/default_dimen"/>
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New ToggleButton"
+            android:id="@+id/toggle_notice_alarm"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/default_dimen"
+            android:checked="false"/>
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:background="@color/colorDivider"
+        android:layout_below="@+id/toolbar_shadow"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="잡담톡 알림"
+            android:id="@+id/text_board_alarm"
+            android:textSize="@dimen/font_size_large"
+            android:textColor="@android:color/black"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/default_dimen"
+            android:layout_marginTop="@dimen/default_small_dimen"/>
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New ToggleButton"
+            android:id="@+id/toggle_board_alarm"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/default_dimen"
+            android:checked="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내가 작성한 글에 공감 받을 시 알림"
+            android:id="@+id/textView25"
+            android:layout_below="@+id/text_board_alarm"
+            android:layout_alignLeft="@+id/text_board_alarm"
+            android:layout_alignStart="@+id/text_board_alarm"
+            android:layout_marginTop="@dimen/default_small_dimen"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/font_size_min"/>
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:background="@color/colorDivider"
+        android:layout_below="@+id/toolbar_shadow"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="알림통통 새소식 알림 설정"
+        android:id="@+id/textView19"
+        android:layout_marginLeft="@dimen/default_dimen"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_size_small"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:background="@color/colorDivider"
+        android:layout_below="@+id/toolbar_shadow"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="에티켓 알림 설정"
+            android:id="@+id/textView23"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="@dimen/font_size_large"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="@dimen/default_dimen"
+            android:layout_marginTop="@dimen/default_small_dimen"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="에티켓 시간인 오후 9시 ~ 오전 8시 사이에는 소리 알림이 울리지 않습니다."
+            android:id="@+id/textView26"
+            android:layout_below="@+id/textView23"
+            android:layout_alignLeft="@+id/textView23"
+            android:layout_alignStart="@+id/textView23"
+            android:layout_marginTop="@dimen/default_small_dimen"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/font_size_min"/>
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New ToggleButton"
+            android:id="@+id/toggle_etiquette_alarm"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/default_dimen"
+            android:checked="false"/>
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:background="@color/colorDivider"
+        android:layout_below="@+id/toolbar_shadow"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+</LinearLayout>
