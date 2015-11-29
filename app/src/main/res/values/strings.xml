@@ -26,7 +26,7 @@
     <string name="help_desk">Help Desk</string>
     <string name="privacy">Privacy</string>
     <string name="legal">Legal</string>
-    <string name="alarm">Alarm</string>
+    <string name="alarm">알림 설정</string>
     <string name="version">Version</string>
     <!-- Category Name-->
     <string name="category_default">메모</string>
@@ -42,11 +42,11 @@
     <!-- login -->
     <string name="input_info">정보 입력</string>
     <string name="agreement">약관 동의</string>
-    <string name="user_agreement_check">동의합니다.(필수 항목)</string>
-    <string name="user_name">이름</string>
-    <string name="user_email">이메일</string>
-    <string name="user_password">비밀번호</string>
-    <string name="user_password_check">비밀번호 확인</string>
+    <string name="user_agreement_check">동의합니다. (필수 항목)</string>
+    <string name="user_name">이름을 입력해 주세요.</string>
+    <string name="user_email">이메일 주소를 입력해 주세요.</string>
+    <string name="user_password">비밀번호를 입력해 주세요.</string>
+    <string name="user_password_check">비밀번호를 한 번 더 입력해 주세요.</string>
     <string name="submit_user_info">입력 완료</string>
     <string name="no_user">로그인 실패! 존재하지 않는 아이디입니다.</string>
     <string name="diff_pw">로그인 실패! 비밀번호가 다릅니다.</string>
@@ -62,6 +62,18 @@
     <string name="check_scrap">스크랩 되었습니다.</string>
     <string name="check_not_scrap">이미 스크랩 되어있습니다.</string>
 
-    <!-- notice String -->
+    <!-- Notice String -->
+    <!-- Service Agreement -->
+    <string name="text_user_agreement"><![CDATA[이 약관은 (주)잡담(이하 "회사")에서 제공하는 서비스\n
+        "잡담"의 이용과 관련하여 회사와 고객간의 권리, 의무 및\n
+        기타 필요한 제반 사항을 정하고 있습니다. 서비스를 이용하시기\n 전에 이 약관을 주의 깊게 읽어 보시기
+        바라며, 자세한 내용은\n <font color="#0db5f7">이 곳</font>을 클릭해 확인하여 주시기 바랍니다.]]>
+    </string>
+    <string name="text_private_info"><![CDATA[(주)잡담(이하 "회사")는 원활한 서비스의 이용을 위하여 다음과\n
+                                같이 이용자의 개인정보를 수집, 이용함에 있어 정보통신망\n
+                                이용 촉진 및 정보 보호 등에 관한 법률, 개인정보 보호법 등 관련\n
+                                법령에 따라 개인정보 수집 및 이용에 관하여 동의를 받고\n
+                                있습니다. 자세한 내용은 <font color="#0db5f7">이 곳</font>을 클릭해 확인하여 주시기\n
+                                바랍니다.]]></string>
 
 </resources>

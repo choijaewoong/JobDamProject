@@ -38,13 +38,12 @@
         android:background="@color/colorPrimary">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/nav_header_profile_size"
+            android:layout_height="@dimen/nav_header_profile_size"
             android:id="@+id/imageView8"
             android:src="@drawable/m_image_icon"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:padding="@dimen/default_small_dimen"/>
+            android:layout_centerHorizontal="true"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -72,10 +71,16 @@
             android:id="@+id/editText_signup_name"
             android:layout_gravity="center_horizontal"
             android:hint="@string/user_name"
+            android:autoText="false"
+            android:singleLine="true"
+            android:maxLength="40"
+            android:background="@android:color/transparent"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:textIsSelectable="false"
-            android:textColorHint="@color/colorLightGray"/>
+            android:textColorHint="@color/colorLightGray"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_size_default"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -83,9 +88,16 @@
             android:id="@+id/editText_signup_email"
             android:layout_gravity="center_horizontal"
             android:hint="@string/user_email"
-            android:layout_below="@+id/editText_signup_name"
-            android:layout_centerHorizontal="true"
-            android:textColorHint="@color/colorLightGray"/>
+            android:autoText="false"
+            android:singleLine="true"
+            android:maxLength="40"
+            android:background="@android:color/transparent"
+            android:textColorHint="@color/colorLightGray"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/imageView7"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_size_default"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -94,9 +106,15 @@
             android:inputType="textPassword"
             android:layout_gravity="center_horizontal"
             android:hint="@string/user_password"
-            android:layout_below="@+id/editText_signup_email"
+            android:autoText="false"
+            android:singleLine="true"
+            android:maxLength="40"
+            android:background="@android:color/transparent"
             android:layout_centerHorizontal="true"
-            android:textColorHint="@color/colorLightGray"/>
+            android:textColorHint="@color/colorLightGray"
+            android:layout_below="@+id/imageView22"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_size_default"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -105,20 +123,68 @@
             android:inputType="textPassword"
             android:layout_gravity="center_horizontal"
             android:hint="@string/user_password_check"
-            android:layout_below="@+id/editText_signup_password"
+            android:autoText="false"
+            android:singleLine="true"
+            android:maxLength="40"
+            android:background="@android:color/transparent"
+            android:layout_below="@+id/imageView23"
             android:layout_centerHorizontal="true"
-            android:textColorHint="@color/colorLightGray"/>
+            android:textColorHint="@color/colorLightGray"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_size_default"/>
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="@string/submit_user_info"
             android:id="@+id/btn_input_complete"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"/>
+            android:layout_marginRight="50dp"
+            android:background="@drawable/button_detail_page"
+            android:textColor="@android:color/white"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_width"
+            android:id="@+id/imageView7"
+            android:layout_below="@+id/editText_signup_name"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorDivider"
+            android:layout_marginTop="@dimen/default_small_dimen"
+            android:layout_marginBottom="@dimen/default_dimen"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_width"
+            android:id="@+id/imageView22"
+            android:background="@color/colorDivider"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/default_small_dimen"
+            android:layout_marginBottom="@dimen/default_dimen"
+            android:layout_below="@+id/editText_signup_email"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_width"
+            android:id="@+id/imageView23"
+            android:background="@color/colorDivider"
+            android:layout_below="@+id/editText_signup_password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/default_small_dimen"
+            android:layout_marginBottom="@dimen/default_dimen"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_width"
+            android:id="@+id/imageView24"
+            android:background="@color/colorDivider"
+            android:layout_below="@+id/editText_signup_password_check"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/default_small_dimen"
+            android:layout_marginBottom="@dimen/default_dimen"/>
 
     </RelativeLayout>
 
