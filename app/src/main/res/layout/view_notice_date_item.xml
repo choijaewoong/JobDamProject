@@ -4,26 +4,19 @@
               android:layout_height="wrap_content"
                 android:gravity="center">
 
-    <FrameLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignWithParentIfMissing="false"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/text_notice_date_header"
-            android:text="15.11.25"
-            android:layout_margin="@dimen/default_small_dimen"
-            android:background="@drawable/image_notice_date_background"
-            android:textColor="@android:color/white"
-            android:layout_gravity="center"
-            android:paddingLeft="@dimen/default_small_dimen"
-            android:paddingRight="@dimen/default_small_dimen"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
-            android:textSize="@dimen/font_size_small"/>
-    </FrameLayout>
+        android:id="@+id/text_notice_date_header"
+        android:text="15.11.25"
+        android:layout_margin="@dimen/default_small_dimen"
+        android:background="@drawable/image_notice_date_background"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center"
+        android:paddingLeft="@dimen/default_small_dimen"
+        android:paddingRight="@dimen/default_small_dimen"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:textSize="@dimen/font_size_min"/>
 
 </RelativeLayout>

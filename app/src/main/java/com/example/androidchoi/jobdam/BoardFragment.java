@@ -32,6 +32,7 @@ public class BoardFragment extends Fragment {
     BoardPagerAdapter mAdapter;
     ArrayList<Articles> mArticlesList = new ArrayList<Articles>();
     ImageView articleWriteImage;
+    int currentCount = 1;
 
     public BoardFragment() {
         // Required empty public constructor
@@ -73,6 +74,7 @@ public class BoardFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
+                Toast.makeText(getActivity(), position+"", Toast.LENGTH_SHORT).show();
 
 
             }
@@ -111,5 +113,8 @@ public class BoardFragment extends Fragment {
                         Toast.makeText(getActivity(), "error : " + code, Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+    public void moreArticle(){
+
     }
 }
