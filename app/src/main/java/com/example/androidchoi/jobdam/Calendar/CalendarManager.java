@@ -104,6 +104,44 @@ public class CalendarManager {
 		}		
 		return data;
 	}
+
+	public CalendarData getWeekCalendarData(Calendar calendar) {
+		CalendarData data = new CalendarData();
+		mWeekCalendar.set(calendar.DAY_OF_WEEK, calendar.SUNDAY);
+		data.year = mWeekCalendar.get(calendar.YEAR);
+		data.month = mWeekCalendar.get(calendar.MONTH);
+		data.weekOfMonth = mWeekCalendar.get(calendar.WEEK_OF_MONTH);
+		data.weekOfYear = mWeekCalendar.get(calendar.WEEK_OF_YEAR);
+		for (int i = 0; i < 7 ; i++) {
+			CalendarItem item = new CalendarItem();
+			item.year =mWeekCalendar.get(calendar.YEAR);
+			item.month = mWeekCalendar.get(calendar.MONTH);
+			item.dayOfMonth = mWeekCalendar.get(calendar.DAY_OF_MONTH);
+			item.dayOfWeek = mWeekCalendar.get(calendar.DAY_OF_WEEK);
+			item.inMonth = true;
+			data.days.add(item);
+			mWeekCalendar.add(calendar.DAY_OF_YEAR, 1);
+		}
+		mWeekCalendar.add(calendar.WEEK_OF_YEAR, -1);
+		for(int calendarIndex = 0,dataIndex = 0; calendarIndex < data.days.size() && dataIndex < mData.size(); ) {
+			CalendarComparable cc = (CalendarComparable) mData.get(dataIndex);
+			CalendarItem item = data.days.get(calendarIndex);
+			int compare = cc.compareDate(item.year, item.month, item.dayOfMonth);
+			if (compare < 0) {
+				dataIndex++;
+			} else if (compare > 0) {
+				calendarIndex++;
+			} else {
+				if(((ItemData)mData.get(dataIndex)).isStart()) {
+					item.getStartItems().add(cc);
+				}else {
+					item.getEndItems().add(cc);
+				}
+				dataIndex++;
+			}
+		}
+		return data;
+	}
 	
 	public CalendarData getCalendarData(int year, int month) {
 		mCalendar.set(Calendar.YEAR, year);
@@ -125,28 +163,28 @@ public class CalendarManager {
 	public CalendarData getCalendarData() {
 		CalendarData data = new CalendarData();
 		int currentMonthYear, currentMonth, lastMonthYear, lastMonth, nextMonthYear, nextMonth;
-		
+
 		mCalendar.set(Calendar.DAY_OF_MONTH, 1);
 		int dayOfWeek = mCalendar.get(Calendar.DAY_OF_WEEK);
 		int thisMonthLastDay = mCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-		
+
 		mCalendar.add(Calendar.MONTH, -1);
 		int lastMonthLastDay = mCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 		lastMonthYear = mCalendar.get(Calendar.YEAR);
 		lastMonth = mCalendar.get(Calendar.MONTH);
-		
+
 		mCalendar.add(Calendar.MONTH, 2);
 		nextMonthYear = mCalendar.get(Calendar.YEAR);
 		nextMonth = mCalendar.get(Calendar.MONTH);
-		
+
 		mCalendar.add(Calendar.MONTH, -1);
 		currentMonthYear = mCalendar.get(Calendar.YEAR);
 		currentMonth = mCalendar.get(Calendar.MONTH);
-		
+
 		data.year = currentMonthYear;
 		data.month = currentMonth;
-		
-		for (int i = Calendar.SUNDAY ; i < dayOfWeek; i++) {
+
+		for (int i = Calendar.SUNDAY; i < dayOfWeek; i++) {
 			CalendarItem item = new CalendarItem();
 			item.year = lastMonthYear;
 			item.month = lastMonth;
@@ -155,8 +193,8 @@ public class CalendarManager {
 			item.inMonth = false;
 			data.days.add(item);
 		}
-		
-		for (int i = 0 ; i < thisMonthLastDay; i++) {
+
+		for (int i = 0; i < thisMonthLastDay; i++) {
 			CalendarItem item = new CalendarItem();
 			item.year = currentMonthYear;
 			item.month = currentMonth;
@@ -165,9 +203,87 @@ public class CalendarManager {
 			item.inMonth = true;
 			data.days.add(item);
 		}
-		
-		int startNextWeek =  Calendar.SUNDAY + ((dayOfWeek - Calendar.SUNDAY + thisMonthLastDay) % 7);
+
+		int startNextWeek = Calendar.SUNDAY + ((dayOfWeek - Calendar.SUNDAY + thisMonthLastDay) % 7);
 		int count = (Calendar.SATURDAY + 1 - startNextWeek) % 7;
+		for (int i = 0; i < count; i++) {
+			CalendarItem item = new CalendarItem();
+			item.year = nextMonthYear;
+			item.month = nextMonth;
+			item.dayOfWeek = i + startNextWeek;
+			item.dayOfMonth = i + 1;
+			item.inMonth = false;
+			data.days.add(item);
+		}
+
+
+		for (int calendarIndex = 0, dataIndex = 0; calendarIndex < data.days.size() && dataIndex < mData.size(); ) {
+			CalendarComparable cc = (CalendarComparable) mData.get(dataIndex);
+			CalendarItem item = data.days.get(calendarIndex);
+			int compare = cc.compareDate(item.year, item.month, item.dayOfMonth);
+			if (compare < 0) {
+				dataIndex++;
+			} else if (compare > 0) {
+				calendarIndex++;
+			} else {
+				if (((ItemData) mData.get(dataIndex)).isStart()) {
+					item.getStartItems().add(cc);
+				} else {
+					item.getEndItems().add(cc);
+				}
+				dataIndex++;
+			}
+		}
+		return data;
+	}
+
+
+	public CalendarData getCalendarData(Calendar calendar) {
+		CalendarData data = new CalendarData();
+		int currentMonthYear, currentMonth, lastMonthYear, lastMonth, nextMonthYear, nextMonth;
+
+		mCalendar.set(calendar.DAY_OF_MONTH, 1);
+		int dayOfWeek = mCalendar.get(calendar.DAY_OF_WEEK);
+		int thisMonthLastDay = mCalendar.getActualMaximum(calendar.DAY_OF_MONTH);
+
+		mCalendar.add(calendar.MONTH, -1);
+		int lastMonthLastDay = mCalendar.getActualMaximum(calendar.DAY_OF_MONTH);
+		lastMonthYear = mCalendar.get(calendar.YEAR);
+		lastMonth = mCalendar.get(calendar.MONTH);
+
+		mCalendar.add(calendar.MONTH, 2);
+		nextMonthYear = mCalendar.get(calendar.YEAR);
+		nextMonth = mCalendar.get(calendar.MONTH);
+
+		mCalendar.add(calendar.MONTH, -1);
+		currentMonthYear = mCalendar.get(calendar.YEAR);
+		currentMonth = mCalendar.get(calendar.MONTH);
+
+		data.year = currentMonthYear;
+		data.month = currentMonth;
+
+		for (int i = calendar.SUNDAY ; i < dayOfWeek; i++) {
+			CalendarItem item = new CalendarItem();
+			item.year = lastMonthYear;
+			item.month = lastMonth;
+			item.dayOfWeek = i;
+			item.dayOfMonth = lastMonthLastDay - dayOfWeek + i + 1;
+			item.inMonth = false;
+			data.days.add(item);
+		}
+
+		for (int i = 0 ; i < thisMonthLastDay; i++) {
+			CalendarItem item = new CalendarItem();
+			item.year = currentMonthYear;
+			item.month = currentMonth;
+			item.dayOfWeek = calendar.SUNDAY + ((i + dayOfWeek - calendar.SUNDAY) % 7);
+			item.dayOfMonth = i + 1;
+			item.inMonth = true;
+			data.days.add(item);
+		}
+
+		int startNextWeek =  calendar.SUNDAY + ((dayOfWeek - calendar.SUNDAY + thisMonthLastDay) % 7);
+		int count = (calendar.SATURDAY + 1 - startNextWeek) % 7;
 		for (int i = 0 ; i < count ; i++) {
 			CalendarItem item = new CalendarItem();
 			item.year = nextMonthYear;
@@ -177,8 +293,8 @@ public class CalendarManager {
 			item.inMonth = false;
 			data.days.add(item);
 		}
-		
-		
+
+
 		for(int calendarIndex = 0,dataIndex = 0; calendarIndex < data.days.size() && dataIndex < mData.size(); ) {
 			CalendarComparable cc = (CalendarComparable) mData.get(dataIndex);
 			CalendarItem item = data.days.get(calendarIndex);
@@ -196,7 +312,6 @@ public class CalendarManager {
 				dataIndex++;
 			}
 		}
-		
 		return data;
 	}
 }

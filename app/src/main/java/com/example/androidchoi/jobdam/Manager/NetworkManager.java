@@ -7,9 +7,9 @@ import com.begentgroup.xmlparser.XMLParser;
 import com.example.androidchoi.jobdam.Model.ArticleLab;
 import com.example.androidchoi.jobdam.Model.Articles;
 import com.example.androidchoi.jobdam.Model.JobList;
+import com.example.androidchoi.jobdam.Model.LoginData;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
-import com.example.androidchoi.jobdam.Model.LoginData;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -32,7 +32,6 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
-import java.util.Collections;
 
 
 /**
@@ -243,8 +242,6 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 ArticleLab articleLab = gson.fromJson(responseString, ArticleLab.class);
-                Collections.reverse(articleLab.getArticleList());
-                //ArticleLab.get(MyApplication.getContext(), gson.fromJson(responseString, ArticleLab.class));
                 listener.onSuccess(articleLab);
             }
         });
