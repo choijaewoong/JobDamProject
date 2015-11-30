@@ -8,9 +8,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -36,6 +38,7 @@ public class JobDetailActivity extends AppCompatActivity {
     TextView mJobTitle;
     ExpandableListView mExpandableListView;
     JobDetailAdapter mExpandableAdapter;
+    boolean isScrap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class JobDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mData = (Job) intent.getSerializableExtra(Job.JOBITEM);
+        isScrap = intent.getBooleanExtra(Job.JOB_SCRAP_CHECK, false);
 
         mExpandableListView = (ExpandableListView) findViewById(R.id.listview_job_detail_expandable);
         mExpandableAdapter = new JobDetailAdapter();
@@ -56,30 +60,36 @@ public class JobDetailActivity extends AppCompatActivity {
         View corpHeaderView = getLayoutInflater().inflate(R.layout.view_header_job_detail_corp, null);
         View titleHeaderView = getLayoutInflater().inflate(R.layout.view_header_job_detail_title, null);
         ToggleButton scrapButton = (ToggleButton) titleHeaderView.findViewById(R.id.btn_detail_scrap);
+        scrapButton.setChecked(isScrap);
         scrapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyJob job = new MyJob();
-                job.setData(mData);
-                Gson gson = new Gson();
-                final String json = gson.toJson(job);
-                NetworkManager.getInstance().addMyJob(JobDetailActivity.this, json, new NetworkManager.OnResultListener<String>() {
-                    @Override
-                    public void onSuccess(String result) {
-                        Toast.makeText(JobDetailActivity.this, getString(R.string.check_scrap), Toast.LENGTH_SHORT).show();
-                        Log.i("json", json);
-                        setResult(Activity.RESULT_OK);
-                    }
-                    @Override
-                    public void onFail(int code) {
-                    }
-                });
+                if(isScrap){
+                  //deleteMyJob
+                } else {
+                    MyJob job = new MyJob();
+                    job.setData(mData);
+                    Gson gson = new Gson();
+                    final String json = gson.toJson(job);
+                    NetworkManager.getInstance().addMyJob(JobDetailActivity.this, json, new NetworkManager.OnResultListener<String>() {
+                        @Override
+                        public void onSuccess(String result) {
+                            showScrapToast();
+                            setResult(Activity.RESULT_OK);
+                        }
+
+                        @Override
+                        public void onFail(int code) {
+                        }
+                    });
 //                if(MyJobLab.get(getApplication()).getJobData(mData.getId()) == null) {
 //                    MyJobLab.get(getApplicationContext()).addJobData(mData);
 //                    Toast.makeText(JobDetailActivity.this, getString(R.string.check_scrap), Toast.LENGTH_SHORT).show();
 //                }else{
 //                    Toast.makeText(JobDetailActivity.this, getString(R.string.check_not_scrap), Toast.LENGTH_SHORT).show();
 //                }
+                }
+                isScrap = !isScrap;
             }
         });
         Button corpLink = (Button) titleHeaderView.findViewById(R.id.btn_detail_move_homepage);
@@ -138,6 +148,17 @@ public class JobDetailActivity extends AppCompatActivity {
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat("~ yyyy년 MM월 dd일 E요일 HH시 mm분");
         return dateFormat.format(end);
+    }
+
+    public void showScrapToast(){
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.view_toast_scrap,
+                (ViewGroup)findViewById(R.id.container_scrap_toast));
+        Toast toast = new Toast(JobDetailActivity.this);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(view);
+        toast.show();
     }
 
     @Override

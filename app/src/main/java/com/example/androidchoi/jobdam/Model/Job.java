@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public abstract class Job implements Serializable{
     public static final String JOBITEM = "job_item";
+    public static final String JOB_SCRAP_CHECK = "job_scrap_check";
     public static final String JOBID = "job_id";
 
     public abstract void init();

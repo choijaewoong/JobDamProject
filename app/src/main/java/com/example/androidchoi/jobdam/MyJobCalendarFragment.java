@@ -123,6 +123,7 @@ public class MyJobCalendarFragment extends Fragment {
                 Job data = (Job) mEndJobAdapter.getItem(position);
                 Intent intent = new Intent(getActivity(), JobDetailActivity.class);
                 intent.putExtra(Job.JOBITEM, data);
+                intent.putExtra(Job.JOB_SCRAP_CHECK, true);
                 startActivity(intent);
             }
         });
