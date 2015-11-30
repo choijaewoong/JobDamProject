@@ -32,4 +32,5 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile files('libs/XMLParser.jar')
     compile 'in.srain.cube:grid-view-with-header-footer:1.0.12'
+    compile project(':recyclerViewPager')
 }

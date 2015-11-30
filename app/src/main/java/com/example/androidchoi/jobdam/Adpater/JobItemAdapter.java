@@ -15,8 +15,8 @@ import java.util.ArrayList;
 public class JobItemAdapter extends BaseAdapter {
 
     ArrayList<Job> mItems = new ArrayList<Job>();
-    int totalCount;
 
+    int totalCount;
     public void setItems(ArrayList items){
         mItems.clear();
         mItems.addAll(items);

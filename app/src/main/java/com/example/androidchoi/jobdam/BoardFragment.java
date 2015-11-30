@@ -74,7 +74,6 @@ public class BoardFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                Toast.makeText(getActivity(), position+"", Toast.LENGTH_SHORT).show();
 
 
             }

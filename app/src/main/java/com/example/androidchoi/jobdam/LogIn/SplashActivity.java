@@ -16,11 +16,11 @@ import com.example.androidchoi.jobdam.R;
 
 public class SplashActivity extends AppCompatActivity {
 
+    int count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
         String id = PropertyManager.getInstance().getId();
         if (!TextUtils.isEmpty(id)) {
             String password = PropertyManager.getInstance().getPassword();
@@ -36,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onFail(int code) {
-
+                    goLogin();
                 }
             });
         } else {
