@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/image_card_folder"
+        android:padding="@dimen/default_small_dimen"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/default_dimen"
+        android:layout_marginLeft="@dimen/default_small_dimen"
+        android:layout_marginRight="@dimen/default_small_dimen">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="4dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/image_category_icon"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_category_name"
+                android:textIsSelectable="false"
+                android:textSize="@dimen/font_size_min"
+                android:layout_below="@+id/image_category_icon"
+                android:layout_centerHorizontal="true"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:id="@+id/text_category_count"
+            android:background="@drawable/image_category_count_box"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

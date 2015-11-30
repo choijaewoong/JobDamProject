@@ -20,11 +20,11 @@ public class CategoryData {
     private CategoryData(Context context) {
         mContext = context;
         mCategoryList = new ArrayList<CategoryData>();
-        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_default), R.drawable.image_category_default, ContextCompat.getColor(context, R.color.colorCategoryDefault)));
-        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_scrap), R.drawable.image_category_scrap, ContextCompat.getColor(context, R.color.colorCategoryScrap)));
-        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_win), R.drawable.image_category_win,ContextCompat.getColor(context, R.color.colorCategoryWin)));
-        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_intern), R.drawable.image_category_intern, ContextCompat.getColor(context, R.color.colorCategoryIntern)));
-        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_link), R.drawable.image_category_link, ContextCompat.getColor(context, R.color.colorCategoryLink)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_default), R.drawable.image_category_4, ContextCompat.getColor(context, R.color.colorCategoryDefault)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_scrap), R.drawable.image_category_5, ContextCompat.getColor(context, R.color.colorCategoryScrap)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_win), R.drawable.image_category_6,ContextCompat.getColor(context, R.color.colorCategoryWin)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_intern), R.drawable.image_category_2, ContextCompat.getColor(context, R.color.colorCategoryIntern)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_link), R.drawable.image_category_8, ContextCompat.getColor(context, R.color.colorCategoryLink)));
     }
     private CategoryData(String name, int imageResource, int color) {
         this.name = name;

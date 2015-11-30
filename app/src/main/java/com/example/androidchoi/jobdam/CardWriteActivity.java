@@ -3,6 +3,8 @@ package com.example.androidchoi.jobdam;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -72,8 +74,10 @@ public class CardWriteActivity extends AppCompatActivity {
         mTextCategory.setText(categoryData.getName());
         mTextCategory.setTextColor(categoryData.getColor());
         mImageCategory.setBackgroundColor(categoryData.getColor());
+        Drawable drawable = ContextCompat.getDrawable(CardWriteActivity.this, R.drawable.image_category_color);
+        drawable.setColorFilter(categoryData.getColor(), PorterDuff.Mode.MULTIPLY);
         for(TextView t : mTextTags){
-            t.setBackgroundResource(categoryData.getImage());
+            t.setBackground(drawable);
         }
     }
 
@@ -256,7 +260,9 @@ public class CardWriteActivity extends AppCompatActivity {
         t.setText(tag);
         t.setTextSize(12);
         t.setTextColor(ContextCompat.getColor(this, android.R.color.white));
-        t.setBackgroundResource(CategoryData.get(getApplicationContext()).getCategoryList().get(mData.getCard().getCategory()).getImage());
+        Drawable drawable = ContextCompat.getDrawable(CardWriteActivity.this, R.drawable.image_category_color);
+        drawable.setColorFilter(CategoryData.get(getApplicationContext()).getCategoryList().get(mData.getCard().getCategory()).getColor(), PorterDuff.Mode.MULTIPLY);
+        t.setBackground(drawable);
         t.setPadding(10, 5, 10, 5);
         int width = getResources().getDimensionPixelSize(R.dimen.tag_max_width);
         t.setMaxWidth(width);

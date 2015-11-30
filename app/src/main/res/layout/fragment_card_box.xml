@@ -21,6 +21,17 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"/>
 
+    <in.srain.cube.views.GridViewWithHeaderAndFooter
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:listSelector="@android:color/transparent"
+        android:clipToPadding="false"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        android:id="@+id/gridview_category_folder"
+        android:visibility="gone"/>
+
     <com.example.androidchoi.jobdam.Util.MyScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -140,5 +151,4 @@
             android:src="@drawable/floating_button_write"/>
 
     </com.github.clans.fab.FloatingActionMenu>
-
 </RelativeLayout>

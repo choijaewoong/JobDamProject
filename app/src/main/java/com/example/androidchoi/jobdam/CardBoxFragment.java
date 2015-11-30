@@ -4,7 +4,9 @@ package com.example.androidchoi.jobdam;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -28,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.CardItemAdapter;
+import com.example.androidchoi.jobdam.Calendar.CategoryFolderAdapter;
 import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.CategoryData;
@@ -40,6 +43,8 @@ import com.github.clans.fab.FloatingActionMenu;
 
 import java.util.ArrayList;
 
+import in.srain.cube.views.GridViewWithHeaderAndFooter;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,11 +55,18 @@ public class CardBoxFragment extends Fragment {
     private static final int REQUEST_NEW = 2;
 
     ListView mListView;
+    GridViewWithHeaderAndFooter mGridView;
+    CategoryFolderAdapter mCategoryFolderAdapter;
     CardItemAdapter mAdapter;
     FloatingActionMenu fam;
-    EditText mSearchEdit;
-    ImageView mDeleteImage;
-    TextView mCountTextView;
+    EditText mListSearchEdit;
+    EditText mGridSearchEdit;
+    ImageView mListSearchDeleteImage;
+    ImageView mGridSearchDeleteImage;
+    TextView mItemCountTextView;
+    TextView mCategoryCountTextView;
+    ImageView mImageChangeGridView;
+    ImageView mImageChangeListView;
     PredicateLayout mPredicateLayout;
     ScrollView mScrollView;
     ImageView mImageTagCloseButton;
@@ -88,11 +100,20 @@ public class CardBoxFragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if (mSearchEdit.isFocused() || mPredicateLayout.isFocused()) {
+                    if (mListSearchEdit.isFocused()) {
                         Rect outRect = new Rect();
-                        mSearchEdit.getGlobalVisibleRect(outRect);
+                        mListSearchEdit.getGlobalVisibleRect(outRect);
+                        mGridSearchEdit.getGlobalVisibleRect(outRect);
                         if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                            mSearchEdit.clearFocus();
+                            mListSearchEdit.clearFocus();
+                            InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        }
+                    } else if (mGridSearchEdit.isFocused()) {
+                        Rect outRect = new Rect();
+                        mGridSearchEdit.getGlobalVisibleRect(outRect);
+                        if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
+                            mGridSearchEdit.clearFocus();
                             InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                         }
@@ -103,77 +124,73 @@ public class CardBoxFragment extends Fragment {
         });
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View shadowToolbar = getActivity().findViewById(R.id.toolbar_shadow);
         shadowToolbar.setVisibility(View.VISIBLE);
-        final View view = inflater.inflate(R.layout.fragment_card_box, container, false);
-        View searchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
-        View countHeaderView = inflater.inflate(R.layout.view_header_item_count, null);
+        View view = inflater.inflate(R.layout.fragment_card_box, container, false);
+        View listSearchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
+        View gridSearchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
+        View itemCountHeaderView = inflater.inflate(R.layout.view_header_card_item_count, null);
+        View categoryCountHeaderView = inflater.inflate(R.layout.view_header_category_item_count,null);
+
+        //리스트 뷰
         mListView = (ListView) view.findViewById(R.id.listview_card);
-        mListView.addHeaderView(searchHeaderView);
-        mListView.addHeaderView(countHeaderView, null, false);
-        mDeleteImage = (ImageView)searchHeaderView.findViewById(R.id.image_search_delete);
-        mDeleteImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSearchEdit.setText("");
-            }
-        });
-        mSearchEdit = (EditText)searchHeaderView.findViewById(R.id.editText_search_bar);
-        mSearchEdit.setHint("태그를 검색해주세요");
-        mSearchEdit.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String string = s.toString();
-                if (!string.equals("")) {
-                    mDeleteImage.setVisibility(View.VISIBLE);
-                } else {
-                    mDeleteImage.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
-        mSearchEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    mScrollView.setVisibility(View.VISIBLE);
-                    int total = 0;
-                    for (int i = 0; i < mCardList.size(); i++) {
-                        int categoryIndex = mCardList.get(i).getCard().getCategory();
-                        for (String tag : mCardList.get(i).getCard().getTags()) {
-                            addTagView(tag, categoryIndex, i, total);
-                            total++;
-                        }
-                    }
-                    Log.i("count", total + "");
-                } else {
-//                    scrollView.setVisibility(View.GONE);
-                }
-            }
-        });
+        mListView.addHeaderView(listSearchHeaderView);
+        mListView.addHeaderView(itemCountHeaderView, null, false);
         mAdapter = new CardItemAdapter();
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                MyCard data = (MyCard) mAdapter.getItem(position - mListView.getHeaderViewsCount());
                 MyCards myCards = (MyCards) mAdapter.getItem(position - mListView.getHeaderViewsCount());
                 Intent intent = new Intent(getActivity(), CardWriteActivity.class);
                 intent.putExtra(MyCard.CARD_ITEM, myCards);
                 intent.putExtra(MyCard.CARD_NEW, false);
-//                intent.putExtra(CardData.CARDPOSITION, position - mListView.getHeaderViewsCount());
                 startActivityForResult(intent, REQUEST_MODIFY);
             }
         });
+
+        // 그리드 뷰
+        mGridView = (GridViewWithHeaderAndFooter) view.findViewById(R.id.gridview_category_folder);
+        mGridView.setVisibility(View.GONE);
+        mCategoryFolderAdapter = new CategoryFolderAdapter(getActivity());
+        mGridView.addHeaderView(gridSearchHeaderView);
+        mGridView.addHeaderView(categoryCountHeaderView, null, false);
+        mGridView.setAdapter(mCategoryFolderAdapter);
+
+        //리스트 헤더뷰
+        mItemCountTextView = (TextView) itemCountHeaderView.findViewById(R.id.text_item_count);
+        mImageChangeGridView = (ImageView)itemCountHeaderView.findViewById(R.id.image_change_grid_view);
+        mImageChangeGridView.setImageResource(R.drawable.button_card_folder);
+        mImageChangeGridView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListView.setVisibility(View.GONE);
+                mGridView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //그리드 헤더뷰
+        mCategoryCountTextView = (TextView)categoryCountHeaderView.findViewById(R.id.text_category_count);
+        mImageChangeListView = (ImageView)categoryCountHeaderView.findViewById(R.id.image_change_list_view);
+        mImageChangeListView.setImageResource(R.drawable.button_card_list);
+        mImageChangeListView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListView.setVisibility(View.VISIBLE);
+                mGridView.setVisibility(View.GONE);
+            }
+        });
+        mCategoryCountTextView.setText("폴더 " + mCategoryFolderAdapter.getCount());
+
+        mListSearchEdit = (EditText)listSearchHeaderView.findViewById(R.id.editText_search_bar);
+        mListSearchDeleteImage = (ImageView)listSearchHeaderView.findViewById(R.id.image_search_delete);
+        setEditListener(mListSearchEdit, mListSearchDeleteImage);
+        mGridSearchEdit = (EditText)gridSearchHeaderView.findViewById(R.id.editText_search_bar);
+        mGridSearchDeleteImage = (ImageView)gridSearchHeaderView.findViewById(R.id.image_search_delete);
+        setEditListener(mGridSearchEdit, mGridSearchDeleteImage);
+
         fam = (FloatingActionMenu) view.findViewById(R.id.menu);
         FloatingActionButton addCardButton = (FloatingActionButton) view.findViewById(R.id.fab_write_card);
         addCardButton.setOnClickListener(new View.OnClickListener() {
@@ -186,7 +203,6 @@ public class CardBoxFragment extends Fragment {
             }
         });
         FloatingActionButton addCategoryButton = (FloatingActionButton) view.findViewById(R.id.fab_add_category);
-        mCountTextView = (TextView) view.findViewById(R.id.text_item_count);
         mPredicateLayout = (PredicateLayout)view.findViewById(R.id.predicateLayout_all_tag_box);
         mScrollView = (ScrollView) view.findViewById(R.id.scrollView_tag);
         mImageTagCloseButton = (ImageView)view.findViewById(R.id.image_tag_box_close_button);
@@ -196,7 +212,6 @@ public class CardBoxFragment extends Fragment {
                 mScrollView.setVisibility(View.GONE);
             }
         });
-
         return view;
     }
     @Override
@@ -211,7 +226,9 @@ public class CardBoxFragment extends Fragment {
         t.setText(tag);
         t.setTextSize(14);
         t.setTextColor(ContextCompat.getColor(getActivity(), android.R.color.white));
-        t.setBackgroundResource(CategoryData.get(getActivity()).getCategoryList().get(categoryIndex).getImage());
+        Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.image_category_color);
+        drawable.setColorFilter(CategoryData.get(getActivity()).getCategoryList().get(categoryIndex).getColor(), PorterDuff.Mode.MULTIPLY);
+        t.setBackground(drawable);
         t.setPadding(20, 10, 20, 10);
         int width = getResources().getDimensionPixelSize(R.dimen.tag_max_width);
         t.setMaxWidth(width);
@@ -248,13 +265,63 @@ public class CardBoxFragment extends Fragment {
                     public void onSuccess(MyCardLab result) {
                         mCardList = result.getCardList();
                         mAdapter.setItems(mCardList);
-                        mCountTextView.setText("총 " + mAdapter.getCount() + "건");
+                        mItemCountTextView.setText("전체카드 " + mAdapter.getCount());
                     }
                     @Override
                     public void onFail(int code) {
                         Toast.makeText(MyApplication.getContext(), code + "", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    public  void setEditListener(final EditText editText, final ImageView imageView){
+
+        editText.setHint("태그를 검색해주세요");
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String string = s.toString();
+                if (!string.equals("")) {
+                    imageView.setVisibility(View.VISIBLE);
+                } else {
+                    imageView.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    mScrollView.setVisibility(View.VISIBLE);
+                    int total = 0;
+                    for (int i = 0; i < mCardList.size(); i++) {
+                        int categoryIndex = mCardList.get(i).getCard().getCategory();
+                        for (String tag : mCardList.get(i).getCard().getTags()) {
+                            addTagView(tag, categoryIndex, i, total);
+                            total++;
+                        }
+                    }
+                    Log.i("count", total + "");
+                } else {
+//                    scrollView.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editText.setText("");
+            }
+        });
     }
 
 }
