@@ -3,6 +3,7 @@ package com.example.androidchoi.jobdam;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,16 +54,16 @@ public class NoticeFragment extends Fragment {
         return view;
     }
 
+
+
     private void initListItem() {
-        mNoticeAdapter.add(new NoticeDateData("15.11.27"));
-        mNoticeAdapter.add(new NoticeContentData(0, "string 1", "time", true));
-        mNoticeAdapter.add(new NoticeContentData(0, "string 1", "time", true));
-        mNoticeAdapter.add(new NoticeContentData(0, "string 1", "time", true));
-        mNoticeAdapter.add(new NoticeContentData(0, "string 1", "time", true));
-        mNoticeAdapter.add(new NoticeDateData("15.11.26"));
-        mNoticeAdapter.add(new NoticeContentData(0, "string 1", "time", true));
-        mNoticeAdapter.add(new NoticeContentData(0, "string 1", "time", true));
-        mNoticeAdapter.add(new NoticeContentData(0, "string 1", "time", true));
+        mNoticeAdapter.add(new NoticeDateData("15.12.01"));
+        mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice0)), "12:00", true));
+        mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice2)), "10:30", true));
+        mNoticeAdapter.add(new NoticeDateData("15.11.30"));
+        mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice5)), "18:00", true));
+        mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice3)), "13:00", true));
+        mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice4)), "09:00", true));
         mNoticeAdapter.notifyDataSetChanged();
     }
 //

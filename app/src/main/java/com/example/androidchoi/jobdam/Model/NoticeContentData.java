@@ -1,12 +1,14 @@
 package com.example.androidchoi.jobdam.Model;
 
+import android.text.Spanned;
+
 /**
  * Created by Choi on 2015-11-28.
  */
 public class NoticeContentData implements NoticeData{
 
     private int announcementType;
-    private String content;
+    private Spanned content;
     private String date;
     private boolean isRead;
 
@@ -16,14 +18,14 @@ public class NoticeContentData implements NoticeData{
     public String getDate() {
         return date;
     }
-    public String getContent() {
+    public Spanned getContent() {
         return content;
     }
     public boolean isRead() {
         return isRead;
     }
 
-    public NoticeContentData(int announcementType, String content, String date, boolean isRead) {
+    public NoticeContentData(int announcementType, Spanned content, String date, boolean isRead) {
         this.announcementType = announcementType;
         this.content = content;
         this.date = date;

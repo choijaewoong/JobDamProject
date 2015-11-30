@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JOBDAM</string>
+    <string name="app_name">잡담</string>
     <string name="action_settings">Settings</string>
     <string name="my_job">내가 담은 채용 정보</string>
     <string name="card_box">나의 카드 박스</string>
@@ -75,5 +75,17 @@
                                 법령에 따라 개인정보 수집 및 이용에 관하여 동의를 받고\n
                                 있습니다. 자세한 내용은 <font color="#0db5f7">이 곳</font>을 클릭해 확인하여 주시기\n
                                 바랍니다.]]></string>
+
+    <string name="notice0"><![CDATA[<font color="#9ce3ff">접수마감 D-day</font><br>
+                                      속보![국민은행]2015신입행원 모집 접수기한 12월 1일 18시까지 마감임박!!]]></string>
+    <string name="notice5"><![CDATA[<font color="#9ce3ff">접수마감 D-1</font><br>
+                                      속보![국민은행]2015신입행원 모집 접수기한 12월 1일 18시까지 마감임박!!]]></string>
+    <string name="notice2"><![CDATA[<font color="#9ce3ff">신입 공채속보</font><br>
+                                      [롯데그룹]2015신입사원 모집 접수기한 12월 7일 18시까지 마감임박!!]]></string>
+    <string name="notice3"><![CDATA[<font color="#9ce3ff">접수마감 D-3</font><br>
+                                      [한국미니스톰]2015신입사원 모집 접수기한 12월 2일 자정까지 마감임박!!]]></string>
+    <string name="notice4"><![CDATA[<font color="#9ce3ff">facebook페이지 이벤트</font><br>
+                                      facebook.com/jobdam 에서 이벤트 진행중!]]></string>
+
 
 </resources>

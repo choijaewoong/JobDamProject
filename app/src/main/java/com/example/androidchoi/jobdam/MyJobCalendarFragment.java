@@ -47,7 +47,7 @@ public class MyJobCalendarFragment extends Fragment {
     TextView mTextCalendarTypeButton;
 
     private ArrayList<MyJobs> mJobList;
-    private static boolean isWeekCalendar = true;
+    private static boolean isWeekCalendar = false;
 
     ArrayList<ItemData> mItemdata;
 

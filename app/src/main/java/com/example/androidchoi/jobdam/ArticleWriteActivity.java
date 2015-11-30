@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Article;
-import com.example.androidchoi.jobdam.Model.User;
 import com.google.gson.Gson;
 
 public class ArticleWriteActivity extends AppCompatActivity {
@@ -97,15 +96,15 @@ public class ArticleWriteActivity extends AppCompatActivity {
         }
         //noinspection SimplifiableIfStatement
         else if (id == R.id.action_save) {
-            mArticle = new Article();
-            mArticle.setArticle(User.getInstance().getUserId(),
-                    0, false, mEditText.getText().toString(), 0);
-            Gson gson = new Gson();
-            final String jsonString = gson.toJson(mArticle);
-            NetworkManager.getInstance().addArticle(ArticleWriteActivity.this, jsonString, new NetworkManager.OnResultListener<String>() {
+//            mArticle = new Article();
+//            mArticle.setArticle(User.getInstance().getUserId(),
+//                    0, false, mEditText.getText().toString(), 0);
+//            Gson gson = new Gson();
+//            final String jsonString = gson.toJson(mArticle);
+            NetworkManager.getInstance().addArticle(ArticleWriteActivity.this, mEditText.getText().toString(), new NetworkManager.OnResultListener<Article>() {
                 @Override
-                public void onSuccess(String result) {
-                    Log.i("게시글 생성" , jsonString);
+                public void onSuccess(Article result) {
+                    Log.i("게시글 생성" , new Gson().toJson(result).toString());
                     setResult(Activity.RESULT_OK);
                     Toast.makeText(ArticleWriteActivity.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
                     finish();

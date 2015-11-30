@@ -43,6 +43,8 @@ public class CardWriteActivity extends AppCompatActivity {
     TextView mTextStartDate;
     TextView mTextEndDate;
     ArrayList<TextView> mTextTags = new ArrayList<TextView>();
+    TextView mCancelButton;
+    TextView mSaveButton;
 
     boolean isNew;
     boolean isStartDate = true;
@@ -96,7 +98,6 @@ public class CardWriteActivity extends AppCompatActivity {
         mTextContent = (TextView) findViewById(R.id.text_view_card_content);
         mEditTag = (EditText)findViewById(R.id.edit_text_card_tag);
         mPredicateLayout =(PredicateLayout)findViewById(R.id.tag_box);
-
         Intent intent = getIntent();
         isNew = intent.getBooleanExtra(MyCard.CARD_NEW, true);
         // 기존 Data있는 경우 (메모 수정)
@@ -105,7 +106,8 @@ public class CardWriteActivity extends AppCompatActivity {
             mCancelSaveLayout.setVisibility(View.GONE);
             mTextTitle.setText(mData.getCard().getTitle());
             mTextContent.setText(mData.getCard().getContent());
-
+            mEditTitle.setText(mTextTitle.getText());
+            mEditContent.setText(mTextContent.getText());
         } else { // 기존 Data없는 경우 (메모 추가)
             mData = new MyCards();
             changeWriteMode();
@@ -133,7 +135,7 @@ public class CardWriteActivity extends AppCompatActivity {
         }
 
         //취소,저장 버튼
-        TextView mCancelButton = (TextView) findViewById(R.id.text_cancel_card);
+        mCancelButton = (TextView) findViewById(R.id.text_cancel_card);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,7 +143,7 @@ public class CardWriteActivity extends AppCompatActivity {
                 finish();
             }
         });
-        TextView mSaveButton = (TextView) findViewById(R.id.text_save_card);
+        mSaveButton = (TextView) findViewById(R.id.text_save_card);
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
