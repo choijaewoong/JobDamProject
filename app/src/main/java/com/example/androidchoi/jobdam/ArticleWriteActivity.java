@@ -41,12 +41,12 @@ public class ArticleWriteActivity extends AppCompatActivity {
 
         View customToolbar = getLayoutInflater().inflate(R.layout.toolbar_write_article, null);
         ImageView imageEmotion = (ImageView)customToolbar.findViewById(R.id.image_article_emotion);
-        imageEmotion .setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(ArticleWriteActivity.this, "emotion", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        imageEmotion .setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(ArticleWriteActivity.this, "emotion", Toast.LENGTH_SHORT).show();
+//            }
+//        });
         getSupportActionBar().setCustomView(customToolbar, params);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
