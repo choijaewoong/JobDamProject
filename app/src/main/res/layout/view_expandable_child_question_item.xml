@@ -1,15 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/default_dimen">
 
-    <ImageView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorLightGray"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:text="question"
+        android:id="@+id/text_job_question"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="123dp"/>
+        android:layout_marginLeft="@dimen/default_large_dimen"
+        android:layout_marginRight="@dimen/default_large_dimen"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_size_default"/>
 
+    <com.example.androidchoi.jobdam.Util.PredicateLayout
+        android:id="@+id/layout_job_question_tag"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/text_job_question"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/default_large_dimen"
+        android:layout_marginRight="@dimen/default_large_dimen"
+        android:background="@drawable/image_container_job_tag"
+        android:layout_marginTop="@dimen/default_small_dimen">
+
+    </com.example.androidchoi.jobdam.Util.PredicateLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:id="@+id/button_job_question_detail"
+        android:text="질문 항목 자세히 보기"
+        android:textColor="@android:color/white"
+        android:background="@drawable/selector_button_detail_page"
+        android:textSize="@dimen/font_size_default"
+        android:layout_below="@+id/layout_job_question_tag"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/default_dimen"
+        android:visibility="gone"/>
 </RelativeLayout>

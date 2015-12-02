@@ -25,6 +25,8 @@ import com.example.androidchoi.jobdam.Model.AddressData;
 import com.example.androidchoi.jobdam.Model.ContentData;
 import com.example.androidchoi.jobdam.Model.Job;
 import com.example.androidchoi.jobdam.Model.MyJob;
+import com.example.androidchoi.jobdam.Model.QuestionLab;
+import com.example.androidchoi.jobdam.Model.Questions;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
@@ -34,6 +36,7 @@ import java.util.Date;
 public class JobDetailActivity extends AppCompatActivity {
 
     Job mData;
+    Questions mQuestions;
     TextView mCorpName;
     TextView mJobTitle;
     ExpandableListView mExpandableListView;
@@ -82,12 +85,6 @@ public class JobDetailActivity extends AppCompatActivity {
                         public void onFail(int code) {
                         }
                     });
-//                if(MyJobLab.get(getApplication()).getJobData(mData.getId()) == null) {
-//                    MyJobLab.get(getApplicationContext()).addJobData(mData);
-//                    Toast.makeText(JobDetailActivity.this, getString(R.string.check_scrap), Toast.LENGTH_SHORT).show();
-//                }else{
-//                    Toast.makeText(JobDetailActivity.this, getString(R.string.check_not_scrap), Toast.LENGTH_SHORT).show();
-//                }
                 }
                 isScrap = !isScrap;
             }
@@ -102,30 +99,31 @@ public class JobDetailActivity extends AppCompatActivity {
             }
         });
 
-
         mCorpName = (TextView) corpHeaderView.findViewById(R.id.text_detail_corp_name);
         mCorpName.setText(mData.getCompanyName());
         mJobTitle = (TextView) titleHeaderView.findViewById(R.id.text_detail_job_title);
         mJobTitle.setText(mData.getJobTitle());
         mExpandableListView.addHeaderView(corpHeaderView, null, false);
         mExpandableListView.addHeaderView(titleHeaderView, null, false);
-
         mExpandableListView.setAdapter(mExpandableAdapter);
         mExpandableListView.setGroupIndicator(null);
         mExpandableListView.setDivider(ContextCompat.getDrawable(JobDetailActivity.this, android.R.color.transparent));
         mExpandableListView.setChildDivider(ContextCompat.getDrawable(JobDetailActivity.this, android.R.color.transparent));
-        initJobDetailMenu(); // 상세 채용 정보 카테고리 생성
-        for (int i = 0; i < mExpandableAdapter.getGroupCount(); i++) {
-            mExpandableListView.expandGroup(i);
-        }
+        showJobQuestion();
+
+
     }
 
+    //리스트뷰 메뉴 설정
     private void initJobDetailMenu() {
         mExpandableAdapter.add(getString(R.string.qualification), new ContentData(getQualification()));
         mExpandableAdapter.add(getString(R.string.conditions), new ContentData(getConditions()));
         mExpandableAdapter.add(getString(R.string.period), new ContentData(getPeriod()));
         mExpandableAdapter.add(getString(R.string.detail_page), new AddressData(mData.getSiteUrl()));
-        mExpandableAdapter.add(getString(R.string.questions), new ContentData("empty"));
+        mExpandableAdapter.addQuestion(getString(R.string.questions), mQuestions);
+        for (int i = 0; i < mExpandableAdapter.getGroupCount(); i++) {
+            mExpandableListView.expandGroup(i);
+        }
     }
 
     public String getQualification() {
@@ -153,13 +151,29 @@ public class JobDetailActivity extends AppCompatActivity {
     public void showScrapToast(){
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.view_toast_scrap,
-                (ViewGroup)findViewById(R.id.container_scrap_toast));
+                (ViewGroup) findViewById(R.id.container_scrap_toast));
         Toast toast = new Toast(JobDetailActivity.this);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(view);
         toast.show();
     }
+
+    public void showJobQuestion(){
+        NetworkManager.getInstance().showJobQuestion(JobDetailActivity.this, mData.getId() , new NetworkManager.OnResultListener<QuestionLab>() {
+            @Override
+            public void onSuccess(QuestionLab result) {
+                if(result != null) {
+                    mQuestions = result.getQuestions();
+                }
+                initJobDetailMenu(); // 상세 채용 정보 카테고리 생성
+            }
+            @Override
+            public void onFail(int code) {
+            }
+        });
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -177,4 +191,5 @@ public class JobDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

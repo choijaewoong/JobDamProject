@@ -11,6 +11,7 @@ import com.example.androidchoi.jobdam.Model.JobList;
 import com.example.androidchoi.jobdam.Model.LoginData;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
+import com.example.androidchoi.jobdam.Model.QuestionLab;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -104,7 +105,7 @@ public class NetworkManager {
     public void getJobAPI(Context context, String keyword, String job_ordering, String job_region, String job_kind, String job_type,
                           int start, int count, final OnResultListener<JobList> listener) {
         final RequestParams params = new RequestParams();
-        params.put("bbs_gb",1);
+        params.put("bbs_gb", 1);
         params.put(KEYWORD, keyword);
         params.put(JOB_ORDER, job_ordering);
         params.put(JOB_REGION, job_region);
@@ -128,6 +129,7 @@ public class NetworkManager {
         });
     }
 
+
     private static final String SERVER = "http://52.69.235.46:3000";
     // 내가 담은 채용정보 불러오는 method
     private static final String SHOW_MY_JOB = SERVER + "/showmyscrap";
@@ -146,6 +148,28 @@ public class NetworkManager {
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 MyJobLab myJobLab = gson.fromJson(responseString, MyJobLab.class);
                 listener.onSuccess(myJobLab);
+            }
+        });
+    }
+
+    private static final String SHOW_JOB_QUESTION = SERVER + "/jasoseo/%s";
+    public void showJobQuestion(Context context, int jobId, final OnResultListener<QuestionLab> listener) {
+        RequestParams params = new RequestParams();
+        Header[] headers = new Header[1];
+        headers[0] = new BasicHeader("Accept", "application/json");
+        String url = String.format(SHOW_JOB_QUESTION, jobId);
+        Log.i("url", url);
+        client.get(context, url, headers, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Log.i("QuestionLab", responseString);
+                QuestionLab questionLab = gson.fromJson(responseString, QuestionLab.class);
+                listener.onSuccess(questionLab);
             }
         });
     }
@@ -260,6 +284,7 @@ public class NetworkManager {
 
     // 게시글 추가
     private static final String ADD_ARTICLE = SERVER + "/addboard";
+
     public void addArticle(Context context, String content, final OnResultListener<Article> listener) {
         RequestParams params = new RequestParams();
         params.put("content", content);
@@ -267,6 +292,7 @@ public class NetworkManager {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Articles article = new Gson().fromJson(responseString, Articles.class);
@@ -326,13 +352,6 @@ public class NetworkManager {
     public static final String LOG_IN = SERVER + "/login";
 
     public void login(Context context, String userid, String password, final OnResultListener<LoginData> listener) {
-//        mHandler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                OnResultListener<String> listener = null;
-//                listener.onSuccess(null, "ok");
-//            }
-//        }, 1000);
         RequestParams params = new RequestParams();
         params.put("user_id", userid);
         params.put("pw", password);
@@ -368,109 +387,6 @@ public class NetworkManager {
             }
         });
     }
-//        mHandler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                OnResultListener<String> listener = null;
-//                listener.onSuccess(null, "ok");
-//            }
-//        }, 1000);
 }
 
-
-//    ThreadPoolExecutor mExecutor;
-//    public static final int CORE_POOL_SIZE = 5;
-//    public static final int MAXIMUN_POOL_SIZE = 64;
-//    public static final int KEEP_ALIVE_TIME = 5000;
-//    LinkedBlockingQueue<Runnable> mRequestQueue = new LinkedBlockingQueue<Runnable>();
-//    Map<Context, List<NetworkRequest>> mRequestMap = new HashMap<Context, List<NetworkRequest>>();
-//
-//    private NetworkManager() {
-//        mExecutor = new ThreadPoolExecutor(CORE_POOL_SIZE, MAXIMUN_POOL_SIZE, KEEP_ALIVE_TIME, TimeUnit.MILLISECONDS, mRequestQueue);
-//    }
-//
-//    public interface OnResultListener<T> {
-//        public void onSuccess(NetworkRequest<T> request, T result);
-//        public void onFail(NetworkRequest<T> request, int code);
-//    }
-//
-//    public static final int MESSAGE_SEND_SUCCESS = 1;
-//    public static final int MESSAGE_SEND_FAIL = 2;
-//
-//    Handler mHandler = new Handler(Looper.getMainLooper()) {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            NetworkRequest request = (NetworkRequest) msg.obj;
-//            switch (msg.what) {
-//                case MESSAGE_SEND_SUCCESS:
-//                    request.sendSuccess();
-//                    break;
-//                case MESSAGE_SEND_FAIL:
-//                    request.sendFail();
-//                    break;
-//            }
-//            removeMap(request);
-//        }
-//    };
-//
-//    public void sendSuccess(NetworkRequest request) {
-//        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SEND_SUCCESS, request));
-//    }
-//
-//    public void sendFail(NetworkRequest request) {
-//        mHandler.sendMessage(mHandler.obtainMessage(MESSAGE_SEND_FAIL, request));
-//    }
-//
-//    public <T> void getNetworkData(Context context, NetworkRequest<T> request, OnResultListener<T> listener) {
-//        request.setOnResultListener(listener);
-//        getNetworkData(context, request);
-//    }
-//
-//    public void cancelAll(Context context) {
-//        List<NetworkRequest> list = mRequestMap.get(context);
-//        if (list != null) {
-//            List<NetworkRequest> removelist = new ArrayList<NetworkRequest>(list);
-//            for (NetworkRequest req : removelist) {
-//                req.cancel();
-//            }
-//        }
-//    }
-//
-//    private void addMap(NetworkRequest request) {
-//        Context context = request.getContext();
-//        List<NetworkRequest> list = mRequestMap.get(context);
-//        if (list == null) {
-//            list = new ArrayList<NetworkRequest>();
-//            mRequestMap.put(context, list);
-//        }
-//        list.add(request);
-//    }
-//
-//    private void removeMap(NetworkRequest request) {
-//        Context context = request.getContext();
-//        List<NetworkRequest> list = mRequestMap.get(context);
-//        if (list != null) {
-//            list.remove(request);
-//            if (list.size() == 0) {
-//                mRequestMap.remove(context);
-//            }
-//        }
-//    }
-//
-//    public <T> void getNetworkData(Context context, NetworkRequest<T> request) {
-//        request.setNetworkManager(this);
-//        request.setContext(context);
-//        addMap(request);
-//        mExecutor.execute(request);
-//    }
-//
-//    public void processCancel(NetworkRequest request) {
-//        mRequestQueue.remove(request);
-//        removeMap(request);
-//    }
-//
-//
-//
-//
-//
 

@@ -6,11 +6,14 @@ import android.widget.BaseExpandableListAdapter;
 
 import com.example.androidchoi.jobdam.ExpandableChildAddressItemView;
 import com.example.androidchoi.jobdam.ExpandableChildContentItemView;
+import com.example.androidchoi.jobdam.ExpandableChildQuestionItemView;
 import com.example.androidchoi.jobdam.ExpandableGroupItemView;
 import com.example.androidchoi.jobdam.Model.AddressData;
+import com.example.androidchoi.jobdam.Model.ChildData;
 import com.example.androidchoi.jobdam.Model.ContentData;
 import com.example.androidchoi.jobdam.Model.GroupData;
-import com.example.androidchoi.jobdam.Model.ChildData;
+import com.example.androidchoi.jobdam.Model.QuestionData;
+import com.example.androidchoi.jobdam.Model.Questions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +30,14 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
     private static final int TYPE_INDEX_QUESTION = 2;
 
     public void add(String title, ChildData content) {
-        GroupData data = new GroupData(title, content);
+        List<ChildData> childDataList = new ArrayList<ChildData>();
+        childDataList.add(content);
+        GroupData data = new GroupData(title, childDataList);
+        mItems.add(data);
+        notifyDataSetChanged();
+    }
+    public void addQuestion(String title, Questions questions){
+        GroupData data = new GroupData(title, questions);
         mItems.add(data);
         notifyDataSetChanged();
     }
@@ -39,7 +49,7 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return 1;
+        return mItems.get(groupPosition).getChildDataList().size();
     }
 
     @Override
@@ -49,7 +59,7 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return mItems.get(groupPosition).getChildData();
+        return mItems.get(groupPosition).getChildDataList().get(childPosition);
     }
 
     @Override
@@ -89,7 +99,7 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
                 } else {
                     view = new ExpandableChildContentItemView(parent.getContext());
                 }
-                view.setExpandableContent((ContentData)mItems.get(groupPosition).getChildData());
+                view.setExpandableContent((ContentData)mItems.get(groupPosition).getChildDataList().get(childPosition));
                 return view;
             }
             case TYPE_INDEX_ADDRESS : {
@@ -99,18 +109,28 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
                 } else {
                     view = new ExpandableChildAddressItemView(parent.getContext());
                 }
-                view.setExpandableAddress((AddressData)mItems.get(groupPosition).getChildData());
+                view.setExpandableAddress((AddressData)mItems.get(groupPosition).getChildDataList().get(childPosition));
                 return view;
             }
             case TYPE_INDEX_QUESTION :
             default : {
-                return convertView;
+                ExpandableChildQuestionItemView view;
+                if(convertView != null){
+                    view = (ExpandableChildQuestionItemView)convertView;
+                }else{
+                    view = new ExpandableChildQuestionItemView(parent.getContext());
+                }
+                if(isLastChild){
+                    view.setVisibleDetailButton();
+                }
+                view.setExpandableQuestion((QuestionData)mItems.get(groupPosition).getChildDataList().get(childPosition));
+                return view;
             }
         }
     }
     @Override
     public int getChildType(int groupPosition, int childPosition) {
-        ChildData data = mItems.get(groupPosition).getChildData();
+        ChildData data = mItems.get(groupPosition).getChildDataList().get(childPosition);
         if(data instanceof ContentData){
             return TYPE_INDEX_CONTENT;
         } else if(data instanceof AddressData){
