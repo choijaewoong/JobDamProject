@@ -32,7 +32,8 @@ import java.util.ArrayList;
 public class CardWriteActivity extends AppCompatActivity {
 
     private static final String CATEGORY_DIALOG = "category_dialog";
-    private static final String CALENDAR_DIALOG = "calendar_dialog";
+    public static final String CALENDAR_START_DIALOG = "calendar_start_dialog";
+    public static final String CALENDAR_END_DIALOG = "calendar_end_dialog";
 
     private MyCards mData;
     TextView mTextCategory; // 카테고리 이름
@@ -47,7 +48,7 @@ public class CardWriteActivity extends AppCompatActivity {
     TextView mSaveButton;
 
     boolean isNew;
-    boolean isStartDate = true;
+
 
     //작성 기능
     EditText mEditTitle;
@@ -59,7 +60,7 @@ public class CardWriteActivity extends AppCompatActivity {
     public MyCard getData() {
         return mData.getCard();
     }
-    public void setDate(String date) {
+    public void setDate(String date, boolean isStartDate) {
         if (isStartDate) {
             mData.getCard().setStartDate(date);
             mTextStartDate.setText(date);
@@ -98,6 +99,9 @@ public class CardWriteActivity extends AppCompatActivity {
         mTextContent = (TextView) findViewById(R.id.text_view_card_content);
         mEditTag = (EditText)findViewById(R.id.edit_text_card_tag);
         mPredicateLayout =(PredicateLayout)findViewById(R.id.tag_box);
+        mTextStartDate = (TextView) findViewById(R.id.text_start_date);
+        mTextEndDate = (TextView) findViewById(R.id.text_end_date);
+
         Intent intent = getIntent();
         isNew = intent.getBooleanExtra(MyCard.CARD_NEW, true);
         // 기존 Data있는 경우 (메모 수정)
@@ -111,10 +115,13 @@ public class CardWriteActivity extends AppCompatActivity {
         } else { // 기존 Data없는 경우 (메모 추가)
             mData = new MyCards();
             changeWriteMode();
-            mEditContent.requestFocus();
+            mEditTitle.requestFocus();
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(mEditContent, InputMethodManager.SHOW_IMPLICIT);
+            imm.showSoftInput(mEditTitle, InputMethodManager.SHOW_IMPLICIT);
         }
+        // 활동기간
+        mTextStartDate.setText(mData.getCard().getStartDate());
+        mTextEndDate.setText(mData.getCard().getEndDate());
 
         // 카테고리 이름, 색 설정
         CategoryData categoryData = CategoryData.get(getApplicationContext()).getCategoryList().get(mData.getCard().getCategory());
@@ -203,29 +210,24 @@ public class CardWriteActivity extends AppCompatActivity {
                 imm.showSoftInput(mEditContent, InputMethodManager.SHOW_IMPLICIT);
             }
         });
-
         mEditTag.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 mCancelSaveLayout.setVisibility(View.VISIBLE);
             }
         });
-        mTextStartDate = (TextView) findViewById(R.id.text_start_date);
         mTextStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isStartDate = true;
                 CustomCalendarDialogFragment dialog = new CustomCalendarDialogFragment();
-                dialog.show(getSupportFragmentManager(), CALENDAR_DIALOG);
+                dialog.show(getSupportFragmentManager(), CALENDAR_START_DIALOG);
             }
         });
-        mTextEndDate = (TextView) findViewById(R.id.text_end_date);
         mTextEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isStartDate = false;
                 CustomCalendarDialogFragment dialog = new CustomCalendarDialogFragment();
-                dialog.show(getSupportFragmentManager(), CALENDAR_DIALOG);
+                dialog.show(getSupportFragmentManager(), CALENDAR_END_DIALOG);
             }
         });
         ImageView mCategorySelectImage = (ImageView) findViewById(R.id.image_category_select);
@@ -257,6 +259,7 @@ public class CardWriteActivity extends AppCompatActivity {
         });
     }
 
+    //태그 더하기
     public void addTagView(String tag){
         final TextView t = new TextView(CardWriteActivity.this);
         t.setText(tag);
@@ -304,6 +307,7 @@ public class CardWriteActivity extends AppCompatActivity {
         return gson.toJson(mData);
     }
 
+    //작성 모드 변경
     public void changeWriteMode() {
         mCancelSaveLayout.setVisibility(View.VISIBLE);
         scrollView.setVisibility(View.GONE);

@@ -144,7 +144,6 @@
                 android:paddingBottom="@dimen/default_small_dimen"
                 android:paddingRight="@dimen/default_small_dimen"
                 android:paddingTop="@dimen/default_small_dimen"
-                android:text="2015년 10월 14일"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"/>
 
@@ -164,7 +163,6 @@
                 android:paddingBottom="@dimen/default_small_dimen"
                 android:paddingRight="@dimen/default_small_dimen"
                 android:paddingTop="@dimen/default_small_dimen"
-                android:text="2015년 10월 14일"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"/>
         </LinearLayout>

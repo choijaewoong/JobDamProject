@@ -90,13 +90,13 @@ public class ArticleFragment extends Fragment {
     }
 
     public void showLikeToast(Bundle savedInstanceState){
-        LayoutInflater inflater = getLayoutInflater(savedInstanceState);
-        View view = inflater.inflate(R.layout.view_toast_like,
-                (ViewGroup) getActivity().findViewById(R.id.container_like_toast));
-        Toast toast = new Toast(getActivity().getApplicationContext());
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setView(view);
-        toast.show();
-    }
+    LayoutInflater inflater = getLayoutInflater(savedInstanceState);
+    View view = inflater.inflate(R.layout.view_toast_like,
+            (ViewGroup) getActivity().findViewById(R.id.container_like_toast));
+    Toast toast = new Toast(getActivity().getApplicationContext());
+    toast.setGravity(Gravity.CENTER, 0, 0);
+    toast.setDuration(Toast.LENGTH_SHORT);
+    toast.setView(view);
+    toast.show();
+}
 }

@@ -1,11 +1,12 @@
 package com.example.androidchoi.jobdam.Calendar;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  * Created by Choi on 2015-11-21.
  */
-public class CurrentTime {
+public class CurrentTime implements Serializable{
 
     private final String[] weeks = { null, "일", "월", "화", "수", "목", "금", "토" };
     private Calendar calendar;
@@ -40,4 +41,6 @@ public class CurrentTime {
     public int getSecond() {
         return calendar.get(Calendar.SECOND);
     }
+
+    public long getTimeStamp(){ return calendar.get(Calendar.MILLISECOND); }
 }

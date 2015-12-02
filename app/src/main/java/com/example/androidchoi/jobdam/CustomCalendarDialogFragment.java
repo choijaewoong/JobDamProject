@@ -35,6 +35,7 @@ public class CustomCalendarDialogFragment extends DialogFragment {
     TextView textCheck;
     MemoCalendarAdapter mAdapter;
     String selectDate;
+    boolean isStartDate;
 
     private static boolean isWeekCalendar = false;
 
@@ -49,6 +50,10 @@ public class CustomCalendarDialogFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogAnimation);
+        if(getTag().equals(CardWriteActivity.CALENDAR_START_DIALOG))
+            isStartDate = true;
+        else
+            isStartDate = false;
     }
 
     @Override
@@ -129,14 +134,13 @@ public class CustomCalendarDialogFragment extends DialogFragment {
                 selectDate = ((CalendarItem) mAdapter.getItem(position)).year + "년 " +
                         (((CalendarItem) mAdapter.getItem(position)).month + 1) + "월 " +
                         ((CalendarItem) mAdapter.getItem(position)).dayOfMonth + "일";
-                ((CardWriteActivity) getActivity()).getData().setStartDate(selectDate);
                 Toast.makeText(getActivity(), selectDate, Toast.LENGTH_SHORT).show();
             }
         });
         textCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((CardWriteActivity) getActivity()).setDate(selectDate);
+                ((CardWriteActivity) getActivity()).setDate(selectDate, isStartDate);
                 dismiss();
             }
         });
