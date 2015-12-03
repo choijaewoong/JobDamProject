@@ -1,11 +1,18 @@
 package com.example.androidchoi.jobdam;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.example.androidchoi.jobdam.Model.CategoryData;
 import com.example.androidchoi.jobdam.Model.QuestionData;
 import com.example.androidchoi.jobdam.Util.PredicateLayout;
 
@@ -13,11 +20,11 @@ import com.example.androidchoi.jobdam.Util.PredicateLayout;
  * Created by Choi on 2015-11-04.
  */
 public class ExpandableChildQuestionItemView extends FrameLayout {
+
     public ExpandableChildQuestionItemView(Context context) {
         super(context);
         init();
     }
-
     TextView mTextQuestionView;
     PredicateLayout mPredicateLayout;
     Button mButtonQuestionDetail;
@@ -29,11 +36,57 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
         mButtonQuestionDetail = (Button)view.findViewById(R.id.button_job_question_detail);
     }
 
-    public void setExpandableQuestion(QuestionData data){
+    public void setExpandableQuestion(QuestionData data, final int position){
         mTextQuestionView.setText(data.getQuestion());
+        mPredicateLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CardChoiceActivity.class);
+                intent.putExtra(CardChoiceActivity.QUESTION_NUM, position);
+                ((JobDetailActivity) getContext()).startActivityForResult(intent, JobDetailActivity.REQUEST_ATTACH);
+            }
+        });
     }
 
     public void setVisibleDetailButton(){
         mButtonQuestionDetail.setVisibility(VISIBLE);
+    }
+
+    public void addTagView(String tag, int categoryIndex){
+        final TextView t = new TextView(getContext());
+        t.setText(tag);
+        t.setTextSize(14);
+        t.setTextColor(ContextCompat.getColor(getContext(), android.R.color.white));
+        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.image_category_color);
+        drawable.setColorFilter(CategoryData.get(getContext()).getCategoryList().get(categoryIndex).getColor(), PorterDuff.Mode.MULTIPLY);
+        t.setBackground(drawable);
+        t.setPadding(20, 10, 20, 10);
+        int width = getResources().getDimensionPixelSize(R.dimen.tag_max_width);
+        t.setMaxWidth(width);
+        t.setSingleLine(true);
+        t.setEllipsize(TextUtils.TruncateAt.END);
+        t.setGravity(Gravity.CENTER);
+//        t.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                for(int i=0; i<mTextTags.size(); i++){
+//                    if(t == mTextTags.get(i)){
+////                        Toast.makeText(CardWriteActivity.this, "해당 태그가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(getActivity(), CardWriteActivity.class);
+//                        intent.putExtra(MyCard.CARD_ITEM, mCardList.get(index));
+//                        intent.putExtra(MyCard.CARD_NEW, false);
+//                        startActivityForResult(intent, REQUEST_MODIFY);
+//                    }
+//                }
+//            }
+//        });
+//        for(int i=0; i<mTextTags.size(); i++) {
+//            if (t.getId() == mTextTags.get(i).getId()) {
+//                return;
+//            }
+//        }
+//        mTextTags.add(t);
+//        mPredicateLayout.addView(mTextTags.get(mTextTags.size() - 1));
+        mPredicateLayout.addView(t);
     }
 }

@@ -33,7 +33,7 @@ public class CategoryFolderItemView extends RelativeLayout{
     }
 
     public void setData(CategoryData data, int count){
-        mTextCount.setText(count+"");
+        mTextCount.setText("");
         mTextName.setText(data.getName());
         mTextName.setTextColor(data.getColor());
         Drawable drawable = ContextCompat.getDrawable(getContext(), data.getImage());

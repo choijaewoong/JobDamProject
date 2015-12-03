@@ -20,27 +20,35 @@
     <com.example.androidchoi.jobdam.Util.PredicateLayout
         android:id="@+id/layout_job_question_tag"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/text_job_question"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="@dimen/default_large_dimen"
         android:layout_marginRight="@dimen/default_large_dimen"
-        android:background="@drawable/image_container_job_tag"
-        android:layout_marginTop="@dimen/default_small_dimen">
+        android:background="@drawable/selector_button_container_job_tag"
+        android:layout_marginTop="@dimen/default_small_dimen"
+        android:paddingLeft="20dp"
+        android:paddingRight="@dimen/default_small_dimen"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"/>
 
     </com.example.androidchoi.jobdam.Util.PredicateLayout>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_width="90dp"
+        android:layout_height="14dp"
         android:id="@+id/button_job_question_detail"
-        android:text="질문 항목 자세히 보기"
         android:textColor="@android:color/white"
-        android:background="@drawable/selector_button_detail_page"
+        android:background="@drawable/button_job_tag_detail"
         android:textSize="@dimen/font_size_default"
         android:layout_below="@+id/layout_job_question_tag"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/default_dimen"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/default_large_dimen"/>
 </RelativeLayout>

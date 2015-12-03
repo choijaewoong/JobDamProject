@@ -1,5 +1,6 @@
 package com.example.androidchoi.jobdam.Adpater;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
@@ -23,11 +24,23 @@ import java.util.List;
  */
 public class JobDetailAdapter extends BaseExpandableListAdapter {
 
+    Context mContext;
     List<GroupData> mItems = new ArrayList<GroupData>();
     private static final int VIEW_TYPE_COUNT = 3;
     private static final int TYPE_INDEX_CONTENT = 0;
     private static final int TYPE_INDEX_ADDRESS = 1;
     private static final int TYPE_INDEX_QUESTION = 2;
+
+//    JobDetailActivity.OnAddCardCallback mCallback = new JobDetailActivity.OnAddCardCallback() {
+//        @Override
+//        public void onAddCardTag(List<MyCards> myCardList, int pos) {
+//            for (int i = 0; i < myCardList.size(); i++) {
+//                view.addTagView(myCardList.get(i).getCard().getTitle(), myCardList.get(i).getCard().getCategory());
+//
+//            }
+//        }
+//    };
+//    ((JobDetailActivity)mContext).setOnAddCardCallback(mCallback);
 
     public void add(String title, ChildData content) {
         List<ChildData> childDataList = new ArrayList<ChildData>();
@@ -40,6 +53,10 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
         GroupData data = new GroupData(title, questions);
         mItems.add(data);
         notifyDataSetChanged();
+    }
+
+    public JobDetailAdapter(Context context) {
+        mContext = context;
     }
 
     @Override
@@ -90,7 +107,7 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
         return view;
     }
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         switch(getChildType(groupPosition,childPosition)){
             case TYPE_INDEX_CONTENT : {
                 ExpandableChildContentItemView view;
@@ -114,7 +131,7 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
             }
             case TYPE_INDEX_QUESTION :
             default : {
-                ExpandableChildQuestionItemView view;
+                final ExpandableChildQuestionItemView view;
                 if(convertView != null){
                     view = (ExpandableChildQuestionItemView)convertView;
                 }else{
@@ -123,7 +140,7 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
                 if(isLastChild){
                     view.setVisibleDetailButton();
                 }
-                view.setExpandableQuestion((QuestionData)mItems.get(groupPosition).getChildDataList().get(childPosition));
+                view.setExpandableQuestion((QuestionData)mItems.get(groupPosition).getChildDataList().get(childPosition), childPosition);
                 return view;
             }
         }

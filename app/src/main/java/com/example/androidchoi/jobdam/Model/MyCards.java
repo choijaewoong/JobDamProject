@@ -1,5 +1,7 @@
 package com.example.androidchoi.jobdam.Model;
 
+import android.os.Parcel;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -12,6 +14,11 @@ public class MyCards implements Serializable{
     private String _id;
     @SerializedName("memo")
     private MyCard card;
+
+    protected MyCards(Parcel in) {
+        _id = in.readString();
+    }
+
     public MyCard getCard() {
         return card;
     }
@@ -20,4 +27,6 @@ public class MyCards implements Serializable{
     public MyCards() {
         card = new MyCard();
     }
+
+
 }

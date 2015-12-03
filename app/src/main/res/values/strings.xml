@@ -52,8 +52,9 @@
     <string name="diff_pw">로그인 실패! 비밀번호가 다릅니다.</string>
     <string name="missing_credentials">계정 정보를 입력해주세요.</string>
 
-    <!-- JobDam Talk -->
+    <!-- actionbar menu  -->
     <string name="save_article">저장</string>
+    <string name="attach_card">첨부</string>
     <!-- Job List Header -->
     <string name="order_latest">최신순</string>
     <string name="order_dead_line">마감순</string>
