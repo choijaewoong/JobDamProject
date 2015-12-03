@@ -47,7 +47,7 @@ public class MyJobCalendarFragment extends Fragment {
     TextView mTextCalendarTypeButton;
 
     private ArrayList<MyJobs> mJobList;
-    private static boolean isWeekCalendar = false;
+    private static boolean isWeekCalendar = true;
 
     ArrayList<ItemData> mItemdata;
 
@@ -114,6 +114,7 @@ public class MyJobCalendarFragment extends Fragment {
                 Job data = (Job) mStartJobAdapter.getItem(position);
                 Intent intent = new Intent(getActivity(), JobDetailActivity.class);
                 intent.putExtra(Job.JOBITEM, data);
+                intent.putExtra(Job.JOB_SCRAP_CHECK, true);
                 startActivity(intent);
             }
         });

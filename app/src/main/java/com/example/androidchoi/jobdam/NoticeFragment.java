@@ -57,10 +57,10 @@ public class NoticeFragment extends Fragment {
 
 
     private void initListItem() {
-        mNoticeAdapter.add(new NoticeDateData("15.12.01"));
+        mNoticeAdapter.add(new NoticeDateData("15.12.04"));
         mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice0)), "12:00", true));
         mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice2)), "10:30", true));
-        mNoticeAdapter.add(new NoticeDateData("15.11.30"));
+        mNoticeAdapter.add(new NoticeDateData("15.12.03"));
         mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice5)), "18:00", true));
         mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice3)), "13:00", true));
         mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice4)), "09:00", true));
