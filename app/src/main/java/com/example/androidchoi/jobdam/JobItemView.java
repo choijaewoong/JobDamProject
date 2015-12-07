@@ -53,8 +53,13 @@ public class JobItemView extends RelativeLayout {
         endDay.setTime(end);
         long endTime = endDay.getTimeInMillis();
         long todayTime = currentDay.getTimeInMillis();
-        long dday = ((endTime+1000) - todayTime)/ONE_DAY_TIME_STAMP;
-        int d_day = (int)dday;
+        long timeGap = (endTime+1000) - todayTime;
+        if(timeGap < 0){
+            mDDay.setText("마감");
+            mDDay.setBackgroundResource(R.drawable.image_dday_box_always);
+            return true;
+        }
+        int d_day = (int)(timeGap/ONE_DAY_TIME_STAMP);
         mDDay.setText("d-" + d_day);
         if (d_day == 0) {
             mDDay.setText("d-day");
@@ -79,6 +84,7 @@ public class JobItemView extends RelativeLayout {
         Date start = new Date(itemData.getStart() * 1000L);
         Date end = new Date(itemData.getEnd() * 1000L);
 
-        setPeriod(start, end, setDDay(end));
+        boolean checkDeadLine = setDDay(end);
+        setPeriod(start, end, checkDeadLine);
     }
 }
