@@ -64,8 +64,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@+id/imageView12"/>
-        <!--</LinearLayout>-->
-    <!--</TabHost>-->
+    <View
+        android:id="@+id/toolbar_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/shadow_depth"
+        android:background="@drawable/shadow_bottom"/>
 </RelativeLayout>
 

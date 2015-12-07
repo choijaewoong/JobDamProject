@@ -39,8 +39,6 @@ public class NoticeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View shadowToolbar = getActivity().findViewById(R.id.toolbar_shadow);
-        shadowToolbar.setVisibility(View.VISIBLE);
         View view =  inflater.inflate(R.layout.fragment_notice, container, false);
         mListView = (ListView)view.findViewById(R.id.listView_notice);
         mNoticeAdapter = new NoticeAdapter();
@@ -53,8 +51,6 @@ public class NoticeFragment extends Fragment {
         initListItem();
         return view;
     }
-
-
 
     private void initListItem() {
         mNoticeAdapter.add(new NoticeDateData("15.12.04"));

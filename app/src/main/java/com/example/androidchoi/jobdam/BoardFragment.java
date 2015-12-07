@@ -50,16 +50,12 @@ public class BoardFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         TextView subTitle = (TextView)getActivity().findViewById(R.id.text_subtitle);
         subTitle.setText(R.string.board);
-//        mArticlesList = ArticleLab.get(getActivity()).getArticleList();
-//        mAdapter.setItems(mArticlesList);
         showArticle();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View shadowToolbar = getActivity().findViewById(R.id.toolbar_shadow);
-        shadowToolbar.setVisibility(View.VISIBLE);
         View view =  inflater.inflate(R.layout.fragment_board, container, false);
         mAdapter = new BoardPagerAdapter(getChildFragmentManager());
         pager = (ViewPager)view.findViewById(R.id.view_pager_article);

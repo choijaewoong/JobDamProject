@@ -151,4 +151,10 @@
             android:src="@drawable/floating_button_write"/>
 
     </com.github.clans.fab.FloatingActionMenu>
+
+    <View
+        android:id="@+id/toolbar_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/shadow_depth"
+        android:background="@drawable/shadow_bottom"/>
 </RelativeLayout>

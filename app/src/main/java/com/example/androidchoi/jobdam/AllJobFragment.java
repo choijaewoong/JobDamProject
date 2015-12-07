@@ -71,7 +71,6 @@ public class AllJobFragment extends Fragment {
         subTitle.setText(R.string.all_job);
 
         searchJob();
-
         mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -128,9 +127,6 @@ public class AllJobFragment extends Fragment {
                 searchJob();
             }
         });
-
-        View shadowToolbar = getActivity().findViewById(R.id.toolbar_shadow);
-        shadowToolbar.setVisibility(View.GONE);
         mListView = (ListView) view.findViewById(R.id.listview_all_job);
         mListView.addHeaderView(searchHeaderView);
         mListView.addHeaderView(countHeaderView, null, false);

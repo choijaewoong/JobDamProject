@@ -51,8 +51,6 @@ public class MyJobFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View shadowToolbar = getActivity().findViewById(R.id.toolbar_shadow);
-        shadowToolbar.setVisibility(View.VISIBLE);
         View view = inflater.inflate(R.layout.fragment_my_job, container, false);
         List<Fragment> fragments = new ArrayList<Fragment>();
         fragments.add(0,new MyJobListFragment());

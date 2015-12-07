@@ -48,12 +48,17 @@
         android:textStyle="bold"/>
 
 </RelativeLayout>
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_width"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorDivider"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:paddingLeft="@dimen/default_dimen"
-        android:paddingRight="@dimen/default_dimen">
+        android:paddingRight="@dimen/default_dimen"
+        android:background="@android:color/white">
 
         <TextView
             android:layout_width="32dp"
@@ -113,7 +118,6 @@
     <ImageView
     android:layout_width="match_parent"
     android:layout_height="@dimen/divider_width"
-    android:id="@+id/image_category_select"
     android:layout_gravity="center_horizontal"
     android:background="@color/colorDivider"/>
 
@@ -199,7 +203,6 @@
 <ImageView
     android:layout_width="match_parent"
     android:layout_height="@dimen/divider_width"
-    android:id="@+id/imageView"
     android:layout_gravity="center_horizontal"
     android:background="@color/colorDivider"/>
 

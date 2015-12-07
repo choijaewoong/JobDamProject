@@ -14,4 +14,10 @@
         android:listSelector="@android:color/transparent"
         android:clipToPadding="false"
         android:divider="@android:color/transparent"/>
+
+    <View
+        android:id="@+id/toolbar_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/shadow_depth"
+        android:background="@drawable/shadow_bottom"/>
 </FrameLayout>
