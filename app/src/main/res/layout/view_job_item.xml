@@ -100,8 +100,8 @@
 
     <TextView
         android:id="@+id/text_job_dday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="34dp"
+        android:layout_height="20dp"
         android:text="d-day"
         android:textColor="@android:color/white"
         android:textSize="@dimen/font_size_min"
@@ -111,7 +111,7 @@
         android:paddingLeft="3dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentEnd="false"
         android:layout_marginTop="@dimen/default_small_dimen"/>
 
 </RelativeLayout>

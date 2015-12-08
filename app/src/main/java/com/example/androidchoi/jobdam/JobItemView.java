@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam;
 
 import android.content.Context;
+import android.util.TypedValue;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -54,16 +55,19 @@ public class JobItemView extends RelativeLayout {
         long endTime = endDay.getTimeInMillis();
         long todayTime = currentDay.getTimeInMillis();
         long timeGap = (endTime+1000) - todayTime;
+        int d_day = (int)(timeGap/ONE_DAY_TIME_STAMP);
+        mDDay.setText("D-" + d_day);
         if(timeGap < 0){
             mDDay.setText("마감");
-            mDDay.setBackgroundResource(R.drawable.image_dday_box_always);
+            mDDay.setBackgroundResource(R.drawable.image_dday_box_end);
+            mDDay.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.font_size_small));
             return true;
         }
-        int d_day = (int)(timeGap/ONE_DAY_TIME_STAMP);
-        mDDay.setText("d-" + d_day);
         if (d_day == 0) {
-            mDDay.setText("d-day");
+            mDDay.setText("D-day");
+            mDDay.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.font_size_min));
             mDDay.setBackgroundResource(R.drawable.image_dday_box_danger);
+            return true;
         } else if (d_day < 7) {
             mDDay.setBackgroundResource(R.drawable.image_dday_box_danger);
         } else if (d_day < 15) {
@@ -74,7 +78,12 @@ public class JobItemView extends RelativeLayout {
             return false;
         } else {
             mDDay.setBackgroundResource(R.drawable.image_dday_box_default);
+            if(d_day > 99){
+                mDDay.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.font_size_min));
+                return true;
+            }
         }
+        mDDay.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.font_size_small));
         return true;
     }
 

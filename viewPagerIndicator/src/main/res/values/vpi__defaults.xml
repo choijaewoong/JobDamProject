@@ -19,7 +19,7 @@
     <color name="default_circle_indicator_fill_color">#0db5f7</color>
     <color name="default_circle_indicator_page_color">#ffffff</color>
     <integer name="default_circle_indicator_orientation">0</integer>
-    <dimen name="default_circle_indicator_radius">5dp</dimen>
+    <dimen name="default_circle_indicator_radius">4dp</dimen>
     <bool name="default_circle_indicator_snap">false</bool>
     <color name="default_circle_indicator_stroke_color">#ffffff</color>
     <dimen name="default_circle_indicator_stroke_width">0dp</dimen>
