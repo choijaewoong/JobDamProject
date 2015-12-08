@@ -53,8 +53,8 @@ public class ArticleWriteActivity extends AppCompatActivity {
 
         mEditText = (EditText)findViewById(R.id.edit_text_article);
 
-        /* intent 가져오고 Data가 없다면
-         새로 작성하는 article , Data가 있다면 article 수정 */
+        /* intent 가져오고 Data가 없다면 새로 작성하는 article
+        Data가 있다면 article 수정 */
         if(mArticle != null){
 //            mEditText.setText(mArticle.getContent());
         } else{
