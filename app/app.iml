@@ -103,6 +103,7 @@
     <orderEntry type="module" module-name="androidAsyncHttp" exported="" />
     <orderEntry type="module" module-name="FloatingActionButton" exported="" />
     <orderEntry type="module" module-name="recyclerVIewPager" exported="" />
+    <orderEntry type="module" module-name="viewPagerIndicator" exported="" />
     <orderEntry type="module" module-name="slidingmenu" exported="" />
     <orderEntry type="library" exported="" name="org.apache.http.legacy-android-23" level="project" />
   </component>

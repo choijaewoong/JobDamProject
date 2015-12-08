@@ -1,1 +1,2 @@
 include ':app', ':slidingmenu', ':FloatingActionButton', ':androidAsyncHttp', ':recyclerVIewPager'
+include ':viewPagerIndicator'

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.QuestionPagerAdapter;
 import com.example.androidchoi.jobdam.Model.Questions;
+import com.viewpagerindicator.CirclePageIndicator;
 
 public class JobQuestionActivity extends AppCompatActivity {
 
@@ -18,6 +19,7 @@ public class JobQuestionActivity extends AppCompatActivity {
     ViewPager mViewPager;
     QuestionPagerAdapter mQuestionPagerAdapter;
     Questions mQuestions;
+    CirclePageIndicator mCirclePageIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class JobQuestionActivity extends AppCompatActivity {
         mQuestionPagerAdapter = new QuestionPagerAdapter();
         mQuestionPagerAdapter.setItems(mQuestions);
         mViewPager.setAdapter(mQuestionPagerAdapter);
+        mCirclePageIndicator = (CirclePageIndicator)findViewById(R.id.pager_indicator);
+        mCirclePageIndicator.setViewPager(mViewPager);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
