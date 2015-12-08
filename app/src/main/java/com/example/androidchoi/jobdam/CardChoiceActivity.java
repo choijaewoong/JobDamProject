@@ -20,9 +20,6 @@ import java.util.ArrayList;
 
 public class CardChoiceActivity extends AppCompatActivity {
 
-    public static final String QUESTION_NUM = "questionNumber";
-    public static final String JOB_ID = "jobId";
-
     ListView mListView;
     CardItemAdapter mAdapter;
     private ArrayList<MyCards> mCardList = new ArrayList<MyCards>();
@@ -40,8 +37,8 @@ public class CardChoiceActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
 
         Intent intent = getIntent();
-        mQuestionNum = intent.getIntExtra(QUESTION_NUM, 0);
-        mJobId = intent.getIntExtra(JOB_ID, -1);
+        mQuestionNum = intent.getIntExtra(ExpandableChildQuestionItemView.QUESTION_NUM, 0);
+        mJobId = intent.getIntExtra(ExpandableChildQuestionItemView.JOB_ID, -1);
 //        Toast.makeText(CardChoiceActivity.this, mQuestionNum + "", Toast.LENGTH_SHORT).show();
 
         mListView = (ListView)findViewById(R.id.listView_attach_card);

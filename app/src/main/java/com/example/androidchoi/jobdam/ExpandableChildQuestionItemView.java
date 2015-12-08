@@ -15,12 +15,17 @@ import android.widget.TextView;
 import com.example.androidchoi.jobdam.Model.CategoryData;
 import com.example.androidchoi.jobdam.Model.MyCards;
 import com.example.androidchoi.jobdam.Model.QuestionData;
+import com.example.androidchoi.jobdam.Model.Questions;
 import com.example.androidchoi.jobdam.Util.PredicateLayout;
 
 /**
  * Created by Choi on 2015-11-04.
  */
 public class ExpandableChildQuestionItemView extends FrameLayout {
+
+    public static final String QUESTION_NUM = "questionNumber";
+    public static final String JOB_ID = "jobId";
+    public static final String QUESTION_LIST = "questionList";
 
     public ExpandableChildQuestionItemView(Context context) {
         super(context);
@@ -44,8 +49,8 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CardChoiceActivity.class);
                 //질문 번호
-                intent.putExtra(CardChoiceActivity.QUESTION_NUM, position);
-                intent.putExtra(CardChoiceActivity.JOB_ID, jobId);
+                intent.putExtra(QUESTION_NUM, position);
+                intent.putExtra(JOB_ID, jobId);
                 ((JobDetailActivity) getContext()).startActivityForResult(intent, JobDetailActivity.REQUEST_ATTACH);
             }
         });
@@ -57,7 +62,10 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
         mButtonQuestionDetail.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), JobQuestionActivity.class);
+                Questions questions = ((JobDetailActivity) getContext()).getQuestions();
+                intent.putExtra(QUESTION_LIST, questions);
+                ((JobDetailActivity) getContext()).startActivityForResult(intent, JobDetailActivity.REQUEST_DETAIL);
             }
         });
     }

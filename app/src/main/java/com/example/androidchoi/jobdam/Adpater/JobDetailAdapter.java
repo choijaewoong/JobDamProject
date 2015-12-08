@@ -49,7 +49,6 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
         notifyDataSetChanged();
     }
     public void addQuestion(String title, Questions questions){
-        mJobId = questions.getJobId();
         GroupData data = new GroupData(title, questions);
         mItems.add(data);
         notifyDataSetChanged();

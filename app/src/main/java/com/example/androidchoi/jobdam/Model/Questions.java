@@ -2,12 +2,13 @@ package com.example.androidchoi.jobdam.Model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Choi on 2015-12-02.
  */
-public class Questions {
+public class Questions implements Serializable{
     int job_id;
     @SerializedName("question")
     List<QuestionData> questionList;

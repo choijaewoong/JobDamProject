@@ -36,13 +36,15 @@ import java.util.Date;
 public class JobDetailActivity extends AppCompatActivity {
 
     public static final int REQUEST_ATTACH = 1;
-    Job mData;
-    Questions mQuestions;
-    TextView mCorpName;
-    TextView mJobTitle;
-    ExpandableListView mExpandableListView;
-    JobDetailAdapter mExpandableAdapter;
+    public static final int REQUEST_DETAIL = 2;
+    private Job mData;
+    private Questions mQuestions;
+    private TextView mCorpName;
+    private TextView mJobTitle;
+    private ExpandableListView mExpandableListView;
+    private JobDetailAdapter mExpandableAdapter;
     boolean isScrap;
+    public Questions getQuestions() { return mQuestions; }
 //
 //
 //    public interface OnAddCardCallback {
