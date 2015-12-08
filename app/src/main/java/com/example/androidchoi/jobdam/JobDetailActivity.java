@@ -24,7 +24,6 @@ import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.AddressData;
 import com.example.androidchoi.jobdam.Model.ContentData;
 import com.example.androidchoi.jobdam.Model.Job;
-import com.example.androidchoi.jobdam.Model.MyCards;
 import com.example.androidchoi.jobdam.Model.MyJob;
 import com.example.androidchoi.jobdam.Model.QuestionLab;
 import com.example.androidchoi.jobdam.Model.Questions;
@@ -33,7 +32,6 @@ import com.google.gson.Gson;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class JobDetailActivity extends AppCompatActivity {
 
@@ -45,27 +43,27 @@ public class JobDetailActivity extends AppCompatActivity {
     ExpandableListView mExpandableListView;
     JobDetailAdapter mExpandableAdapter;
     boolean isScrap;
+//
+//
+//    public interface OnAddCardCallback {
+//        void onAddCardTag(List<MyCards> myCardList, int position);
+//    }
+//    private OnAddCardCallback mCallback;
+//    public void setOnAddCardCallback(OnAddCardCallback callback){
+//        mCallback = callback;
+//    }
 
-    // 날짜 체크 콜백
-    public interface OnAddCardCallback {
-        void onAddCardTag(List<MyCards> myCardList, int position);
-    }
-    private OnAddCardCallback mCallback;
-    public void setOnAddCardCallback(OnAddCardCallback callback){
-        mCallback = callback;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode != Activity.RESULT_OK){ return; }
-        if(requestCode == REQUEST_ATTACH){
-            int position = data.getIntExtra(CardChoiceActivity.QUESTION_NUM, 0);
-            List<MyCards> myCardList = (List<MyCards>) data.getSerializableExtra(CardChoiceActivity.CARD_TITLE);
-//            mCallback.onAddCardTag(myCardList, position);
-            mExpandableAdapter.notifyDataSetChanged();
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(resultCode != Activity.RESULT_OK){ return; }
+//        if(requestCode == REQUEST_ATTACH){
+//            int position = data.getIntExtra(CardChoiceActivity.QUESTION_NUM, 0);
+//            List<MyCards> myCardList = (List<MyCards>) data.getSerializableExtra(CardChoiceActivity.CARD_TITLE);
+////            mCallback.onAddCardTag(myCardList, position);
+//            mExpandableAdapter.notifyDataSetChanged();
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +80,7 @@ public class JobDetailActivity extends AppCompatActivity {
         isScrap = intent.getBooleanExtra(Job.JOB_SCRAP_CHECK, false);
 
         mExpandableListView = (ExpandableListView) findViewById(R.id.listview_job_detail_expandable);
-        mExpandableAdapter = new JobDetailAdapter(JobDetailActivity.this);
+        mExpandableAdapter = new JobDetailAdapter(mData.getId());
         // 헤더뷰 설정
         View corpHeaderView = getLayoutInflater().inflate(R.layout.view_header_job_detail_corp, null);
         View titleHeaderView = getLayoutInflater().inflate(R.layout.view_header_job_detail_title, null);
@@ -134,8 +132,6 @@ public class JobDetailActivity extends AppCompatActivity {
         mExpandableListView.setDivider(ContextCompat.getDrawable(JobDetailActivity.this, android.R.color.transparent));
         mExpandableListView.setChildDivider(ContextCompat.getDrawable(JobDetailActivity.this, android.R.color.transparent));
         showJobQuestion();
-
-
     }
 
     //리스트뷰 메뉴 설정

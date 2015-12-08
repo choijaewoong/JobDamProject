@@ -12,7 +12,7 @@ public class Questions {
     @SerializedName("question")
     List<QuestionData> questionList;
 
-    public int getJob_id() {
+    public int getJobId() {
         return job_id;
     }
 

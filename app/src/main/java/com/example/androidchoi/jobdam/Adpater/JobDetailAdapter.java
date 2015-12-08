@@ -1,6 +1,5 @@
 package com.example.androidchoi.jobdam.Adpater;
 
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
@@ -24,8 +23,8 @@ import java.util.List;
  */
 public class JobDetailAdapter extends BaseExpandableListAdapter {
 
-    Context mContext;
     List<GroupData> mItems = new ArrayList<GroupData>();
+    int mJobId;
     private static final int VIEW_TYPE_COUNT = 3;
     private static final int TYPE_INDEX_CONTENT = 0;
     private static final int TYPE_INDEX_ADDRESS = 1;
@@ -50,13 +49,14 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
         notifyDataSetChanged();
     }
     public void addQuestion(String title, Questions questions){
+        mJobId = questions.getJobId();
         GroupData data = new GroupData(title, questions);
         mItems.add(data);
         notifyDataSetChanged();
     }
 
-    public JobDetailAdapter(Context context) {
-        mContext = context;
+    public JobDetailAdapter(int jobId) {
+        mJobId = jobId;
     }
 
     @Override
@@ -131,7 +131,7 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
             }
             case TYPE_INDEX_QUESTION :
             default : {
-                final ExpandableChildQuestionItemView view;
+                ExpandableChildQuestionItemView view;
                 if(convertView != null){
                     view = (ExpandableChildQuestionItemView)convertView;
                 }else{
@@ -140,7 +140,7 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
                 if(isLastChild){
                     view.setVisibleDetailButton();
                 }
-                view.setExpandableQuestion((QuestionData)mItems.get(groupPosition).getChildDataList().get(childPosition), childPosition);
+                view.setExpandableQuestion((QuestionData)mItems.get(groupPosition).getChildDataList().get(childPosition), mJobId, childPosition);
                 return view;
             }
         }

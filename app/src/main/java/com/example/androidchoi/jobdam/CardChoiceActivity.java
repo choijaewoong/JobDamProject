@@ -21,12 +21,13 @@ import java.util.ArrayList;
 public class CardChoiceActivity extends AppCompatActivity {
 
     public static final String QUESTION_NUM = "questionNumber";
-    public static final String CARD_TITLE = "cardTitle";
+    public static final String JOB_ID = "jobId";
 
     ListView mListView;
     CardItemAdapter mAdapter;
     private ArrayList<MyCards> mCardList = new ArrayList<MyCards>();
     int mQuestionNum;
+    int mJobId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class CardChoiceActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mQuestionNum = intent.getIntExtra(QUESTION_NUM, 0);
+        mJobId = intent.getIntExtra(JOB_ID, -1);
 //        Toast.makeText(CardChoiceActivity.this, mQuestionNum + "", Toast.LENGTH_SHORT).show();
 
         mListView = (ListView)findViewById(R.id.listView_attach_card);
@@ -61,8 +63,7 @@ public class CardChoiceActivity extends AppCompatActivity {
                 new NetworkManager.OnResultListener<MyCardLab>() {
                     @Override
                     public void onSuccess(MyCardLab result) {
-                        mCardList = result.getCardList();
-                        mAdapter.setItems(mCardList);
+                        mAdapter.setItems(result.getCardList());
                     }
                     @Override
                     public void onFail(int code) {
@@ -86,21 +87,18 @@ public class CardChoiceActivity extends AppCompatActivity {
         }
         //noinspection SimplifiableIfStatement
         else if (id == R.id.action_attach) {
-//            List<MyCard> myCards = (List<MyCard>)mListView.getSelectedItem();
             SparseBooleanArray isCheckedArray = mListView.getCheckedItemPositions();
-//            Toast.makeText(CardChoiceActivity.this, isCheckedArray.size() + " ", Toast.LENGTH_SHORT).show();
             ArrayList<MyCards> myCardList = new ArrayList<MyCards>();
-//            MyCards[] myCardList = new MyCards[checkedPosition.length];
             for(int i = 0; i < isCheckedArray.size(); i++){
-//                myCardList[i] = (MyCards) mAdapter.getItem((int) checkedPosition[i]);
                 if(isCheckedArray.get(i) == true)
                     myCardList.add((MyCards) mAdapter.getItem(i));
             }
-//            Toast.makeText(CardChoiceActivity.this, myCardList.size() + " ", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent();
-            intent.putExtra(QUESTION_NUM, mQuestionNum);
-            intent.putExtra(CARD_TITLE, myCardList);
-            setResult(RESULT_OK, intent);
+            /* 질문 번호와 채용정보 id와 카드 데이터를 서버에 전달 */
+
+//            Intent intent = new Intent();
+//            intent.putExtra(QUESTION_NUM, mQuestionNum);
+//            intent.putExtra(CARD_TITLE, myCardList);
+//            setResult(RESULT_OK, intent);
             finish();
             return true;
         }

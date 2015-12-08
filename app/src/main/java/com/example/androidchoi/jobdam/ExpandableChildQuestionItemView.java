@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Model.CategoryData;
+import com.example.androidchoi.jobdam.Model.MyCards;
 import com.example.androidchoi.jobdam.Model.QuestionData;
 import com.example.androidchoi.jobdam.Util.PredicateLayout;
 
@@ -36,14 +37,27 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
         mButtonQuestionDetail = (Button)view.findViewById(R.id.button_job_question_detail);
     }
 
-    public void setExpandableQuestion(QuestionData data, final int position){
+    public void setExpandableQuestion(final QuestionData data, final int jobId,  final int position){
         mTextQuestionView.setText(data.getQuestion());
         mPredicateLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CardChoiceActivity.class);
+                //질문 번호
                 intent.putExtra(CardChoiceActivity.QUESTION_NUM, position);
+                intent.putExtra(CardChoiceActivity.JOB_ID, jobId);
                 ((JobDetailActivity) getContext()).startActivityForResult(intent, JobDetailActivity.REQUEST_ATTACH);
+            }
+        });
+        if(data.getCardList() != null){
+            for (MyCards myCards : data.getCardList()) {
+                addTagView(myCards.getCard().getTitle(), myCards.getCard().getCategory());
+            }
+        }
+        mButtonQuestionDetail.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
