@@ -19,6 +19,7 @@ public class JobQuestionActivity extends AppCompatActivity {
     ViewPager mViewPager;
     QuestionPagerAdapter mQuestionPagerAdapter;
     Questions mQuestions;
+    String mCorpName;
     CirclePageIndicator mCirclePageIndicator;
 
     @Override
@@ -31,10 +32,12 @@ public class JobQuestionActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
 
-        mTextToolbarTitle = (TextView)findViewById(R.id.toolbar_title);
-
         Intent intent = getIntent();
         mQuestions = (Questions) intent.getSerializableExtra(ExpandableChildQuestionItemView.QUESTION_LIST);
+        mCorpName = intent.getStringExtra(ExpandableChildQuestionItemView.CORP_NAME);
+
+        mTextToolbarTitle = (TextView)findViewById(R.id.toolbar_title);
+        mTextToolbarTitle.setText(mCorpName);
 
         mViewPager = (ViewPager)findViewById(R.id.pager_job_question);
         mQuestionPagerAdapter = new QuestionPagerAdapter();

@@ -25,6 +25,7 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
 
     List<GroupData> mItems = new ArrayList<GroupData>();
     int mJobId;
+    String mCorpName;
     private static final int VIEW_TYPE_COUNT = 3;
     private static final int TYPE_INDEX_CONTENT = 0;
     private static final int TYPE_INDEX_ADDRESS = 1;
@@ -59,8 +60,9 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
         notifyDataSetChanged();
     }
 
-    public JobDetailAdapter(int jobId) {
+    public JobDetailAdapter(int jobId, String corpName) {
         mJobId = jobId;
+        mCorpName = corpName;
     }
 
     @Override
@@ -147,7 +149,7 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
                 if(isLastChild){
                     view.setVisibleDetailButton();
                 }
-                view.setExpandableQuestion((QuestionData)mItems.get(groupPosition).getChildDataList().get(childPosition), mJobId, childPosition);
+                view.setExpandableQuestion((QuestionData)mItems.get(groupPosition).getChildDataList().get(childPosition), mJobId, mCorpName, childPosition);
                 return view;
             }
         }

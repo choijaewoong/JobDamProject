@@ -26,6 +26,7 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
     public static final String QUESTION_NUM = "questionNumber";
     public static final String JOB_ID = "jobId";
     public static final String QUESTION_LIST = "questionList";
+    public static final String CORP_NAME = "corpName";
 
     public ExpandableChildQuestionItemView(Context context) {
         super(context);
@@ -42,7 +43,7 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
         mButtonQuestionDetail = (Button)view.findViewById(R.id.button_job_question_detail);
     }
 
-    public void setExpandableQuestion(final QuestionData data, final int jobId,  final int position){
+    public void setExpandableQuestion(final QuestionData data, final int jobId, final String corpName,  final int position){
         mTextQuestionView.setText(data.getQuestion());
         mPredicateLayout.setOnClickListener(new OnClickListener() {
             @Override
@@ -65,6 +66,7 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
                 Intent intent = new Intent(getContext(), JobQuestionActivity.class);
                 Questions questions = ((JobDetailActivity) getContext()).getQuestions();
                 intent.putExtra(QUESTION_LIST, questions);
+                intent.putExtra(CORP_NAME, corpName);
                 ((JobDetailActivity) getContext()).startActivityForResult(intent, JobDetailActivity.REQUEST_DETAIL);
             }
         });
