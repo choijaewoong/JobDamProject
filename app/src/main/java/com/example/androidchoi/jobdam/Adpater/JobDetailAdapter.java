@@ -6,12 +6,14 @@ import android.widget.BaseExpandableListAdapter;
 
 import com.example.androidchoi.jobdam.ExpandableChildAddressItemView;
 import com.example.androidchoi.jobdam.ExpandableChildContentItemView;
+import com.example.androidchoi.jobdam.ExpandableChildPeriodItemView;
 import com.example.androidchoi.jobdam.ExpandableChildQuestionItemView;
 import com.example.androidchoi.jobdam.ExpandableGroupItemView;
 import com.example.androidchoi.jobdam.Model.AddressData;
 import com.example.androidchoi.jobdam.Model.ChildData;
 import com.example.androidchoi.jobdam.Model.ContentData;
 import com.example.androidchoi.jobdam.Model.GroupData;
+import com.example.androidchoi.jobdam.Model.PeriodData;
 import com.example.androidchoi.jobdam.Model.QuestionData;
 import com.example.androidchoi.jobdam.Model.Questions;
 
@@ -26,21 +28,11 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
     List<GroupData> mItems = new ArrayList<GroupData>();
     int mJobId;
     String mCorpName;
-    private static final int VIEW_TYPE_COUNT = 3;
+    private static final int VIEW_TYPE_COUNT = 4;
     private static final int TYPE_INDEX_CONTENT = 0;
     private static final int TYPE_INDEX_ADDRESS = 1;
     private static final int TYPE_INDEX_QUESTION = 2;
-
-//    JobDetailActivity.OnAddCardCallback mCallback = new JobDetailActivity.OnAddCardCallback() {
-//        @Override
-//        public void onAddCardTag(List<MyCards> myCardList, int pos) {
-//            for (int i = 0; i < myCardList.size(); i++) {
-//                view.addTagView(myCardList.get(i).getCard().getTitle(), myCardList.get(i).getCard().getCategory());
-//
-//            }
-//        }
-//    };
-//    ((JobDetailActivity)mContext).setOnAddCardCallback(mCallback);
+    private static final int TYPE_INDEX_PERIOD = 3;
 
     public void add(String title, ArrayList<ChildData> childDataList) {
         GroupData data = new GroupData(title, childDataList);
@@ -138,6 +130,16 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
                 view.setExpandableAddress((AddressData)mItems.get(groupPosition).getChildDataList().get(childPosition));
                 return view;
             }
+            case TYPE_INDEX_PERIOD: {
+                ExpandableChildPeriodItemView view;
+                if(convertView != null){
+                    view = (ExpandableChildPeriodItemView)convertView;
+                } else {
+                    view = new ExpandableChildPeriodItemView(parent.getContext());
+                }
+                view.setExpandablePeriod((PeriodData)mItems.get(groupPosition).getChildDataList().get(childPosition));
+                return view;
+            }
             case TYPE_INDEX_QUESTION :
             default : {
                 ExpandableChildQuestionItemView view;
@@ -159,15 +161,17 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
         ChildData data = mItems.get(groupPosition).getChildDataList().get(childPosition);
         if(data instanceof ContentData){
             return TYPE_INDEX_CONTENT;
-        } else if(data instanceof AddressData){
+        } else if(data instanceof AddressData) {
             return TYPE_INDEX_ADDRESS;
+        } else if (data instanceof PeriodData){
+            return TYPE_INDEX_PERIOD;
         } else{ // data instanceof QuestionData
             return TYPE_INDEX_QUESTION;
         }
     }
     @Override
     public int getChildTypeCount() {
-        return 3;
+        return VIEW_TYPE_COUNT;
     }
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {

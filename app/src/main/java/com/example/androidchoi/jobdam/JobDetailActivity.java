@@ -25,14 +25,12 @@ import com.example.androidchoi.jobdam.Model.ChildData;
 import com.example.androidchoi.jobdam.Model.ContentData;
 import com.example.androidchoi.jobdam.Model.Job;
 import com.example.androidchoi.jobdam.Model.MyJob;
+import com.example.androidchoi.jobdam.Model.PeriodData;
 import com.example.androidchoi.jobdam.Model.QuestionLab;
 import com.example.androidchoi.jobdam.Model.Questions;
 import com.google.gson.Gson;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class JobDetailActivity extends AppCompatActivity {
 
@@ -147,7 +145,8 @@ public class JobDetailActivity extends AppCompatActivity {
         conditionsList.add(new ContentData(getString(R.string.location),mData.getLocation().replace(",", "<br>")));
         conditionsList.add(new ContentData(getString(R.string.salary),mData.getSalary()));
         mExpandableAdapter.add(getString(R.string.conditions), conditionsList);
-        mExpandableAdapter.add(getString(R.string.period), new ContentData(getPeriod(), ""));
+
+        mExpandableAdapter.add(getString(R.string.period), new PeriodData(mData.getStart(), mData.getEnd()));
         mExpandableAdapter.add(getString(R.string.detail_page), new AddressData(mData.getSiteUrl()));
         mExpandableAdapter.addQuestion(getString(R.string.questions), mQuestions);
         for (int i = 0; i < mExpandableAdapter.getGroupCount(); i++) {
@@ -155,17 +154,17 @@ public class JobDetailActivity extends AppCompatActivity {
         }
     }
 
-    public String getPeriod() {
-        Date end = new Date(mData.getEnd() * 1000L);
-        Calendar endDay = Calendar.getInstance();
-        endDay.setTime(end);
-        long gap = (endDay.getTimeInMillis() - Calendar.getInstance().getTimeInMillis())/JobItemView.ONE_DAY_TIME_STAMP;
-        if((int)gap > 200){
-            return "상시 모집";
-        }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("~ yyyy.MM.dd.E     HH:mm");
-        return "<strong>" + dateFormat.format(end) + "</strong>";
-    }
+//    public String getPeriod() {
+//        Date end = new Date(mData.getEnd() * 1000L);
+//        Calendar endDay = Calendar.getInstance();
+//        endDay.setTime(end);
+//        long gap = (endDay.getTimeInMillis() - Calendar.getInstance().getTimeInMillis())/JobItemView.ONE_DAY_TIME_STAMP;
+//        if((int)gap > 200){
+//            return "상시 모집";
+//        }
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("~ yyyy.MM.dd.E     HH:mm");
+//        return "<strong>" + dateFormat.format(end) + "</strong>";
+//    }
 
     public void showScrapToast(){
         LayoutInflater inflater = getLayoutInflater();

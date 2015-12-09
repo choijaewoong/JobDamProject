@@ -23,7 +23,7 @@ public class ExpandableChildContentItemView extends FrameLayout {
     ImageView mImageBottomPadding;
     private void init() {
         inflate(getContext(), R.layout.view_expandable_child_content_item, this);
-        mExpandableContentView = (TextView)findViewById(R.id.text_expandable_content);
+        mExpandableContentView = (TextView)findViewById(R.id.text_expandable_period_dday);
         mExpandableTitleView = (TextView)findViewById(R.id.text_expandable_title);
         mImageBottomPadding = (ImageView)findViewById(R.id.image_bottom_padding);
     }
