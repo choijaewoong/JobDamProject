@@ -1,7 +1,9 @@
 package com.example.androidchoi.jobdam;
 
 import android.content.Context;
+import android.text.Html;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Model.ContentData;
@@ -17,11 +19,19 @@ public class ExpandableChildContentItemView extends FrameLayout {
     }
 
     TextView mExpandableContentView;
+    TextView mExpandableTitleView;
+    ImageView mImageBottomPadding;
     private void init() {
         inflate(getContext(), R.layout.view_expandable_child_content_item, this);
         mExpandableContentView = (TextView)findViewById(R.id.text_expandable_content);
+        mExpandableTitleView = (TextView)findViewById(R.id.text_expandable_title);
+        mImageBottomPadding = (ImageView)findViewById(R.id.image_bottom_padding);
     }
     public void setExpandableContent(ContentData data){
-        mExpandableContentView.setText(data.getContent());
+        mExpandableContentView.setText(Html.fromHtml(data.getContent()));
+        mExpandableTitleView.setText(Html.fromHtml(data.getTitle()));    }
+
+    public void setVisibleBottomPadding() {
+        mImageBottomPadding.setVisibility(VISIBLE);
     }
 }

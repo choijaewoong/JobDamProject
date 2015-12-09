@@ -56,7 +56,7 @@ public class MainActivity extends SlidingFragmentActivity
 //        setSlidingActionBarEnabled(false);
 
         if (savedInstanceState == null) {
-//            getSupportFragmentManager().beginTransaction().add(R.id.menu_container, new MenuFragment()).commit();
+//          getSupportFragmentManager().beginTransaction().add(R.id.menu_container, new MenuFragment()).commit();
             getSupportFragmentManager().beginTransaction().add(R.id.container, new MyJobFragment(), TAG_MY_JOB).commit();
             }
         mSlidingMenu = getSlidingMenu();

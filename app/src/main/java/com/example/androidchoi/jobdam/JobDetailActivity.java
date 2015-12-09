@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -22,6 +21,7 @@ import android.widget.ToggleButton;
 import com.example.androidchoi.jobdam.Adpater.JobDetailAdapter;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.AddressData;
+import com.example.androidchoi.jobdam.Model.ChildData;
 import com.example.androidchoi.jobdam.Model.ContentData;
 import com.example.androidchoi.jobdam.Model.Job;
 import com.example.androidchoi.jobdam.Model.MyJob;
@@ -30,6 +30,7 @@ import com.example.androidchoi.jobdam.Model.Questions;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -138,24 +139,20 @@ public class JobDetailActivity extends AppCompatActivity {
 
     //리스트뷰 메뉴 설정
     private void initJobDetailMenu() {
-        mExpandableAdapter.add(getString(R.string.qualification), new ContentData(getQualification()));
-        mExpandableAdapter.add(getString(R.string.conditions), new ContentData(getConditions()));
-        mExpandableAdapter.add(getString(R.string.period), new ContentData(getPeriod()));
+        ArrayList<ChildData> qualificationList = new ArrayList<ChildData>();
+        qualificationList.add(new ContentData(getString(R.string.experience_level), mData.getExperienceLevel()));
+        qualificationList.add(new ContentData(getString(R.string.education_level), mData.getEducationLevel()));
+        mExpandableAdapter.add(getString(R.string.qualification), qualificationList);
+        ArrayList<ChildData> conditionsList = new ArrayList<ChildData>();
+        conditionsList.add(new ContentData(getString(R.string.location),mData.getLocation().replace(",", "<br>")));
+        conditionsList.add(new ContentData(getString(R.string.salary),mData.getSalary()));
+        mExpandableAdapter.add(getString(R.string.conditions), conditionsList);
+        mExpandableAdapter.add(getString(R.string.period), new ContentData(getPeriod(), ""));
         mExpandableAdapter.add(getString(R.string.detail_page), new AddressData(mData.getSiteUrl()));
         mExpandableAdapter.addQuestion(getString(R.string.questions), mQuestions);
         for (int i = 0; i < mExpandableAdapter.getGroupCount(); i++) {
             mExpandableListView.expandGroup(i);
         }
-    }
-
-    public String getQualification() {
-        return getString(R.string.experience_level) + mData.getExperienceLevel() + "\n"
-                + getString(R.string.education_level) + mData.getEducationLevel();
-    }
-
-    public String getConditions() {
-        return getString(R.string.location) + Html.fromHtml(mData.getLocation()) + "\n"
-                + getString(R.string.salary) + mData.getSalary();
     }
 
     public String getPeriod() {
@@ -166,8 +163,8 @@ public class JobDetailActivity extends AppCompatActivity {
         if((int)gap > 200){
             return "상시 모집";
         }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("~ yyyy년 MM월 dd일 E요일 HH시 mm분");
-        return dateFormat.format(end);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("~ yyyy.MM.dd.E     HH:mm");
+        return "<strong>" + dateFormat.format(end) + "</strong>";
     }
 
     public void showScrapToast(){
@@ -190,7 +187,6 @@ public class JobDetailActivity extends AppCompatActivity {
                 }
                 initJobDetailMenu(); // 상세 채용 정보 카테고리 생성
             }
-
             @Override
             public void onFail(int code) {
             }

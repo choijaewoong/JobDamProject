@@ -10,11 +10,32 @@
         android:text="content"
         android:id="@+id/text_expandable_content"
         android:textSize="@dimen/font_size_default"
+        android:layout_marginRight="@dimen/default_large_dimen"
+        android:textColor="@android:color/black"
+        android:layout_toRightOf="@+id/text_expandable_title"
+        android:layout_toEndOf="@+id/text_expandable_title"
+        android:layout_marginLeft="@dimen/default_small_dimen"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/text_expandable_title"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="@dimen/default_large_dimen"
-        android:layout_marginRight="@dimen/default_large_dimen"
+        android:textSize="@dimen/font_size_default"
         android:textColor="@android:color/black"
-        android:layout_marginBottom="@dimen/default_dimen"/>
+        android:textIsSelectable="false"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_dimen"
+        android:id="@+id/image_bottom_padding"
+        android:layout_below="@+id/text_expandable_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>

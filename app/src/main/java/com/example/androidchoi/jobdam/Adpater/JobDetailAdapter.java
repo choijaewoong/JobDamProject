@@ -41,6 +41,11 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
 //    };
 //    ((JobDetailActivity)mContext).setOnAddCardCallback(mCallback);
 
+    public void add(String title, ArrayList<ChildData> childDataList) {
+        GroupData data = new GroupData(title, childDataList);
+        mItems.add(data);
+        notifyDataSetChanged();
+    }
     public void add(String title, ChildData content) {
         List<ChildData> childDataList = new ArrayList<ChildData>();
         childDataList.add(content);
@@ -114,6 +119,9 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
                     view = (ExpandableChildContentItemView)convertView;
                 } else {
                     view = new ExpandableChildContentItemView(parent.getContext());
+                }
+                if(isLastChild){
+                    view.setVisibleBottomPadding();
                 }
                 view.setExpandableContent((ContentData)mItems.get(groupPosition).getChildDataList().get(childPosition));
                 return view;

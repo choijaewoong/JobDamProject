@@ -1,5 +1,8 @@
 package com.example.androidchoi.jobdam.Model;
 
+import com.example.androidchoi.jobdam.Manager.MyApplication;
+import com.example.androidchoi.jobdam.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +15,7 @@ public class GroupData {
     public GroupData(String title, Questions questions) {
         mTitle = title;
         if(questions == null || questions.getQuestionList().size() == 0){
-            mChildDataList.add(new ContentData("준비중 입니다...!"));
+            mChildDataList.add(new ContentData(MyApplication.getContext().getString(R.string.empty_question), ""));
             return;
         }
         for(QuestionData data : questions.getQuestionList()){
