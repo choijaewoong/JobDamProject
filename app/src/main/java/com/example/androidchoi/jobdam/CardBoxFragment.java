@@ -161,7 +161,7 @@ public class CardBoxFragment extends Fragment {
         //리스트 헤더뷰
         mItemCountTextView = (TextView) itemCountHeaderView.findViewById(R.id.text_item_count);
         mImageChangeGridView = (ImageView)itemCountHeaderView.findViewById(R.id.image_change_grid_view);
-        mImageChangeGridView.setImageResource(R.drawable.button_card_folder);
+        mImageChangeGridView.setImageResource(R.drawable.button_card_list);
         mImageChangeGridView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,7 +173,7 @@ public class CardBoxFragment extends Fragment {
         //그리드 헤더뷰
         mCategoryCountTextView = (TextView)categoryCountHeaderView.findViewById(R.id.text_category_count);
         mImageChangeListView = (ImageView)categoryCountHeaderView.findViewById(R.id.image_change_list_view);
-        mImageChangeListView.setImageResource(R.drawable.button_card_list);
+        mImageChangeListView.setImageResource(R.drawable.button_card_folder);
         mImageChangeListView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
