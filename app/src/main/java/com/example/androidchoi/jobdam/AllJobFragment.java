@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -378,7 +379,7 @@ public class AllJobFragment extends Fragment {
                         page++;
                         mAdapter.setItems(result.getJobList());
                         mAdapter.setTotalCount(Integer.parseInt(result.getTotal()));
-                        mTextView.setText("공채정보 총 " + result.getTotal() + "건");
+                        mTextView.setText(Html.fromHtml("공채정보 총 <font color=#0db5f7>" + result.getTotal() + "</font>건"));
                     }
                     @Override
                     public void onFail(int code) {

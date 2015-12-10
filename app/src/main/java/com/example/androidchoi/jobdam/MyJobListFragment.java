@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -158,7 +159,7 @@ public class MyJobListFragment extends Fragment {
 //                mAdapter.setItems(((MyJobFragment) getParentFragment()).getJobList());
                 mJobList = result.getJobList();
                 mAdapter.setItems(mJobList);
-                mCountTextView.setText("총 " + mAdapter.getCount() + "건");
+                mCountTextView.setText(Html.fromHtml("총 <font color=#0db5f7>" + mAdapter.getCount() + "</font>건"));
             }
             @Override
             public void onFail(int code) {

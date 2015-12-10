@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -180,7 +181,7 @@ public class CardBoxFragment extends Fragment {
                 mGridView.setVisibility(View.GONE);
             }
         });
-        mCategoryCountTextView.setText("폴더 " + mCategoryFolderAdapter.getCount());
+        mCategoryCountTextView.setText(Html.fromHtml("폴더  <font color=#0db5f7>" + mCategoryFolderAdapter.getCount()));
 
         mListSearchEdit = (EditText)listSearchHeaderView.findViewById(R.id.editText_search_bar);
         mListSearchDeleteImage = (ImageView)listSearchHeaderView.findViewById(R.id.image_search_delete);
@@ -263,7 +264,7 @@ public class CardBoxFragment extends Fragment {
                     public void onSuccess(MyCardLab result) {
                         mCardList = result.getCardList();
                         mAdapter.setItems(mCardList);
-                        mItemCountTextView.setText("전체카드 " + mAdapter.getCount());
+                        mItemCountTextView.setText(Html.fromHtml("전체카드 <font color=#0db5f7>" + mAdapter.getCount()));
                     }
                     @Override
                     public void onFail(int code) {

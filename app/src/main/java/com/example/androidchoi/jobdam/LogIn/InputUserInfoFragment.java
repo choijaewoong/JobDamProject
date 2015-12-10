@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,7 +60,6 @@ public class InputUserInfoFragment extends Fragment {
                         new NetworkManager.OnResultListener<LoginData>() {
                             @Override
                             public void onSuccess(LoginData result) {
-                                Log.i("회원가입" , "sdsdssd");
                                 if (result.getMessage().equals(LoginFragment.MESSAGE_SUCCESS)) {
                                     PropertyManager.getInstance().setId(result.getUserId());
                                     PropertyManager.getInstance().setPassword(mEditPassword.getText().toString());
