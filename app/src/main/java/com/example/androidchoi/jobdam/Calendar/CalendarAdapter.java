@@ -52,7 +52,8 @@ public class CalendarAdapter extends BaseAdapter {
 		return position;
 	}
 
-	MyJobCalendarFragment.OnDateCheckCallback callback = new MyJobCalendarFragment.OnDateCheckCallback() {
+	MyJobCalendarFragment.OnDateCheckCallback callback =
+			new MyJobCalendarFragment.OnDateCheckCallback() {
 		@Override
 		public CalendarItem onDateCheck(int position) {
 			for(int i =0 ; i<mData.days.size(); i++){

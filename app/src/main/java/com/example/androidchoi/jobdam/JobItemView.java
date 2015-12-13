@@ -2,6 +2,7 @@ package com.example.androidchoi.jobdam;
 
 import android.content.Context;
 import android.util.TypedValue;
+import android.widget.Checkable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,13 +15,15 @@ import java.util.Date;
 /**
  * Created by Choi on 2015-10-18.
  */
-public class JobItemView extends RelativeLayout {
+public class JobItemView extends RelativeLayout implements Checkable{
 
     public static final int ONE_DAY_TIME_STAMP = 86400000;
     TextView mCorp;
     TextView mTitle;
     TextView mPeriod;
     TextView mDDay;
+    RelativeLayout mLayout;
+    boolean isChecked = false;
 
     public JobItemView(Context context) {
         super(context);
@@ -33,6 +36,7 @@ public class JobItemView extends RelativeLayout {
         mTitle = (TextView) findViewById(R.id.text_job_title);
         mPeriod = (TextView) findViewById(R.id.text_period);
         mDDay = (TextView) findViewById(R.id.text_job_dday);
+        mLayout = (RelativeLayout)findViewById(R.id.layout_job_item_container);
     }
 
     private void setPeriod(Date start, Date end, boolean checkDeadLine) {
@@ -87,13 +91,40 @@ public class JobItemView extends RelativeLayout {
         return true;
     }
 
+    public void setSelectColor(){
+        mLayout.setBackgroundResource(R.drawable.image_job_container_selected);
+    }
+
     public void setItemData(Job itemData) {
         mCorp.setText(itemData.getCompanyName());
         mTitle.setText(itemData.getJobTitle());
+//        mLayout.setBackgroundResource(R.drawable.image_job_container);
+        setChecked(false);
         Date start = new Date(itemData.getStart() * 1000L);
         Date end = new Date(itemData.getEnd() * 1000L);
 
         boolean checkDeadLine = setDDay(end);
         setPeriod(start, end, checkDeadLine);
+    }
+
+    @Override
+    public void setChecked(boolean checked) {
+        this.isChecked = checked;
+        if (checked) {
+            mLayout.setSelected(true);
+//            mLayout.setBackgroundResource(R.drawable.image_job_container_selected);
+        } else {
+            mLayout.setSelected(false);
+//            mLayout.setBackgroundResource(R.drawable.image_job_container);
+        }
+    }
+    @Override
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    @Override
+    public void toggle() {
+        setChecked(!isChecked);
     }
 }

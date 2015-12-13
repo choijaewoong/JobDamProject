@@ -32,11 +32,6 @@ public class MainActivity extends SlidingFragmentActivity
     TextView mUserEmail;
 
     @Override
-    public void onActivityReenter(int resultCode, Intent data) {
-        super.onActivityReenter(resultCode, data);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -93,13 +88,9 @@ public class MainActivity extends SlidingFragmentActivity
         int id = item.getItemId();
         if (id == android.R.id.home) {
             toggle();
-            return true;
+            return false;
         }
-        //noinspection SimplifiableIfStatement
-        else if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return false;
     }
 
     @Override

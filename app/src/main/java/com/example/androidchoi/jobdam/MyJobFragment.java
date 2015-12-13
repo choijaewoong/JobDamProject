@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.MyFragmentPagerAdapter;
+import com.example.androidchoi.jobdam.Util.CustomViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +22,9 @@ import java.util.List;
  */
 public class MyJobFragment extends Fragment {
 
-    ViewPager mViewPager;
+    CustomViewPager mViewPager;
     TabLayout mTabLayout;
     MyFragmentPagerAdapter mAdapter;
-//    private ArrayList<MyJobs> mJobList;
-//    public ArrayList<MyJobs> getJobList() { return mJobList; }
-//    public void setJobList(ArrayList<MyJobs> jobList) { mJobList = jobList; }
-
     public MyJobFragment() {
         // Required empty public constructor
     }
@@ -56,10 +52,12 @@ public class MyJobFragment extends Fragment {
         fragments.add(0,new MyJobListFragment());
         fragments.add(1,new MyJobCalendarFragment());
         mAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), fragments);
-        mViewPager = (ViewPager)view.findViewById(R.id.tab_pager);
+        mViewPager = (CustomViewPager)view.findViewById(R.id.tab_pager);
         mViewPager.setAdapter(mAdapter);
         mTabLayout = (TabLayout)view.findViewById(R.id.sliding_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
         return view;
     }
+    public CustomViewPager getViewPager() {  return mViewPager; }
+    public TabLayout getTabLayout() {  return mTabLayout; }
 }

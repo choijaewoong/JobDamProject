@@ -7,10 +7,15 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,23 +50,29 @@ public class MyJobListFragment extends Fragment {
     private ArrayList<MyJobs> mJobList;
 
     public MyJobListFragment() {
-        // Required empty public constructor
-        setHasOptionsMenu(true);
+
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode != Activity.RESULT_OK){ return; }
-        Toast.makeText(getActivity(),"MyJob이 갱신 되었습니다." ,Toast.LENGTH_SHORT).show();
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        Toast.makeText(getActivity(), "MyJob이 갱신 되었습니다.", Toast.LENGTH_SHORT).show();
         showMyJob();
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        showMyJob();
-        FrameLayout touchInterceptor = (FrameLayout)getActivity().findViewById(R.id.touchInterceptor);
+        FrameLayout touchInterceptor = (FrameLayout) getActivity().findViewById(R.id.touchInterceptor);
         touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -88,17 +99,17 @@ public class MyJobListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_job_list, container, false);
         View searchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
         View countHeaderView = inflater.inflate(R.layout.view_header_item_count, null);
-        mListView = (ListView)view.findViewById(R.id.listview_my_job);
+        mListView = (ListView) view.findViewById(R.id.listview_my_job);
         mListView.addHeaderView(searchHeaderView);
         mListView.addHeaderView(countHeaderView, null, false);
-        mDeleteImage = (ImageView)searchHeaderView.findViewById(R.id.image_search_delete);
+        mDeleteImage = (ImageView) searchHeaderView.findViewById(R.id.image_search_delete);
         mDeleteImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSearchEdit.setText("");
             }
         });
-        mSearchEdit = (EditText)searchHeaderView.findViewById(R.id.editText_search_bar);
+        mSearchEdit = (EditText) searchHeaderView.findViewById(R.id.editText_search_bar);
         mSearchEdit.setHint("기업을 검색해주세요");
         mSearchEdit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -108,14 +119,6 @@ public class MyJobListFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                ArrayList<JobData> jobList = new ArrayList<JobData>();
-//                for (JobData c : mJobList) {
-//                    if (c.toString().contains(s)) {
-//                        jobList.add(c);
-//                    }
-//                }
-//                mAdapter.setItems(jobList);
-//                mCountTextView.setText("총 " + mAdapter.getCount() + "건");
             }
 
             @Override
@@ -133,6 +136,20 @@ public class MyJobListFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (mListView.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
+                    ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
+                    Log.i("position", position + ".");
+                    for(int i = 0; i< mAdapter.getCheckedItemIndexList().size(); i++){
+                        if(mAdapter.getCheckedItemIndexList().get(i).equals(position-mListView.getHeaderViewsCount())){
+                            mAdapter.getCheckedItemIndexList().remove(i);
+                            mAdapter.notifyDataSetChanged();
+                            return;
+                        }
+                    }
+                    mAdapter.getCheckedItemIndexList().add(position-mListView.getHeaderViewsCount());
+                    mAdapter.notifyDataSetChanged();
+                    return;
+                }
                 Job data = (Job) mAdapter.getItem(position - mListView.getHeaderViewsCount());
                 Intent intent = new Intent(getActivity(), JobDetailActivity.class);
                 intent.putExtra(Job.JOBITEM, data);
@@ -140,7 +157,14 @@ public class MyJobListFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        mCountTextView = (TextView)view.findViewById(R.id.text_item_count);
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                deleteMode();
+                return true;
+            }
+        });
+        mCountTextView = (TextView) view.findViewById(R.id.text_item_count);
         showMyJob();
         return view;
     }
@@ -148,23 +172,79 @@ public class MyJobListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        setHasOptionsMenu(true);
         mAdapter.notifyDataSetChanged();
     }
-
-    public void showMyJob(){
+    public void showMyJob() {
         NetworkManager.getInstance().showMyJob(getActivity(), new NetworkManager.OnResultListener<MyJobLab>() {
             @Override
             public void onSuccess(MyJobLab result) {
-//                ((MyJobFragment)getParentFragment()).setJobList(result.getJobList());
-//                mAdapter.setItems(((MyJobFragment) getParentFragment()).getJobList());
                 mJobList = result.getJobList();
                 mAdapter.setItems(mJobList);
                 mCountTextView.setText(Html.fromHtml("총 <font color=#0db5f7>" + mAdapter.getCount() + "</font>건"));
             }
+
             @Override
             public void onFail(int code) {
                 Toast.makeText(getActivity(), code + "", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public void deleteMode(){
+//        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+        super.setMenuVisibility(true);
+        mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(false);
+        ((MyJobFragment)getParentFragment()).getViewPager().setPagingEnabled(false);
+        ((MyJobFragment)getParentFragment()).getTabLayout().setVisibility(View.GONE);
+    }
+
+    public void defaultMode(){
+        super.setMenuVisibility(false);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(true);
+        ((MyJobFragment)getParentFragment()).getViewPager().setPagingEnabled(true);
+        ((MyJobFragment)getParentFragment()).getTabLayout().setVisibility(View.VISIBLE);
+        mListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
+
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.menu_delete, menu);
+    }
+    @Override
+    public void setMenuVisibility(boolean menuVisible) {
+        Log.i(menuVisible+".", menuVisible+".");
+        super.setMenuVisibility(false);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_delete) {
+
+            // mAdapter.getCheckedItemIndexList() 보내 삭제 요청
+            for(int i =0; i<mAdapter.getCheckedItemIndexList().size(); i++){
+                mListView.setItemChecked(mAdapter.getCheckedItemIndexList().get(i)+mListView.getHeaderViewsCount(), false);
+            }
+            mAdapter.getCheckedItemIndexList().clear();
+            mAdapter.notifyDataSetChanged();
+            defaultMode();
+            return false;
+        } else if (id == R.id.action_cancel) {
+            for(int i =0; i<mAdapter.getCheckedItemIndexList().size(); i++){
+                mListView.setItemChecked(mAdapter.getCheckedItemIndexList().get(i)+mListView.getHeaderViewsCount(), false);
+            }
+            mAdapter.getCheckedItemIndexList().clear();
+            mAdapter.notifyDataSetChanged();
+            defaultMode();
+            return false;
+        }
+        return false;
     }
 }

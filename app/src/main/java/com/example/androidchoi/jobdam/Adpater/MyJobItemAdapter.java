@@ -15,13 +15,18 @@ import java.util.ArrayList;
  */
 public class MyJobItemAdapter extends BaseAdapter {
 
-    ArrayList<MyJobs> mItems = new ArrayList<MyJobs>();
+    private ArrayList<MyJobs> mItems = new ArrayList<MyJobs>();
+    private ArrayList<Integer> mCheckedItemIndexList = new ArrayList<Integer>();
+
+    public ArrayList<Integer> getCheckedItemIndexList() {
+        return mCheckedItemIndexList;
+    }
 
     public void setItems(ArrayList<MyJobs> items){
         mItems = items;
         notifyDataSetChanged();
     }
-//
+
     public void add(MyJob item){
         MyJobs myJobs = new MyJobs();
         myJobs.setJob(item);
@@ -55,7 +60,9 @@ public class MyJobItemAdapter extends BaseAdapter {
             view = (JobItemView)convertView;
         }
         view.setItemData((MyJob)getItem(position));
-
+        if(mCheckedItemIndexList.contains(position)){
+            view.setChecked(true);
+        }
         return view;
     }
 }

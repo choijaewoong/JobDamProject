@@ -54,8 +54,10 @@
     <string name="missing_credentials">계정 정보를 입력해주세요.</string>
 
     <!-- actionbar menu  -->
-    <string name="save_article">저장</string>
+    <string name="menu_save">저장</string>
+    <string name="menu_cancel">취소</string>
     <string name="attach_card">첨부</string>
+    <string name="menu_delete">삭제</string>
     <!-- Job List Header -->
     <string name="order_latest">최신순</string>
     <string name="order_dead_line">마감순</string>

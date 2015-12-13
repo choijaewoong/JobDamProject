@@ -38,7 +38,6 @@ public class JobItemAdapter extends BaseAdapter {
         return mItems.size();
     }
 
-
     @Override
     public Object getItem(int position) {
         return mItems.get(position);
