@@ -3,6 +3,9 @@ package com.example.androidchoi.jobdam;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Model.User;
 import com.example.androidchoi.jobdam.Setting.SettingActivity;
@@ -52,7 +56,7 @@ public class MainActivity extends SlidingFragmentActivity
 
         if (savedInstanceState == null) {
 //          getSupportFragmentManager().beginTransaction().add(R.id.menu_container, new MenuFragment()).commit();
-            getSupportFragmentManager().beginTransaction().add(R.id.container, new MyJobFragment(), TAG_MY_JOB).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyJobFragment(), TAG_MY_JOB).commit();
             }
         mSlidingMenu = getSlidingMenu();
         mSlidingMenu.setBehindWidthRes(R.dimen.menu_width);
@@ -97,35 +101,34 @@ public class MainActivity extends SlidingFragmentActivity
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         int id = menuItem.getItemId();
         if (id == R.id.nav_my_job) {
-            emptyBackStack();
-//            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_MY_JOB);
-//            if(old == null) {
-//                emptyBackStack();
-//                getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyJobFragment(), TAG_MY_JOB).commit();
-//            }
+            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_MY_JOB);
+            if(old == null) {
+                emptyBackStack();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyJobFragment(), TAG_MY_JOB).commit();
+            }
         } else if (id == R.id.nav_card_box) {
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_CARD_BOX);
             if (old == null) {
                 emptyBackStack();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new CardBoxFragment(),TAG_CARD_BOX).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new CardBoxFragment(), TAG_CARD_BOX).commit();
             }
         } else if (id == R.id.nav_all_job) {
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_ALL_JOB);
             if (old == null) {
                 emptyBackStack();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new AllJobFragment(), TAG_ALL_JOB).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new AllJobFragment(), TAG_ALL_JOB).commit();
             }
         } else if (id == R.id.nav_board) {
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_BOARD);
             if (old == null) {
                 emptyBackStack();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new BoardFragment(), TAG_BOARD).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new BoardFragment(), TAG_BOARD).commit();
             }
         } else if (id == R.id.nav_announcement) {
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_ALARM);
             if (old == null) {
                 emptyBackStack();
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new NoticeFragment(), TAG_ALARM).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new NoticeFragment(), TAG_ALARM).commit();
             }
         }
         showContent();
@@ -133,5 +136,31 @@ public class MainActivity extends SlidingFragmentActivity
     }
     private void emptyBackStack() {
         getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+    }
+
+    public static final int MESSAGE_BACK_TIMEOUT = 3;
+    public static final int TIME_BACK_TIMEOUT = 2000;
+    boolean isBackPressed = false;
+    Handler mHandler = new Handler(Looper.getMainLooper()){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch(msg.what){
+                case MESSAGE_BACK_TIMEOUT :
+                    isBackPressed = false;
+                    break;
+            }
+        }
+    };
+    @Override
+    public void onBackPressed() {
+        if(isBackPressed){
+            mHandler.removeMessages(MESSAGE_BACK_TIMEOUT);
+            super.onBackPressed();
+        }else{
+            isBackPressed = true;
+            Toast.makeText(this, "'뒤로'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            mHandler.sendEmptyMessageDelayed(MESSAGE_BACK_TIMEOUT, TIME_BACK_TIMEOUT);
+        }
     }
 }
