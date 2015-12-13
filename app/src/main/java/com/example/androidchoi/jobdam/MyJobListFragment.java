@@ -7,11 +7,11 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -56,7 +56,7 @@ public class MyJobListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -138,7 +138,6 @@ public class MyJobListFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (mListView.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
                     ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
-                    Log.i("position", position + ".");
                     for(int i = 0; i< mAdapter.getCheckedItemIndexList().size(); i++){
                         if(mAdapter.getCheckedItemIndexList().get(i).equals(position-mListView.getHeaderViewsCount())){
                             mAdapter.getCheckedItemIndexList().remove(i);
@@ -172,7 +171,6 @@ public class MyJobListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        setHasOptionsMenu(true);
         mAdapter.notifyDataSetChanged();
     }
     public void showMyJob() {
@@ -195,6 +193,7 @@ public class MyJobListFragment extends Fragment {
         super.setMenuVisibility(true);
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorNavHeaderBackground));
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(false);
@@ -206,6 +205,7 @@ public class MyJobListFragment extends Fragment {
         super.setMenuVisibility(false);
 //        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorPrimary));
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(true);
         ((MyJobFragment)getParentFragment()).getViewPager().setPagingEnabled(true);
@@ -216,11 +216,10 @@ public class MyJobListFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        getActivity().getMenuInflater().inflate(R.menu.menu_delete, menu);
+        getActivity().getMenuInflater().inflate(R.menu.menu_my_job, menu);
     }
     @Override
     public void setMenuVisibility(boolean menuVisible) {
-        Log.i(menuVisible+".", menuVisible+".");
         super.setMenuVisibility(false);
     }
     @Override

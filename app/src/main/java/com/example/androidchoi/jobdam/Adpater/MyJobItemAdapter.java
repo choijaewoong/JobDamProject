@@ -60,9 +60,6 @@ public class MyJobItemAdapter extends BaseAdapter {
             view = (JobItemView)convertView;
         }
         view.setItemData((MyJob)getItem(position));
-        if(mCheckedItemIndexList.contains(position)){
-            view.setChecked(true);
-        }
         return view;
     }
 }

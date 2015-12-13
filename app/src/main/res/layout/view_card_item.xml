@@ -9,7 +9,8 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/default_dimen"
                 android:paddingRight="@dimen/default_dimen"
-                android:paddingBottom="@dimen/card_item_vertical_gap">
+                android:paddingBottom="@dimen/card_item_vertical_gap"
+    android:id="@+id/layout_card_item_container">
 
     <RelativeLayout
         android:layout_width="match_parent"

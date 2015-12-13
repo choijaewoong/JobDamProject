@@ -58,6 +58,7 @@
     <string name="menu_cancel">취소</string>
     <string name="attach_card">첨부</string>
     <string name="menu_delete">삭제</string>
+    <string name="menu_move">이동</string>
     <!-- Job List Header -->
     <string name="order_latest">최신순</string>
     <string name="order_dead_line">마감순</string>

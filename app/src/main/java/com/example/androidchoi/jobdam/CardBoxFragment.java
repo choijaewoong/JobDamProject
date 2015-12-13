@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
@@ -17,6 +18,9 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,9 +80,14 @@ public class CardBoxFragment extends Fragment {
 
     public CardBoxFragment() {
         // Required empty public constructor
-        setHasOptionsMenu(true);
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+        super.setMenuVisibility(false);
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -142,6 +151,19 @@ public class CardBoxFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (mListView.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
+                    ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
+                    for(int i = 0; i< mAdapter.getCheckedItemIndexList().size(); i++){
+                        if(mAdapter.getCheckedItemIndexList().get(i).equals(position-mListView.getHeaderViewsCount())){
+                            mAdapter.getCheckedItemIndexList().remove(i);
+                            mAdapter.notifyDataSetChanged();
+                            return;
+                        }
+                    }
+                    mAdapter.getCheckedItemIndexList().add(position-mListView.getHeaderViewsCount());
+                    mAdapter.notifyDataSetChanged();
+                    return;
+                }
                 MyCards myCards = (MyCards) mAdapter.getItem(position - mListView.getHeaderViewsCount());
                 Intent intent = new Intent(getActivity(), CardWriteActivity.class);
                 intent.putExtra(MyCard.CARD_ITEM, myCards);
@@ -149,7 +171,13 @@ public class CardBoxFragment extends Fragment {
                 startActivityForResult(intent, REQUEST_MODIFY);
             }
         });
-
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                deleteMode();
+                return true;
+            }
+        });
         // 그리드 뷰
         mGridView = (GridViewWithHeaderAndFooter) view.findViewById(R.id.gridview_category_folder);
         mGridView.setVisibility(View.GONE);
@@ -266,6 +294,7 @@ public class CardBoxFragment extends Fragment {
                         mAdapter.setItems(mCardList);
                         mItemCountTextView.setText(Html.fromHtml("전체카드 <font color=#0db5f7>" + mAdapter.getCount()));
                     }
+
                     @Override
                     public void onFail(int code) {
                         Toast.makeText(MyApplication.getContext(), code + "", Toast.LENGTH_SHORT).show();
@@ -274,7 +303,6 @@ public class CardBoxFragment extends Fragment {
     }
 
     public  void setEditListener(final EditText editText, final ImageView imageView){
-
         editText.setHint("태그를 검색해주세요");
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -310,17 +338,69 @@ public class CardBoxFragment extends Fragment {
                     }
                     Log.i("count", total + "");
                 } else {
-//                    scrollView.setVisibility(View.GONE);
                 }
             }
         });
-
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 editText.setText("");
             }
         });
+    }
+
+    public void deleteMode(){
+//        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+        super.setMenuVisibility(true);
+        mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorNavHeaderBackground));
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(false);
+    }
+
+    public void defaultMode(){
+        super.setMenuVisibility(false);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorPrimary));
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(true);
+        mListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.menu_card, menu);
+    }
+    @Override
+    public void setMenuVisibility(boolean menuVisible) {
+        super.setMenuVisibility(false);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_delete) {
+
+            // mAdapter.getCheckedItemIndexList() 보내 삭제 요청
+            for(int i =0; i<mAdapter.getCheckedItemIndexList().size(); i++){
+                mListView.setItemChecked(mAdapter.getCheckedItemIndexList().get(i)+mListView.getHeaderViewsCount(), false);
+            }
+            mAdapter.getCheckedItemIndexList().clear();
+            mAdapter.notifyDataSetChanged();
+            defaultMode();
+            return false;
+        } else if (id == R.id.action_cancel) {
+            for(int i =0; i<mAdapter.getCheckedItemIndexList().size(); i++){
+                mListView.setItemChecked(mAdapter.getCheckedItemIndexList().get(i)+mListView.getHeaderViewsCount(), false);
+            }
+            mAdapter.getCheckedItemIndexList().clear();
+            mAdapter.notifyDataSetChanged();
+            defaultMode();
+            return false;
+        }
+        return false;
     }
 
 }

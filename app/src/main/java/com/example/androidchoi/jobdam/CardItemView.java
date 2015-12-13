@@ -14,12 +14,12 @@ import com.example.androidchoi.jobdam.Model.MyCard;
  */
 public class CardItemView extends RelativeLayout implements Checkable{
 
-//    CardData data;
     TextView mTitle;
     TextView mContent;
     ImageView mCategoryBar;
     TextView mCategoryText;
     TextView mDateText;
+    RelativeLayout mLayout;
     boolean isChecked = false;
     int categoryColor;
 
@@ -35,9 +35,11 @@ public class CardItemView extends RelativeLayout implements Checkable{
         mCategoryBar = (ImageView)findViewById(R.id.image_category_bar);
         mCategoryText = (TextView)findViewById(R.id.text_category_title);
         mDateText = (TextView)findViewById(R.id.text_card_write_date);
+        mLayout = (RelativeLayout)findViewById(R.id.layout_card_item_container);
     }
 
     public void setItemData(MyCard data){
+        setChecked(false);
         categoryColor = CategoryData.get(getContext()).getCategoryList().get(data.getCategory()).getColor();
         mTitle.setText(data.getTitle());
         mContent.setText(data.getContent());
@@ -51,9 +53,11 @@ public class CardItemView extends RelativeLayout implements Checkable{
     public void setChecked(boolean checked) {
         this.isChecked = checked;
         if(checked) {
-            mCategoryBar.setBackgroundResource(R.color.colorPrimary);
+//            mCategoryBar.setBackgroundResource(R.color.colorPrimary);
+            mLayout.setSelected(true);
         } else {
-            mCategoryBar.setBackgroundColor(categoryColor);
+//            mCategoryBar.setBackgroundColor(categoryColor);
+            mLayout.setSelected(false);
         }
     }
 

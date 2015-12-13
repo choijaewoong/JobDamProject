@@ -15,6 +15,10 @@ import java.util.ArrayList;
 public class CardItemAdapter extends BaseAdapter {
 
     ArrayList<MyCards> mItems = new ArrayList<MyCards>();
+    private ArrayList<Integer> mCheckedItemIndexList = new ArrayList<Integer>();
+    public ArrayList<Integer> getCheckedItemIndexList() {
+        return mCheckedItemIndexList;
+    }
 
     public void setItems(ArrayList<MyCards> items){
         mItems = items;

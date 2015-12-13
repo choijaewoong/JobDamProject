@@ -91,18 +91,12 @@ public class JobItemView extends RelativeLayout implements Checkable{
         return true;
     }
 
-    public void setSelectColor(){
-        mLayout.setBackgroundResource(R.drawable.image_job_container_selected);
-    }
-
     public void setItemData(Job itemData) {
         mCorp.setText(itemData.getCompanyName());
         mTitle.setText(itemData.getJobTitle());
-//        mLayout.setBackgroundResource(R.drawable.image_job_container);
         setChecked(false);
         Date start = new Date(itemData.getStart() * 1000L);
         Date end = new Date(itemData.getEnd() * 1000L);
-
         boolean checkDeadLine = setDDay(end);
         setPeriod(start, end, checkDeadLine);
     }
