@@ -82,6 +82,7 @@ public class CardBoxFragment extends Fragment {
     View gridSearchHeaderView;
     View itemCountHeaderView;
     View categoryCountHeaderView;
+    ArrayList<Integer> checkedItems = new ArrayList<Integer>();
 
     MainActivity.OnCardBoxCallBack callback = new MainActivity.OnCardBoxCallBack() {
         @Override
@@ -174,15 +175,13 @@ public class CardBoxFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (mListView.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
                     ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
-                    for (int i = 0; i < mAdapter.getCheckedItemIndexList().size(); i++) {
-                        if (mAdapter.getCheckedItemIndexList().get(i).equals(position - mListView.getHeaderViewsCount())) {
-                            mAdapter.getCheckedItemIndexList().remove(i);
-                            mAdapter.notifyDataSetChanged();
+                    for (int i = 0; i < checkedItems.size(); i++) {
+                        if (checkedItems.get(i).equals(position)) {
+                            checkedItems.remove(i);
                             return;
                         }
                     }
-                    mAdapter.getCheckedItemIndexList().add(position - mListView.getHeaderViewsCount());
-                    mAdapter.notifyDataSetChanged();
+                    checkedItems.add(position);
                     return;
                 }
                 MyCards myCards = (MyCards) mAdapter.getItem(position - mListView.getHeaderViewsCount());
@@ -387,9 +386,10 @@ public class CardBoxFragment extends Fragment {
 
     public void defaultMode() {
         super.setMenuVisibility(false);
-        for (int i = 0; i < mAdapter.getCheckedItemIndexList().size(); i++) {
-            mListView.setItemChecked(mAdapter.getCheckedItemIndexList().get(i) + mListView.getHeaderViewsCount(), false);
+        for (int i = 0; i < checkedItems.size(); i++) {
+            mListView.setItemChecked(checkedItems.get(i), false);
         }
+        checkedItems.clear();
         mListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorPrimary));
@@ -400,7 +400,6 @@ public class CardBoxFragment extends Fragment {
         mListView.addHeaderView(itemCountHeaderView, null, false);
         mImageChangeGridView.setVisibility(View.VISIBLE);
         fam.setVisibility(View.VISIBLE);
-        mAdapter.getCheckedItemIndexList().clear();
         mAdapter.notifyDataSetChanged();
     }
 

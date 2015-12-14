@@ -50,6 +50,7 @@ public class MyJobListFragment extends Fragment {
     private ArrayList<MyJobs> mJobList;
     View searchHeaderView;
     View countHeaderView;
+    ArrayList<Integer> checkedItems = new ArrayList<Integer>();
 
     MainActivity.OnMyJobListCallBack callback = new MainActivity.OnMyJobListCallBack() {
         @Override
@@ -150,17 +151,15 @@ public class MyJobListFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
                 if (mListView.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
-                    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
-                    for (int i = 0; i < mAdapter.getCheckedItemIndexList().size(); i++) {
-                        if (mAdapter.getCheckedItemIndexList().get(i).equals(position - mListView.getHeaderViewsCount())) {
-                            mAdapter.getCheckedItemIndexList().remove(i);
-                            mAdapter.notifyDataSetChanged();
+                    for (int i = 0; i < checkedItems.size(); i++) {
+                        if (checkedItems.get(i).equals(position)) {
+                            checkedItems.remove(i);
                             return;
                         }
                     }
-                    mAdapter.getCheckedItemIndexList().add(position - mListView.getHeaderViewsCount());
-                    mAdapter.notifyDataSetChanged();
+                    checkedItems.add(position);
                     return;
                 }
                 Job data = (Job) mAdapter.getItem(position - mListView.getHeaderViewsCount());
@@ -219,9 +218,10 @@ public class MyJobListFragment extends Fragment {
 
     public void defaultMode() {
         super.setMenuVisibility(false);
-        for (int i = 0; i < mAdapter.getCheckedItemIndexList().size(); i++) {
-            mListView.setItemChecked(mAdapter.getCheckedItemIndexList().get(i) + mListView.getHeaderViewsCount(), false);
+        for(int i=0; i<checkedItems.size(); i++){
+            mListView.setItemChecked(checkedItems.get(i), false);
         }
+        checkedItems.clear();
         mListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorPrimary));
@@ -232,7 +232,6 @@ public class MyJobListFragment extends Fragment {
         mListView.addHeaderView(countHeaderView, null, false);
         ((MyJobFragment) getParentFragment()).getViewPager().setPagingEnabled(true);
         ((MyJobFragment) getParentFragment()).getTabLayout().setVisibility(View.VISIBLE);
-        mAdapter.getCheckedItemIndexList().clear();
         mAdapter.notifyDataSetChanged();
     }
 

@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.TypedValue;
 import android.widget.Checkable;
 import android.widget.RelativeLayout;
@@ -92,6 +93,7 @@ public class JobItemView extends RelativeLayout implements Checkable{
     }
 
     public void setItemData(Job itemData) {
+        Log.i("갱신", "갱신");
         mCorp.setText(itemData.getCompanyName());
         mTitle.setText(itemData.getJobTitle());
         setChecked(false);

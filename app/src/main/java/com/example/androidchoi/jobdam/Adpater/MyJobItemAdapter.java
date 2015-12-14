@@ -16,11 +16,6 @@ import java.util.ArrayList;
 public class MyJobItemAdapter extends BaseAdapter {
 
     private ArrayList<MyJobs> mItems = new ArrayList<MyJobs>();
-    private ArrayList<Integer> mCheckedItemIndexList = new ArrayList<Integer>();
-
-    public ArrayList<Integer> getCheckedItemIndexList() {
-        return mCheckedItemIndexList;
-    }
 
     public void setItems(ArrayList<MyJobs> items){
         mItems = items;
