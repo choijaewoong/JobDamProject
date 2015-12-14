@@ -8,7 +8,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -103,39 +102,31 @@ public class MainActivity extends SlidingFragmentActivity
         if (id == R.id.nav_my_job) {
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_MY_JOB);
             if(old == null) {
-                emptyBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyJobFragment(), TAG_MY_JOB).commit();
             }
         } else if (id == R.id.nav_card_box) {
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_CARD_BOX);
             if (old == null) {
-                emptyBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new CardBoxFragment(), TAG_CARD_BOX).commit();
             }
         } else if (id == R.id.nav_all_job) {
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_ALL_JOB);
             if (old == null) {
-                emptyBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new AllJobFragment(), TAG_ALL_JOB).commit();
             }
         } else if (id == R.id.nav_board) {
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_BOARD);
             if (old == null) {
-                emptyBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new BoardFragment(), TAG_BOARD).commit();
             }
         } else if (id == R.id.nav_announcement) {
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_ALARM);
             if (old == null) {
-                emptyBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new NoticeFragment(), TAG_ALARM).commit();
             }
         }
         showContent();
         return true;
-    }
-    private void emptyBackStack() {
-        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
     public static final int MESSAGE_BACK_TIMEOUT = 3;
@@ -154,7 +145,14 @@ public class MainActivity extends SlidingFragmentActivity
     };
     @Override
     public void onBackPressed() {
-        if(isBackPressed){
+        if(getSupportFragmentManager().findFragmentByTag(TAG_CARD_BOX) != null
+                && cardBoxCallBack.onCheckMode()){
+            cardBoxCallBack.onChangeMode();
+        }else if(getSupportFragmentManager().findFragmentByTag(TAG_MY_JOB) != null
+                && myJobListCallBack.onCheckMode()){
+            myJobListCallBack.onChangeMode();
+        }
+        else if(isBackPressed){
             mHandler.removeMessages(MESSAGE_BACK_TIMEOUT);
             super.onBackPressed();
         }else{
@@ -162,5 +160,23 @@ public class MainActivity extends SlidingFragmentActivity
             Toast.makeText(this, "'뒤로'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
             mHandler.sendEmptyMessageDelayed(MESSAGE_BACK_TIMEOUT, TIME_BACK_TIMEOUT);
         }
+    }
+
+    public interface OnCardBoxCallBack {
+        boolean onCheckMode();
+        void onChangeMode();
+    }
+    OnCardBoxCallBack cardBoxCallBack;
+    public void setOnCardBoxCallback(OnCardBoxCallBack callback){
+        cardBoxCallBack = callback;
+    }
+
+    public interface OnMyJobListCallBack {
+        boolean onCheckMode();
+        void onChangeMode();
+    }
+    OnMyJobListCallBack myJobListCallBack;
+    public void setOnMyJobListCallback(OnMyJobListCallBack callback){
+        myJobListCallBack  = callback;
     }
 }

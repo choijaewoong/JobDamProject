@@ -78,15 +78,27 @@ public class CardBoxFragment extends Fragment {
     ArrayList<TextView> mTextTags = new ArrayList<TextView>();
     private ArrayList<MyCards> mCardList = new ArrayList<MyCards>();
 
-    public CardBoxFragment() {
-        // Required empty public constructor
-    }
+    MainActivity.OnCardBoxCallBack callback = new MainActivity.OnCardBoxCallBack() {
+        @Override
+        public boolean onCheckMode() {
+            Log.i(mListView.getChoiceMode()+".", ListView.CHOICE_MODE_MULTIPLE+"." );
+            if(mListView.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
+                return true;
+            }
+            return false;
+        }
 
+        @Override
+        public void onChangeMode() {
+            defaultMode();
+        }
+    };
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         super.setMenuVisibility(false);
+        ((MainActivity)getActivity()).setOnCardBoxCallback(callback);
     }
 
     @Override
@@ -362,12 +374,17 @@ public class CardBoxFragment extends Fragment {
 
     public void defaultMode(){
         super.setMenuVisibility(false);
+        for(int i =0; i<mAdapter.getCheckedItemIndexList().size(); i++){
+            mListView.setItemChecked(mAdapter.getCheckedItemIndexList().get(i)+mListView.getHeaderViewsCount(), false);
+        }
+        mListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
 //        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorPrimary));
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(true);
-        mListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
+        mAdapter.getCheckedItemIndexList().clear();
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -384,19 +401,10 @@ public class CardBoxFragment extends Fragment {
         if (id == R.id.action_delete) {
 
             // mAdapter.getCheckedItemIndexList() 보내 삭제 요청
-            for(int i =0; i<mAdapter.getCheckedItemIndexList().size(); i++){
-                mListView.setItemChecked(mAdapter.getCheckedItemIndexList().get(i)+mListView.getHeaderViewsCount(), false);
-            }
-            mAdapter.getCheckedItemIndexList().clear();
-            mAdapter.notifyDataSetChanged();
+
             defaultMode();
             return false;
         } else if (id == R.id.action_cancel) {
-            for(int i =0; i<mAdapter.getCheckedItemIndexList().size(); i++){
-                mListView.setItemChecked(mAdapter.getCheckedItemIndexList().get(i)+mListView.getHeaderViewsCount(), false);
-            }
-            mAdapter.getCheckedItemIndexList().clear();
-            mAdapter.notifyDataSetChanged();
             defaultMode();
             return false;
         }

@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -49,14 +50,26 @@ public class MyJobListFragment extends Fragment {
     TextView mCountTextView;
     private ArrayList<MyJobs> mJobList;
 
-    public MyJobListFragment() {
+    MainActivity.OnMyJobListCallBack callback = new MainActivity.OnMyJobListCallBack() {
+        @Override
+        public boolean onCheckMode() {
+            Log.i(mListView.getChoiceMode()+".", ListView.CHOICE_MODE_MULTIPLE+"." );
+            if(mListView.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
+                return true;
+            }
+            return false;
+        }
 
-    }
-
+        @Override
+        public void onChangeMode() {
+            defaultMode();
+        }
+    };
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        ((MainActivity)getActivity()).setOnMyJobListCallback(callback);
     }
 
     @Override
@@ -203,6 +216,10 @@ public class MyJobListFragment extends Fragment {
 
     public void defaultMode(){
         super.setMenuVisibility(false);
+        for(int i =0; i<mAdapter.getCheckedItemIndexList().size(); i++){
+            mListView.setItemChecked(mAdapter.getCheckedItemIndexList().get(i)+mListView.getHeaderViewsCount(), false);
+        }
+        mListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
 //        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorPrimary));
@@ -210,9 +227,9 @@ public class MyJobListFragment extends Fragment {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(true);
         ((MyJobFragment)getParentFragment()).getViewPager().setPagingEnabled(true);
         ((MyJobFragment)getParentFragment()).getTabLayout().setVisibility(View.VISIBLE);
-        mListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
-
-    }
+        mAdapter.getCheckedItemIndexList().clear();
+        mAdapter.notifyDataSetChanged();
+}
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -228,22 +245,14 @@ public class MyJobListFragment extends Fragment {
         if (id == R.id.action_delete) {
 
             // mAdapter.getCheckedItemIndexList() 보내 삭제 요청
-            for(int i =0; i<mAdapter.getCheckedItemIndexList().size(); i++){
-                mListView.setItemChecked(mAdapter.getCheckedItemIndexList().get(i)+mListView.getHeaderViewsCount(), false);
-            }
-            mAdapter.getCheckedItemIndexList().clear();
-            mAdapter.notifyDataSetChanged();
+
             defaultMode();
             return false;
         } else if (id == R.id.action_cancel) {
-            for(int i =0; i<mAdapter.getCheckedItemIndexList().size(); i++){
-                mListView.setItemChecked(mAdapter.getCheckedItemIndexList().get(i)+mListView.getHeaderViewsCount(), false);
-            }
-            mAdapter.getCheckedItemIndexList().clear();
-            mAdapter.notifyDataSetChanged();
             defaultMode();
             return false;
         }
         return false;
     }
+
 }
