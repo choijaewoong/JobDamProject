@@ -60,7 +60,15 @@ public class CustomDialogFragment extends DialogFragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ((CardWriteActivity) getActivity()).setCategory(position);
+                if (getActivity() instanceof CardWriteActivity) {
+                    ((CardWriteActivity) getActivity()).setCategory(position);
+                }  else if (getActivity() instanceof MainActivity) {
+                    CardBoxFragment cardBoxFragment;
+                    cardBoxFragment = (CardBoxFragment) ((MainActivity) getActivity()).getSupportFragmentManager().findFragmentByTag(MainActivity.TAG_CARD_BOX);
+                    if(cardBoxFragment != null){
+                        cardBoxFragment.moveCategory();
+                    }
+                }
                 dismiss();
             }
         });

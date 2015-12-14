@@ -56,6 +56,7 @@ import in.srain.cube.views.GridViewWithHeaderAndFooter;
  */
 public class CardBoxFragment extends Fragment {
 
+    public static final String CATEGORY_DIALOG = "category_dialog";
     private static final int REQUEST_MODIFY = 1;
     private static final int REQUEST_NEW = 2;
 
@@ -403,6 +404,12 @@ public class CardBoxFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
     }
 
+    public void moveCategory() {
+
+        // 변경된 카드 리스트 서버에 전달
+        defaultMode();
+    }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         getActivity().getMenuInflater().inflate(R.menu.menu_card, menu);
@@ -419,7 +426,10 @@ public class CardBoxFragment extends Fragment {
         if (id == android.R.id.home) {
             defaultMode();
             return true;
-        } else if (id == R.id.action_delete) {
+        }else if(id == R.id.action_move){
+            CustomDialogFragment dialog = new CustomDialogFragment();
+            dialog.show(getActivity().getSupportFragmentManager(), CATEGORY_DIALOG);
+        }else if (id == R.id.action_delete) {
 
             // mAdapter.getCheckedItemIndexList() 보내 삭제 요청
 

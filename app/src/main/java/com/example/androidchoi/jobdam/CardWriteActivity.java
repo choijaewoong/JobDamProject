@@ -30,8 +30,6 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 public class CardWriteActivity extends AppCompatActivity {
-
-    private static final String CATEGORY_DIALOG = "category_dialog";
     public static final String CALENDAR_START_DIALOG = "calendar_start_dialog";
     public static final String CALENDAR_END_DIALOG = "calendar_end_dialog";
 
@@ -129,7 +127,7 @@ public class CardWriteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CustomDialogFragment dialog = new CustomDialogFragment();
-                dialog.show(getSupportFragmentManager(), CATEGORY_DIALOG);
+                dialog.show(getSupportFragmentManager(), CardBoxFragment.CATEGORY_DIALOG);
             }
         });
         mImageCategory.setBackgroundColor(categoryData.getColor());
@@ -232,7 +230,7 @@ public class CardWriteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CustomDialogFragment dialog = new CustomDialogFragment();
-                dialog.show(getSupportFragmentManager(), CATEGORY_DIALOG);
+                dialog.show(getSupportFragmentManager(), CardBoxFragment.CATEGORY_DIALOG);
             }
         });
 

@@ -26,10 +26,10 @@ public class MainActivity extends SlidingFragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String TAG_MY_JOB = "text";
-    private static final String TAG_CARD_BOX = "cardBox";
-    private static final String TAG_ALL_JOB = "jobInfo";
-    private static final String TAG_BOARD = "board";
-    private static final String TAG_ALARM = "alarm";
+    public static final String TAG_CARD_BOX = "cardBox";
+    public static final String TAG_ALL_JOB = "jobInfo";
+    public static final String TAG_BOARD = "board";
+    public static final String TAG_ALARM = "alarm";
     SlidingMenu mSlidingMenu;
     TextView mUserName;
     TextView mUserEmail;
