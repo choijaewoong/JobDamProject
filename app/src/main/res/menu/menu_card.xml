@@ -11,8 +11,4 @@
           android:title="@string/menu_delete"
           android:orderInCategory="101"
           app:showAsAction="always"/>
-    <item android:id="@+id/action_cancel"
-          android:title="@string/menu_cancel"
-          android:orderInCategory="102"
-          app:showAsAction="always"/>
 </menu>

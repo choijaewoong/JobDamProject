@@ -56,7 +56,7 @@ public class MainActivity extends SlidingFragmentActivity
         if (savedInstanceState == null) {
 //          getSupportFragmentManager().beginTransaction().add(R.id.menu_container, new MenuFragment()).commit();
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyJobFragment(), TAG_MY_JOB).commit();
-            }
+        }
         mSlidingMenu = getSlidingMenu();
         mSlidingMenu.setBehindWidthRes(R.dimen.menu_width);
         mSlidingMenu.setShadowDrawable(R.drawable.shadow_nav_menu);
@@ -68,11 +68,11 @@ public class MainActivity extends SlidingFragmentActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.addHeaderView(navHeaderView);
-        mUserEmail = (TextView)navHeaderView.findViewById(R.id.text_user_email);
-        mUserName = (TextView)navHeaderView.findViewById(R.id.text_user_name);
+        mUserEmail = (TextView) navHeaderView.findViewById(R.id.text_user_email);
+        mUserName = (TextView) navHeaderView.findViewById(R.id.text_user_name);
         mUserEmail.setText(User.getInstance().getUserId());
         mUserName.setText(User.getInstance().getUserName());
-        ImageView setting = (ImageView)navHeaderView.findViewById(R.id.btn_setting);
+        ImageView setting = (ImageView) navHeaderView.findViewById(R.id.btn_setting);
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,8 +90,16 @@ public class MainActivity extends SlidingFragmentActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            toggle();
-            return false;
+            if (getSupportFragmentManager().findFragmentByTag(TAG_MY_JOB) != null
+                    && myJobListCallBack.onCheckMode()) {
+                return false;
+            } else if(getSupportFragmentManager().findFragmentByTag(TAG_CARD_BOX) != null
+                    && cardBoxCallBack.onCheckMode()){
+                return false;
+            }else {
+                toggle();
+                return true;
+            }
         }
         return false;
     }
@@ -101,7 +109,7 @@ public class MainActivity extends SlidingFragmentActivity
         int id = menuItem.getItemId();
         if (id == R.id.nav_my_job) {
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_MY_JOB);
-            if(old == null) {
+            if (old == null) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyJobFragment(), TAG_MY_JOB).commit();
             }
         } else if (id == R.id.nav_card_box) {
@@ -132,30 +140,30 @@ public class MainActivity extends SlidingFragmentActivity
     public static final int MESSAGE_BACK_TIMEOUT = 3;
     public static final int TIME_BACK_TIMEOUT = 2000;
     boolean isBackPressed = false;
-    Handler mHandler = new Handler(Looper.getMainLooper()){
+    Handler mHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch(msg.what){
-                case MESSAGE_BACK_TIMEOUT :
+            switch (msg.what) {
+                case MESSAGE_BACK_TIMEOUT:
                     isBackPressed = false;
                     break;
             }
         }
     };
+
     @Override
     public void onBackPressed() {
-        if(getSupportFragmentManager().findFragmentByTag(TAG_CARD_BOX) != null
-                && cardBoxCallBack.onCheckMode()){
+        if (getSupportFragmentManager().findFragmentByTag(TAG_CARD_BOX) != null
+                && cardBoxCallBack.onCheckMode()) {
             cardBoxCallBack.onChangeMode();
-        }else if(getSupportFragmentManager().findFragmentByTag(TAG_MY_JOB) != null
-                && myJobListCallBack.onCheckMode()){
+        } else if (getSupportFragmentManager().findFragmentByTag(TAG_MY_JOB) != null
+                && myJobListCallBack.onCheckMode()) {
             myJobListCallBack.onChangeMode();
-        }
-        else if(isBackPressed){
+        } else if (isBackPressed) {
             mHandler.removeMessages(MESSAGE_BACK_TIMEOUT);
             super.onBackPressed();
-        }else{
+        } else {
             isBackPressed = true;
             Toast.makeText(this, "'뒤로'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
             mHandler.sendEmptyMessageDelayed(MESSAGE_BACK_TIMEOUT, TIME_BACK_TIMEOUT);
@@ -164,19 +172,25 @@ public class MainActivity extends SlidingFragmentActivity
 
     public interface OnCardBoxCallBack {
         boolean onCheckMode();
+
         void onChangeMode();
     }
+
     OnCardBoxCallBack cardBoxCallBack;
-    public void setOnCardBoxCallback(OnCardBoxCallBack callback){
+
+    public void setOnCardBoxCallback(OnCardBoxCallBack callback) {
         cardBoxCallBack = callback;
     }
 
     public interface OnMyJobListCallBack {
         boolean onCheckMode();
+
         void onChangeMode();
     }
+
     OnMyJobListCallBack myJobListCallBack;
-    public void setOnMyJobListCallback(OnMyJobListCallBack callback){
-        myJobListCallBack  = callback;
+
+    public void setOnMyJobListCallback(OnMyJobListCallBack callback) {
+        myJobListCallBack = callback;
     }
 }

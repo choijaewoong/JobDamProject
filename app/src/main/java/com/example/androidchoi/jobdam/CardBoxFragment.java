@@ -81,8 +81,8 @@ public class CardBoxFragment extends Fragment {
     MainActivity.OnCardBoxCallBack callback = new MainActivity.OnCardBoxCallBack() {
         @Override
         public boolean onCheckMode() {
-            Log.i(mListView.getChoiceMode()+".", ListView.CHOICE_MODE_MULTIPLE+"." );
-            if(mListView.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
+            Log.i(mListView.getChoiceMode() + ".", ListView.CHOICE_MODE_MULTIPLE + ".");
+            if (mListView.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
                 return true;
             }
             return false;
@@ -93,20 +93,23 @@ public class CardBoxFragment extends Fragment {
             defaultMode();
         }
     };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         super.setMenuVisibility(false);
-        ((MainActivity)getActivity()).setOnCardBoxCallback(callback);
+        ((MainActivity) getActivity()).setOnCardBoxCallback(callback);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode != Activity.RESULT_OK){ return; }
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
         showMyMemo();
-        if(requestCode == REQUEST_MODIFY){
-        }else if(requestCode == REQUEST_NEW){
+        if (requestCode == REQUEST_MODIFY) {
+        } else if (requestCode == REQUEST_NEW) {
             mListView.smoothScrollToPositionFromTop(0, 0, 500);
         }
     }
@@ -117,7 +120,7 @@ public class CardBoxFragment extends Fragment {
         TextView subTitle = (TextView) getActivity().findViewById(R.id.text_subtitle);
         subTitle.setText(R.string.card_box);
         showMyMemo();
-        FrameLayout touchInterceptor = (FrameLayout)getActivity().findViewById(R.id.touchInterceptor);
+        FrameLayout touchInterceptor = (FrameLayout) getActivity().findViewById(R.id.touchInterceptor);
         touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -145,6 +148,7 @@ public class CardBoxFragment extends Fragment {
             }
         });
     }
+
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -152,7 +156,7 @@ public class CardBoxFragment extends Fragment {
         View listSearchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
         View gridSearchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
         View itemCountHeaderView = inflater.inflate(R.layout.view_header_card_item_count, null);
-        View categoryCountHeaderView = inflater.inflate(R.layout.view_header_category_item_count,null);
+        View categoryCountHeaderView = inflater.inflate(R.layout.view_header_category_item_count, null);
 
         //리스트 뷰
         mListView = (ListView) view.findViewById(R.id.listview_card);
@@ -164,15 +168,15 @@ public class CardBoxFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (mListView.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
-                    ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
-                    for(int i = 0; i< mAdapter.getCheckedItemIndexList().size(); i++){
-                        if(mAdapter.getCheckedItemIndexList().get(i).equals(position-mListView.getHeaderViewsCount())){
+                    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
+                    for (int i = 0; i < mAdapter.getCheckedItemIndexList().size(); i++) {
+                        if (mAdapter.getCheckedItemIndexList().get(i).equals(position - mListView.getHeaderViewsCount())) {
                             mAdapter.getCheckedItemIndexList().remove(i);
                             mAdapter.notifyDataSetChanged();
                             return;
                         }
                     }
-                    mAdapter.getCheckedItemIndexList().add(position-mListView.getHeaderViewsCount());
+                    mAdapter.getCheckedItemIndexList().add(position - mListView.getHeaderViewsCount());
                     mAdapter.notifyDataSetChanged();
                     return;
                 }
@@ -200,7 +204,7 @@ public class CardBoxFragment extends Fragment {
 
         //리스트 헤더뷰
         mItemCountTextView = (TextView) itemCountHeaderView.findViewById(R.id.text_item_count);
-        mImageChangeGridView = (ImageView)itemCountHeaderView.findViewById(R.id.image_change_grid_view);
+        mImageChangeGridView = (ImageView) itemCountHeaderView.findViewById(R.id.image_change_grid_view);
         mImageChangeGridView.setImageResource(R.drawable.button_card_list);
         mImageChangeGridView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,8 +215,8 @@ public class CardBoxFragment extends Fragment {
         });
 
         //그리드 헤더뷰
-        mCategoryCountTextView = (TextView)categoryCountHeaderView.findViewById(R.id.text_category_count);
-        mImageChangeListView = (ImageView)categoryCountHeaderView.findViewById(R.id.image_change_list_view);
+        mCategoryCountTextView = (TextView) categoryCountHeaderView.findViewById(R.id.text_category_count);
+        mImageChangeListView = (ImageView) categoryCountHeaderView.findViewById(R.id.image_change_list_view);
         mImageChangeListView.setImageResource(R.drawable.button_card_folder);
         mImageChangeListView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,11 +227,11 @@ public class CardBoxFragment extends Fragment {
         });
         mCategoryCountTextView.setText(Html.fromHtml("폴더  <font color=#0db5f7>" + mCategoryFolderAdapter.getCount()));
 
-        mListSearchEdit = (EditText)listSearchHeaderView.findViewById(R.id.editText_search_bar);
-        mListSearchDeleteImage = (ImageView)listSearchHeaderView.findViewById(R.id.image_search_delete);
+        mListSearchEdit = (EditText) listSearchHeaderView.findViewById(R.id.editText_search_bar);
+        mListSearchDeleteImage = (ImageView) listSearchHeaderView.findViewById(R.id.image_search_delete);
         setEditListener(mListSearchEdit, mListSearchDeleteImage);
-        mGridSearchEdit = (EditText)gridSearchHeaderView.findViewById(R.id.editText_search_bar);
-        mGridSearchDeleteImage = (ImageView)gridSearchHeaderView.findViewById(R.id.image_search_delete);
+        mGridSearchEdit = (EditText) gridSearchHeaderView.findViewById(R.id.editText_search_bar);
+        mGridSearchDeleteImage = (ImageView) gridSearchHeaderView.findViewById(R.id.image_search_delete);
         setEditListener(mGridSearchEdit, mGridSearchDeleteImage);
 
         fam = (FloatingActionMenu) view.findViewById(R.id.menu);
@@ -242,9 +246,9 @@ public class CardBoxFragment extends Fragment {
             }
         });
         FloatingActionButton addCategoryButton = (FloatingActionButton) view.findViewById(R.id.fab_add_category);
-        mPredicateLayout = (PredicateLayout)view.findViewById(R.id.predicateLayout_all_tag_box);
+        mPredicateLayout = (PredicateLayout) view.findViewById(R.id.predicateLayout_all_tag_box);
         mScrollView = (ScrollView) view.findViewById(R.id.scrollView_tag);
-        mImageTagCloseButton = (ImageView)view.findViewById(R.id.image_tag_box_close_button);
+        mImageTagCloseButton = (ImageView) view.findViewById(R.id.image_tag_box_close_button);
         mImageTagCloseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -253,13 +257,14 @@ public class CardBoxFragment extends Fragment {
         });
         return view;
     }
+
     @Override
     public void onResume() {
         super.onResume();
 
     }
 
-    public void addTagView(String tag, int categoryIndex, final int index, int tagID){
+    public void addTagView(String tag, int categoryIndex, final int index, int tagID) {
         final TextView t = new TextView(getActivity());
         t.setId(tagID);
         t.setText(tag);
@@ -277,8 +282,8 @@ public class CardBoxFragment extends Fragment {
         t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int i=0; i<mTextTags.size(); i++){
-                    if(t == mTextTags.get(i)){
+                for (int i = 0; i < mTextTags.size(); i++) {
+                    if (t == mTextTags.get(i)) {
 //                        Toast.makeText(CardWriteActivity.this, "해당 태그가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getActivity(), CardWriteActivity.class);
                         intent.putExtra(MyCard.CARD_ITEM, mCardList.get(index));
@@ -288,7 +293,7 @@ public class CardBoxFragment extends Fragment {
                 }
             }
         });
-        for(int i=0; i<mTextTags.size(); i++) {
+        for (int i = 0; i < mTextTags.size(); i++) {
             if (t.getId() == mTextTags.get(i).getId()) {
                 return;
             }
@@ -314,7 +319,7 @@ public class CardBoxFragment extends Fragment {
                 });
     }
 
-    public  void setEditListener(final EditText editText, final ImageView imageView){
+    public void setEditListener(final EditText editText, final ImageView imageView) {
         editText.setHint("태그를 검색해주세요");
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -361,28 +366,26 @@ public class CardBoxFragment extends Fragment {
         });
     }
 
-    public void deleteMode(){
-//        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+    public void deleteMode() {
         super.setMenuVisibility(true);
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorNavHeaderBackground));
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorNavHeaderBackground));
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(false);
     }
 
-    public void defaultMode(){
+    public void defaultMode() {
         super.setMenuVisibility(false);
-        for(int i =0; i<mAdapter.getCheckedItemIndexList().size(); i++){
-            mListView.setItemChecked(mAdapter.getCheckedItemIndexList().get(i)+mListView.getHeaderViewsCount(), false);
+        for (int i = 0; i < mAdapter.getCheckedItemIndexList().size(); i++) {
+            mListView.setItemChecked(mAdapter.getCheckedItemIndexList().get(i) + mListView.getHeaderViewsCount(), false);
         }
         mListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorPrimary));
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorPrimary));
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(true);
         mAdapter.getCheckedItemIndexList().clear();
         mAdapter.notifyDataSetChanged();
     }
@@ -391,24 +394,25 @@ public class CardBoxFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         getActivity().getMenuInflater().inflate(R.menu.menu_card, menu);
     }
+
     @Override
     public void setMenuVisibility(boolean menuVisible) {
         super.setMenuVisibility(false);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_delete) {
+        if (id == android.R.id.home) {
+            defaultMode();
+            return true;
+        } else if (id == R.id.action_delete) {
 
             // mAdapter.getCheckedItemIndexList() 보내 삭제 요청
 
             defaultMode();
-            return false;
-        } else if (id == R.id.action_cancel) {
-            defaultMode();
-            return false;
+            return true;
         }
-        return false;
+        return true;
     }
-
 }

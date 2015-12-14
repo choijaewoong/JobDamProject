@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -53,8 +52,7 @@ public class MyJobListFragment extends Fragment {
     MainActivity.OnMyJobListCallBack callback = new MainActivity.OnMyJobListCallBack() {
         @Override
         public boolean onCheckMode() {
-            Log.i(mListView.getChoiceMode()+".", ListView.CHOICE_MODE_MULTIPLE+"." );
-            if(mListView.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
+            if (mListView.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
                 return true;
             }
             return false;
@@ -65,11 +63,12 @@ public class MyJobListFragment extends Fragment {
             defaultMode();
         }
     };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        ((MainActivity)getActivity()).setOnMyJobListCallback(callback);
+        ((MainActivity) getActivity()).setOnMyJobListCallback(callback);
     }
 
     @Override
@@ -150,15 +149,15 @@ public class MyJobListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (mListView.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
-                    ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
-                    for(int i = 0; i< mAdapter.getCheckedItemIndexList().size(); i++){
-                        if(mAdapter.getCheckedItemIndexList().get(i).equals(position-mListView.getHeaderViewsCount())){
+                    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
+                    for (int i = 0; i < mAdapter.getCheckedItemIndexList().size(); i++) {
+                        if (mAdapter.getCheckedItemIndexList().get(i).equals(position - mListView.getHeaderViewsCount())) {
                             mAdapter.getCheckedItemIndexList().remove(i);
                             mAdapter.notifyDataSetChanged();
                             return;
                         }
                     }
-                    mAdapter.getCheckedItemIndexList().add(position-mListView.getHeaderViewsCount());
+                    mAdapter.getCheckedItemIndexList().add(position - mListView.getHeaderViewsCount());
                     mAdapter.notifyDataSetChanged();
                     return;
                 }
@@ -186,6 +185,7 @@ public class MyJobListFragment extends Fragment {
         super.onResume();
         mAdapter.notifyDataSetChanged();
     }
+
     public void showMyJob() {
         NetworkManager.getInstance().showMyJob(getActivity(), new NetworkManager.OnResultListener<MyJobLab>() {
             @Override
@@ -201,58 +201,59 @@ public class MyJobListFragment extends Fragment {
             }
         });
     }
-    public void deleteMode(){
-//        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+
+    public void deleteMode() {
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
         super.setMenuVisibility(true);
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorNavHeaderBackground));
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(false);
-        ((MyJobFragment)getParentFragment()).getViewPager().setPagingEnabled(false);
-        ((MyJobFragment)getParentFragment()).getTabLayout().setVisibility(View.GONE);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorNavHeaderBackground));
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(false);
+        ((MyJobFragment) getParentFragment()).getViewPager().setPagingEnabled(false);
+        ((MyJobFragment) getParentFragment()).getTabLayout().setVisibility(View.GONE);
     }
 
-    public void defaultMode(){
+    public void defaultMode() {
         super.setMenuVisibility(false);
-        for(int i =0; i<mAdapter.getCheckedItemIndexList().size(); i++){
-            mListView.setItemChecked(mAdapter.getCheckedItemIndexList().get(i)+mListView.getHeaderViewsCount(), false);
+        for (int i = 0; i < mAdapter.getCheckedItemIndexList().size(); i++) {
+            mListView.setItemChecked(mAdapter.getCheckedItemIndexList().get(i) + mListView.getHeaderViewsCount(), false);
         }
         mListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorPrimary));
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(true);
-        ((MyJobFragment)getParentFragment()).getViewPager().setPagingEnabled(true);
-        ((MyJobFragment)getParentFragment()).getTabLayout().setVisibility(View.VISIBLE);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorPrimary));
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(true);
+        ((MyJobFragment) getParentFragment()).getViewPager().setPagingEnabled(true);
+        ((MyJobFragment) getParentFragment()).getTabLayout().setVisibility(View.VISIBLE);
         mAdapter.getCheckedItemIndexList().clear();
         mAdapter.notifyDataSetChanged();
-}
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         getActivity().getMenuInflater().inflate(R.menu.menu_my_job, menu);
     }
+
     @Override
     public void setMenuVisibility(boolean menuVisible) {
         super.setMenuVisibility(false);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_delete) {
+        if(id == android.R.id.home){
+            defaultMode();
+            return true;
+        } else if (id == R.id.action_delete) {
 
             // mAdapter.getCheckedItemIndexList() 보내 삭제 요청
 
             defaultMode();
-            return false;
-        } else if (id == R.id.action_cancel) {
-            defaultMode();
-            return false;
+            return true;
         }
-        return false;
+        return true;
     }
 
 }
