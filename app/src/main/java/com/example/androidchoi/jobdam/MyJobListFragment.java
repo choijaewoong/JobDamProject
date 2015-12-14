@@ -48,6 +48,8 @@ public class MyJobListFragment extends Fragment {
     ImageView mDeleteImage;
     TextView mCountTextView;
     private ArrayList<MyJobs> mJobList;
+    View searchHeaderView;
+    View countHeaderView;
 
     MainActivity.OnMyJobListCallBack callback = new MainActivity.OnMyJobListCallBack() {
         @Override
@@ -109,8 +111,8 @@ public class MyJobListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_job_list, container, false);
-        View searchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
-        View countHeaderView = inflater.inflate(R.layout.view_header_item_count, null);
+        searchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
+        countHeaderView = inflater.inflate(R.layout.view_header_item_count, null);
         mListView = (ListView) view.findViewById(R.id.listview_my_job);
         mListView.addHeaderView(searchHeaderView);
         mListView.addHeaderView(countHeaderView, null, false);
@@ -210,6 +212,7 @@ public class MyJobListFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(false);
+        mListView.removeHeaderView(searchHeaderView);
         ((MyJobFragment) getParentFragment()).getViewPager().setPagingEnabled(false);
         ((MyJobFragment) getParentFragment()).getTabLayout().setVisibility(View.GONE);
     }
@@ -224,6 +227,9 @@ public class MyJobListFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorPrimary));
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(true);
+        mListView.removeHeaderView(countHeaderView);
+        mListView.addHeaderView(searchHeaderView);
+        mListView.addHeaderView(countHeaderView, null, false);
         ((MyJobFragment) getParentFragment()).getViewPager().setPagingEnabled(true);
         ((MyJobFragment) getParentFragment()).getTabLayout().setVisibility(View.VISIBLE);
         mAdapter.getCheckedItemIndexList().clear();

@@ -77,6 +77,10 @@ public class CardBoxFragment extends Fragment {
     ImageView mImageTagCloseButton;
     ArrayList<TextView> mTextTags = new ArrayList<TextView>();
     private ArrayList<MyCards> mCardList = new ArrayList<MyCards>();
+    View listSearchHeaderView;
+    View gridSearchHeaderView;
+    View itemCountHeaderView;
+    View categoryCountHeaderView;
 
     MainActivity.OnCardBoxCallBack callback = new MainActivity.OnCardBoxCallBack() {
         @Override
@@ -153,10 +157,10 @@ public class CardBoxFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_card_box, container, false);
-        View listSearchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
-        View gridSearchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
-        View itemCountHeaderView = inflater.inflate(R.layout.view_header_card_item_count, null);
-        View categoryCountHeaderView = inflater.inflate(R.layout.view_header_category_item_count, null);
+        listSearchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
+        gridSearchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
+        itemCountHeaderView = inflater.inflate(R.layout.view_header_card_item_count, null);
+        categoryCountHeaderView = inflater.inflate(R.layout.view_header_category_item_count, null);
 
         //리스트 뷰
         mListView = (ListView) view.findViewById(R.id.listview_card);
@@ -374,6 +378,10 @@ public class CardBoxFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(false);
+        mListView.removeHeaderView(listSearchHeaderView);
+        mImageChangeGridView.setVisibility(View.GONE);
+        fam.setVisibility(View.GONE);
+        mAdapter.notifyDataSetChanged();
     }
 
     public void defaultMode() {
@@ -386,6 +394,11 @@ public class CardBoxFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorPrimary));
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(true);
+        mListView.removeHeaderView(itemCountHeaderView);
+        mListView.addHeaderView(listSearchHeaderView);
+        mListView.addHeaderView(itemCountHeaderView, null, false);
+        mImageChangeGridView.setVisibility(View.VISIBLE);
+        fam.setVisibility(View.VISIBLE);
         mAdapter.getCheckedItemIndexList().clear();
         mAdapter.notifyDataSetChanged();
     }
