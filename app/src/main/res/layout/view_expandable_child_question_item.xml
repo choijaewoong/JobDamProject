@@ -43,7 +43,7 @@
         android:layout_height="14dp"
         android:id="@+id/button_job_question_detail"
         android:textColor="@android:color/white"
-        android:background="@drawable/button_job_tag_detail"
+        android:background="@drawable/selector_job_tag_detail"
         android:textSize="@dimen/font_size_default"
         android:layout_below="@+id/layout_job_question_tag"
         android:layout_centerHorizontal="true"

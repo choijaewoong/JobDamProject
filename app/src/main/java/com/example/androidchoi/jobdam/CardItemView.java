@@ -53,7 +53,7 @@ public class CardItemView extends RelativeLayout implements Checkable{
     public void setChecked(boolean checked) {
         this.isChecked = checked;
         if(checked) {
-//            mCategoryBar.setBackgroundResource(R.color.colorPrimary);
+//            mCategoryBar.setBackgroundResource(R.color.colorLightPrimary);
             mLayout.setSelected(true);
         } else {
 //            mCategoryBar.setBackgroundColor(categoryColor);

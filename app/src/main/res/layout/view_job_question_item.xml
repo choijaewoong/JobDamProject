@@ -11,7 +11,10 @@
         android:id="@+id/text_job_question"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:padding="@dimen/default_dimen"
-        android:background="@color/colorPrimary"
-        android:textColor="@android:color/white"/>
+        android:background="@drawable/image_job_question_container"
+        android:textColor="@android:color/white"
+        android:paddingLeft="@dimen/default_dimen"
+        android:paddingTop="@dimen/default_dimen"
+        android:paddingRight="@dimen/default_dimen"
+        android:paddingBottom="@dimen/default_large_dimen"/>
 </RelativeLayout>

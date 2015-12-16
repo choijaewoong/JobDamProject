@@ -110,15 +110,17 @@
             android:layout_marginLeft="@dimen/default_dimen"/>
 
         <ToggleButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New ToggleButton"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
             android:id="@+id/toggleButton_auto_login"
+            android:textOn=""
+            android:textOff=""
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentEnd="false"
             android:layout_marginRight="@dimen/default_dimen"
-            android:checked="false"/>
+            android:checked="false"
+            android:background="@drawable/selector_toggle"/>
     </RelativeLayout>
     <ImageView
         android:layout_width="match_parent"

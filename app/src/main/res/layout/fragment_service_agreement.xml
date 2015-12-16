@@ -86,10 +86,11 @@
                 />
 
             <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/default_large_dimen"
+                android:layout_height="@dimen/default_large_dimen"
                 android:id="@+id/checkBox_user_agreement"
-                android:checked="false"/>
+                android:checked="false"
+                android:background="@drawable/selector_check_toggle"/>
 
         </LinearLayout>
 
@@ -136,10 +137,11 @@
                 />
 
             <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/default_large_dimen"
+                android:layout_height="@dimen/default_large_dimen"
                 android:id="@+id/checkBox_private_info"
-                android:checked="false"/>
+                android:checked="false"
+                android:background="@drawable/selector_check_toggle"/>
 
         </LinearLayout>
 
