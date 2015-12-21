@@ -57,6 +57,7 @@ import in.srain.cube.views.GridViewWithHeaderAndFooter;
 public class CardBoxFragment extends Fragment {
 
     public static final String CATEGORY_DIALOG = "category_dialog";
+    public static final String EXTRA_CATEGORY_INDEX = "category_index";
     private static final int REQUEST_MODIFY = 1;
     private static final int REQUEST_NEW = 2;
 
@@ -205,6 +206,14 @@ public class CardBoxFragment extends Fragment {
         mGridView.addHeaderView(gridSearchHeaderView);
         mGridView.addHeaderView(categoryCountHeaderView, null, false);
         mGridView.setAdapter(mCategoryFolderAdapter);
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), FilteredCardActivity.class);
+                intent.putExtra(EXTRA_CATEGORY_INDEX, position);
+                startActivity(intent);
+            }
+        });
 
         //리스트 헤더뷰
         mItemCountTextView = (TextView) itemCountHeaderView.findViewById(R.id.text_item_count);

@@ -198,7 +198,6 @@ public class NetworkManager {
 
     //메모 보기
     public static final String SHOW_MY_MEMO = SERVER + "/mymemolist";
-
     public void showMyMemo(Context context, final OnResultListener<MyCardLab> listener) {
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
@@ -209,6 +208,25 @@ public class NetworkManager {
                 listener.onFail(statusCode);
             }
 
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                MyCardLab myCardLab = gson.fromJson(responseString, MyCardLab.class);
+                listener.onSuccess(myCardLab);
+            }
+        });
+    }
+
+    public static final String SHOW_FILTERED_MEMO = SERVER + "/folderlist/%s";
+    public void showFilteredMemo(Context context, int index,  final OnResultListener<MyCardLab> listener) {
+        RequestParams params = new RequestParams();
+        Header[] headers = new Header[1];
+        headers[0] = new BasicHeader("Accept", "application/json");
+        String url = String.format(SHOW_FILTERED_MEMO, index);
+        client.get(context, url, headers, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+            }
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 MyCardLab myCardLab = gson.fromJson(responseString, MyCardLab.class);

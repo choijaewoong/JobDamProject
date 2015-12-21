@@ -99,7 +99,7 @@ public class CardWriteActivity extends AppCompatActivity {
         mTextEndDate = (TextView) findViewById(R.id.text_end_date);
 
         Intent intent = getIntent();
-        isNew = intent.getBooleanExtra(MyCard.CARD_NEW, true);
+        isNew = intent.getBooleanExtra(MyCard.CARD_NEW, false);
         // 기존 Data있는 경우 (메모 수정)
         if (isNew == false) {
             mData = (MyCards) intent.getSerializableExtra(MyCard.CARD_ITEM);

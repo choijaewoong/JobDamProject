@@ -20,7 +20,9 @@ public class CategoryData {
     private CategoryData(Context context) {
         mContext = context;
         mCategoryList = new ArrayList<CategoryData>();
-        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_default), R.drawable.image_category_4, ContextCompat.getColor(context, R.color.colorCategoryDefault)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_default),
+                                            R.drawable.image_category_4,
+                                            ContextCompat.getColor(context, R.color.colorCategoryDefault)));
         mCategoryList.add(new CategoryData(mContext.getString(R.string.category_scrap), R.drawable.image_category_5, ContextCompat.getColor(context, R.color.colorCategoryScrap)));
         mCategoryList.add(new CategoryData(mContext.getString(R.string.category_win), R.drawable.image_category_6,ContextCompat.getColor(context, R.color.colorCategoryWin)));
         mCategoryList.add(new CategoryData(mContext.getString(R.string.category_intern), R.drawable.image_category_2, ContextCompat.getColor(context, R.color.colorCategoryIntern)));

@@ -78,7 +78,11 @@
             android:name=".CardChoiceActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".JobQuestionActivity"
+        <activity
+            android:name=".JobQuestionActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity android:name=".FilteredCardActivity"
                   android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>

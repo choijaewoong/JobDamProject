@@ -44,27 +44,6 @@ public class JobDetailActivity extends AppCompatActivity {
     private JobDetailAdapter mExpandableAdapter;
     boolean isScrap;
     public Questions getQuestions() { return mQuestions; }
-//
-//
-//    public interface OnAddCardCallback {
-//        void onAddCardTag(List<MyCards> myCardList, int position);
-//    }
-//    private OnAddCardCallback mCallback;
-//    public void setOnAddCardCallback(OnAddCardCallback callback){
-//        mCallback = callback;
-//    }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(resultCode != Activity.RESULT_OK){ return; }
-//        if(requestCode == REQUEST_ATTACH){
-//            int position = data.getIntExtra(CardChoiceActivity.QUESTION_NUM, 0);
-//            List<MyCards> myCardList = (List<MyCards>) data.getSerializableExtra(CardChoiceActivity.CARD_TITLE);
-////            mCallback.onAddCardTag(myCardList, position);
-//            mExpandableAdapter.notifyDataSetChanged();
-//        }
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
