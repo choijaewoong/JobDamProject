@@ -6,8 +6,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/count_header_height"
-        android:paddingLeft="@dimen/default_large_dimen"
-        android:paddingRight="@dimen/default_dimen">
+        android:paddingLeft="@dimen/default_dimen"
+        android:paddingRight="@dimen/default_small_dimen">
         <TextView
             android:id="@+id/text_category_count"
             android:layout_width="wrap_content"

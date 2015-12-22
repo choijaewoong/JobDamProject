@@ -14,7 +14,6 @@ import com.example.androidchoi.jobdam.Model.CategoryData;
 public class CategoryFolderAdapter extends BaseAdapter {
 
     Context mContext;
-    CategoryData mCategoryData;
 
     public CategoryFolderAdapter(Context context) {
         mContext = context;
@@ -41,7 +40,7 @@ public class CategoryFolderAdapter extends BaseAdapter {
         if (mCategoryFolderItemView == null) {
             mCategoryFolderItemView = new CategoryFolderItemView(mContext);
         }
-        mCategoryFolderItemView.setData(CategoryData.get(mContext).getCategoryList().get(position), 1);
+        mCategoryFolderItemView.setData(CategoryData.get(mContext).getCategoryList().get(position));
         return mCategoryFolderItemView;
     }
 }

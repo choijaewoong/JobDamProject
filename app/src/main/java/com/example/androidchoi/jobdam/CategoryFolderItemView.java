@@ -18,6 +18,7 @@ public class CategoryFolderItemView extends RelativeLayout{
     TextView mTextCount;
     TextView mTextName;
     ImageView mImageIcon;
+    RelativeLayout mLayout;
 
 
     public CategoryFolderItemView(Context context) {
@@ -30,9 +31,10 @@ public class CategoryFolderItemView extends RelativeLayout{
         mTextCount = (TextView)findViewById(R.id.text_category_count);
         mTextName = (TextView)findViewById(R.id.text_category_name);
         mImageIcon = (ImageView)findViewById(R.id.image_category_icon);
+        mLayout = (RelativeLayout)findViewById(R.id.layout_folder_grid_item);
     }
 
-    public void setData(CategoryData data, int count){
+    public void setData(CategoryData data){
         mTextCount.setText("");
         mTextName.setText(data.getName());
         mTextName.setTextColor(data.getColor());

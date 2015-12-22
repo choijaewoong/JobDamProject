@@ -67,9 +67,7 @@ public class CardBoxFragment extends Fragment {
     CardItemAdapter mAdapter;
     FloatingActionMenu fam;
     EditText mListSearchEdit;
-    EditText mGridSearchEdit;
     ImageView mListSearchDeleteImage;
-    ImageView mGridSearchDeleteImage;
     TextView mItemCountTextView;
     TextView mCategoryCountTextView;
     ImageView mImageChangeGridView;
@@ -80,7 +78,6 @@ public class CardBoxFragment extends Fragment {
     ArrayList<TextView> mTextTags = new ArrayList<TextView>();
     private ArrayList<MyCards> mCardList = new ArrayList<MyCards>();
     View listSearchHeaderView;
-    View gridSearchHeaderView;
     View itemCountHeaderView;
     View categoryCountHeaderView;
     ArrayList<Integer> checkedItems = new ArrayList<Integer>();
@@ -135,17 +132,8 @@ public class CardBoxFragment extends Fragment {
                     if (mListSearchEdit.isFocused()) {
                         Rect outRect = new Rect();
                         mListSearchEdit.getGlobalVisibleRect(outRect);
-                        mGridSearchEdit.getGlobalVisibleRect(outRect);
                         if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
                             mListSearchEdit.clearFocus();
-                            InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                        }
-                    } else if (mGridSearchEdit.isFocused()) {
-                        Rect outRect = new Rect();
-                        mGridSearchEdit.getGlobalVisibleRect(outRect);
-                        if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                            mGridSearchEdit.clearFocus();
                             InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                         }
@@ -161,7 +149,6 @@ public class CardBoxFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_card_box, container, false);
         listSearchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
-        gridSearchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
         itemCountHeaderView = inflater.inflate(R.layout.view_header_card_item_count, null);
         categoryCountHeaderView = inflater.inflate(R.layout.view_header_category_item_count, null);
 
@@ -203,7 +190,6 @@ public class CardBoxFragment extends Fragment {
         mGridView = (GridViewWithHeaderAndFooter) view.findViewById(R.id.gridview_category_folder);
         mGridView.setVisibility(View.GONE);
         mCategoryFolderAdapter = new CategoryFolderAdapter(getActivity());
-        mGridView.addHeaderView(gridSearchHeaderView);
         mGridView.addHeaderView(categoryCountHeaderView, null, false);
         mGridView.setAdapter(mCategoryFolderAdapter);
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -222,7 +208,7 @@ public class CardBoxFragment extends Fragment {
         mImageChangeGridView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListView.setVisibility(View.GONE);
+//                mListView.setVisibility(View.GONE);
                 mGridView.setVisibility(View.VISIBLE);
             }
         });
@@ -234,7 +220,7 @@ public class CardBoxFragment extends Fragment {
         mImageChangeListView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListView.setVisibility(View.VISIBLE);
+//                mListView.setVisibility(View.VISIBLE);
                 mGridView.setVisibility(View.GONE);
             }
         });
@@ -243,9 +229,6 @@ public class CardBoxFragment extends Fragment {
         mListSearchEdit = (EditText) listSearchHeaderView.findViewById(R.id.editText_search_bar);
         mListSearchDeleteImage = (ImageView) listSearchHeaderView.findViewById(R.id.image_search_delete);
         setEditListener(mListSearchEdit, mListSearchDeleteImage);
-        mGridSearchEdit = (EditText) gridSearchHeaderView.findViewById(R.id.editText_search_bar);
-        mGridSearchDeleteImage = (ImageView) gridSearchHeaderView.findViewById(R.id.image_search_delete);
-        setEditListener(mGridSearchEdit, mGridSearchDeleteImage);
 
         fam = (FloatingActionMenu) view.findViewById(R.id.menu);
         FloatingActionButton addCardButton = (FloatingActionButton) view.findViewById(R.id.fab_write_card);

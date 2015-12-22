@@ -1,54 +1,59 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.example.dongja94.sampleslidingmenu.MainFragment">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.example.dongja94.sampleslidingmenu.MainFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <!--@dimen/item_height-->
 
     <ListView
         android:id="@+id/listview_card"
-        android:listSelector="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_gravity="left|top"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
         android:clipToPadding="false"
         android:divider="@android:color/transparent"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="0dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"/>
+        android:listSelector="@android:color/transparent"/>
 
     <in.srain.cube.views.GridViewWithHeaderAndFooter
+        android:id="@+id/gridview_category_folder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/search_view_height"
+        android:background="@color/colorBackground"
         android:listSelector="@android:color/transparent"
-        android:clipToPadding="false"
         android:numColumns="3"
         android:stretchMode="columnWidth"
-        android:gravity="center"
-        android:id="@+id/gridview_category_folder"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:paddingLeft="@dimen/default_small_dimen"
+        android:paddingRight="@dimen/default_small_dimen"/>
+
 
     <com.example.androidchoi.jobdam.Util.MyScrollView
+        android:id="@+id/scrollView_tag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollView_tag"
-        android:fillViewport="false"
-        android:clipToPadding="false"
-        android:focusable="false"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="@dimen/search_view_height"
+        android:clipToPadding="false"
+        android:fillViewport="false"
+        android:focusable="false"
         android:visibility="gone">
+
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorBackground"
             android:padding="@dimen/default_small_dimen"
             >
+
             <com.example.androidchoi.jobdam.Util.PredicateLayout
                 android:id="@+id/predicateLayout_all_tag_box"
                 android:layout_width="match_parent"
@@ -59,10 +64,11 @@
                 android:layout_marginRight="30dp"
                 >
             </com.example.androidchoi.jobdam.Util.PredicateLayout>
+
             <ImageView
+                android:id="@+id/image_tag_box_close_button"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:id="@+id/image_tag_box_close_button"
                 android:layout_gravity="right|top"
                 android:src="@drawable/button_search_delete"/>
         </FrameLayout>
@@ -73,8 +79,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:layout_gravity="right|bottom"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:paddingBottom="@dimen/default_small_dimen"
+        android:paddingRight="@dimen/default_small_dimen"
         app:menu_animationDelayPerItem="50"
         app:menu_backgroundColor="@color/colorBackgroundBlur"
         app:menu_buttonSpacing="0dp"
@@ -83,8 +95,6 @@
         app:menu_colorRipple="#99FFFFFF"
         app:menu_fab_size="normal"
         app:menu_icon="@drawable/fab_add"
-        app:menu_openDirection="up"
-        app:menu_showShadow="true"
         app:menu_labels_colorNormal="@android:color/transparent"
         app:menu_labels_colorPressed="@android:color/transparent"
         app:menu_labels_colorRipple="@android:color/transparent"
@@ -99,12 +109,8 @@
         app:menu_labels_singleLine="false"
         app:menu_labels_textColor="#FFFFFF"
         app:menu_labels_textSize="14sp"
-        android:paddingRight="@dimen/default_small_dimen"
-        android:paddingBottom="@dimen/default_small_dimen"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="0dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp">
+        app:menu_openDirection="up"
+        app:menu_showShadow="true">
         <!--app:menu_shadowColor="#66000000"-->
         <!--app:menu_shadowRadius="4dp"-->
         <!--app:menu_shadowXOffset="1dp"-->
@@ -131,24 +137,24 @@
             android:id="@+id/fab_add_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/floating_button_add_category"
             app:fab_colorNormal="#ffffff"
             app:fab_colorPressed="#bcbcbc"
             app:fab_colorRipple="#99FFFFFF"
             app:fab_label="@string/add_cartegory"
             app:fab_size="mini"
-            android:src="@drawable/floating_button_add_category"
             />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab_write_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/floating_button_write"
             app:fab_colorNormal="#ffffff"
             app:fab_colorPressed="#bcbcbc"
             app:fab_colorRipple="#99FFFFFF"
             app:fab_label="@string/write_card"
-            app:fab_size="mini"
-            android:src="@drawable/floating_button_write"/>
+            app:fab_size="mini"/>
 
     </com.github.clans.fab.FloatingActionMenu>
 
