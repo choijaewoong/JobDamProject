@@ -92,5 +92,8 @@
     <string name="notice4"><![CDATA[<font color="#9ce3ff">facebook페이지 이벤트</font><br>
                                       facebook.com/jobdam 에서 이벤트 진행중!]]></string>
 
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

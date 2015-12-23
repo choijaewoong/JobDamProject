@@ -30,6 +30,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,7 +68,9 @@ public class CardBoxFragment extends Fragment {
     CardItemAdapter mAdapter;
     FloatingActionMenu fam;
     EditText mListSearchEdit;
+    EditText mGridSearchEdit;
     ImageView mListSearchDeleteImage;
+    ImageView mGridSearchDeleteImage;
     TextView mItemCountTextView;
     TextView mCategoryCountTextView;
     ImageView mImageChangeGridView;
@@ -79,13 +82,13 @@ public class CardBoxFragment extends Fragment {
     private ArrayList<MyCards> mCardList = new ArrayList<MyCards>();
     View listSearchHeaderView;
     View itemCountHeaderView;
+    RelativeLayout gridSearchHeaderView;
     View categoryCountHeaderView;
     ArrayList<Integer> checkedItems = new ArrayList<Integer>();
 
     MainActivity.OnCardBoxCallBack callback = new MainActivity.OnCardBoxCallBack() {
         @Override
         public boolean onCheckMode() {
-            Log.i(mListView.getChoiceMode() + ".", ListView.CHOICE_MODE_MULTIPLE + ".");
             if (mListView.getChoiceMode() == ListView.CHOICE_MODE_MULTIPLE) {
                 return true;
             }
@@ -137,6 +140,14 @@ public class CardBoxFragment extends Fragment {
                             InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                         }
+                    } else if (mGridSearchEdit.isFocused()) {
+                        Rect outRect = new Rect();
+                        mGridSearchEdit.getGlobalVisibleRect(outRect);
+                        if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
+                            mGridSearchEdit.clearFocus();
+                            InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        }
                     }
                 }
                 return false;
@@ -151,6 +162,7 @@ public class CardBoxFragment extends Fragment {
         listSearchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
         itemCountHeaderView = inflater.inflate(R.layout.view_header_card_item_count, null);
         categoryCountHeaderView = inflater.inflate(R.layout.view_header_category_item_count, null);
+        gridSearchHeaderView = (RelativeLayout)view.findViewById(R.id.layout_card_folder_search);
 
         //리스트 뷰
         mListView = (ListView) view.findViewById(R.id.listview_card);
@@ -209,6 +221,7 @@ public class CardBoxFragment extends Fragment {
             @Override
             public void onClick(View v) {
 //                mListView.setVisibility(View.GONE);
+                gridSearchHeaderView.setVisibility(View.VISIBLE);
                 mGridView.setVisibility(View.VISIBLE);
             }
         });
@@ -221,14 +234,20 @@ public class CardBoxFragment extends Fragment {
             @Override
             public void onClick(View v) {
 //                mListView.setVisibility(View.VISIBLE);
+                gridSearchHeaderView.setVisibility(View.GONE);
                 mGridView.setVisibility(View.GONE);
             }
         });
         mCategoryCountTextView.setText(Html.fromHtml("폴더  <font color=#0db5f7>" + mCategoryFolderAdapter.getCount()));
 
+        // 검색 뷰
         mListSearchEdit = (EditText) listSearchHeaderView.findViewById(R.id.editText_search_bar);
+        mGridSearchEdit = (EditText)view.findViewById(R.id.editText_folder_search_bar);
         mListSearchDeleteImage = (ImageView) listSearchHeaderView.findViewById(R.id.image_search_delete);
+        mGridSearchDeleteImage = (ImageView) view.findViewById(R.id.image_folder_search_delete);
         setEditListener(mListSearchEdit, mListSearchDeleteImage);
+        setEditListener(mGridSearchEdit, mGridSearchDeleteImage);
+
 
         fam = (FloatingActionMenu) view.findViewById(R.id.menu);
         FloatingActionButton addCardButton = (FloatingActionButton) view.findViewById(R.id.fab_write_card);

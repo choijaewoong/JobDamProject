@@ -21,18 +21,70 @@
         android:divider="@android:color/transparent"
         android:listSelector="@android:color/transparent"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/search_view_height"
+        android:background="@android:color/white"
+        android:id="@+id/layout_card_folder_search"
+        android:visibility="gone">
+        <ImageView
+            android:id="@+id/image_search_icon"
+            android:layout_width="@dimen/search_icon_size"
+            android:layout_height="@dimen/search_icon_size"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_small_dimen"
+            android:src="@drawable/button_search"
+            android:scaleType="center"/>
+
+        <ImageView
+            android:id="@+id/image_folder_search_delete"
+            android:layout_width="@dimen/search_icon_size"
+            android:layout_height="@dimen/search_icon_size"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/default_small_dimen"
+            android:scaleType="center"
+            android:visibility="invisible"
+            android:src="@drawable/button_search_delete"/>
+
+        <EditText
+            android:id="@+id/editText_folder_search_bar"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:inputType="text"
+            android:maxLength="17"
+            android:singleLine="true"
+            android:textSize="@dimen/font_size_default"
+            android:imeOptions="actionDone"
+            android:textColorHint="@color/colorLightGray"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_width"
+            android:id="@+id/imageView3"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorDivider"/>
+    </RelativeLayout>
+
     <in.srain.cube.views.GridViewWithHeaderAndFooter
         android:id="@+id/gridview_category_folder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/search_view_height"
         android:background="@color/colorBackground"
         android:listSelector="@android:color/transparent"
         android:numColumns="3"
         android:stretchMode="columnWidth"
         android:visibility="gone"
         android:paddingLeft="@dimen/default_small_dimen"
-        android:paddingRight="@dimen/default_small_dimen"/>
+        android:paddingRight="@dimen/default_small_dimen"
+        android:layout_below="@+id/layout_card_folder_search"/>
 
 
     <com.example.androidchoi.jobdam.Util.MyScrollView
