@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Questions implements Serializable{
     int job_id;
-    @SerializedName("question")
+    @SerializedName("Question")
     List<QuestionData> questionList;
 
     public int getJobId() {

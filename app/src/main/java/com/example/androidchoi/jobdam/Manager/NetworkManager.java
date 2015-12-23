@@ -13,6 +13,7 @@ import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
 import com.example.androidchoi.jobdam.Model.QuestionLab;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.MySSLSocketFactory;
@@ -118,7 +119,6 @@ public class NetworkManager {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 ByteArrayInputStream bais = new ByteArrayInputStream(responseBody);
                 JobList jobList = parser.fromXml(bais, "jobs", JobList.class);
-                Log.i("개수 :", jobList.getTotal() + " / " + jobList.getJobList().size());
                 listener.onSuccess(jobList);
             }
 
@@ -146,7 +146,12 @@ public class NetworkManager {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                MyJobLab myJobLab = gson.fromJson(responseString, MyJobLab.class);
+                MyJobLab myJobLab = new MyJobLab();
+                try{
+                    myJobLab = gson.fromJson(responseString, MyJobLab.class);
+                }catch (JsonSyntaxException e){
+                    e.printStackTrace();
+                }
                 listener.onSuccess(myJobLab);
             }
         });
@@ -158,7 +163,6 @@ public class NetworkManager {
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
         String url = String.format(SHOW_JOB_QUESTION, jobId);
-        Log.i("url", url);
         client.get(context, url, headers, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -168,7 +172,12 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Log.i("QuestionLab", responseString);
-                QuestionLab questionLab = gson.fromJson(responseString, QuestionLab.class);
+                QuestionLab questionLab = new QuestionLab();
+                try {
+                    questionLab = gson.fromJson(responseString, QuestionLab.class);
+                }catch (JsonSyntaxException e){
+                    e.printStackTrace();
+                }
                 listener.onSuccess(questionLab);
             }
         });
@@ -176,7 +185,6 @@ public class NetworkManager {
 
     // 채용정보 담기
     private static final String ADD_MY_JOB = SERVER + "/addscrap";
-
     public void addMyJob(Context context, final String jsonString, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
         try {
@@ -210,7 +218,12 @@ public class NetworkManager {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                MyCardLab myCardLab = gson.fromJson(responseString, MyCardLab.class);
+                MyCardLab myCardLab = new MyCardLab();
+                try{
+                    myCardLab = gson.fromJson(responseString, MyCardLab.class);
+                }catch (JsonSyntaxException e){
+                    e.printStackTrace();
+                }
                 listener.onSuccess(myCardLab);
             }
         });
@@ -229,7 +242,12 @@ public class NetworkManager {
             }
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                MyCardLab myCardLab = gson.fromJson(responseString, MyCardLab.class);
+                MyCardLab myCardLab = new MyCardLab();
+                try{
+                    myCardLab = gson.fromJson(responseString, MyCardLab.class);
+                }catch (JsonSyntaxException e){
+                    e.printStackTrace();
+                }
                 listener.onSuccess(myCardLab);
             }
         });
@@ -237,7 +255,6 @@ public class NetworkManager {
 
     // 메모 추가
     private static final String ADD_MEMO = SERVER + "/addmemo";
-
     public void addMemo(Context context, final String jsonString, final OnResultListener<String> listener) {
         try {
             client.post(context, ADD_MEMO, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
@@ -258,7 +275,6 @@ public class NetworkManager {
 
     //메모 수정
     private static final String UPDATE_MEMO = SERVER + "/memo/update";
-
     public void updateMemo(Context context, final String jsonString, final OnResultListener<String> listener) {
         try {
             client.post(context, UPDATE_MEMO, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
@@ -280,7 +296,6 @@ public class NetworkManager {
     //게시글 보기
     public static final String SHOW_ARTICLE = SERVER + "/boardlist";
     public static final String ARTICLE_PAGE = "page";
-
     public void showArticle(Context context, final OnResultListener<ArticleLab> listener) {
         RequestParams params = new RequestParams();
         params.put(ARTICLE_PAGE, 1);
@@ -294,7 +309,12 @@ public class NetworkManager {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                ArticleLab articleLab = gson.fromJson(responseString, ArticleLab.class);
+                ArticleLab articleLab = new ArticleLab();
+                try{
+                    articleLab = gson.fromJson(responseString, ArticleLab.class);
+                }catch (JsonSyntaxException e){
+                    e.printStackTrace();
+                }
                 listener.onSuccess(articleLab);
             }
         });
@@ -356,19 +376,17 @@ public class NetworkManager {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Articles articles = gson.fromJson(responseString, Articles.class);
-                //ArticleLab.get(MyApplication.getContext(), gson.fromJson(responseString, ArticleLab.class));
+                Articles articles = new Articles();
+                try{
+                    articles = gson.fromJson(responseString, Articles.class);
+                }catch (JsonSyntaxException e){
+                    e.printStackTrace();
+                }
                 listener.onSuccess(articles);
             }
         });
     }
-
-//    public void cancelAll(Context context) {
-//        client.cancelRequests(context, true);
-//    }
-
     public static final String LOG_IN = SERVER + "/login";
-
     public void login(Context context, String userid, String password, final OnResultListener<LoginData> listener) {
         RequestParams params = new RequestParams();
         params.put("user_id", userid);
@@ -387,7 +405,6 @@ public class NetworkManager {
     }
 
     public static final String SIGN_UP = SERVER + "/signup";
-
     public void signup(Context context, String userid, String password, String name, final OnResultListener<LoginData> listener) {
         RequestParams params = new RequestParams();
         params.put("user_id", userid);
