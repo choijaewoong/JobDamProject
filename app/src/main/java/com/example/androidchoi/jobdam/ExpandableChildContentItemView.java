@@ -29,7 +29,9 @@ public class ExpandableChildContentItemView extends FrameLayout {
     }
     public void setExpandableContent(ContentData data){
         mExpandableContentView.setText(Html.fromHtml(data.getContent()));
-        mExpandableTitleView.setText(Html.fromHtml(data.getTitle()));    }
+        mExpandableTitleView.setText(Html.fromHtml(data.getTitle()));
+        mImageBottomPadding.setVisibility(GONE);
+    }
 
     public void setVisibleBottomPadding() {
         mImageBottomPadding.setVisibility(VISIBLE);

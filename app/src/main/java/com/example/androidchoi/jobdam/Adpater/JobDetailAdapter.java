@@ -114,10 +114,10 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
                 } else {
                     view = new ExpandableChildContentItemView(parent.getContext());
                 }
+                view.setExpandableContent((ContentData)mItems.get(groupPosition).getChildDataList().get(childPosition));
                 if(isLastChild){
                     view.setVisibleBottomPadding();
                 }
-                view.setExpandableContent((ContentData)mItems.get(groupPosition).getChildDataList().get(childPosition));
                 return view;
             }
             case TYPE_INDEX_ADDRESS : {

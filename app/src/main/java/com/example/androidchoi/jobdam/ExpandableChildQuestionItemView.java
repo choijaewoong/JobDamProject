@@ -77,7 +77,7 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
     }
 
     public void addTagView(String tag, int categoryIndex){
-        final TextView t = new TextView(getContext());
+        TextView t = new TextView(getContext());
         t.setText(tag);
         t.setTextSize(14);
         t.setTextColor(ContextCompat.getColor(getContext(), android.R.color.white));
