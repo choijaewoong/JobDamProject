@@ -91,13 +91,13 @@
         android:id="@+id/scrollView_tag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:layout_marginTop="@dimen/search_view_height"
         android:clipToPadding="false"
         android:fillViewport="false"
         android:focusable="false"
-        android:visibility="gone">
+        android:visibility="visible"
+        android:layout_alignTop="@+id/listview_card"
+        android:layout_alignParentLeft="true">
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -119,10 +119,11 @@
 
             <ImageView
                 android:id="@+id/image_tag_box_close_button"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/search_icon_size"
+                android:layout_height="@dimen/search_icon_size"
                 android:layout_gravity="right|top"
-                android:src="@drawable/button_search_delete"/>
+                android:src="@drawable/button_search_delete"
+                android:scaleType="center"/>
         </FrameLayout>
     </com.example.androidchoi.jobdam.Util.MyScrollView>
 

@@ -73,7 +73,7 @@ public class CardWriteActivity extends AppCompatActivity {
         mTextCategory.setText(categoryData.getName());
         mTextCategory.setTextColor(categoryData.getColor());
         mImageCategory.setBackgroundColor(categoryData.getColor());
-        Drawable drawable = ContextCompat.getDrawable(CardWriteActivity.this, R.drawable.image_category_color);
+        Drawable drawable = ContextCompat.getDrawable(CardWriteActivity.this, R.drawable.image_category_background);
         drawable.setColorFilter(categoryData.getColor(), PorterDuff.Mode.MULTIPLY);
         for(TextView t : mTextTags){
             t.setBackground(drawable);
@@ -260,7 +260,7 @@ public class CardWriteActivity extends AppCompatActivity {
         t.setText(tag);
         t.setTextSize(12);
         t.setTextColor(ContextCompat.getColor(this, android.R.color.white));
-        Drawable drawable = ContextCompat.getDrawable(CardWriteActivity.this, R.drawable.image_category_color);
+        Drawable drawable = ContextCompat.getDrawable(CardWriteActivity.this, R.drawable.image_category_background);
         drawable.setColorFilter(CategoryData.get(getApplicationContext()).getCategoryList().get(mData.getCard().getCategory()).getColor(), PorterDuff.Mode.MULTIPLY);
         t.setBackground(drawable);
         t.setPadding(10, 5, 10, 5);

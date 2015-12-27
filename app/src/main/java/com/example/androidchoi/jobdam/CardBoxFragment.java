@@ -25,6 +25,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -198,6 +199,17 @@ public class CardBoxFragment extends Fragment {
                 return true;
             }
         });
+        mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                mScrollView.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
         // 그리드 뷰
         mGridView = (GridViewWithHeaderAndFooter) view.findViewById(R.id.gridview_category_folder);
         mGridView.setVisibility(View.GONE);
@@ -283,12 +295,12 @@ public class CardBoxFragment extends Fragment {
         final TextView t = new TextView(getActivity());
         t.setId(tagID);
         t.setText(tag);
-        t.setTextSize(14);
+        t.setTextSize(12);
         t.setTextColor(ContextCompat.getColor(getActivity(), android.R.color.white));
-        Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.image_category_color);
+        Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.image_category_background);
         drawable.setColorFilter(CategoryData.get(getActivity()).getCategoryList().get(categoryIndex).getColor(), PorterDuff.Mode.MULTIPLY);
         t.setBackground(drawable);
-        t.setPadding(20, 10, 20, 10);
+        t.setPadding(16, 8, 16, 8);
         int width = getResources().getDimensionPixelSize(R.dimen.tag_max_width);
         t.setMaxWidth(width);
         t.setSingleLine(true);
@@ -368,8 +380,8 @@ public class CardBoxFragment extends Fragment {
                             total++;
                         }
                     }
-                    Log.i("count", total + "");
                 } else {
+
                 }
             }
         });

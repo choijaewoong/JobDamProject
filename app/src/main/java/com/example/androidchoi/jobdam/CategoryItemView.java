@@ -31,7 +31,7 @@ public class CategoryItemView extends RelativeLayout {
 
     public void setItemData(CategoryData data) {
         mTextView.setText(data.getName());
-        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.image_category_color);
+        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.image_category_background);
         drawable.setColorFilter(data.getColor(), PorterDuff.Mode.MULTIPLY);
         mImageView.setImageDrawable(drawable);
 //        mImageView.setImageResource(data.getImage());
