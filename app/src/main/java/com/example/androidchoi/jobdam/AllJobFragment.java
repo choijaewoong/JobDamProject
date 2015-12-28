@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -49,6 +50,7 @@ public class AllJobFragment extends Fragment {
     private String job_keyword;
     int page;
 
+    SwipeRefreshLayout mRefreshLayout;
     ListView mListView;
     TextView mTextView;
     JobItemAdapter mAdapter;
@@ -71,15 +73,21 @@ public class AllJobFragment extends Fragment {
         TextView subTitle = (TextView) getActivity().findViewById(R.id.text_subtitle);
         subTitle.setText(R.string.all_job);
 
-        searchJob();
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                searchJob();
+            }
+        });
         mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 if (isLastItem && scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+//                    mRefreshLayout.setRefreshing(true);
                     getMoreItem();
                 }
             }
-
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (totalItemCount > 0 && (firstVisibleItem + visibleItemCount >= totalItemCount - 1)) {
@@ -128,6 +136,9 @@ public class AllJobFragment extends Fragment {
                 searchJob();
             }
         });
+        mRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_all_job);
+        mRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorPrimary);
+        mRefreshLayout.setColorSchemeResources(android.R.color.white);
         mListView = (ListView) view.findViewById(R.id.listview_all_job);
         mListView.addHeaderView(searchHeaderView);
         mListView.addHeaderView(countHeaderView, null, false);
@@ -136,6 +147,7 @@ public class AllJobFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mSearchEdit.setText("");
+                job_keyword = "";
                 searchJob();
             }
         });
@@ -359,6 +371,7 @@ public class AllJobFragment extends Fragment {
                             mAdapter.add(item);
                         }
                         isUpdate = false;
+//                        mRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
@@ -376,10 +389,17 @@ public class AllJobFragment extends Fragment {
                 page, SHOW_JOB_MAX, new NetworkManager.OnResultListener<JobList>() {
                     @Override
                     public void onSuccess(JobList result) {
+                        mRefreshLayout.setRefreshing(false);
                         page++;
                         mAdapter.setItems(result.getJobList());
                         mAdapter.setTotalCount(Integer.parseInt(result.getTotal()));
                         mTextView.setText(Html.fromHtml("공채정보 총 <font color=#0db5f7>" + result.getTotal() + "</font>건"));
+//                        mRefreshLayout.postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                mRefreshLayout.setRefreshing(false);
+//                            }
+//                        }, 2000);
                     }
                     @Override
                     public void onFail(int code) {

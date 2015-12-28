@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
@@ -62,6 +63,7 @@ public class CardBoxFragment extends Fragment {
     private static final int REQUEST_MODIFY = 1;
     private static final int REQUEST_NEW = 2;
 
+    SwipeRefreshLayout mRefreshLayout;
     ListView mListView;
     GridViewWithHeaderAndFooter mGridView;
     CategoryFolderAdapter mCategoryFolderAdapter;
@@ -127,6 +129,13 @@ public class CardBoxFragment extends Fragment {
         TextView subTitle = (TextView) getActivity().findViewById(R.id.text_subtitle);
         subTitle.setText(R.string.card_box);
         showMyMemo();
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mScrollView.setVisibility(View.GONE);
+                showMyMemo();
+            }
+        });
         FrameLayout touchInterceptor = (FrameLayout) getActivity().findViewById(R.id.touchInterceptor);
         touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -165,6 +174,9 @@ public class CardBoxFragment extends Fragment {
         gridSearchHeaderView = (RelativeLayout)view.findViewById(R.id.layout_card_folder_search);
 
         //리스트 뷰
+        mRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_card_box);
+        mRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorPrimary);
+        mRefreshLayout.setColorSchemeResources(android.R.color.white);
         mListView = (ListView) view.findViewById(R.id.listview_card);
         mListView.addHeaderView(listSearchHeaderView);
         mListView.addHeaderView(itemCountHeaderView, null, false);
@@ -337,6 +349,7 @@ public class CardBoxFragment extends Fragment {
                         mCardList = result.getCardList();
                         mAdapter.setItems(mCardList);
                         mItemCountTextView.setText(Html.fromHtml("전체카드 <font color=#0db5f7>" + mAdapter.getCount()));
+                        mRefreshLayout.setRefreshing(false);
                     }
 
                     @Override

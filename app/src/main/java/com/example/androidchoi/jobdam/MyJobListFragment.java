@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
@@ -42,6 +43,7 @@ import java.util.ArrayList;
  */
 public class MyJobListFragment extends Fragment {
 
+    SwipeRefreshLayout mRefreshLayout;
     ListView mListView;
     MyJobItemAdapter mAdapter;
     EditText mSearchEdit;
@@ -114,6 +116,9 @@ public class MyJobListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_job_list, container, false);
         searchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
         countHeaderView = inflater.inflate(R.layout.view_header_item_count, null);
+        mRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_my_job);
+        mRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorPrimary);
+        mRefreshLayout.setColorSchemeResources(android.R.color.white);
         mListView = (ListView) view.findViewById(R.id.listview_my_job);
         mListView.addHeaderView(searchHeaderView);
         mListView.addHeaderView(countHeaderView, null, false);
@@ -176,6 +181,12 @@ public class MyJobListFragment extends Fragment {
                 return true;
             }
         });
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                showMyJob();
+            }
+        });
         mCountTextView = (TextView) view.findViewById(R.id.text_item_count);
         showMyJob();
         return view;
@@ -194,6 +205,7 @@ public class MyJobListFragment extends Fragment {
                 mJobList = result.getJobList();
                 mAdapter.setItems(mJobList);
                 mCountTextView.setText(Html.fromHtml("총 <font color=#0db5f7>" + mAdapter.getCount() + "</font>건"));
+                mRefreshLayout.setRefreshing(false);
             }
 
             @Override
