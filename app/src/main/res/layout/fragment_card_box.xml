@@ -95,7 +95,7 @@
         android:clipToPadding="false"
         android:fillViewport="false"
         android:focusable="false"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_alignTop="@+id/listview_card"
         android:layout_alignParentLeft="true">
 
