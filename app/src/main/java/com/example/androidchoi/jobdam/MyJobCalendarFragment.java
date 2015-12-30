@@ -8,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.example.androidchoi.jobdam.Adpater.MyJobItemAdapter;
 import com.example.androidchoi.jobdam.Calendar.CalendarAdapter;
@@ -44,7 +46,7 @@ public class MyJobCalendarFragment extends Fragment {
     MyJobItemAdapter mEndJobAdapter;
     TextView textStartHeader;
     TextView textEndHeader;
-    TextView mTextCalendarTypeButton;
+    ToggleButton mToggleCalendarType;
 
     private ArrayList<MyJobs> mJobList;
     private static boolean isWeekCalendar = true;
@@ -64,20 +66,21 @@ public class MyJobCalendarFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         showMyJob();
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_job_calendar, container, false);
-        titleView = (TextView)view.findViewById(R.id.title);
-        ImageView imageCalendarButton = (ImageView)view.findViewById(R.id.image_next_month_button);
+        titleView = (TextView) view.findViewById(R.id.title);
+        ImageView imageCalendarButton = (ImageView) view.findViewById(R.id.image_next_month_button);
         imageCalendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 if (isWeekCalendar) {
                     CalendarData data = CalendarManager.getInstance().getNextWeekCalendarData();
-                    titleView.setText((data.year) + " . " + (data.month+1));
+                    titleView.setText((data.year) + " . " + (data.month + 1));
                     mCalendarAdapter.setCalendarData(data);
                 } else {
                     CalendarData data = CalendarManager.getInstance().getNextMonthCalendarData();
@@ -86,14 +89,14 @@ public class MyJobCalendarFragment extends Fragment {
                 }
             }
         });
-        imageCalendarButton = (ImageView)view.findViewById(R.id.image_prev_month_button);
+        imageCalendarButton = (ImageView) view.findViewById(R.id.image_prev_month_button);
         imageCalendarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 if (isWeekCalendar) {
                     CalendarData data = CalendarManager.getInstance().getPrevWeekCalendarData();
-                    titleView.setText((data.year) + " . " + (data.month+1));
+                    titleView.setText((data.year) + " . " + (data.month + 1));
                     mCalendarAdapter.setCalendarData(data);
                 } else {
                     CalendarData data = CalendarManager.getInstance().getLastMonthCalendarData();
@@ -102,8 +105,8 @@ public class MyJobCalendarFragment extends Fragment {
                 }
             }
         });
-        mStartListView = (ListView)view.findViewById(R.id.listView_start_job);
-        mEndListView = (ListView)view.findViewById(R.id.listView_end_job);
+        mStartListView = (ListView) view.findViewById(R.id.listView_start_job);
+        mEndListView = (ListView) view.findViewById(R.id.listView_end_job);
         mStartJobAdapter = new MyJobItemAdapter();
         mEndJobAdapter = new MyJobItemAdapter();
         mStartListView.setAdapter(mStartJobAdapter);
@@ -129,9 +132,9 @@ public class MyJobCalendarFragment extends Fragment {
             }
         });
 
-        textStartHeader = (TextView)view.findViewById(R.id.text_start_header);
-        textEndHeader = (TextView)view.findViewById(R.id.text_end_header);
-        gridView = (GridView)view.findViewById(R.id.grid_view_calendar);
+        textStartHeader = (TextView) view.findViewById(R.id.text_start_header);
+        textEndHeader = (TextView) view.findViewById(R.id.text_end_header);
+        gridView = (GridView) view.findViewById(R.id.grid_view_calendar);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -143,40 +146,40 @@ public class MyJobCalendarFragment extends Fragment {
 //                    changeCalendar(calendar);
 //                    refreshView(((CalendarItem)mCalendarAdapter.getItem(position)));
 //                } else {
-                if(isWeekCalendar == false){
+                if (isWeekCalendar == false) {
 
                 }
-                    mStartJobAdapter.setItems(new ArrayList<MyJobs>());
-                    mEndJobAdapter.setItems(new ArrayList<MyJobs>());
-                    int startCount = calendarItem.getStartItems().size();
-                    int endCount = calendarItem.getEndItems().size();
+                mStartJobAdapter.setItems(new ArrayList<MyJobs>());
+                mEndJobAdapter.setItems(new ArrayList<MyJobs>());
+                int startCount = calendarItem.getStartItems().size();
+                int endCount = calendarItem.getEndItems().size();
 
-                    if (startCount != 0) {
-                        textStartHeader.setVisibility(View.VISIBLE);
-                        for (int i = 0; i < startCount; i++) {
-                            mStartJobAdapter.add(findJob(((ItemData) calendarItem.getStartItems().get(i)).getJobId()));
-                        }
-                    } else {
-                        textStartHeader.setVisibility(View.GONE);
+                if (startCount != 0) {
+                    textStartHeader.setVisibility(View.VISIBLE);
+                    for (int i = 0; i < startCount; i++) {
+                        mStartJobAdapter.add(findJob(((ItemData) calendarItem.getStartItems().get(i)).getJobId()));
                     }
-                    if (endCount != 0) {
-                        textEndHeader.setVisibility(View.VISIBLE);
-                        for (int i = 0; i < endCount; i++) {
-                            mEndJobAdapter.add(findJob(((ItemData) calendarItem.getEndItems().get(i)).getJobId()));
-                        }
-                    } else {
-                        textEndHeader.setVisibility(View.GONE);
-                    }
-                    ListUtils.setDynamicHeight(mStartListView);
-                    ListUtils.setDynamicHeight(mEndListView);
-                    mStartJobAdapter.notifyDataSetChanged();
-                    mEndJobAdapter.notifyDataSetChanged();
+                } else {
+                    textStartHeader.setVisibility(View.GONE);
                 }
+                if (endCount != 0) {
+                    textEndHeader.setVisibility(View.VISIBLE);
+                    for (int i = 0; i < endCount; i++) {
+                        mEndJobAdapter.add(findJob(((ItemData) calendarItem.getEndItems().get(i)).getJobId()));
+                    }
+                } else {
+                    textEndHeader.setVisibility(View.GONE);
+                }
+                ListUtils.setDynamicHeight(mStartListView);
+                ListUtils.setDynamicHeight(mEndListView);
+                mStartJobAdapter.notifyDataSetChanged();
+                mEndJobAdapter.notifyDataSetChanged();
+            }
         });
-        mTextCalendarTypeButton = (TextView)view.findViewById(R.id.text_calendar_type_select_button);
-        mTextCalendarTypeButton.setOnClickListener(new View.OnClickListener() {
+        mToggleCalendarType = (ToggleButton) view.findViewById(R.id.toggleButton_calendar_type);
+        mToggleCalendarType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 isWeekCalendar = !isWeekCalendar;
                 refreshView();
                 textStartHeader.setVisibility(View.GONE);
@@ -185,6 +188,17 @@ public class MyJobCalendarFragment extends Fragment {
                 mEndJobAdapter.setItems(new ArrayList<MyJobs>());
             }
         });
+//        mToggleCalendarType.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                isWeekCalendar = !isWeekCalendar;
+//                refreshView();
+//                textStartHeader.setVisibility(View.GONE);
+//                textEndHeader.setVisibility(View.GONE);
+//                mStartJobAdapter.setItems(new ArrayList<MyJobs>());
+//                mEndJobAdapter.setItems(new ArrayList<MyJobs>());
+//            }
+//        });
         return view;
     }
 
@@ -192,12 +206,14 @@ public class MyJobCalendarFragment extends Fragment {
     public interface OnDateCheckCallback {
         CalendarItem onDateCheck(int position);
     }
+
     private OnDateCheckCallback mCallback;
-    public void setOnDateCheckCallback(OnDateCheckCallback callback){
+
+    public void setOnDateCheckCallback(OnDateCheckCallback callback) {
         mCallback = callback;
     }
 
-    public void refreshView(){
+    public void refreshView() {
         try {
             CalendarManager.getInstance().setDataObject(mItemdata);
         } catch (CalendarManager.NoComparableObjectException e) {
@@ -206,7 +222,7 @@ public class MyJobCalendarFragment extends Fragment {
         }
         if (isWeekCalendar) {
             CalendarData data = CalendarManager.getInstance().getWeekCalendarData();
-            titleView.setText((data.year) + " . " + (data.month+1));
+            titleView.setText((data.year) + " . " + (data.month + 1));
             mCalendarAdapter = new CalendarAdapter(getActivity(), data);
         } else {
             CalendarData data = CalendarManager.getInstance().getCalendarData();
@@ -217,7 +233,7 @@ public class MyJobCalendarFragment extends Fragment {
 //        mAdapter.add(((ItemData)mCalendarAdapter.getCheckDate().getStartItems().get(0)).getMyJob());
     }
 
-    public void changeCalendar(Calendar calendar){
+    public void changeCalendar(Calendar calendar) {
         try {
             CalendarManager.getInstance().setDataObject(mItemdata);
         } catch (CalendarManager.NoComparableObjectException e) {
@@ -226,7 +242,7 @@ public class MyJobCalendarFragment extends Fragment {
         }
         if (isWeekCalendar) {
             CalendarData data = CalendarManager.getInstance().getWeekCalendarData(calendar);
-            titleView.setText((data.year) + " . " + (data.month+1));
+            titleView.setText((data.year) + " . " + (data.month + 1));
             mCalendarAdapter = new CalendarAdapter(getActivity(), data);
         } else {
             CalendarData data = CalendarManager.getInstance().getCalendarData(calendar);
@@ -237,7 +253,7 @@ public class MyJobCalendarFragment extends Fragment {
 //        mAdapter.add(((ItemData)mCalendarAdapter.getCheckDate().getStartItems().get(0)).getMyJob());
     }
 
-    public void showMyJob(){
+    public void showMyJob() {
         NetworkManager.getInstance().showMyJob(getActivity(), new NetworkManager.OnResultListener<MyJobLab>() {
             @Override
             public void onSuccess(MyJobLab result) {
@@ -258,9 +274,9 @@ public class MyJobCalendarFragment extends Fragment {
         });
     }
 
-    public MyJob findJob(int id){
-        for(MyJobs myJobs : mJobList){
-            if(myJobs.getJob().getId() == id)
+    public MyJob findJob(int id) {
+        for (MyJobs myJobs : mJobList) {
+            if (myJobs.getJob().getId() == id)
                 return myJobs.getJob();
         }
         return null;

@@ -63,6 +63,9 @@
     <string name="order_latest">최신순</string>
     <string name="order_dead_line">마감순</string>
 
+    <string name="monthly">월간</string>
+    <string name="weekly">주간</string>
+
     <!-- Check Message-->
     <string name="check_scrap">스크랩 되었습니다.</string>
     <string name="check_not_scrap">이미 스크랩 되어있습니다.</string>

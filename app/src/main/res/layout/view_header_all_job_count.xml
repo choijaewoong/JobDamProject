@@ -19,17 +19,20 @@
 
         <ToggleButton
             android:id="@+id/btn_order_toggle"
-            android:layout_width="48dp"
+            android:layout_width="60dp"
             android:layout_height="24dp"
             android:text="@string/order_latest"
             android:textOff="@string/order_latest"
             android:textOn="@string/order_dead_line"
             android:background="@drawable/selector_button_order"
-            android:textColor="@drawable/selector_button_order_text"
+            android:textColor="@android:color/white"
             android:checked="false"
             android:textSize="@dimen/font_size_small"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:gravity="center_vertical|left|right"
+            android:paddingLeft="@dimen/default_small_dimen"
+            android:paddingRight="@dimen/default_small_dimen"/>
     </RelativeLayout>
 </RelativeLayout>

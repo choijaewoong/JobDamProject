@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -118,24 +119,26 @@ public class AllJobFragment extends Fragment {
         });
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_all_job, container, false);
-        View searchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
-        View countHeaderView = inflater.inflate(R.layout.view_header_all_job_count, null);
-        ToggleButton toggleButton = (ToggleButton)countHeaderView.findViewById(R.id.btn_order_toggle);
-        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    job_ordering = "da";
-                }else {
-                    job_ordering = "pd";
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+            // Inflate the layout for this fragment
+            View view = inflater.inflate(R.layout.fragment_all_job, container, false);
+            View searchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
+            View countHeaderView = inflater.inflate(R.layout.view_header_all_job_count, null);
+            final ToggleButton toggleButton = (ToggleButton)countHeaderView.findViewById(R.id.btn_order_toggle);
+            toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked){
+                        job_ordering = "da";
+                        toggleButton.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+                    }else {
+                        job_ordering = "pd";
+                        toggleButton.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+                    }
+                    searchJob();
                 }
-                searchJob();
-            }
-        });
+            });
         mRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_all_job);
         mRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorPrimary);
         mRefreshLayout.setColorSchemeResources(android.R.color.white);
