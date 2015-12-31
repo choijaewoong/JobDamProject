@@ -148,10 +148,10 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
                 }else{
                     view = new ExpandableChildQuestionItemView(parent.getContext());
                 }
+                view.setExpandableQuestion((QuestionData)mItems.get(groupPosition).getChildDataList().get(childPosition), mJobId, mCorpName, childPosition);
                 if(isLastChild){
                     view.setVisibleDetailButton();
                 }
-                view.setExpandableQuestion((QuestionData)mItems.get(groupPosition).getChildDataList().get(childPosition), mJobId, mCorpName, childPosition);
                 return view;
             }
         }

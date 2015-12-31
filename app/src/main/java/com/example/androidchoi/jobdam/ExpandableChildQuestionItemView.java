@@ -45,6 +45,7 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
 
     public void setExpandableQuestion(final QuestionData data, final int jobId, final String corpName,  final int position){
         mTextQuestionView.setText(data.getQuestion());
+        mButtonQuestionDetail.setVisibility(GONE); //상세보기 숨김
         mPredicateLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
