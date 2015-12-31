@@ -57,10 +57,6 @@ public class MyJobCalendarFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public GridView getGridView() {
-        return gridView;
-    }
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -117,7 +113,6 @@ public class MyJobCalendarFragment extends Fragment {
                 Job data = (Job) mStartJobAdapter.getItem(position);
                 Intent intent = new Intent(getActivity(), JobDetailActivity.class);
                 intent.putExtra(Job.JOBITEM, data);
-                intent.putExtra(Job.JOB_SCRAP_CHECK, true);
                 startActivity(intent);
             }
         });
@@ -127,7 +122,6 @@ public class MyJobCalendarFragment extends Fragment {
                 Job data = (Job) mEndJobAdapter.getItem(position);
                 Intent intent = new Intent(getActivity(), JobDetailActivity.class);
                 intent.putExtra(Job.JOBITEM, data);
-                intent.putExtra(Job.JOB_SCRAP_CHECK, true);
                 startActivity(intent);
             }
         });
@@ -188,17 +182,6 @@ public class MyJobCalendarFragment extends Fragment {
                 mEndJobAdapter.setItems(new ArrayList<MyJobs>());
             }
         });
-//        mToggleCalendarType.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                isWeekCalendar = !isWeekCalendar;
-//                refreshView();
-//                textStartHeader.setVisibility(View.GONE);
-//                textEndHeader.setVisibility(View.GONE);
-//                mStartJobAdapter.setItems(new ArrayList<MyJobs>());
-//                mEndJobAdapter.setItems(new ArrayList<MyJobs>());
-//            }
-//        });
         return view;
     }
 

@@ -57,7 +57,7 @@ public class JobItemAdapter extends BaseAdapter {
         }else {
             view = (JobItemView)convertView;
         }
-        view.setItemData(mItems.get(position));
+        view.setItemData(mItems.get(position), false);
 
         return view;
     }

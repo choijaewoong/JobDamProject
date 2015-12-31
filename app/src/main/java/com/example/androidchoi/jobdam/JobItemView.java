@@ -22,6 +22,7 @@ public class JobItemView extends RelativeLayout implements Checkable{
     TextView mTitle;
     TextView mPeriod;
     TextView mDDay;
+    TextView mTextQuestion;
     RelativeLayout mLayout;
     boolean isChecked = false;
 
@@ -36,6 +37,7 @@ public class JobItemView extends RelativeLayout implements Checkable{
         mTitle = (TextView) findViewById(R.id.text_job_title);
         mPeriod = (TextView) findViewById(R.id.text_period);
         mDDay = (TextView) findViewById(R.id.text_job_dday);
+        mTextQuestion = (TextView) findViewById(R.id.text_show_question);
         mLayout = (RelativeLayout)findViewById(R.id.layout_job_item_container);
     }
 
@@ -91,7 +93,7 @@ public class JobItemView extends RelativeLayout implements Checkable{
         return true;
     }
 
-    public void setItemData(Job itemData) {
+    public void setItemData(Job itemData, boolean check) {
         mCorp.setText(itemData.getCompanyName());
         mTitle.setText(itemData.getJobTitle());
         setChecked(false);
@@ -99,6 +101,9 @@ public class JobItemView extends RelativeLayout implements Checkable{
         Date end = new Date(itemData.getEnd() * 1000L);
         boolean checkDeadLine = setDDay(end);
         setPeriod(start, end, checkDeadLine);
+        if(!check){
+            mTextQuestion.setVisibility(GONE);
+        }
     }
 
     @Override

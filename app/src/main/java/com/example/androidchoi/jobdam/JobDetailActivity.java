@@ -57,7 +57,8 @@ public class JobDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mData = (Job) intent.getSerializableExtra(Job.JOBITEM);
-        isScrap = intent.getBooleanExtra(Job.JOB_SCRAP_CHECK, false);
+        // 스크랩 확인 요청
+//        isScrap = intent.getBooleanExtra(Job.JOB_SCRAP_CHECK, false);
 
         mExpandableListView = (ExpandableListView) findViewById(R.id.listview_job_detail_expandable);
         mExpandableAdapter = new JobDetailAdapter(mData.getId(), mData.getCompanyName());

@@ -73,11 +73,9 @@ public class AllJobFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         TextView subTitle = (TextView) getActivity().findViewById(R.id.text_subtitle);
         subTitle.setText(R.string.all_job);
-
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
                 searchJob();
             }
         });

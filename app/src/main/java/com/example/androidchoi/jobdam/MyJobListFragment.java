@@ -170,7 +170,6 @@ public class MyJobListFragment extends Fragment {
                 Job data = (Job) mAdapter.getItem(position - mListView.getHeaderViewsCount());
                 Intent intent = new Intent(getActivity(), JobDetailActivity.class);
                 intent.putExtra(Job.JOBITEM, data);
-                intent.putExtra(Job.JOB_SCRAP_CHECK, true);
                 startActivity(intent);
             }
         });
