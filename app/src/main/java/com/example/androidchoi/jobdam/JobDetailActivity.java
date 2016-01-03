@@ -61,7 +61,7 @@ public class JobDetailActivity extends AppCompatActivity {
 //        isScrap = intent.getBooleanExtra(Job.JOB_SCRAP_CHECK, false);
 
         mExpandableListView = (ExpandableListView) findViewById(R.id.listview_job_detail_expandable);
-        mExpandableAdapter = new JobDetailAdapter(mData.getId(), mData.getCompanyName());
+        mExpandableAdapter = new JobDetailAdapter();
         // 헤더뷰 설정
         View corpHeaderView = getLayoutInflater().inflate(R.layout.view_header_job_detail_corp, null);
         View titleHeaderView = getLayoutInflater().inflate(R.layout.view_header_job_detail_title, null);
@@ -163,6 +163,7 @@ public class JobDetailActivity extends AppCompatActivity {
             public void onSuccess(QuestionLab result) {
                 if (result != null) {
                     mQuestions = result.getQuestions();
+                    mExpandableAdapter.setData(result.get_id(), mData.getCompanyName());
                 }
                 initJobDetailMenu(); // 상세 채용 정보 카테고리 생성
             }

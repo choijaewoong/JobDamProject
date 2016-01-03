@@ -24,7 +24,7 @@ import com.example.androidchoi.jobdam.Util.PredicateLayout;
 public class ExpandableChildQuestionItemView extends FrameLayout {
 
     public static final String QUESTION_NUM = "questionNumber";
-    public static final String JOB_ID = "jobId";
+    public static final String QUESTION_ID = "questionId";
     public static final String QUESTION_LIST = "questionList";
     public static final String CORP_NAME = "corpName";
 
@@ -43,7 +43,7 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
         mButtonQuestionDetail = (Button)view.findViewById(R.id.button_job_question_detail);
     }
 
-    public void setExpandableQuestion(final QuestionData data, final int jobId, final String corpName,  final int position){
+    public void setExpandableQuestion(final QuestionData data, final String questionId, final String corpName,  final int position){
         mTextQuestionView.setText(data.getQuestion());
         mButtonQuestionDetail.setVisibility(GONE); //상세보기 숨김
         mPredicateLayout.setOnClickListener(new OnClickListener() {
@@ -52,7 +52,7 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
                 Intent intent = new Intent(getContext(), CardChoiceActivity.class);
                 //질문 번호
                 intent.putExtra(QUESTION_NUM, position);
-                intent.putExtra(JOB_ID, jobId);
+                intent.putExtra(QUESTION_ID, questionId);
                 ((JobDetailActivity) getContext()).startActivityForResult(intent, JobDetailActivity.REQUEST_ATTACH);
             }
         });

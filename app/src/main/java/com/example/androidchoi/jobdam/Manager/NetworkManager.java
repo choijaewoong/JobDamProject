@@ -35,6 +35,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
+import java.util.ArrayList;
 
 
 /**
@@ -180,6 +181,25 @@ public class NetworkManager {
                     e.printStackTrace();
                 }
                 listener.onSuccess(questionLab);
+            }
+        });
+    }
+
+    private static final String ADD_QUESTION_TAG = SERVER + "/jasoseotag";
+    public void addQuestionTag(Context context, String questionID, ArrayList<String> memoId, int questionNumber, final OnResultListener<String> listener) {
+        RequestParams params = new RequestParams();
+        params.put("_id", questionID);
+        params.put("memo_id", memoId);
+        params.put("Qnum", questionNumber);
+        client.post(context, ADD_QUESTION_TAG, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                listener.onSuccess(responseString);
             }
         });
     }

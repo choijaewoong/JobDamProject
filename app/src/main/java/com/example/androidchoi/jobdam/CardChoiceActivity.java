@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,7 +25,7 @@ public class CardChoiceActivity extends AppCompatActivity {
     CardItemAdapter mAdapter;
     private ArrayList<MyCards> mCardList = new ArrayList<MyCards>();
     int mQuestionNum;
-    int mJobId;
+    String mQuestionId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,8 @@ public class CardChoiceActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mQuestionNum = intent.getIntExtra(ExpandableChildQuestionItemView.QUESTION_NUM, 0);
-        mJobId = intent.getIntExtra(ExpandableChildQuestionItemView.JOB_ID, -1);
-//        Toast.makeText(CardChoiceActivity.this, mQuestionNum + "", Toast.LENGTH_SHORT).show();
+        mQuestionId = intent.getStringExtra(ExpandableChildQuestionItemView.QUESTION_ID);
+        Toast.makeText(CardChoiceActivity.this, mQuestionNum + "/" + mQuestionId, Toast.LENGTH_SHORT).show();
 
         mListView = (ListView)findViewById(R.id.listView_attach_card);
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -85,12 +86,29 @@ public class CardChoiceActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         else if (id == R.id.action_attach) {
             SparseBooleanArray isCheckedArray = mListView.getCheckedItemPositions();
-            ArrayList<MyCards> myCardList = new ArrayList<MyCards>();
+            ArrayList<String> CardIdList = new ArrayList<String>();
             for(int i = 0; i < isCheckedArray.size(); i++){
-                if(isCheckedArray.get(i) == true)
-                    myCardList.add((MyCards) mAdapter.getItem(i));
+                if(isCheckedArray.valueAt(i) == true)
+                    CardIdList.add(((MyCards) mAdapter.getItem(isCheckedArray.keyAt(i))).getId());
             }
+
+            for(int i =0 ; i<CardIdList.size(); i++){
+                Log.i("memoId", CardIdList.get(i));
+            }
+            NetworkManager.getInstance().addQuestionTag(getApplicationContext(), mQuestionId, CardIdList, mQuestionNum, new NetworkManager.OnResultListener(){
+
+                @Override
+                public void onSuccess(Object result) {
+                    Log.i("sss", result.toString());
+                }
+
+                @Override
+                public void onFail(int code) {
+                    Log.i("code", code+" ");
+                }
+            });
             /* 질문 번호와 채용정보 id와 카드 데이터를 서버에 전달 */
+
 
 //            Intent intent = new Intent();
 //            intent.putExtra(QUESTION_NUM, mQuestionNum);
