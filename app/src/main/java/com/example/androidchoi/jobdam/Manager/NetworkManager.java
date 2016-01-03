@@ -175,6 +175,7 @@ public class NetworkManager {
                 QuestionLab questionLab = new QuestionLab();
                 try {
                     questionLab = gson.fromJson(responseString, QuestionLab.class);
+                    questionLab.getQuestions().getQuestionList().get(0).addTestTag();
                 }catch (JsonSyntaxException e){
                     e.printStackTrace();
                 }

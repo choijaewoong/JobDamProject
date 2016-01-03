@@ -60,4 +60,13 @@ public class MyCard implements Serializable {
         startDate = writeDate.getYear() + "년 " + writeDate.getMonth() + "월 " + writeDate.getDayOfMonth() + "일";
         endDate = writeDate.getYear() + "년 " + writeDate.getMonth() + "월 " + writeDate.getDayOfMonth() + "일";
     }
+    public MyCard(String test){
+        title = test;
+        content = test;
+        userId = User.getInstance().getUserId();
+        category = 1;
+        writeDate = new CurrentTime();
+        startDate = writeDate.getYear() + "년 " + writeDate.getMonth() + "월 " + writeDate.getDayOfMonth() + "일";
+        endDate = writeDate.getYear() + "년 " + writeDate.getMonth() + "월 " + writeDate.getDayOfMonth() + "일";
+    }
 }

@@ -57,6 +57,7 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
             }
         });
         if(data.getCardList() != null){
+            mPredicateLayout.removeViews(1, mPredicateLayout.getChildCount()-1);
             for (MyCards myCards : data.getCardList()) {
                 addTagView(myCards.getCard().getTitle(), myCards.getCard().getCategory());
             }
