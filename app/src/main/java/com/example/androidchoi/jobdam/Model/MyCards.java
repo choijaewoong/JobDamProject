@@ -17,7 +17,9 @@ public class MyCards implements Serializable{
         return card;
     }
     public String getId() { return _id; }
-    public MyCards() { }
+    public MyCards() {
+        card = new MyCard();
+    }
     public MyCards(String test) {
         card = new MyCard(test);
     }

@@ -25,7 +25,7 @@ public class CardChoiceActivity extends AppCompatActivity {
     CardItemAdapter mAdapter;
     private ArrayList<MyCards> mCardList = new ArrayList<MyCards>();
     int mQuestionNum;
-    String mQuestionId;
+    int mJobId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +39,8 @@ public class CardChoiceActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mQuestionNum = intent.getIntExtra(ExpandableChildQuestionItemView.QUESTION_NUM, 0);
-        mQuestionId = intent.getStringExtra(ExpandableChildQuestionItemView.QUESTION_ID);
-        Toast.makeText(CardChoiceActivity.this, mQuestionNum + "/" + mQuestionId, Toast.LENGTH_SHORT).show();
+        mJobId = intent.getIntExtra(ExpandableChildQuestionItemView.JOB_ID, -1);
+        Toast.makeText(CardChoiceActivity.this, mQuestionNum + "/" + mJobId, Toast.LENGTH_SHORT).show();
 
         mListView = (ListView)findViewById(R.id.listView_attach_card);
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -95,13 +95,11 @@ public class CardChoiceActivity extends AppCompatActivity {
             for(int i =0 ; i<CardIdList.size(); i++){
                 Log.i("memoId", CardIdList.get(i));
             }
-            NetworkManager.getInstance().addQuestionTag(getApplicationContext(), mQuestionId, CardIdList, mQuestionNum, new NetworkManager.OnResultListener(){
-
+            NetworkManager.getInstance().addQuestionTag(getApplicationContext(), mJobId, CardIdList, mQuestionNum, new NetworkManager.OnResultListener(){
                 @Override
                 public void onSuccess(Object result) {
-                    Log.i("sss", result.toString());
+                    Log.i("result", result.toString());
                 }
-
                 @Override
                 public void onFail(int code) {
                     Log.i("code", code+" ");

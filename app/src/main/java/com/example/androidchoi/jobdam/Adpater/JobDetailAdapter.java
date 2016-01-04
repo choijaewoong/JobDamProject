@@ -26,7 +26,7 @@ import java.util.List;
 public class JobDetailAdapter extends BaseExpandableListAdapter {
 
     List<GroupData> mItems = new ArrayList<GroupData>();
-    String  mQuestionId;
+    int  mJobId;
     String mCorpName;
     private static final int VIEW_TYPE_COUNT = 4;
     private static final int TYPE_INDEX_CONTENT = 0;
@@ -52,8 +52,8 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
         notifyDataSetChanged();
     }
 
-    public void setData(String questionId, String corpName){
-        mQuestionId = questionId;
+    public void setData(int jobId, String corpName){
+        mJobId = jobId;
         mCorpName = corpName;
     }
 
@@ -148,7 +148,7 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
                 }else{
                     view = new ExpandableChildQuestionItemView(parent.getContext());
                 }
-                view.setExpandableQuestion((QuestionData)mItems.get(groupPosition).getChildDataList().get(childPosition), mQuestionId, mCorpName, childPosition);
+                view.setExpandableQuestion((QuestionData)mItems.get(groupPosition).getChildDataList().get(childPosition), mJobId, mCorpName, childPosition);
                 if(isLastChild){
                     view.setVisibleDetailButton();
                 }

@@ -176,7 +176,7 @@ public class NetworkManager {
                 QuestionLab questionLab = new QuestionLab();
                 try {
                     questionLab = gson.fromJson(responseString, QuestionLab.class);
-                    questionLab.getQuestions().getQuestionList().get(0).addTestTag();
+//                    questionLab.getQuestions().getQuestionList().get(0).addTestTag();
                 }catch (JsonSyntaxException e){
                     e.printStackTrace();
                 }
@@ -186,11 +186,14 @@ public class NetworkManager {
     }
 
     private static final String ADD_QUESTION_TAG = SERVER + "/jasoseotag";
-    public void addQuestionTag(Context context, String questionID, ArrayList<String> memoId, int questionNumber, final OnResultListener<String> listener) {
+    public void addQuestionTag(Context context, int jobId, ArrayList<String> memoId, int questionNumber, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
-        params.put("_id", questionID);
-        params.put("memo_id", memoId);
+        params.put("job_id", jobId);
         params.put("Qnum", questionNumber);
+        for(String id : memoId){
+            params.put("memo_id", id);
+        }
+
         client.post(context, ADD_QUESTION_TAG, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
