@@ -217,6 +217,7 @@ public class MyJobListFragment extends Fragment {
     public void deleteMode() {
         ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
         super.setMenuVisibility(true);
+        mRefreshLayout.setEnabled(false);
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorNavHeaderBackground));
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
@@ -233,6 +234,7 @@ public class MyJobListFragment extends Fragment {
             mListView.setItemChecked(checkedItems.get(i), false);
         }
         checkedItems.clear();
+        mRefreshLayout.setEnabled(true);
         mListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorPrimary));

@@ -413,6 +413,7 @@ public class CardBoxFragment extends Fragment {
 
     public void deleteMode() {
         super.setMenuVisibility(true);
+        mRefreshLayout.setEnabled(false);
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorNavHeaderBackground));
@@ -431,6 +432,7 @@ public class CardBoxFragment extends Fragment {
             mListView.setItemChecked(checkedItems.get(i), false);
         }
         checkedItems.clear();
+        mRefreshLayout.setEnabled(true);
         mListView.setChoiceMode(ListView.CHOICE_MODE_NONE);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_menu);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorPrimary));
