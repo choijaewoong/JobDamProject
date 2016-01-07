@@ -57,6 +57,11 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
         mCorpName = corpName;
     }
 
+    public void setClear(){
+        mItems = new ArrayList<GroupData>();
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getGroupCount() {
         return mItems.size();

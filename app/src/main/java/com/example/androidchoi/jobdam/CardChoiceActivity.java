@@ -99,6 +99,8 @@ public class CardChoiceActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Object result) {
                     Log.i("result", result.toString());
+                    setResult(RESULT_OK);
+                    finish();
                 }
                 @Override
                 public void onFail(int code) {
@@ -106,13 +108,9 @@ public class CardChoiceActivity extends AppCompatActivity {
                 }
             });
             /* 질문 번호와 채용정보 id와 카드 데이터를 서버에 전달 */
-
-
 //            Intent intent = new Intent();
 //            intent.putExtra(QUESTION_NUM, mQuestionNum);
 //            intent.putExtra(CARD_TITLE, myCardList);
-//            setResult(RESULT_OK, intent);
-            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

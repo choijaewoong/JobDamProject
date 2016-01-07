@@ -1,5 +1,6 @@
 package com.example.androidchoi.jobdam;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -43,6 +44,16 @@ public class JobDetailActivity extends AppCompatActivity {
     private JobDetailAdapter mExpandableAdapter;
     boolean isScrap;
     public Questions getQuestions() { return mQuestions; }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        showJobQuestion();
+        Toast.makeText(JobDetailActivity.this, "hello", Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +127,7 @@ public class JobDetailActivity extends AppCompatActivity {
 
     //리스트뷰 메뉴 설정
     private void initJobDetailMenu() {
+        mExpandableAdapter.setClear();
         ArrayList<ChildData> qualificationList = new ArrayList<ChildData>();
         qualificationList.add(new ContentData(getString(R.string.experience_level), mData.getExperienceLevel()));
         qualificationList.add(new ContentData(getString(R.string.education_level), mData.getEducationLevel()));
@@ -131,6 +143,7 @@ public class JobDetailActivity extends AppCompatActivity {
         for (int i = 0; i < mExpandableAdapter.getGroupCount(); i++) {
             mExpandableListView.expandGroup(i);
         }
+        mExpandableAdapter.notifyDataSetChanged();
     }
 
 //    public String getPeriod() {
