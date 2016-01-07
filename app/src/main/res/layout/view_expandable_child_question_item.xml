@@ -30,7 +30,6 @@
         android:background="@drawable/selector_button_container_job_tag"
         android:layout_marginTop="@dimen/default_small_dimen"
         android:paddingLeft="20dp"
-        android:paddingRight="@dimen/default_small_dimen"
         android:paddingTop="10dp">
 
         <TextView
