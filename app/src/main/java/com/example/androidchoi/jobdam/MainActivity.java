@@ -127,11 +127,6 @@ public class MainActivity extends SlidingFragmentActivity
             if (old == null) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new BoardFragment(), TAG_BOARD).commit();
             }
-        } else if (id == R.id.nav_announcement) {
-            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_ALARM);
-            if (old == null) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new NoticeFragment(), TAG_ALARM).commit();
-            }
         }
         showContent();
         return true;

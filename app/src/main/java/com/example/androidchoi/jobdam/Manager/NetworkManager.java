@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.begentgroup.xmlparser.XMLParser;
-import com.example.androidchoi.jobdam.Model.Article;
 import com.example.androidchoi.jobdam.Model.ArticleLab;
 import com.example.androidchoi.jobdam.Model.Articles;
 import com.example.androidchoi.jobdam.Model.JobList;
@@ -347,7 +346,7 @@ public class NetworkManager {
     // 게시글 추가
     private static final String ADD_ARTICLE = SERVER + "/addboard";
 
-    public void addArticle(Context context, String content, final OnResultListener<Article> listener) {
+    public void addArticle(Context context, String content, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
         params.put("content", content);
         client.post(context, ADD_ARTICLE, params, new TextHttpResponseHandler() {
@@ -357,8 +356,7 @@ public class NetworkManager {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Articles article = new Gson().fromJson(responseString, Articles.class);
-                listener.onSuccess(article.getArticle());
+                listener.onSuccess(responseString);
             }
         });
     }

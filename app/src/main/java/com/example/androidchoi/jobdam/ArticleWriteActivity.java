@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +20,6 @@ import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Article;
-import com.google.gson.Gson;
 
 public class ArticleWriteActivity extends AppCompatActivity {
 
@@ -94,17 +92,10 @@ public class ArticleWriteActivity extends AppCompatActivity {
             finish();
             return true;
         }
-        //noinspection SimplifiableIfStatement
         else if (id == R.id.action_save) {
-//            mArticle = new Article();
-//            mArticle.setArticle(User.getInstance().getUserId(),
-//                    0, false, mEditText.getText().toString(), 0);
-//            Gson gson = new Gson();
-//            final String jsonString = gson.toJson(mArticle);
-            NetworkManager.getInstance().addArticle(ArticleWriteActivity.this, mEditText.getText().toString(), new NetworkManager.OnResultListener<Article>() {
+            NetworkManager.getInstance().addArticle(ArticleWriteActivity.this, mEditText.getText().toString(), new NetworkManager.OnResultListener<String>() {
                 @Override
-                public void onSuccess(Article result) {
-                    Log.i("게시글 생성" , new Gson().toJson(result).toString());
+                public void onSuccess(String result) {
                     setResult(Activity.RESULT_OK);
                     Toast.makeText(ArticleWriteActivity.this, "저장되었습니다.", Toast.LENGTH_SHORT).show();
                     finish();

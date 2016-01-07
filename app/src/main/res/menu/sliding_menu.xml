@@ -20,9 +20,5 @@
             android:id="@+id/nav_board"
             android:icon="@drawable/icon_menu_jdt"
             android:title="@string/board"/>
-        <item
-            android:id="@+id/nav_announcement"
-            android:icon="@drawable/icon_menu_at"
-            android:title="@string/announcement"/>
     </group>
 </menu>
