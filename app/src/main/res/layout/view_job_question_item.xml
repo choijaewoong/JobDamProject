@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="@dimen/default_dimen">
+                android:paddingLeft="@dimen/default_dimen"
+                android:paddingTop="@dimen/default_dimen"
+                android:paddingRight="@dimen/default_dimen">
 
     <TextView
         android:layout_width="match_parent"
@@ -14,7 +16,20 @@
         android:background="@drawable/image_job_question_container"
         android:textColor="@android:color/white"
         android:paddingLeft="@dimen/default_dimen"
-        android:paddingTop="@dimen/default_dimen"
         android:paddingRight="@dimen/default_dimen"
-        android:paddingBottom="@dimen/default_large_dimen"/>
+        android:paddingBottom="@dimen/default_large_dimen"
+        android:paddingTop="@dimen/default_small_dimen"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView_memo_tag"
+        android:paddingTop="@dimen/default_small_dimen"
+        android:layout_below="@+id/text_job_question"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:clipToPadding="false"
+        android:scrollbars="none"
+        android:divider="@android:color/transparent"
+        android:listSelector="@android:color/transparent"/>
 </RelativeLayout>

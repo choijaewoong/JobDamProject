@@ -30,8 +30,8 @@ public class CardItemView extends RelativeLayout implements Checkable{
 
     private void init() {
         inflate(getContext(), R.layout.view_card_item, this);
-        mTitle = (TextView)findViewById(R.id.edit_text_card_title);
-        mContent = (TextView)findViewById(R.id.edit_text_card_content);
+        mTitle = (TextView)findViewById(R.id.textView_memo_title);
+        mContent = (TextView)findViewById(R.id.textView_memo_content);
         mCategoryBar = (ImageView)findViewById(R.id.image_category_bar);
         mCategoryText = (TextView)findViewById(R.id.text_category_title);
         mDateText = (TextView)findViewById(R.id.text_card_write_date);

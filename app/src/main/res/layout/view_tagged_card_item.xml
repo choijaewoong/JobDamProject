@@ -9,84 +9,75 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/default_dimen"
                 android:paddingRight="@dimen/default_dimen"
-                android:paddingBottom="@dimen/card_item_vertical_gap"
-    android:id="@+id/layout_card_item_container">
+                android:paddingBottom="@dimen/default_dimen"
+    android:id="@+id/layout_tag_card_item_container">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height"
-        android:paddingRight="@dimen/card_right_padding"
-        android:background="@drawable/selector_card_container"
+        android:layout_height="wrap_content"
+        android:background="@color/colorLightDivider"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/relativeLayout2">
-
-        <ImageView
-            android:id="@+id/image_category_bar"
-            android:layout_width="@dimen/category_bar_width"
-            android:layout_height="@dimen/item_height"
-            android:layout_gravity="center"
-            android:background="@color/colorCategoryDefault"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginRight="@dimen/card_left_padding"
-            android:layout_marginBottom="@dimen/category_bar_bottom_margin"/>
+        android:id="@+id/relativeLayout2"
+        android:paddingLeft="@dimen/default_dimen"
+        android:paddingTop="@dimen/default_small_dimen"
+        android:paddingBottom="@dimen/default_small_dimen"
+        android:paddingRight="@dimen/default_small_dimen">
 
         <TextView
-            android:id="@+id/textView_memo_title"
-            android:layout_width="200dp"
+            android:id="@+id/text_tag_memo_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autoText="false"
-            android:paddingRight="@dimen/default_dimen"
             android:maxLines="1"
             android:ellipsize="end"
             android:text="Title"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/font_size_default"
+            android:textSize="@dimen/font_size_semi_large"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/image_category_bar"
-            android:layout_toEndOf="@+id/image_category_bar"
-            android:layout_marginTop="@dimen/default_small_dimen"/>
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="4dp"/>
 
         <TextView
-            android:id="@+id/textView_memo_content"
-            android:layout_width="200dp"
+            android:id="@+id/text_tag_memo_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingRight="@dimen/default_dimen"
-            android:maxLines="2"
+            android:maxLines="4"
             android:ellipsize="end"
             android:text="Content"
             android:textColor="@android:color/black"
-            android:layout_below="@+id/textView_memo_title"
-            android:layout_toRightOf="@+id/image_category_bar"
-            android:layout_toEndOf="@+id/image_category_bar"
-            android:layout_above="@+id/linearLayout2"
-            android:textSize="@dimen/font_size_small"/>
+            android:layout_below="@+id/text_tag_memo_title"
+            android:textSize="@dimen/font_size_small"
+            android:layout_marginTop="@dimen/default_small_dimen"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="@dimen/default_small_dimen"/>
 
         <ImageView
-            android:id="@+id/image_card_image"
-            android:layout_width="@dimen/card_item_image_thumnail_size"
-            android:layout_height="@dimen/card_item_image_thumnail_size"
-            android:layout_alignParentEnd="true"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_width"
+            android:background="@color/colorDivider"
+            android:layout_below="@+id/text_tag_memo_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/image_default_picture"/>
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/default_small_dimen"
+            android:layout_marginBottom="@dimen/default_small_dimen"
+            android:id="@+id/imageView31"
+            android:layout_marginLeft="@dimen/default_small_dimen"/>
 
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView_memo_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/textView_memo_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="@dimen/default_small_dimen"
-            >
+            android:layout_below="@+id/imageView31"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/default_small_dimen">
 
             <TextView
-                android:id="@+id/text_category_title"
+                android:id="@+id/text_tag_category_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -106,7 +97,7 @@
                 android:layout_marginBottom="3dp"/>
 
             <TextView
-                android:id="@+id/text_card_write_date"
+                android:id="@+id/text_tag_card_write_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

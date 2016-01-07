@@ -4,6 +4,7 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Model.QuestionData;
@@ -37,8 +38,12 @@ public class QuestionPagerAdapter extends PagerAdapter{
         }else {
             view = LayoutInflater.from(container.getContext()).inflate(R.layout.view_job_question_item, container, false);
         }
-        TextView tv = (TextView)view.findViewById(R.id.text_job_question);
-        tv.setText(mItems.get(position).getQuestion());
+        TextView textView = (TextView)view.findViewById(R.id.text_job_question);
+        TaggedCardItemAdapter adapter = new TaggedCardItemAdapter();
+        adapter.setItems(mItems.get(position).getCardList());
+        ListView listView = (ListView)view.findViewById(R.id.listView_memo_tag);
+        listView.setAdapter(adapter);
+        textView.setText(mItems.get(position).getQuestion());
         container.addView(view);
         return view;
     }

@@ -89,8 +89,8 @@ public class CardWriteActivity extends AppCompatActivity {
         mImageCategoryBar = (ImageView) findViewById(R.id.image_card_category_color);
         scrollView = (ScrollView) findViewById(R.id.scroll_view_content);
         mCancelSaveLayout = (LinearLayout) findViewById(R.id.linearLayout_cancel_save_button);
-        mEditTitle = (EditText) findViewById(R.id.edit_text_card_title);
-        mEditContent = (EditText) findViewById(R.id.edit_text_card_content);
+        mEditTitle = (EditText) findViewById(R.id.textView_memo_title);
+        mEditContent = (EditText) findViewById(R.id.textView_memo_content);
         mTextTitle = (TextView) findViewById(R.id.text_view_card_title);
         mTextContent = (TextView) findViewById(R.id.text_view_card_content);
         mEditTag = (EditText)findViewById(R.id.edit_text_card_tag);

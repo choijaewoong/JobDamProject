@@ -169,7 +169,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/edit_text_card_title"
+            android:id="@+id/textView_memo_title"
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:background="@android:color/transparent"
@@ -213,7 +213,7 @@
             android:background="@color/colorLightGray"/>
 
         <EditText
-            android:id="@+id/edit_text_card_content"
+            android:id="@+id/textView_memo_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/image_divider"
