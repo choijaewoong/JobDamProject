@@ -306,7 +306,6 @@ public class CardBoxFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
     }
 
     public void addTagView(String tag, int categoryIndex, final int index, int tagID) {
