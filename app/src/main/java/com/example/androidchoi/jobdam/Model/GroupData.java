@@ -15,7 +15,7 @@ public class GroupData {
     public GroupData(String title, Questions questions) {
         mTitle = title;
         if(questions == null || questions.getQuestionList().size() == 0){
-            mChildDataList.add(new ContentData(MyApplication.getContext().getString(R.string.empty_question), ""));
+            mChildDataList.add(new ContentData(MyApplication.getContext().getString(R.string.preparation), ""));
             return;
         }
         for(QuestionData data : questions.getQuestionList()){

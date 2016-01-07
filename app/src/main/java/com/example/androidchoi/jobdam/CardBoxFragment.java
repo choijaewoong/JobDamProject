@@ -285,6 +285,12 @@ public class CardBoxFragment extends Fragment {
             }
         });
         FloatingActionButton addCategoryButton = (FloatingActionButton) view.findViewById(R.id.fab_add_category);
+        addCategoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), getString(R.string.preparation), Toast.LENGTH_SHORT).show();
+            }
+        });
         mPredicateLayout = (PredicateLayout) view.findViewById(R.id.predicateLayout_all_tag_box);
         mScrollView = (ScrollView) view.findViewById(R.id.scrollView_tag);
         mImageTagCloseButton = (ImageView) view.findViewById(R.id.image_tag_box_close_button);

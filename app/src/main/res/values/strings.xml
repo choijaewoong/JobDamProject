@@ -21,7 +21,7 @@
     <string name="education_level"><![CDATA[<strong>학력</strong>]]></string>
     <string name="location"><![CDATA[<strong>지역</strong>]]></string>
     <string name="salary"><![CDATA[<strong>급여</strong>]]></string>
-    <string name="empty_question"><![CDATA[준비중입니다...!]]></string>
+    <string name="preparation"><![CDATA[준비중입니다...!]]></string>
 
     <!-- setting activity-->
     <string name="help_desk">Help Desk</string>
