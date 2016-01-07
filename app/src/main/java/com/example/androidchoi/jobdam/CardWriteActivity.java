@@ -35,7 +35,7 @@ public class CardWriteActivity extends AppCompatActivity {
 
     private MyCards mData;
     TextView mTextCategory; // 카테고리 이름
-    ImageView mImageCategory; //카테고리 색 바
+    ImageView mImageCategoryBar; //카테고리 색 바
     ScrollView scrollView;
     LinearLayout mCancelSaveLayout; // 취소, 저장 버튼
     PredicateLayout mPredicateLayout; //저장된 태그 보여주는 부분
@@ -72,7 +72,7 @@ public class CardWriteActivity extends AppCompatActivity {
         CategoryData categoryData = CategoryData.get(getApplicationContext()).getCategoryList().get(position);
         mTextCategory.setText(categoryData.getName());
         mTextCategory.setTextColor(categoryData.getColor());
-        mImageCategory.setBackgroundColor(categoryData.getColor());
+        mImageCategoryBar.setBackgroundColor(categoryData.getColor());
         Drawable drawable = ContextCompat.getDrawable(CardWriteActivity.this, R.drawable.image_category_background);
         drawable.setColorFilter(categoryData.getColor(), PorterDuff.Mode.MULTIPLY);
         for(TextView t : mTextTags){
@@ -86,7 +86,7 @@ public class CardWriteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_card_write);
 
         mTextCategory = (TextView) findViewById(R.id.text_card_category_title);
-        mImageCategory = (ImageView) findViewById(R.id.image_card_category_color);
+        mImageCategoryBar = (ImageView) findViewById(R.id.image_card_category_color);
         scrollView = (ScrollView) findViewById(R.id.scroll_view_content);
         mCancelSaveLayout = (LinearLayout) findViewById(R.id.linearLayout_cancel_save_button);
         mEditTitle = (EditText) findViewById(R.id.edit_text_card_title);
@@ -130,7 +130,7 @@ public class CardWriteActivity extends AppCompatActivity {
                 dialog.show(getSupportFragmentManager(), CardBoxFragment.CATEGORY_DIALOG);
             }
         });
-        mImageCategory.setBackgroundColor(categoryData.getColor());
+        mImageCategoryBar.setBackgroundColor(categoryData.getColor());
 
         // 태그 등록
         for(String tag : mData.getCard().getTags()){
@@ -231,6 +231,7 @@ public class CardWriteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 CustomDialogFragment dialog = new CustomDialogFragment();
                 dialog.show(getSupportFragmentManager(), CardBoxFragment.CATEGORY_DIALOG);
+                mCancelSaveLayout.setVisibility(View.VISIBLE);
             }
         });
 
