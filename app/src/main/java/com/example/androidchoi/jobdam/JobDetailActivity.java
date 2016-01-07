@@ -51,8 +51,9 @@ public class JobDetailActivity extends AppCompatActivity {
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
-        showJobQuestion();
-        Toast.makeText(JobDetailActivity.this, "hello", Toast.LENGTH_SHORT).show();
+        if(requestCode == JobDetailActivity.REQUEST_ATTACH) {
+            showJobQuestion();
+        }
     }
 
     @Override

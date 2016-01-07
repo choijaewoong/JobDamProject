@@ -9,10 +9,8 @@ import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.CardItemAdapter;
-import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyCards;
@@ -23,7 +21,6 @@ public class CardChoiceActivity extends AppCompatActivity {
 
     ListView mListView;
     CardItemAdapter mAdapter;
-    private ArrayList<MyCards> mCardList = new ArrayList<MyCards>();
     int mQuestionNum;
     int mJobId;
 
@@ -40,20 +37,12 @@ public class CardChoiceActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mQuestionNum = intent.getIntExtra(ExpandableChildQuestionItemView.QUESTION_NUM, 0);
         mJobId = intent.getIntExtra(ExpandableChildQuestionItemView.JOB_ID, -1);
-        Toast.makeText(CardChoiceActivity.this, mQuestionNum + "/" + mJobId, Toast.LENGTH_SHORT).show();
 
         mListView = (ListView)findViewById(R.id.listView_attach_card);
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         mAdapter = new CardItemAdapter();
         showMyMemo();
         mListView.setAdapter(mAdapter);
-//        mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//            }
-//        });
     }
 
     public void showMyMemo() {
@@ -65,7 +54,7 @@ public class CardChoiceActivity extends AppCompatActivity {
                     }
                     @Override
                     public void onFail(int code) {
-                        Toast.makeText(MyApplication.getContext(), code + "", Toast.LENGTH_SHORT).show();
+                        Log.i("code : ", code+"");
                     }
                 });
     }
@@ -91,7 +80,6 @@ public class CardChoiceActivity extends AppCompatActivity {
                 if(isCheckedArray.valueAt(i) == true)
                     CardIdList.add(((MyCards) mAdapter.getItem(isCheckedArray.keyAt(i))).getId());
             }
-
             for(int i =0 ; i<CardIdList.size(); i++){
                 Log.i("memoId", CardIdList.get(i));
             }
@@ -107,10 +95,6 @@ public class CardChoiceActivity extends AppCompatActivity {
                     Log.i("code", code+" ");
                 }
             });
-            /* 질문 번호와 채용정보 id와 카드 데이터를 서버에 전달 */
-//            Intent intent = new Intent();
-//            intent.putExtra(QUESTION_NUM, mQuestionNum);
-//            intent.putExtra(CARD_TITLE, myCardList);
             return true;
         }
         return super.onOptionsItemSelected(item);
