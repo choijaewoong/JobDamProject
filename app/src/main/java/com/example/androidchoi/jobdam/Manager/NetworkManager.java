@@ -190,7 +190,7 @@ public class NetworkManager {
         params.put("job_id", jobId);
         params.put("Qnum", questionNumber);
         for(String id : memoId){
-            params.put("memo_id", id);
+            params.add("memo_id", id);
         }
 
         client.post(context, ADD_QUESTION_TAG, params, new TextHttpResponseHandler() {
