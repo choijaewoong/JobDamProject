@@ -46,7 +46,7 @@ public class CardItemView extends RelativeLayout implements Checkable{
         mCategoryText.setText(CategoryData.get(getContext()).getCategoryList().get(data.getCategory()).getName());
         mCategoryText.setTextColor(categoryColor);
         mCategoryBar.setBackgroundColor(categoryColor);
-        mDateText.setText(data.getWriteDate());
+        mDateText.setText(data.getDate());
     }
 
     @Override

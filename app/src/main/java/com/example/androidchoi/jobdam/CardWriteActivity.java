@@ -39,8 +39,8 @@ public class CardWriteActivity extends AppCompatActivity {
     ScrollView scrollView;
     LinearLayout mCancelSaveLayout; // 취소, 저장 버튼
     PredicateLayout mPredicateLayout; //저장된 태그 보여주는 부분
-    TextView mTextStartDate;
-    TextView mTextEndDate;
+//    TextView mTextStartDate;
+//    TextView mTextEndDate;
     ArrayList<TextView> mTextTags = new ArrayList<TextView>();
     TextView mCancelButton;
     TextView mSaveButton;
@@ -57,13 +57,13 @@ public class CardWriteActivity extends AppCompatActivity {
         return mData.getCard();
     }
     public void setDate(String date, boolean isStartDate) {
-        if (isStartDate) {
-            mData.getCard().setStartDate(date);
-            mTextStartDate.setText(date);
-        } else {
-            mData.getCard().setEndDate(date);
-            mTextEndDate.setText(date);
-        }
+//        if (isStartDate) {
+//            mData.getCard().setStartDate(date);
+//            mTextStartDate.setText(date);
+//        } else {
+//            mData.getCard().setEndDate(date);
+//            mTextEndDate.setText(date);
+//        }
     }
 
     // 카테고리 이름, 색 설정
@@ -95,8 +95,8 @@ public class CardWriteActivity extends AppCompatActivity {
         mTextContent = (TextView) findViewById(R.id.text_view_card_content);
         mEditTag = (EditText)findViewById(R.id.edit_text_card_tag);
         mPredicateLayout =(PredicateLayout)findViewById(R.id.layout_job_question_tag);
-        mTextStartDate = (TextView) findViewById(R.id.text_start_date);
-        mTextEndDate = (TextView) findViewById(R.id.text_end_date);
+//        mTextStartDate = (TextView) findViewById(R.id.text_start_date);
+//        mTextEndDate = (TextView) findViewById(R.id.text_end_date);
 
         Intent intent = getIntent();
         isNew = intent.getBooleanExtra(MyCard.CARD_NEW, false);
@@ -116,8 +116,8 @@ public class CardWriteActivity extends AppCompatActivity {
             imm.showSoftInput(mEditTitle, InputMethodManager.SHOW_IMPLICIT);
         }
         // 활동기간
-        mTextStartDate.setText(mData.getCard().getStartDate());
-        mTextEndDate.setText(mData.getCard().getEndDate());
+//        mTextStartDate.setText(mData.getCard().getStartDate());
+//        mTextEndDate.setText(mData.getCard().getEndDate());
 
         // 카테고리 이름, 색 설정
         CategoryData categoryData = CategoryData.get(getApplicationContext()).getCategoryList().get(mData.getCard().getCategory());
@@ -211,20 +211,20 @@ public class CardWriteActivity extends AppCompatActivity {
                 mCancelSaveLayout.setVisibility(View.VISIBLE);
             }
         });
-        mTextStartDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CustomCalendarDialogFragment dialog = new CustomCalendarDialogFragment();
-                dialog.show(getSupportFragmentManager(), CALENDAR_START_DIALOG);
-            }
-        });
-        mTextEndDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CustomCalendarDialogFragment dialog = new CustomCalendarDialogFragment();
-                dialog.show(getSupportFragmentManager(), CALENDAR_END_DIALOG);
-            }
-        });
+//        mTextStartDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                CustomCalendarDialogFragment dialog = new CustomCalendarDialogFragment();
+//                dialog.show(getSupportFragmentManager(), CALENDAR_START_DIALOG);
+//            }
+//        });
+//        mTextEndDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                CustomCalendarDialogFragment dialog = new CustomCalendarDialogFragment();
+//                dialog.show(getSupportFragmentManager(), CALENDAR_END_DIALOG);
+//            }
+//        });
         ImageView mCategorySelectImage = (ImageView) findViewById(R.id.image_category_select);
         mCategorySelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
