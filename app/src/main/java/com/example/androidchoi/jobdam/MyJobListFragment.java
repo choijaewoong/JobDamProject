@@ -1,7 +1,6 @@
 package com.example.androidchoi.jobdam;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -13,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,7 +27,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.MyJobItemAdapter;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
@@ -74,16 +73,6 @@ public class MyJobListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         ((MainActivity) getActivity()).setOnMyJobListCallback(callback);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != Activity.RESULT_OK) {
-            return;
-        }
-        Toast.makeText(getActivity(), "MyJob이 갱신 되었습니다.", Toast.LENGTH_SHORT).show();
-        showMyJob();
     }
 
     @Override
@@ -209,7 +198,7 @@ public class MyJobListFragment extends Fragment {
 
             @Override
             public void onFail(int code) {
-                Toast.makeText(getActivity(), code + "", Toast.LENGTH_SHORT).show();
+                Log.i("error : ", code+"");
             }
         });
     }
