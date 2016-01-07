@@ -311,7 +311,7 @@ public class CardBoxFragment extends Fragment {
         t.setTextColor(ContextCompat.getColor(getActivity(), android.R.color.white));
         Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.image_category_background);
         drawable.setColorFilter(CategoryData.get(getActivity()).getCategoryList().get(categoryIndex).getColor(), PorterDuff.Mode.MULTIPLY);
-        t.setBackground(drawable);
+        t.setBackgroundDrawable(drawable);
         t.setPadding(16, 8, 16, 8);
         int width = getResources().getDimensionPixelSize(R.dimen.tag_max_width);
         t.setMaxWidth(width);

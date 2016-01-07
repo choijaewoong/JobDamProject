@@ -85,7 +85,7 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
         t.setTextColor(ContextCompat.getColor(getContext(), android.R.color.white));
         Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.image_category_background);
         drawable.setColorFilter(CategoryData.get(getContext()).getCategoryList().get(categoryIndex).getColor(), PorterDuff.Mode.MULTIPLY);
-        t.setBackground(drawable);
+        t.setBackgroundDrawable(drawable);
         t.setPadding(20, 10, 20, 10);
         int width = getResources().getDimensionPixelSize(R.dimen.tag_max_width);
         t.setMaxWidth(width);
