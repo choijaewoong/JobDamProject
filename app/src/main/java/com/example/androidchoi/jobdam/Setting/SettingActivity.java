@@ -1,12 +1,9 @@
 package com.example.androidchoi.jobdam.Setting;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -17,7 +14,7 @@ public class SettingActivity extends AppCompatActivity {
 
     TextView mTextUserEmail;
     ToggleButton mAutoLogin;
-    ImageView mImageAlarmSetting;
+//    ImageView mImageAlarmSetting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +29,14 @@ public class SettingActivity extends AppCompatActivity {
         mTextUserEmail = (TextView)findViewById(R.id.text_setting_user_email);
         mTextUserEmail.setText(User.getInstance().getUserId());
         mAutoLogin = (ToggleButton)findViewById(R.id.toggleButton_auto_login);
-        mImageAlarmSetting = (ImageView)findViewById(R.id.image_setting_alarm_button);
-        mImageAlarmSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SettingActivity.this, AlarmSettingActivity.class);
-                startActivity(intent);
-            }
-        });
+//        mImageAlarmSetting = (ImageView)findViewById(R.id.image_setting_alarm_button);
+//        mImageAlarmSetting.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(SettingActivity.this, AlarmSettingActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
     }
 
