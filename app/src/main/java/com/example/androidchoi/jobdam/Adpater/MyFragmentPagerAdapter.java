@@ -11,12 +11,15 @@ import java.util.List;
  */
 public class MyFragmentPagerAdapter extends FragmentStatePagerAdapter {
     final int PAGE_COUNT = 2;
-    private String mTabTitles[] = new String[]{"잡담 리스트", "잡담 캘린더"};
+    private String mTabTitles[];
     private List<Fragment> mFragments;
 
     public MyFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         mFragments = fragments;
+    }
+    public void setTabList(String[] strings){
+        mTabTitles = strings;
     }
 
     @Override

@@ -52,6 +52,7 @@ public class MyJobFragment extends Fragment {
         fragments.add(0,new MyJobListFragment());
         fragments.add(1,new MyJobCalendarFragment());
         mAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), fragments);
+        mAdapter.setTabList(new String[]{"잡담 리스트", "잡담캘린더"});
         mViewPager = (CustomViewPager)view.findViewById(R.id.tab_pager);
         mViewPager.setAdapter(mAdapter);
         mTabLayout = (TabLayout)view.findViewById(R.id.sliding_tabs);
