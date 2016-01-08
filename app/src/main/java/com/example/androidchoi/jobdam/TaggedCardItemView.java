@@ -1,6 +1,10 @@
 package com.example.androidchoi.jobdam;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.support.v4.content.ContextCompat;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,6 +21,8 @@ public class TaggedCardItemView extends RelativeLayout{
     TextView mCategoryText;
     TextView mDateText;
     RelativeLayout mLayout;
+    LayerDrawable layerDrawable;
+    Drawable shapeDrawable;
     int categoryColor;
 
     public TaggedCardItemView(Context context) {
@@ -31,10 +37,14 @@ public class TaggedCardItemView extends RelativeLayout{
         mCategoryText = (TextView)findViewById(R.id.text_tag_category_title);
         mDateText = (TextView)findViewById(R.id.text_tag_card_write_date);
         mLayout = (RelativeLayout)findViewById(R.id.layout_tag_card_item_container);
+        layerDrawable = (LayerDrawable) ContextCompat.getDrawable(getContext(), R.drawable.background_tag_card_item);
+        shapeDrawable = layerDrawable.findDrawableByLayerId(R.id.category_bar_tag_card);
     }
 
     public void setItemData(MyCard data){
         categoryColor = CategoryData.get(getContext()).getCategoryList().get(data.getCategory()).getColor();
+        shapeDrawable.setColorFilter(categoryColor, PorterDuff.Mode.MULTIPLY);
+        mLayout.setBackgroundDrawable(layerDrawable);
         mTitle.setText(data.getTitle());
         mContent.setText(data.getContent());
         mCategoryText.setText(CategoryData.get(getContext()).getCategoryList().get(data.getCategory()).getName());

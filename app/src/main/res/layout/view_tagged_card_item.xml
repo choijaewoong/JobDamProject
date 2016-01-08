@@ -9,17 +9,16 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/default_dimen"
                 android:paddingRight="@dimen/default_dimen"
-                android:paddingBottom="@dimen/default_dimen"
-    android:id="@+id/layout_tag_card_item_container">
+                android:paddingBottom="@dimen/default_dimen">
 
     <RelativeLayout
+        android:id="@+id/layout_tag_card_item_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorLightDivider"
+        android:background="@drawable/background_tag_card_item"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/relativeLayout2"
         android:paddingLeft="@dimen/default_dimen"
         android:paddingTop="@dimen/default_small_dimen"
         android:paddingBottom="@dimen/default_small_dimen"

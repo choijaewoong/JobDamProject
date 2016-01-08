@@ -40,6 +40,7 @@ public class JobQuestionActivity extends AppCompatActivity {
         mTextToolbarTitle.setText(mCorpName);
 
         mViewPager = (ViewPager)findViewById(R.id.pager_job_question);
+        mViewPager.setOffscreenPageLimit(mQuestions.getQuestionList().size());
         mQuestionPagerAdapter = new QuestionPagerAdapter();
         mQuestionPagerAdapter.setItems(mQuestions);
         mViewPager.setAdapter(mQuestionPagerAdapter);
