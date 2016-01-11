@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -23,8 +22,6 @@ public class JobQuestionActivity extends AppCompatActivity {
     String mCorpName;
     CirclePageIndicator mCirclePageIndicator;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,21 +37,12 @@ public class JobQuestionActivity extends AppCompatActivity {
         mCorpName = intent.getStringExtra(ExpandableChildQuestionItemView.CORP_NAME);
         mTextToolbarTitle = (TextView)findViewById(R.id.toolbar_title);
         mTextToolbarTitle.setText(mCorpName);
+
         MyTask task = new MyTask();
         task.execute();
-//
-//
-//        mViewPager = (ViewPager)findViewById(R.id.pager_job_question);
-//        mViewPager.setOffscreenPageLimit(mQuestions.getQuestionList().size());
-//        mQuestionPagerAdapter = new QuestionPagerAdapter();
-//        mQuestionPagerAdapter.setItems(mQuestions);
-//        mViewPager.setAdapter(mQuestionPagerAdapter);
-//        mCirclePageIndicator = (CirclePageIndicator)findViewById(R.id.pager_indicator);
-//        mCirclePageIndicator.setViewPager(mViewPager);
     }
 
     class MyTask extends AsyncTask<Void, Void, Void> {
-
         @Override
         protected Void doInBackground(Void... params) {
             mViewPager = (ViewPager)findViewById(R.id.pager_job_question);
@@ -63,7 +51,6 @@ public class JobQuestionActivity extends AppCompatActivity {
             mCirclePageIndicator = (CirclePageIndicator)findViewById(R.id.pager_indicator);
             return null;
         }
-
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
@@ -72,11 +59,11 @@ public class JobQuestionActivity extends AppCompatActivity {
             mCirclePageIndicator.setViewPager(mViewPager);
         }
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_save, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_save, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -85,7 +72,7 @@ public class JobQuestionActivity extends AppCompatActivity {
             finish();
             return true;
         }
-        //noinspection SimplifiableIfStatement
+
         else if (id == R.id.action_save) {
             // 태그 순서 변경 사항 서버 저장
             finish();

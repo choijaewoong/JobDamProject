@@ -8,8 +8,8 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Model.CategoryData;
@@ -34,18 +34,18 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
     }
     TextView mTextQuestionView;
     PredicateLayout mPredicateLayout;
-    Button mButtonQuestionDetail;
+    ImageView mImageQuestionDetailButton;
 
     private void init() {
         View view = inflate(getContext(), R.layout.view_expandable_child_question_item,this);
         mTextQuestionView = (TextView)view.findViewById(R.id.text_job_question);
         mPredicateLayout = (PredicateLayout)view.findViewById(R.id.layout_job_question_tag);
-        mButtonQuestionDetail = (Button)view.findViewById(R.id.button_job_question_detail);
+        mImageQuestionDetailButton = (ImageView)view.findViewById(R.id.image_job_question_detail_button);
     }
 
     public void setExpandableQuestion(final QuestionData data, final int jobId, final String corpName,  final int position){
         mTextQuestionView.setText(data.getQuestion());
-        mButtonQuestionDetail.setVisibility(GONE); //상세보기 숨김
+        mImageQuestionDetailButton.setVisibility(GONE); //상세보기 숨김
         mPredicateLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +62,7 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
                 addTagView(myCards.getCard().getTitle(), myCards.getCard().getCategory());
             }
         }
-        mButtonQuestionDetail.setOnClickListener(new OnClickListener() {
+        mImageQuestionDetailButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), JobQuestionActivity.class);
@@ -75,7 +75,7 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
     }
 
     public void setVisibleDetailButton(){
-        mButtonQuestionDetail.setVisibility(VISIBLE);
+        mImageQuestionDetailButton.setVisibility(VISIBLE);
     }
 
     public void addTagView(String tag, int categoryIndex){
