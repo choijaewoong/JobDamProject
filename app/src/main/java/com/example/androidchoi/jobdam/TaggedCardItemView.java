@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
@@ -89,7 +88,6 @@ public class TaggedCardItemView extends RelativeLayout{
         TextView t = new TextView(getContext());
         t.setText(tag);
         t.setTextSize(10);
-        Log.i("heigit", t.getHeight()+"");
         t.setTextColor(categoryColor);
         LayerDrawable drawable = (LayerDrawable)ContextCompat.getDrawable(getContext(), R.drawable.image_card_tag_border);
         Drawable borderDrawable = drawable.findDrawableByLayerId(R.id.image_tag_border);

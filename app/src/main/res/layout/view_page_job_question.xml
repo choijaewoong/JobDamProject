@@ -2,9 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="@dimen/default_dimen"
                 android:paddingTop="@dimen/default_dimen"
-                android:paddingRight="@dimen/default_dimen">
+    >
 
     <TextView
         android:layout_width="match_parent"
@@ -18,11 +17,13 @@
         android:paddingLeft="@dimen/default_dimen"
         android:paddingRight="@dimen/default_dimen"
         android:paddingBottom="@dimen/default_large_dimen"
-        android:paddingTop="@dimen/default_small_dimen"/>
+        android:paddingTop="@dimen/default_small_dimen"
+        android:layout_marginLeft="@dimen/default_dimen"
+        android:layout_marginRight="@dimen/default_dimen"/>
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/listView_memo_tag"
         android:paddingTop="@dimen/default_small_dimen"
         android:layout_below="@+id/text_job_question"

@@ -22,11 +22,15 @@ public class QuestionPagerAdapter extends PagerAdapter{
     List<View> scrappedView = new ArrayList<View>();
     List<QuestionData> mItems = new ArrayList<QuestionData>();
 
-
     public void setItems(Questions questions){
         for(QuestionData questionData : questions.getQuestionList()){
             mItems.add(questionData);
         }
+        notifyDataSetChanged();
+    }
+
+    public void addItem(QuestionData questionData){
+        mItems.add(questionData);
     }
 
     @Override
@@ -36,17 +40,34 @@ public class QuestionPagerAdapter extends PagerAdapter{
         if (scrappedView.size() > 0){
             view = scrappedView.remove(0);
         }else {
-            view = LayoutInflater.from(container.getContext()).inflate(R.layout.view_job_question_item, container, false);
+            view = LayoutInflater.from(container.getContext()).inflate(R.layout.view_page_job_question, container, false);
         }
         TextView textView = (TextView)view.findViewById(R.id.text_job_question);
         TaggedCardItemAdapter adapter = new TaggedCardItemAdapter();
         adapter.setItems(mItems.get(position).getCardList());
         ListView listView = (ListView)view.findViewById(R.id.listView_memo_tag);
         listView.setAdapter(adapter);
+//        MyTask myTask = new MyTask();
+//        myTask.execute();
+
         textView.setText(mItems.get(position).getQuestion());
         container.addView(view);
         return view;
     }
+
+//    class MyTask extends AsyncTask<Void, Void, Void> {
+//
+//        @Override
+//        protected Void doInBackground(Void... params) {
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void aVoid) {
+//            super.onPostExecute(aVoid);
+//            listView.setAdapter(adapter);
+//        }
+//    }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {

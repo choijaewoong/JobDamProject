@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,8 @@ public class JobQuestionActivity extends AppCompatActivity {
     String mCorpName;
     CirclePageIndicator mCirclePageIndicator;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,17 +38,39 @@ public class JobQuestionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mQuestions = (Questions) intent.getSerializableExtra(ExpandableChildQuestionItemView.QUESTION_LIST);
         mCorpName = intent.getStringExtra(ExpandableChildQuestionItemView.CORP_NAME);
-
         mTextToolbarTitle = (TextView)findViewById(R.id.toolbar_title);
         mTextToolbarTitle.setText(mCorpName);
+        MyTask task = new MyTask();
+        task.execute();
+//
+//
+//        mViewPager = (ViewPager)findViewById(R.id.pager_job_question);
+//        mViewPager.setOffscreenPageLimit(mQuestions.getQuestionList().size());
+//        mQuestionPagerAdapter = new QuestionPagerAdapter();
+//        mQuestionPagerAdapter.setItems(mQuestions);
+//        mViewPager.setAdapter(mQuestionPagerAdapter);
+//        mCirclePageIndicator = (CirclePageIndicator)findViewById(R.id.pager_indicator);
+//        mCirclePageIndicator.setViewPager(mViewPager);
+    }
 
-        mViewPager = (ViewPager)findViewById(R.id.pager_job_question);
-        mViewPager.setOffscreenPageLimit(mQuestions.getQuestionList().size());
-        mQuestionPagerAdapter = new QuestionPagerAdapter();
-        mQuestionPagerAdapter.setItems(mQuestions);
-        mViewPager.setAdapter(mQuestionPagerAdapter);
-        mCirclePageIndicator = (CirclePageIndicator)findViewById(R.id.pager_indicator);
-        mCirclePageIndicator.setViewPager(mViewPager);
+    class MyTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            mViewPager = (ViewPager)findViewById(R.id.pager_job_question);
+            mQuestionPagerAdapter = new QuestionPagerAdapter();
+            mQuestionPagerAdapter.setItems(mQuestions);
+            mCirclePageIndicator = (CirclePageIndicator)findViewById(R.id.pager_indicator);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            mViewPager.setOffscreenPageLimit(mQuestions.getQuestionList().size());
+            mViewPager.setAdapter(mQuestionPagerAdapter);
+            mCirclePageIndicator.setViewPager(mViewPager);
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
