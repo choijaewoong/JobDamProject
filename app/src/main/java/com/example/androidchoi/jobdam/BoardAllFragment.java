@@ -3,9 +3,15 @@ package com.example.androidchoi.jobdam;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import com.example.androidchoi.jobdam.Adpater.BoardItemAdapter;
+import com.example.androidchoi.jobdam.Manager.NetworkManager;
+import com.example.androidchoi.jobdam.Model.ArticleLab;
 
 
 /**
@@ -13,6 +19,8 @@ import android.view.ViewGroup;
  */
 public class BoardAllFragment extends Fragment {
 
+    ListView mListView;
+    BoardItemAdapter mAdapter;
 
     public BoardAllFragment() {
         // Required empty public constructor
@@ -23,8 +31,27 @@ public class BoardAllFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_board_all, container, false);
+        View view = inflater.inflate(R.layout.fragment_board_all, container, false);
+        mListView = (ListView)view.findViewById(R.id.listView_board_all);
+        mAdapter = new BoardItemAdapter();
+        showArticle();
+        mListView.setAdapter(mAdapter);
+        return view;
     }
 
+    public void showArticle(){
+        NetworkManager.getInstance().showArticle(getActivity(),
+                new NetworkManager.OnResultListener<ArticleLab>() {
+                    @Override
+                    public void onSuccess(ArticleLab result) {
+                        //서버에서 게시글 리스트 가져와 저장
+                        mAdapter.setItems(result.getArticleList());
+                    }
+                    @Override
+                    public void onFail(int code) {
+                        Log.i("error : " , code+"");
+                    }
+                });
+    }
 
 }
