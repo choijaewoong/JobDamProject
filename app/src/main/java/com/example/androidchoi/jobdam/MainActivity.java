@@ -167,12 +167,10 @@ public class MainActivity extends SlidingFragmentActivity
 
     public interface OnCardBoxCallBack {
         boolean onCheckMode();
-
         void onChangeMode();
     }
 
     OnCardBoxCallBack cardBoxCallBack;
-
     public void setOnCardBoxCallback(OnCardBoxCallBack callback) {
         cardBoxCallBack = callback;
     }
@@ -184,7 +182,6 @@ public class MainActivity extends SlidingFragmentActivity
     }
 
     OnMyJobListCallBack myJobListCallBack;
-
     public void setOnMyJobListCallback(OnMyJobListCallBack callback) {
         myJobListCallBack = callback;
     }

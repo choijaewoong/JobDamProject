@@ -29,12 +29,19 @@ public class TaggedCardItemView extends RelativeLayout{
     RelativeLayout mContentLayout;
     PredicateLayout mPredicateLayout;
     ToggleButton mToggleCardFold;
-    Boolean isFold = false;
-
 
     LayerDrawable layerDrawable;
     Drawable shapeDrawable;
     int categoryColor;
+    int position;
+
+    public interface OnContentOpenCallBack {
+        void onContentOpen(int position, Boolean check);
+    }
+    OnContentOpenCallBack mContentOpenCallBack;
+    public void setOnContentOpenCallback(OnContentOpenCallBack callback) {
+        mContentOpenCallBack = callback;
+    }
 
     public TaggedCardItemView(Context context) {
         super(context);
@@ -49,35 +56,37 @@ public class TaggedCardItemView extends RelativeLayout{
         mDateText = (TextView)findViewById(R.id.text_tag_card_write_date);
         mToggleCardFold = (ToggleButton)findViewById(R.id.toggleButton_tag_card_fold);
         mContainerLayout = (RelativeLayout)findViewById(R.id.layout_tag_card_item_container);
-        mContentLayout = (RelativeLayout)findViewById(R.id.layout_tag_card_content);
-        mPredicateLayout = (PredicateLayout)findViewById(R.id.layout_card_tag_container);
+        mContentLayout = (RelativeLayout) findViewById(R.id.layout_tag_card_content);
+        mPredicateLayout = (PredicateLayout) findViewById(R.id.layout_card_tag_container);
 
         layerDrawable = (LayerDrawable) ContextCompat.getDrawable(getContext(), R.drawable.background_tag_card_item);
         shapeDrawable = layerDrawable.findDrawableByLayerId(R.id.category_bar_tag_card);
+
         mToggleCardFold.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     mContentLayout.setVisibility(VISIBLE);
-                    isFold = true;
+                    mContentOpenCallBack.onContentOpen(position, true);
                 } else {
                     mContentLayout.setVisibility(GONE);
-                    isFold = false;
+                    mContentOpenCallBack.onContentOpen(position, false);
                 }
             }
         });
     }
 
-    public void setItemData(MyCard data){
+    public void setItemData(MyCard data, int position, Boolean check){
+        this.position = position;
         categoryColor = CategoryData.get(getContext()).getCategoryList().get(data.getCategory()).getColor();
         shapeDrawable.setColorFilter(categoryColor, PorterDuff.Mode.MULTIPLY);
         mContainerLayout.setBackgroundDrawable(layerDrawable);
         mTitle.setText(data.getTitle());
         mContent.setText(data.getContent());
-        mToggleCardFold.setChecked(isFold);
         mCategoryText.setText(CategoryData.get(getContext()).getCategoryList().get(data.getCategory()).getName());
         mCategoryText.setTextColor(categoryColor);
         mDateText.setText(data.getDate());
+        mToggleCardFold.setChecked(check);
         mPredicateLayout.removeAllViews();
         for(String tag: data.getTags()){
             addTagView(tag);

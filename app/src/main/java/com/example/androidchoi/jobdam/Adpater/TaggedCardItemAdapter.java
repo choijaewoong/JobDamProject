@@ -15,9 +15,18 @@ import java.util.ArrayList;
 public class TaggedCardItemAdapter extends BaseAdapter {
 
     ArrayList<MyCards> mItems = new ArrayList<MyCards>();
-
+    ArrayList<Boolean> mCheck = new ArrayList<Boolean>();
+    TaggedCardItemView.OnContentOpenCallBack mCallBack = new TaggedCardItemView.OnContentOpenCallBack() {
+        @Override
+        public void onContentOpen(int position, Boolean check) {
+            mCheck.set(position, check);
+        }
+    };
     public void setItems(ArrayList<MyCards> items){
         mItems = items;
+        for(int i=0; i<mItems.size(); i++){
+            mCheck.add(false);
+        }
         notifyDataSetChanged();
     }
     @Override
@@ -40,12 +49,11 @@ public class TaggedCardItemAdapter extends BaseAdapter {
         TaggedCardItemView view;
         if(convertView == null){
             view = new TaggedCardItemView(parent.getContext());
-
         }else {
             view = (TaggedCardItemView)convertView;
         }
-        view.setItemData(mItems.get(position).getCard());
-
+        view.setOnContentOpenCallback(mCallBack);
+        view.setItemData(mItems.get(position).getCard(), position, mCheck.get(position));
         return view;
     }
 }
