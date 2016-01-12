@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.MyFragmentPagerAdapter;
+import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,8 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class BoardFragment extends Fragment {
+
+    private static final int REQUEST_WRITE = 1;
     ViewPager mViewPager;
     TabLayout mTabLayout;
     MyFragmentPagerAdapter mAdapter;
@@ -32,7 +36,10 @@ public class BoardFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        if(resultCode != Activity.RESULT_OK){ return; }
+        for(Fragment fragment :getChildFragmentManager().getFragments()){
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
@@ -55,6 +62,15 @@ public class BoardFragment extends Fragment {
         mViewPager.setAdapter(mAdapter);
         mTabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
+
+        FloatingActionButton writeActicleButton = (FloatingActionButton) view.findViewById(R.id.fab_write_article);
+        writeActicleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ArticleWriteActivity.class);
+                startActivityForResult(intent, REQUEST_WRITE);
+            }
+        });
         return view;
     }
 }

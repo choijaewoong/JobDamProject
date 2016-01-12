@@ -1,68 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/default_small_dimen">
 
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout6">
+        android:background="@android:color/white"
+        android:padding="@dimen/default_small_dimen">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView22"
-            android:layout_alignParentTop="false"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentStart="false"
-            android:text="지금 내 기분은?"
-            android:layout_centerHorizontal="true"/>
+            android:id="@+id/relativeLayout6"
+            android:layout_marginTop="@dimen/default_large_dimen"
+            android:layout_marginLeft="@dimen/default_small_dimen">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView22"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentStart="false"
+                android:text="지금 내 기분은?"
+                android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/image_emotion_icon"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/textView22"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="행복해요"
+                android:id="@+id/text_emotion_description"
+                android:layout_alignParentBottom="false"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/image_emotion_icon"/>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="New Text"
+            android:id="@+id/text_board_content"
+            android:layout_toRightOf="@+id/relativeLayout6"
+            android:layout_toEndOf="@+id/relativeLayout6"
+            android:layout_marginLeft="@dimen/default_large_dimen"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="@dimen/default_dimen"
+            android:layout_marginTop="@dimen/default_large_dimen"
+            android:layout_marginBottom="@dimen/default_large_dimen"/>
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:id="@+id/image_emotion_icon"
-            android:layout_below="@+id/textView22"
-            android:layout_centerHorizontal="true"/>
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_width"
+            android:id="@+id/imageView32"
+            android:layout_below="@+id/text_board_content"
+            android:layout_centerHorizontal="true"
+            android:src="@color/colorPrimary"
+            android:layout_marginTop="@dimen/default_small_dimen"
+            android:layout_marginBottom="@dimen/default_small_dimen"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/text_emotion_description"
-            android:layout_alignParentBottom="false"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/image_emotion_icon"/>
+            android:id="@+id/text_board_like_count"
+            android:layout_below="@+id/imageView32"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
     </RelativeLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/text_board_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/relativeLayout6"
-        android:layout_toEndOf="@+id/relativeLayout6"
-        android:layout_alignBottom="@+id/relativeLayout6"/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_width"
-        android:id="@+id/imageView32"
-        android:layout_below="@+id/text_board_content"
-        android:layout_centerHorizontal="true"
-        android:src="@color/colorLightPrimary"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/text_board_like_count"
-        android:layout_below="@+id/imageView32"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>

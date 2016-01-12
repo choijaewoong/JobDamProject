@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -26,6 +27,11 @@ public class BoardAllFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        showArticle();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
