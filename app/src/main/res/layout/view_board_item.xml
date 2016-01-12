@@ -2,21 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/default_small_dimen">
+                android:paddingLeft="@dimen/default_small_dimen"
+                android:paddingRight="@dimen/default_small_dimen"
+                android:paddingBottom="@dimen/default_dimen">
 
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:padding="@dimen/default_small_dimen">
+        android:background="@drawable/image_board_container"
+        android:paddingLeft="@dimen/default_small_dimen"
+        android:paddingRight="@dimen/default_small_dimen"
+        android:paddingBottom="@dimen/default_dimen">
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="110dp"
             android:id="@+id/relativeLayout6"
             android:layout_marginTop="@dimen/default_large_dimen"
-            android:layout_marginLeft="@dimen/default_small_dimen">
+            android:layout_marginLeft="@dimen/default_dimen">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -26,29 +30,36 @@
                 android:layout_alignParentLeft="false"
                 android:layout_alignParentStart="false"
                 android:text="지금 내 기분은?"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/font_size_small"
+                android:textColor="@android:color/black"/>
 
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:id="@+id/image_emotion_icon"
-                android:layout_centerVertical="true"
+                android:layout_above="@+id/text_emotion_description"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/textView22"/>
+                android:layout_marginBottom="@dimen/default_small_dimen"
+                android:tint="@color/colorPrimary"
+                android:tintMode="multiply"
+                android:src="@drawable/emotion_smile"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="행복해요"
                 android:id="@+id/text_emotion_description"
-                android:layout_alignParentBottom="false"
+                android:textColor="@color/colorPrimary"
+                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/image_emotion_icon"/>
+                android:textSize="@dimen/font_size_default"/>
         </RelativeLayout>
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
             android:text="New Text"
             android:id="@+id/text_board_content"
             android:layout_toRightOf="@+id/relativeLayout6"
@@ -56,27 +67,49 @@
             android:layout_marginLeft="@dimen/default_large_dimen"
             android:layout_alignParentTop="true"
             android:layout_marginRight="@dimen/default_dimen"
-            android:layout_marginTop="@dimen/default_large_dimen"
-            android:layout_marginBottom="@dimen/default_large_dimen"/>
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="@dimen/default_small_dimen"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/font_size_default"
+            android:textIsSelectable="false"/>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_width"
             android:id="@+id/imageView32"
-            android:layout_below="@+id/text_board_content"
-            android:layout_centerHorizontal="true"
-            android:src="@color/colorPrimary"
+            android:src="@color/colorLightPrimary"
+            android:layout_below="@+id/textView31"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginTop="@dimen/default_small_dimen"
-            android:layout_marginBottom="@dimen/default_small_dimen"/>
+            android:layout_marginRight="@dimen/default_small_dimen"
+            android:layout_marginLeft="@dimen/default_small_dimen"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_board_like_count"
+            android:textColor="@color/colorPrimary"
+            android:text="10"
+            android:padding="@dimen/default_small_dimen"
+            android:layout_below="@+id/imageView32"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textSize="@dimen/font_size_default"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/text_board_like_count"
-            android:layout_below="@+id/imageView32"
+            android:id="@+id/textView31"
+            android:layout_below="@+id/text_board_content"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/default_small_dimen"
+            android:textSize="@dimen/font_size_small"
+            android:textColor="@android:color/black"
+            android:visibility="invisible"/>
     </RelativeLayout>
 
 </RelativeLayout>

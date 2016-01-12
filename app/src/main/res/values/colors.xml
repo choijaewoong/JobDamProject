@@ -38,4 +38,6 @@
 
     <!-- nav_header_background-->
     <color name="colorNavHeaderBackground">#064158</color>
+
+    <color name="colorTabUnFocus">#66064158</color>
 </resources>

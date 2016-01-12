@@ -10,15 +10,11 @@
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp"
         app:tabGravity="fill"
         app:tabIndicatorHeight="0dp"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@android:color/white"
-        app:tabTextColor="@color/colorGray">
+        app:tabTextColor="@color/colorPrimaryDark">
     </android.support.design.widget.TabLayout>
 
     <!--<ImageView-->
@@ -49,17 +45,17 @@
         android:id="@+id/fab_write_article"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/floating_button_add_category"
-        app:fab_colorNormal="@android:color/white"
-        app:fab_colorPressed="@color/colorLightDivider"
-        app:fab_colorRipple="@color/colorDivider"
+        android:src="@drawable/button_write"
+        app:fab_colorNormal="@color/colorPrimary"
+        app:fab_colorPressed="@color/colorLightPrimary"
+        app:fab_colorRipple="@color/colorPrimary"
         app:fab_label="@string/add_cartegory"
         app:fab_size="normal"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="@dimen/default_small_dimen"
-        android:layout_marginBottom="@dimen/default_small_dimen"/>
+        android:layout_marginRight="@dimen/default_dimen"
+        android:layout_marginBottom="@dimen/default_dimen"/>
 
 </RelativeLayout>
 

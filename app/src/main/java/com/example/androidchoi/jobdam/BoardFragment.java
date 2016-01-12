@@ -56,12 +56,13 @@ public class BoardFragment extends Fragment {
         List<Fragment> fragments = new ArrayList<Fragment>();
         fragments.add(0, new BoardAllFragment());
         fragments.add(1, new BoardMeFragment());
-        mAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), fragments);
+        mAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(),fragments);
         mAdapter.setTabList(new String[]{"잡담 톡", "나의 톡"});
         mViewPager = (ViewPager) view.findViewById(R.id.tab_pager);
         mViewPager.setAdapter(mAdapter);
         mTabLayout = (TabLayout) view.findViewById(R.id.sliding_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
+        setupTabIcons();
 
         FloatingActionButton writeActicleButton = (FloatingActionButton) view.findViewById(R.id.fab_write_article);
         writeActicleButton.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +73,13 @@ public class BoardFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    private void setupTabIcons() {
+        TabBoardAllView tabBoardAllView = new TabBoardAllView(getContext());
+        tabBoardAllView.setSelected(true);
+        mTabLayout.getTabAt(0).setCustomView(tabBoardAllView);
+        mTabLayout.getTabAt(1).setCustomView(new TabBoardMeView(getActivity()));
     }
 }
 
