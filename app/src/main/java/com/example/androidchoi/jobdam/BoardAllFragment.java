@@ -4,6 +4,7 @@ package com.example.androidchoi.jobdam;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +23,11 @@ public class BoardAllFragment extends Fragment {
 
     ListView mListView;
     BoardItemAdapter mAdapter;
+    SwipeRefreshLayout mRefreshLayout;
 
     public BoardAllFragment() {
         // Required empty public constructor
-    }
+}
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -42,6 +44,16 @@ public class BoardAllFragment extends Fragment {
         mAdapter = new BoardItemAdapter();
         showArticle();
         mListView.setAdapter(mAdapter);
+
+        mRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_board_all);
+        mRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorPrimary);
+        mRefreshLayout.setColorSchemeResources(android.R.color.white);
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                showArticle();
+            }
+        });
         return view;
     }
 
@@ -52,6 +64,7 @@ public class BoardAllFragment extends Fragment {
                     public void onSuccess(ArticleLab result) {
                         //서버에서 게시글 리스트 가져와 저장
                         mAdapter.setItems(result.getArticleList());
+                        mRefreshLayout.setRefreshing(false);
                     }
                     @Override
                     public void onFail(int code) {
