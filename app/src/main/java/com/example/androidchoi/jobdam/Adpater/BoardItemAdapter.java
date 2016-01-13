@@ -40,7 +40,7 @@ public class BoardItemAdapter extends BaseAdapter {
         }else{
             view = (BoardItemView)convertView;
         }
-        view.setItemData(mItems.get(position).getArticle());
+        view.setItemData(mItems.get(position));
         return view;
     }
 }

@@ -10,6 +10,7 @@
     <color name="colorBackground">#f1f1f1</color>
     <color name="colorDivider">#d9d9d9</color>
     <color name="colorLightDivider">#e4e4e4</color>
+    <color name="colorText">#282828</color>
 
 
     <!--#e0e0e0    e7e7e7   e6e9f4-->
@@ -39,5 +40,5 @@
     <!-- nav_header_background-->
     <color name="colorNavHeaderBackground">#064158</color>
 
-    <color name="colorTabUnFocus">#66064158</color>
+    <color name="colorTabUnFocus">#44064158</color>
 </resources>

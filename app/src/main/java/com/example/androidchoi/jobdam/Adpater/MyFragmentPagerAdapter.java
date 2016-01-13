@@ -15,7 +15,7 @@ import java.util.List;
 public class MyFragmentPagerAdapter extends FragmentStatePagerAdapter{
     final int PAGE_COUNT = 2;
     private String[] mTabTitles = new String[PAGE_COUNT];
-    private int tabIcons[] = {R.drawable.image_board_all_icon, R.drawable.image_board_me_icon};
+    private int tabIcons[] = {R.drawable.image_board_all_icon_selected, R.drawable.image_board_me_icon_selected};
     private List<Fragment> mFragments = new ArrayList<Fragment>();
 
     public MyFragmentPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
