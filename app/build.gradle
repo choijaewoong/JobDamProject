@@ -25,13 +25,14 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.0.1'
-    compile project(':slidingmenu')
-    compile project(':FloatingActionButton')
-    compile project(':androidAsyncHttp')
     compile 'com.android.support:design:23.1.0'
     compile 'com.google.code.gson:gson:2.2.4'
+    compile project(':slidingmenu')  // Sliding Menu
+    compile project(':FloatingActionButton')  // Floating Action Button
+    compile project(':androidAsyncHttp')
     compile files('libs/XMLParser.jar')
-    compile 'in.srain.cube:grid-view-with-header-footer:1.0.12'
-    compile project(':recyclerVIewPager')
     compile project(':viewPagerIndicator')
+    compile project(':recyclerVIewPager')
+    compile 'in.srain.cube:grid-view-with-header-footer:1.0.12'
+    compile 'com.melnykov:floatingactionbutton:1.3.0'  // Collapsing Floating Action Button
 }

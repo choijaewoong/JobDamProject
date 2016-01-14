@@ -4,8 +4,8 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/default_small_dimen"
                 android:paddingRight="@dimen/default_small_dimen"
-                android:paddingBottom="@dimen/default_dimen"
-                android:background="@color/colorPrimary">
+                android:paddingBottom="@dimen/default_small_dimen"
+                android:paddingTop="@dimen/default_small_dimen">
 
 
     <RelativeLayout

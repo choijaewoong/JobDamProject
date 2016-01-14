@@ -54,6 +54,7 @@ public class BoardAllFragment extends Fragment {
                 showArticle();
             }
         });
+        ((BoardFragment)getParentFragment()).writeActicleButton.attachToListView(mListView);
         return view;
     }
 

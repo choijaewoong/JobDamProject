@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.MyFragmentPagerAdapter;
-import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +27,8 @@ public class BoardFragment extends Fragment {
     ViewPager mViewPager;
     TabLayout mTabLayout;
     MyFragmentPagerAdapter mAdapter;
+    List<Fragment> mChildFragment = new ArrayList<Fragment>();
+    com.melnykov.fab.FloatingActionButton writeActicleButton;
 
     public BoardFragment() {
         // Required empty public constructor
@@ -64,7 +65,8 @@ public class BoardFragment extends Fragment {
         mTabLayout.setupWithViewPager(mViewPager);
         setupTabIcons();
 
-        FloatingActionButton writeActicleButton = (FloatingActionButton) view.findViewById(R.id.fab_write_article);
+        mChildFragment = getChildFragmentManager().getFragments();
+        writeActicleButton = (com.melnykov.fab.FloatingActionButton)view.findViewById(R.id.fab_write_article);
         writeActicleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
