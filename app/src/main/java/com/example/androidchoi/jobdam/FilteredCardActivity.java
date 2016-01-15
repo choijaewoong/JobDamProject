@@ -1,15 +1,12 @@
 package com.example.androidchoi.jobdam;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -44,13 +41,6 @@ public class FilteredCardActivity extends AppCompatActivity {
         int index = intent.getIntExtra(CardBoxFragment.EXTRA_CATEGORY_INDEX, 0);
         getSupportActionBar().setTitle(CategoryData.get(FilteredCardActivity.this).getCategoryList().get(index).getName());
         mToolbar.setBackgroundColor(CategoryData.get(FilteredCardActivity.this).getCategoryList().get(index).getColor());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.setStatusBarColor(CategoryData.get(FilteredCardActivity.this).getCategoryList().get(index).getColor());
-        }
-//        window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), android.R.color.black));
 
         View itemCountHeaderView = getLayoutInflater().inflate(R.layout.view_header_card_item_count, null);
         mItemCountTextView = (TextView) itemCountHeaderView.findViewById(R.id.text_item_count);

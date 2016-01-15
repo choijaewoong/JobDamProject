@@ -252,13 +252,13 @@ public class NetworkManager {
         });
     }
 
-    public static final String SHOW_FILTERED_MEMO = SERVER + "/folderlist/%s";
+    public static final String SHOW_FILTERED_MEMO = SERVER + "/folderlist";
     public void showFilteredMemo(Context context, int index,  final OnResultListener<MyCardLab> listener) {
         RequestParams params = new RequestParams();
+        params.put("category", index);
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
-        String url = String.format(SHOW_FILTERED_MEMO, index);
-        client.get(context, url, headers, params, new TextHttpResponseHandler() {
+        client.post(context, SHOW_FILTERED_MEMO, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
@@ -266,9 +266,9 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 MyCardLab myCardLab = new MyCardLab();
-                try{
+                try {
                     myCardLab = gson.fromJson(responseString, MyCardLab.class);
-                }catch (JsonSyntaxException e){
+                } catch (JsonSyntaxException e) {
                     e.printStackTrace();
                 }
                 listener.onSuccess(myCardLab);
