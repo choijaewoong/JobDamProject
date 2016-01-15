@@ -27,13 +27,17 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:design:23.1.0'
     compile 'com.google.code.gson:gson:2.2.4'
-    compile project(':slidingmenu')  // Sliding Menu
-    compile project(':FloatingActionButton')  // Floating Action Button
+    compile project(':slidingmenu')
+    // Sliding Menu
+    compile project(':FloatingActionButton')
+    // Floating Action Button
     compile project(':androidAsyncHttp')
     compile files('libs/XMLParser.jar')
     compile project(':viewPagerIndicator')
     compile project(':recyclerVIewPager')
     compile 'in.srain.cube:grid-view-with-header-footer:1.0.12'
-    compile 'com.melnykov:floatingactionbutton:1.3.0'  // Collapsing Floating Action Button
-    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3' // Change Status Bar Color
+    compile 'com.melnykov:floatingactionbutton:1.3.0'
+    // Collapsing Floating Action Button
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    // Change Status Bar Color
 }

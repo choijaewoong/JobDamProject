@@ -1,0 +1,83 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+              android:orientation="vertical"
+             tools:context="com.example.androidchoi.jobdam.MyJobCalendarListDialogFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView_my_job_list"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:scrollbars="none"
+        android:paddingTop="@dimen/default_small_dimen"
+        android:background="@color/colorBackground"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/text_my_job_list_close_button">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시작"
+                android:id="@+id/text_start_header"
+                android:layout_marginLeft="@dimen/default_dimen"
+                android:layout_marginBottom="@dimen/default_small_dimen"
+                android:background="@drawable/button_calendar_start"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                />
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listView_start_job"
+                android:listSelector="@android:color/transparent"
+                android:divider="@android:color/transparent"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="마감"
+                android:id="@+id/text_end_header"
+                android:layout_marginLeft="@dimen/default_dimen"
+                android:layout_marginBottom="@dimen/default_small_dimen"
+                android:gravity="center"
+                android:background="@drawable/button_calendar_end"
+                android:textColor="@android:color/white"
+                />
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listView_end_job"
+                android:listSelector="@android:color/transparent"
+                android:divider="@android:color/transparent"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:id="@+id/text_my_job_list_close_button"
+        android:text="닫 기"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/font_size_large_title"/>
+
+</RelativeLayout>

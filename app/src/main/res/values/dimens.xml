@@ -76,7 +76,7 @@
     <dimen name="calendar_title_height">48dp</dimen>
     <dimen name="calendar_grid_separator">0.5dp</dimen>
     <dimen name="calendar_shadow">12dp</dimen>
-    <dimen name="calendar_number_padding">4dp</dimen>
+    <dimen name="calendar_number_padding">2dp</dimen>
     <!-- font size-->
     <dimen name="font_size_semi_large">16sp</dimen>
     <dimen name="font_size_large">18sp</dimen>
@@ -86,5 +86,7 @@
     <dimen name="font_size_default">14sp</dimen>
     <dimen name="font_size_min">10sp</dimen>
     <!--<dimen name="font_size_small">8dp</dimen>-->
+
+    <dimen name="dialog_height">380dp</dimen>
 
 </resources>

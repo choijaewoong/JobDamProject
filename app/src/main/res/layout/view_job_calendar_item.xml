@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="60dp"
+              android:layout_height="50dp"
               android:background="@android:color/white"
               android:id="@+id/calendar_item_view"
               android:orientation="vertical">
@@ -15,60 +15,60 @@
         android:textSize="@dimen/font_size_small"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="@dimen/calendar_number_padding"
         android:layout_marginLeft="@dimen/calendar_number_padding"
         android:layout_marginTop="@dimen/calendar_number_padding"
         android:layout_marginRight="@dimen/calendar_number_padding"
-        android:paddingLeft="@dimen/calendar_number_padding"/>
+        android:paddingLeft="4dp"/>
 
     <ImageView
-        android:layout_width="24dp"
-        android:layout_height="@dimen/default_dimen"
+        android:layout_width="wrap_content"
+        android:layout_height="14dp"
         android:id="@+id/image_blue_ball"
         android:src="@drawable/image_blue_ball"
-        android:paddingLeft="@dimen/default_small_dimen"
-        android:paddingRight="@dimen/default_small_dimen"
         android:visibility="visible"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/job_calendar_num"/>
+        android:layout_toLeftOf="@+id/job_calendar_start_count"
+        android:layout_alignTop="@+id/job_calendar_start_count"
+        android:scaleType="center"/>
 
     <TextView
         android:id="@+id/job_calendar_start_count"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/default_dimen"
-        android:gravity="center_vertical|left"
-        android:textSize="@dimen/font_size_small"
-        android:layout_alignTop="@+id/image_blue_ball"
-        android:layout_toRightOf="@+id/image_blue_ball"
+        android:minWidth="25dp"
+        android:layout_height="14dp"
+        android:gravity="center_vertical|right"
+        android:textSize="@dimen/font_size_min"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:visibility="visible"/>
+        android:visibility="visible"
+        android:paddingLeft="2dp"
+        android:layout_below="@+id/job_calendar_num"
+        android:paddingRight="4dp"/>
 
     <ImageView
-        android:layout_width="24dp"
-        android:layout_height="@dimen/default_dimen"
+        android:layout_width="wrap_content"
+        android:layout_height="14dp"
         android:id="@+id/image_red_ball"
         android:src="@drawable/image_red_ball"
-        android:paddingLeft="@dimen/default_small_dimen"
-        android:paddingRight="@dimen/default_small_dimen"
         android:layout_alignParentBottom="false"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/image_blue_ball"
-        android:visibility="visible"/>
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:visibility="visible"
+        android:scaleType="center"
+        android:layout_alignTop="@+id/job_calendar_end_count"
+        android:layout_toLeftOf="@+id/job_calendar_end_count"/>
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/default_dimen"
-        android:gravity="center_vertical|left"
+        android:minWidth="25dp"
+        android:layout_height="14dp"
+        android:gravity="center_vertical|right"
         android:id="@+id/job_calendar_end_count"
-        android:layout_alignTop="@+id/image_red_ball"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/image_red_ball"
-        android:textSize="@dimen/font_size_small"
+        android:textSize="@dimen/font_size_min"
         android:visibility="visible"
-        android:layout_toRightOf="@+id/image_red_ball"/>
+        android:paddingLeft="2dp"
+        android:layout_below="@+id/job_calendar_start_count"
+        android:paddingRight="4dp"/>
 
 </RelativeLayout>

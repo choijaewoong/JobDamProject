@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                              android:layout_width="match_parent"
                              android:layout_height="match_parent"
                              android:orientation="vertical">
@@ -11,6 +11,8 @@
     android:layout_height="@dimen/calendar_title_height"
     android:orientation="horizontal"
     android:background="@android:color/white"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
     >
 
     <ImageView
@@ -52,39 +54,21 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_width"
         android:layout_gravity="center_horizontal"
-        android:background="@color/colorDivider"/>
+        android:background="@color/colorDivider"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/imageView34"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:paddingLeft="@dimen/default_dimen"
         android:paddingRight="@dimen/default_dimen"
         android:background="@android:color/white"
-        android:gravity="center">
+        android:layout_below="@+id/imageView34"
+        android:id="@+id/relativeLayout7"
+        android:gravity="center_vertical|right">
 
-
-        <ToggleButton
-            android:id="@+id/toggleButton_calendar_type"
-            android:layout_width="30dp"
-            android:layout_height="16dp"
-            android:textSize="@dimen/font_size_min"
-            android:text="@string/monthly"
-            android:textOff="@string/monthly"
-            android:textOn="@string/weekly"
-            android:background="@drawable/selector_button_monthly"
-            android:textColor="@drawable/selector_button_monthly_text"
-            android:layout_centerVertical="true"/>
-        <!--<TextView-->
-            <!--android:layout_width="32dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="월간"-->
-            <!--android:id="@+id/text_calendar_type_select_button"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_alignParentStart="true"-->
-            <!--android:background="@drawable/image_calendar_selected"-->
-            <!--android:textColor="@android:color/white"-->
-            <!--android:gravity="center"-->
-            <!--android:textSize="@dimen/font_size_min"/>-->
 
         <ImageView
             android:layout_width="wrap_content"
@@ -132,14 +116,22 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/divider_width"
     android:layout_gravity="center_horizontal"
-    android:background="@color/colorDivider"/>
+    android:background="@color/colorDivider"
+    android:layout_below="@+id/relativeLayout7"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/imageView35"/>
 
     <LinearLayout
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="@dimen/calendar_header_height"
     android:layout_gravity="center_horizontal"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    android:id="@+id/linearLayout10"
+    android:layout_below="@+id/imageView35"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true">
 
     <TextView
         android:layout_width="0dp"
@@ -217,7 +209,11 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/divider_width"
     android:layout_gravity="center_horizontal"
-    android:background="@color/colorDivider"/>
+    android:background="@color/colorDivider"
+    android:layout_below="@+id/linearLayout10"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/imageView36"/>
 
 <GridView
     android:id="@+id/grid_view_calendar"
@@ -229,70 +225,20 @@
     android:numColumns="7"
     android:stretchMode="columnWidth"
     android:verticalSpacing="@dimen/calendar_grid_separator"
-    android:visibility="visible">
+    android:visibility="visible"
+    android:layout_below="@+id/imageView36"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true">
 </GridView>
 
-<View
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/shadow_depth"
-    android:id="@+id/imageView11"
-    android:background="@drawable/shadow_bottom"
-    android:visibility="visible"
-    />
-
-    <ScrollView
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
-        android:fillViewport="true"
-        android:clipToPadding="false"
-        android:paddingTop="@dimen/default_small_dimen">
+        android:layout_height="@dimen/shadow_depth"
+        android:id="@+id/imageView11"
+        android:background="@drawable/shadow_bottom"
+        android:visibility="visible"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="false"
+        android:layout_below="@+id/grid_view_calendar"/>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="시작"
-                android:id="@+id/text_start_header"
-                android:layout_marginLeft="@dimen/default_dimen"
-                android:layout_marginBottom="@dimen/default_small_dimen"
-                android:background="@drawable/button_calendar_start"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:visibility="gone"/>
-
-            <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/listView_start_job"
-                android:listSelector="@android:color/transparent"
-                android:divider="@android:color/transparent"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="마감"
-                android:id="@+id/text_end_header"
-                android:layout_marginLeft="@dimen/default_dimen"
-                android:layout_marginBottom="@dimen/default_small_dimen"
-                android:gravity="center"
-                android:background="@drawable/button_calendar_end"
-                android:textColor="@android:color/white"
-                android:visibility="gone"
-                />
-
-            <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/listView_end_job"
-                android:listSelector="@android:color/transparent"
-                android:divider="@android:color/transparent"/>
-        </LinearLayout>
-    </ScrollView>
-
-</LinearLayout>
+</RelativeLayout>
