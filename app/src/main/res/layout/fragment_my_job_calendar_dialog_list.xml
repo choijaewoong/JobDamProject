@@ -3,9 +3,11 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
               android:orientation="vertical"
-             tools:context="com.example.androidchoi.jobdam.MyJobCalendarListDialogFragment">
+             tools:context="com.example.androidchoi.jobdam.MyJobCalendarListDialogFragment"
+                android:background="@color/colorBackground">
 
     <!-- TODO: Update blank fragment layout -->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,7 +16,6 @@
         android:clipToPadding="false"
         android:scrollbars="none"
         android:paddingTop="@dimen/default_small_dimen"
-        android:background="@color/colorBackground"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -65,6 +66,18 @@
                 android:divider="@android:color/transparent"/>
         </LinearLayout>
     </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/shadow_depth"
+        android:background="@drawable/shadow_bottom"
+        android:rotation="180"
+        android:layout_above="@+id/text_my_job_list_close_button"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/shadow_depth"
+        android:background="@drawable/shadow_bottom"/>
 
     <TextView
         android:layout_width="match_parent"

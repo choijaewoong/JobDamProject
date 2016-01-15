@@ -87,6 +87,6 @@
     <dimen name="font_size_min">10sp</dimen>
     <!--<dimen name="font_size_small">8dp</dimen>-->
 
-    <dimen name="dialog_height">380dp</dimen>
+    <dimen name="dialog_height">432dp</dimen>
 
 </resources>
