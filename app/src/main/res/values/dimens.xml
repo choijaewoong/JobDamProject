@@ -88,5 +88,8 @@
     <!--<dimen name="font_size_small">8dp</dimen>-->
 
     <dimen name="dialog_height">432dp</dimen>
+    <dimen name="emotion_dialog_height">100dp</dimen>
+
+    <dimen name="emotion_dialog_top_margin">80dp</dimen>
 
 </resources>

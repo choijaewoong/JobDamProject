@@ -44,7 +44,7 @@ public class EmotionData {
     }
     private int imageResource;
     private String description;
-    public int getImage() {
+    public int getImageResource() {
         return imageResource;
     }
     public String getDescription() { return description;}

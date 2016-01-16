@@ -20,11 +20,17 @@ import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Article;
+import com.example.androidchoi.jobdam.Model.EmotionData;
 
 public class ArticleWriteActivity extends AppCompatActivity {
 
+    private static final String EMOTION_DIALOG = "emotion_dialog";
+
     Article mArticle;
     EditText mEditText;
+    int mEmotionIndex;
+    ImageView mImageEmotion;
+    ImageView mImageArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +43,19 @@ public class ArticleWriteActivity extends AppCompatActivity {
         ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
                 ActionBar.LayoutParams.MATCH_PARENT, Gravity.CENTER);
 
-        View customToolbar = getLayoutInflater().inflate(R.layout.toolbar_write_article, null);
-        ImageView imageEmotion = (ImageView)customToolbar.findViewById(R.id.image_article_emotion);
-//        imageEmotion .setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
+        final View customToolbar = getLayoutInflater().inflate(R.layout.toolbar_write_article, null);
+        mImageEmotion = (ImageView)customToolbar.findViewById(R.id.image_article_emotion);
+        mImageArrow = (ImageView)customToolbar.findViewById(R.id.image_emotion_arrow);
+        mImageEmotion .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 //                Toast.makeText(ArticleWriteActivity.this, "emotion", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+
+                mImageArrow.setImageResource(android.R.color.black);
+                ArticleEmotionListDialogFragment dialog = new ArticleEmotionListDialogFragment();
+                dialog.show(getSupportFragmentManager(), EMOTION_DIALOG);
+            }
+        });
         getSupportActionBar().setCustomView(customToolbar, params);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
@@ -76,7 +87,15 @@ public class ArticleWriteActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
 
+    public void setEmotion(int position){
+        mEmotionIndex = position;
+        mImageEmotion.setImageResource(EmotionData.get(ArticleWriteActivity.this).getCategoryList().get(position).getImageResource());
+    }
+
+    public void setArrow(){
+        mImageArrow.setImageResource(android.R.color.white);
     }
 
     @Override

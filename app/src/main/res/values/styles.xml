@@ -16,15 +16,30 @@
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
-    <style name="DialogAnimation">
-        <item name="android:windowEnterAnimation">@anim/dialog_slide_up_dialog</item>
-        <item name="android:windowExitAnimation">@anim/dialog_slide_out_down</item>
-    </style>
+
     <style name="PopupMenuListView" parent="@style/Widget.AppCompat.ListView.DropDown">
         <item name="android:divider">@color/colorDivider</item>
         <item name="android:dividerHeight">@dimen/divider_width</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:shadowColor">@android:color/transparent</item>
+    </style>
+
+    <style name="EmotionDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">false</item>
+        <!--<item name="android:gravity">t</item>-->
+        <!--<item name="android:layout_marginTop">?attr/actionBarSize</item>-->
+        <!--<item name="android:top">?attr/actionBarSize</item>-->
+    </style>
+
+    <!-- Animation -->
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_slide_up_dialog</item>
+        <item name="android:windowExitAnimation">@anim/dialog_slide_out_down</item>
+    </style>
+    <style name="EmotionDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_slide_down_dialog</item>
+        <item name="android:windowExitAnimation">@anim/dialog_slide_out_up</item>
     </style>
 </resources>

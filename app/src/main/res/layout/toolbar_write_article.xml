@@ -3,19 +3,28 @@
     android:id="@+id/toolbar_write_article"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="?attr/actionBarSize"
     android:gravity="center"
     android:orientation="vertical"
-    android:paddingRight="@dimen/toolbar_article_padding">
+    android:paddingRight="@dimen/toolbar_article_padding"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
 
     <ImageView
         android:id="@+id/image_article_emotion"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/default_small_dimen"
         android:src="@drawable/emotion_smile"
-        android:layout_marginBottom="@dimen/default_small_dimen"/>
+        />
+
+    <ImageView
+        android:layout_width="6dp"
+        android:layout_height="6dp"
+        android:id="@+id/image_emotion_arrow"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/white"
+        />
 
 
 </LinearLayout>

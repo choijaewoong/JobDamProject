@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:padding="@dimen/default_small_dimen">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/image_emotion_icon"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/text_emotion_description"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/default_small_dimen"
+        android:textSize="@dimen/font_size_default"
+        android:textColor="@color/colorGray"/>
+</LinearLayout>
