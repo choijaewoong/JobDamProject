@@ -8,6 +8,16 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/text_my_job_list_dialog_date"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/default_small_dimen"
+        android:textColor="@color/colorPrimary"
+        android:visibility="gone"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,10 +26,10 @@
         android:clipToPadding="false"
         android:scrollbars="none"
         android:paddingTop="@dimen/default_small_dimen"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/text_my_job_list_close_button">
+        android:layout_above="@+id/text_my_job_list_close_button"
+        android:layout_alignParentTop="true">
 
         <LinearLayout
             android:orientation="vertical"
@@ -83,9 +93,9 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:id="@+id/text_my_job_list_close_button"
-        android:text="닫 기"
+        android:text="@string/dialog_close"
         android:layout_gravity="center_horizontal"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/selector_button_my_job_list_dialog_close"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

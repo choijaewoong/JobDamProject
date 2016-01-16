@@ -41,6 +41,7 @@ public class MyJobCalendarListDialogFragment extends DialogFragment {
     TextView textEndHeader;
     ScrollView mScrollView;
     TextView mTextCloseButton;
+//    TextView mTextDate;
 
     private ArrayList<MyJobs> mJobList;
     private CalendarItem mCalendarItem;
@@ -81,6 +82,8 @@ public class MyJobCalendarListDialogFragment extends DialogFragment {
                 dismiss();
             }
         });
+//        mTextDate = (TextView)view.findViewById(R.id.text_my_job_list_dialog_date);
+//        mTextDate.setText(mCalendarItem.year + ". " + mCalendarItem.month + ". " + mCalendarItem.dayOfMonth);
 
         mScrollView = (ScrollView)view.findViewById(R.id.scrollView_my_job_list);
         mStartListView = (ListView) view.findViewById(R.id.listView_start_job);
