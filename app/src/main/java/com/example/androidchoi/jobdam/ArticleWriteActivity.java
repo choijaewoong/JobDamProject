@@ -112,7 +112,8 @@ public class ArticleWriteActivity extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.action_save) {
-            NetworkManager.getInstance().addArticle(ArticleWriteActivity.this, mEditText.getText().toString(), new NetworkManager.OnResultListener<String>() {
+            NetworkManager.getInstance().addArticle(ArticleWriteActivity.this, mEditText.getText().toString(), mEmotionIndex,
+                    new NetworkManager.OnResultListener<String>() {
                 @Override
                 public void onSuccess(String result) {
                     setResult(Activity.RESULT_OK);

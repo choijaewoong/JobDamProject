@@ -346,9 +346,10 @@ public class NetworkManager {
     // 게시글 추가
     private static final String ADD_ARTICLE = SERVER + "/addboard";
 
-    public void addArticle(Context context, String content, final OnResultListener<String> listener) {
+    public void addArticle(Context context, String content, int emotion, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
         params.put("content", content);
+        params.put("emotionIndex", emotion);
         client.post(context, ADD_ARTICLE, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -363,7 +364,6 @@ public class NetworkManager {
 
     //게시글 수정
     private static final String UPDATE_ARTICLE = SERVER + "/board/update";
-
     public void updateArticle(Context context, final String jsonString, final OnResultListener<String> listener) {
         try {
             client.post(context, UPDATE_ARTICLE, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {

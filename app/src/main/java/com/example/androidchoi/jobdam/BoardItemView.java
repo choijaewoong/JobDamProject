@@ -10,8 +10,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Articles;
+import com.example.androidchoi.jobdam.Model.EmotionData;
 
 /**
  * Created by Tacademy on 2015-10-29.
@@ -71,6 +73,8 @@ public class BoardItemView extends RelativeLayout{
         mTextContent.setText(data.getArticle().getContent());
         mTextLikeCount.setText(data.getArticle().getLikeCount() + "");
         mImageLike.setSelected(data.getArticle().getLikeBool());
+        mImageEmotionIcon.setImageResource(EmotionData.get(MyApplication.getContext()).getCategoryList().get(data.getArticle().getEmotionIndex()).getImageResource());
+        mTextEmotionDescription.setText(EmotionData.get(MyApplication.getContext()).getCategoryList().get(data.getArticle().getEmotionIndex()).getDescription());
     }
 
     public void showLikeToast(){

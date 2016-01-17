@@ -14,7 +14,6 @@ public class EmotionData {
     private Context mContext;
 
     private ArrayList<EmotionData> mEmotionList;
-
     public ArrayList<EmotionData> getCategoryList() {
         return mEmotionList;
     }
