@@ -346,10 +346,11 @@ public class NetworkManager {
     // 게시글 추가
     private static final String ADD_ARTICLE = SERVER + "/addboard";
 
-    public void addArticle(Context context, String content, int emotion, final OnResultListener<String> listener) {
+    public void addArticle(Context context, String content, int emotion, long timeStamp, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
         params.put("content", content);
         params.put("emotionIndex", emotion);
+        params.put("writeTimeStamp", timeStamp);
         client.post(context, ADD_ARTICLE, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {

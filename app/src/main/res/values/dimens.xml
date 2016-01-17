@@ -84,6 +84,7 @@
     <dimen name="font_size_large_title">22sp</dimen>
     <dimen name="font_size_small">12sp</dimen>
     <dimen name="font_size_default">14sp</dimen>
+    <dimen name="font_size_semi_min">11sp</dimen>
     <dimen name="font_size_min">10sp</dimen>
     <!--<dimen name="font_size_small">8dp</dimen>-->
 

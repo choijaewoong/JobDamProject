@@ -10,10 +10,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.androidchoi.jobdam.Calendar.CurrentTime;
 import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Articles;
 import com.example.androidchoi.jobdam.Model.EmotionData;
+
+import java.util.Calendar;
 
 /**
  * Created by Tacademy on 2015-10-29.
@@ -25,8 +28,8 @@ public class BoardItemView extends RelativeLayout{
     ImageView mImageLike;
     TextView mTextLikeCount;
     TextView mTextEmotionDescription;
+    TextView mTextWriteDate;
     ImageView mImageEmotionIcon;
-
     Articles article;
 
     public BoardItemView(Context context) {
@@ -65,6 +68,7 @@ public class BoardItemView extends RelativeLayout{
         mImageLike = (ImageView)findViewById(R.id.image_board_like);
         mTextLikeCount = (TextView)findViewById(R.id.text_board_like_count);
         mTextEmotionDescription = (TextView)findViewById(R.id.text_emotion_description);
+        mTextWriteDate = (TextView)findViewById(R.id.text_board_write_date);
         mImageEmotionIcon = (ImageView)findViewById(R.id.image_emotion_icon);
     }
 
@@ -74,6 +78,7 @@ public class BoardItemView extends RelativeLayout{
         mTextLikeCount.setText(data.getArticle().getLikeCount() + "");
         mImageLike.setSelected(data.getArticle().getLikeBool());
         mImageEmotionIcon.setImageResource(EmotionData.get(MyApplication.getContext()).getCategoryList().get(data.getArticle().getEmotionIndex()).getImageResource());
+        mTextWriteDate.setText(getTimeAgo(data.getArticle().getWriteTimeStamp()));
         mTextEmotionDescription.setText(EmotionData.get(MyApplication.getContext()).getCategoryList().get(data.getArticle().getEmotionIndex()).getDescription());
     }
 
@@ -85,8 +90,38 @@ public class BoardItemView extends RelativeLayout{
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(view);
         toast.show();
-//        LayoutInflater inflater = getContext().getLayoutInflater(savedInstanceState);
-//        View view = inflater.inflate(R.layout.view_toast_like, );
     }
 
+    private static final int SECOND_MILLIS = 1000;
+    private static final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
+    private static final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
+    private static final int DAY_MILLIS = 24 * HOUR_MILLIS;
+    public static String getTimeAgo(long time) {
+        long now = Calendar.getInstance().getTimeInMillis();
+        if (time > now || time <= 0) {
+            return null;
+        }
+
+        // TODO: localize
+        final long diff = now - time;
+        if (diff < MINUTE_MILLIS) {
+            return "방금 전";
+        }
+        else if (diff < HOUR_MILLIS) {
+            return diff / MINUTE_MILLIS + "분 전";
+        }
+        else if (diff < 24 * HOUR_MILLIS) {
+            return diff / HOUR_MILLIS + "시간 전";
+        }
+        CurrentTime writeDate = new CurrentTime();
+        writeDate.seTimeStamp(time);
+        if(writeDate.getYear() == Calendar.getInstance().get(Calendar.YEAR)){
+            return writeDate.getMonth() + "월 " + writeDate.getDayOfMonth() + "일 "
+                    + writeDate.getAmPm() + " " + writeDate.getHourOfDay() + ":" + writeDate.getMinute();
+        }else {
+
+            return writeDate.getYear() + "년 " + writeDate.getMonth() + "월 " + writeDate.getDayOfMonth() + "일 "
+                    + writeDate.getAmPm() + " " + writeDate.getHourOfDay() + ":" + writeDate.getMinute();
+        }
+    }
 }

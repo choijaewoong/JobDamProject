@@ -14,13 +14,14 @@
         android:background="@drawable/image_board_container"
         android:paddingLeft="@dimen/default_small_dimen"
         android:paddingRight="@dimen/default_small_dimen"
-        android:paddingBottom="@dimen/default_dimen">
+        android:paddingBottom="@dimen/default_dimen"
+        android:paddingTop="@dimen/default_large_dimen">
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="110dp"
+            android:layout_height="100dp"
             android:id="@+id/relativeLayout6"
-            android:layout_marginTop="@dimen/default_large_dimen"
+            android:layout_marginTop="@dimen/default_small_dimen"
             android:layout_marginLeft="@dimen/default_dimen">
 
             <TextView
@@ -32,8 +33,8 @@
                 android:layout_alignParentStart="false"
                 android:text="지금 내 기분은?"
                 android:layout_centerHorizontal="true"
-                android:textSize="@dimen/font_size_small"
-                android:textColor="@android:color/black"/>
+                android:textSize="@dimen/font_size_min"
+                android:textColor="@color/colorText"/>
 
             <ImageView
                 android:layout_width="50dp"
@@ -62,14 +63,14 @@
             android:layout_height="wrap_content"
             android:minHeight="100dp"
             android:text="New Text"
-            android:lineSpacingExtra="@dimen/default_small_dimen"
+            android:lineSpacingExtra="4dp"
             android:id="@+id/text_board_content"
             android:layout_toRightOf="@+id/relativeLayout6"
             android:layout_toEndOf="@+id/relativeLayout6"
             android:layout_marginLeft="@dimen/default_large_dimen"
             android:layout_alignParentTop="true"
             android:layout_marginRight="@dimen/default_dimen"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/default_dimen"
             android:layout_marginBottom="@dimen/default_small_dimen"
             android:textColor="@color/colorText"
             android:textSize="@dimen/font_size_default"
@@ -80,7 +81,7 @@
             android:layout_height="@dimen/divider_width"
             android:id="@+id/imageView32"
             android:src="@color/colorLightPrimary"
-            android:layout_below="@+id/textView31"
+            android:layout_below="@+id/text_board_write_date"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="@dimen/default_small_dimen"
@@ -100,7 +101,7 @@
             android:layout_marginLeft="@dimen/default_small_dimen">
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="20dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/image_board_like"
                 android:src="@drawable/selector_button_article_like"/>
@@ -114,7 +115,7 @@
                 android:layout_below="@+id/imageView32"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:textSize="@dimen/font_size_default"
+                android:textSize="@dimen/font_size_small"
                 android:paddingLeft="4dp"/>
 
         </LinearLayout>
@@ -123,14 +124,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/textView31"
+            android:id="@+id/text_board_write_date"
             android:layout_below="@+id/text_board_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="@dimen/default_small_dimen"
-            android:textSize="@dimen/font_size_small"
-            android:textColor="@android:color/black"
-            android:visibility="invisible"/>
+            android:layout_marginRight="@dimen/font_size_semi_min"
+            android:textSize="@dimen/font_size_semi_min"
+            android:textColor="@color/colorText"
+            />
     </RelativeLayout>
 
 </RelativeLayout>

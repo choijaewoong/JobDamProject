@@ -5,6 +5,7 @@ import com.example.androidchoi.jobdam.Calendar.CurrentTime;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by Choi on 2015-11-18.
@@ -17,11 +18,11 @@ public class Article implements Serializable {
     private String content; // 게시글 내용
     private int like_cnt; // 게시글 좋아요 수
     private ArrayList<String> like_user = new ArrayList<String>();
-    private String writeDate; //  게시글 작성 시간
+    private long writeTimeStamp; //  게시글 작성 시간
 
     public Article() {
         CurrentTime currentTime = new CurrentTime();
-        writeDate = currentTime.getYear() + ". " + currentTime.getMonth() + ". " + currentTime.getDayOfMonth();
+        writeTimeStamp = Calendar.getInstance().getTimeInMillis();
         emotionIndex = 0;
         like_cnt = 0;
         content = "";
@@ -35,6 +36,7 @@ public class Article implements Serializable {
     public int getEmotionIndex(){
         return emotionIndex;
     }
+    public long getWriteTimeStamp() {return writeTimeStamp;}
     public void setArticle(Article article){
         setArticle(article.getUser(), article.emotionIndex,
                 article.getLikeBool(), article.getContent(), article.getLikeCount());

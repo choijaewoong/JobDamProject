@@ -22,6 +22,8 @@ import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Article;
 import com.example.androidchoi.jobdam.Model.EmotionData;
 
+import java.util.Calendar;
+
 public class ArticleWriteActivity extends AppCompatActivity {
 
     private static final String EMOTION_DIALOG = "emotion_dialog";
@@ -29,6 +31,7 @@ public class ArticleWriteActivity extends AppCompatActivity {
     Article mArticle;
     EditText mEditText;
     int mEmotionIndex;
+    long mWriteTimeStamp;
     ImageView mImageEmotion;
     ImageView mImageArrow;
 
@@ -112,7 +115,11 @@ public class ArticleWriteActivity extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.action_save) {
-            NetworkManager.getInstance().addArticle(ArticleWriteActivity.this, mEditText.getText().toString(), mEmotionIndex,
+
+            mWriteTimeStamp = Calendar.getInstance().getTimeInMillis();
+//            Log.i("timestamp", timeStamp+"");
+
+            NetworkManager.getInstance().addArticle(ArticleWriteActivity.this, mEditText.getText().toString(), mEmotionIndex, mWriteTimeStamp,
                     new NetworkManager.OnResultListener<String>() {
                 @Override
                 public void onSuccess(String result) {
