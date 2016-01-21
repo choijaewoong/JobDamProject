@@ -11,20 +11,17 @@ public class MyJob extends Job implements Serializable{
     private int job_id;
     private String url;
     private String posting_date;
-    private int opening_date;
-    private int closing_date;
+    private int openingTimestamp;
+    private int expirationTimestamp;
     private String company;
     private String companySite;
     private String jobtitle;
     private String position;
     private String location;
-    private String job_type;
     private String exprience_level;
     private String required_level;
-    private int read_cnt;
-    private int apply_cnt;
-    private int reply_cnt;
-    private String salary_code;
+    private String salary;
+    private String companyImage;
     private List<MyJobUser> scrap_userID;
 
     public MyJob() {
@@ -35,12 +32,12 @@ public class MyJob extends Job implements Serializable{
         job_id = 0;
         company = "empty";
         jobtitle = "empty";
-        opening_date = 0;
-        closing_date = 0;
+        openingTimestamp = 0;
+        expirationTimestamp = 0;
         location = "empty";
         exprience_level = "empty";
         required_level = "empty";
-        salary_code = "empty";
+        salary = "empty";
     }
 
     @Override
@@ -54,7 +51,7 @@ public class MyJob extends Job implements Serializable{
     @Override
     public String getSiteUrl() { return url;}
     @Override
-    public String getSalary() { return salary_code; }
+    public String getSalary() { return salary; }
     @Override
     public String getJobTitle() { return jobtitle; }
     @Override
@@ -63,24 +60,36 @@ public class MyJob extends Job implements Serializable{
     public String getExperienceLevel() { return exprience_level; }
     @Override
     public String getEducationLevel() { return required_level; }
+
+    @Override
+    public String getCompanyImage() {
+        return companyImage;
+    }
+
+    @Override
+    public void setCompanyImage(String image) {
+        companyImage = image;
+    }
+
     @Override
     public int getStart() {
-        return opening_date;
+        return openingTimestamp;
     }
     @Override
-    public int getEnd() {return closing_date;}
+    public int getEnd() {return expirationTimestamp;}
 
     public void setData(Job data){
      job_id = data.getId();
      company = data.getCompanyName();
      companySite = data.getCompanyLink();
      url = data.getSiteUrl();
-     opening_date = data.getStart();
-     closing_date = data.getEnd();
-     salary_code = data.getSalary();
+     openingTimestamp = data.getStart();
+    expirationTimestamp = data.getEnd();
+     salary = data.getSalary();
      jobtitle = data.getJobTitle();
      location = data.getLocation();
      exprience_level = data.getExperienceLevel();
      required_level = data.getEducationLevel();
+    companyImage = data.getCompanyImage();
     }
 }

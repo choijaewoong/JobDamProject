@@ -9,29 +9,29 @@ import java.io.Serializable;
  * Created by Choi on 2015-10-18.
  */
 public class JobData extends Job implements Serializable {
-    private int id;
+
+    private int job_id;
     private int mLogoResourceId;
     private JobCompanyData company;
     private JobContentData position;
-    @SerializedName("url")
-    private String mSiteUrl; // 사이트 주소
+    private String url; // 사이트 주소
     @SerializedName("opening-timestamp")
-    private int mStart; // 시작일
+    private int openingTimestamp; // 시작일
     @SerializedName("expiration-timestamp")
-    private int mEnd; // 마감일
-    private String keyword;  //분류
+    private int expirationTimestamp; // 마감일
     private String salary;   //연봉
+    private String companyImage;
 
     @Override
     public void init(){}
     @Override
-    public int getId() { return id; }
+    public int getId() { return job_id; }
     @Override
     public String getCompanyName() {return company.getName().getValue();}
     @Override
     public String getCompanyLink() { return company.getName().getLink(); }
     @Override
-    public String getSiteUrl() { return mSiteUrl; }
+    public String getSiteUrl() { return url; }
     @Override
     public String getJobTitle() { return position.getTitle(); }
     @Override
@@ -42,17 +42,23 @@ public class JobData extends Job implements Serializable {
     public String getEducationLevel() { return position.getEducationLevel(); }
 
     @Override
-    public int getStart() { return mStart; }
+    public String getCompanyImage() {
+        return companyImage;
+    }
     @Override
-    public int getEnd() { return mEnd; }
-    public String getKeyword() {return keyword;}
+    public void setCompanyImage(String image) {
+        companyImage = image;
+    }
+    @Override
+    public int getStart() { return openingTimestamp; }
+    @Override
+    public int getEnd() { return expirationTimestamp; }
     @Override
     public String getSalary() {return salary;}
 
     public JobData() {
         company = new JobCompanyData();
         position = new JobContentData();
-        keyword = "";
         salary = "";
         mLogoResourceId = R.drawable.image_default_corp_logo;
     }

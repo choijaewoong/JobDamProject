@@ -3,6 +3,7 @@ package com.example.androidchoi.jobdam;
 import android.content.Context;
 import android.util.TypedValue;
 import android.widget.Checkable;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,7 +16,7 @@ import java.util.Date;
 /**
  * Created by Choi on 2015-10-18.
  */
-public class JobItemView extends RelativeLayout implements Checkable{
+public class JobItemView extends RelativeLayout implements Checkable {
 
     public static final int ONE_DAY_TIME_STAMP = 86400000;
     TextView mCorp;
@@ -23,6 +24,7 @@ public class JobItemView extends RelativeLayout implements Checkable{
     TextView mPeriod;
     TextView mDDay;
     TextView mTextQuestion;
+    ImageView mImageJobLogo;
     RelativeLayout mLayout;
     boolean isChecked = false;
 
@@ -38,14 +40,15 @@ public class JobItemView extends RelativeLayout implements Checkable{
         mPeriod = (TextView) findViewById(R.id.text_period);
         mDDay = (TextView) findViewById(R.id.text_job_dday);
         mTextQuestion = (TextView) findViewById(R.id.text_show_question);
-        mLayout = (RelativeLayout)findViewById(R.id.layout_job_item_container);
+        mImageJobLogo = (ImageView)findViewById(R.id.image_job_logo);
+        mLayout = (RelativeLayout) findViewById(R.id.layout_job_item_container);
     }
 
     private void setPeriod(Date start, Date end, boolean checkDeadLine) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
         StringBuilder period = new StringBuilder();
         period.append(dateFormat.format(start)).append(" ~ ");
-        if(checkDeadLine){
+        if (checkDeadLine) {
             period.append(dateFormat.format(end));
         } else {
             period.append("채용시까지");
@@ -55,15 +58,15 @@ public class JobItemView extends RelativeLayout implements Checkable{
 
     private boolean setDDay(Date end) {
         Calendar endDay = Calendar.getInstance();
-        Calendar currentDay  = Calendar.getInstance();
+        Calendar currentDay = Calendar.getInstance();
         currentDay.set(endDay.get(Calendar.YEAR), endDay.get(Calendar.MONTH), endDay.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
         endDay.setTime(end);
         long endTime = endDay.getTimeInMillis();
         long todayTime = currentDay.getTimeInMillis();
-        long timeGap = (endTime+1000) - todayTime;
-        int d_day = (int)(timeGap/ONE_DAY_TIME_STAMP);
+        long timeGap = (endTime + 1000) - todayTime;
+        int d_day = (int) (timeGap / ONE_DAY_TIME_STAMP);
         mDDay.setText("D-" + d_day);
-        if(timeGap < 0){
+        if (timeGap < 0) {
             mDDay.setText("마감");
             mDDay.setBackgroundResource(R.drawable.image_dday_box_end);
             mDDay.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.font_size_small));
@@ -84,7 +87,7 @@ public class JobItemView extends RelativeLayout implements Checkable{
             return false;
         } else {
             mDDay.setBackgroundResource(R.drawable.image_dday_box_default);
-            if(d_day > 99){
+            if (d_day > 99) {
                 mDDay.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.font_size_min));
                 return true;
             }
@@ -93,7 +96,7 @@ public class JobItemView extends RelativeLayout implements Checkable{
         return true;
     }
 
-    public void setItemData(Job itemData, boolean check) {
+    public void setItemData(final Job itemData, boolean check) {
         mCorp.setText(itemData.getCompanyName());
         mTitle.setText(itemData.getJobTitle());
         setChecked(false);
@@ -101,7 +104,7 @@ public class JobItemView extends RelativeLayout implements Checkable{
         Date end = new Date(itemData.getEnd() * 1000L);
         boolean checkDeadLine = setDDay(end);
         setPeriod(start, end, checkDeadLine);
-        if(!check){
+        if (!check) {
             mTextQuestion.setVisibility(GONE);
         }
     }
@@ -117,6 +120,7 @@ public class JobItemView extends RelativeLayout implements Checkable{
 //            mLayout.setBackgroundResource(R.drawable.image_job_container);
         }
     }
+
     @Override
     public boolean isChecked() {
         return isChecked;

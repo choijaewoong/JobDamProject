@@ -23,5 +23,7 @@ public abstract class Job implements Serializable{
     public abstract String getLocation();
     public abstract String getExperienceLevel();
     public abstract String getEducationLevel();
+    public abstract String getCompanyImage();
+    public abstract void setCompanyImage(String image);
 
 }

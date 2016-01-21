@@ -1,11 +1,13 @@
 package com.example.androidchoi.jobdam.Manager;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.begentgroup.xmlparser.XMLParser;
 import com.example.androidchoi.jobdam.Model.ArticleLab;
 import com.example.androidchoi.jobdam.Model.Articles;
+import com.example.androidchoi.jobdam.Model.JobData;
 import com.example.androidchoi.jobdam.Model.JobList;
 import com.example.androidchoi.jobdam.Model.LoginData;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
@@ -24,6 +26,9 @@ import org.apache.http.Header;
 import org.apache.http.client.HttpClient;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHeader;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -116,10 +121,21 @@ public class NetworkManager {
         params.put(COUNT, count);
         client.get(context, API_ADDRESS, params, new AsyncHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+            public void onSuccess(int statusCode, Header[] headers, final byte[] responseBody) {
+
                 ByteArrayInputStream bais = new ByteArrayInputStream(responseBody);
-                JobList jobList = parser.fromXml(bais, "jobs", JobList.class);
+                final JobList jobList = parser.fromXml(bais, "jobs", JobList.class);
                 listener.onSuccess(jobList);
+//                for(final JobData job : jobList.getJobList()) {
+//                    MyTask myTask = new MyTask();
+//                    myTask.setOnImagListener(new MyTask.OnImageListener() {
+//                        @Override
+//                        public void onSuccess() {
+//                            listener.onSuccess(jobList);
+//                        }
+//                    });
+//                    myTask.execute(job);
+//                }
             }
 
             @Override
@@ -129,6 +145,40 @@ public class NetworkManager {
         });
     }
 
+    static class MyTask extends AsyncTask<JobData, Void, Void> {
+        public interface OnImageListener {
+            public void onSuccess();
+        }
+        OnImageListener mListener;
+        public void setOnImagListener(OnImageListener listener) {
+            mListener = listener;
+        }
+
+        @Override
+        protected Void doInBackground(JobData... params) {
+            Document doc = null;
+            try {
+                for(JobData job : params){
+                    doc = Jsoup.connect(job.getSiteUrl()).get();
+
+                    Element img = doc.select("table.corp_logo img").first();
+                    if (img != null) {
+//                    setCompanyImage(img.attr("src"));
+                        job.setCompanyImage(img.attr("src"));
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            mListener.onSuccess();
+        }
+    }
 
     private static final String SERVER = "http://52.69.235.46:3000";
     // 내가 담은 채용정보 불러오는 method
