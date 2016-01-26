@@ -107,6 +107,7 @@ public class JobItemView extends RelativeLayout implements Checkable {
         if (!check) {
             mTextQuestion.setVisibility(GONE);
         }
+//        Glide.with(MyApplication.getContext()).load(itemData.getCompanyImage()).into(mImageJobLogo);
     }
 
     @Override

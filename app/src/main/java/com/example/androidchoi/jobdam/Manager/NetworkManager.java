@@ -13,6 +13,7 @@ import com.example.androidchoi.jobdam.Model.LoginData;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
 import com.example.androidchoi.jobdam.Model.QuestionLab;
+import com.example.androidchoi.jobdam.Model.Tags;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.loopj.android.http.AsyncHttpClient;
@@ -183,7 +184,6 @@ public class NetworkManager {
     private static final String SERVER = "http://52.69.235.46:3000";
     // 내가 담은 채용정보 불러오는 method
     private static final String SHOW_MY_JOB = SERVER + "/showmyscrap";
-
     public void showMyJob(Context context, final OnResultListener<MyJobLab> listener) {
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
@@ -226,7 +226,7 @@ public class NetworkManager {
                 try {
                     questionLab = gson.fromJson(responseString, QuestionLab.class);
 //                    questionLab.getQuestions().getQuestionList().get(0).addTestTag();
-                }catch (JsonSyntaxException e){
+                } catch (JsonSyntaxException e) {
                     e.printStackTrace();
                 }
                 listener.onSuccess(questionLab);
@@ -292,9 +292,9 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 MyCardLab myCardLab = new MyCardLab();
-                try{
+                try {
                     myCardLab = gson.fromJson(responseString, MyCardLab.class);
-                }catch (JsonSyntaxException e){
+                } catch (JsonSyntaxException e) {
                     e.printStackTrace();
                 }
                 listener.onSuccess(myCardLab);
@@ -313,6 +313,7 @@ public class NetworkManager {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 MyCardLab myCardLab = new MyCardLab();
@@ -364,6 +365,30 @@ public class NetworkManager {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+    }
+
+    public static final String SHOW_CARD_TAG = SERVER + "/memotaglist";
+    public void showCardTag(Context context, final OnResultListener<Tags> listener){
+        RequestParams params = new RequestParams();
+        Header[] headers = new Header[1];
+        headers[0] = new BasicHeader("Accept", "application/json");
+        client.get(context, SHOW_CARD_TAG, headers, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Tags tagList = new Tags();
+                try {
+                    tagList = gson.fromJson(responseString, Tags.class);
+                }catch(JsonSyntaxException e){
+                    e.printStackTrace();
+                }
+                listener.onSuccess(tagList);
+            }
+        });
     }
 
     //게시글 보기

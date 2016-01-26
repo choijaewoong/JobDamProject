@@ -10,6 +10,7 @@ import java.io.Serializable;
  */
 public class JobData extends Job implements Serializable {
 
+    @SerializedName("id")
     private int job_id;
     private int mLogoResourceId;
     private JobCompanyData company;

@@ -26,46 +26,6 @@
             android:divider="@android:color/transparent"
             android:listSelector="@android:color/transparent"/>
     </android.support.v4.widget.SwipeRefreshLayout>
-    <com.example.androidchoi.jobdam.Util.MyScrollView
-        android:id="@+id/scrollView_tag"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/refresh_card_box"
-        android:layout_marginTop="@dimen/search_view_height"
-        android:clipToPadding="false"
-        android:fillViewport="false"
-        android:focusable="false"
-        android:visibility="gone"
-        android:layout_alignParentStart="true">
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorBackground"
-            android:padding="@dimen/default_small_dimen"
-            >
-
-            <com.example.androidchoi.jobdam.Util.PredicateLayout
-                android:id="@+id/predicateLayout_all_tag_box"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/linearLayout6"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginRight="30dp"
-                >
-            </com.example.androidchoi.jobdam.Util.PredicateLayout>
-
-            <ImageView
-                android:id="@+id/image_tag_box_close_button"
-                android:layout_width="@dimen/search_icon_size"
-                android:layout_height="@dimen/search_icon_size"
-                android:layout_gravity="right|top"
-                android:scaleType="center"
-                android:src="@drawable/button_search_delete"/>
-        </FrameLayout>
-    </com.example.androidchoi.jobdam.Util.MyScrollView>
 
 
     <RelativeLayout
@@ -217,6 +177,47 @@
             app:fab_size="mini"/>
 
     </com.github.clans.fab.FloatingActionMenu>
+
+    <com.example.androidchoi.jobdam.Util.MyScrollView
+        android:id="@+id/scrollView_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/refresh_card_box"
+        android:layout_marginTop="@dimen/search_view_height"
+        android:clipToPadding="false"
+        android:fillViewport="false"
+        android:focusable="false"
+        android:visibility="gone"
+        android:layout_alignParentStart="true">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBackground"
+            android:padding="@dimen/default_small_dimen"
+            >
+
+            <com.example.androidchoi.jobdam.Util.PredicateLayout
+                android:id="@+id/predicateLayout_all_tag_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/linearLayout6"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginRight="30dp"
+                >
+            </com.example.androidchoi.jobdam.Util.PredicateLayout>
+
+            <ImageView
+                android:id="@+id/image_tag_box_close_button"
+                android:layout_width="@dimen/search_icon_size"
+                android:layout_height="@dimen/search_icon_size"
+                android:layout_gravity="right|top"
+                android:scaleType="center"
+                android:src="@drawable/button_search_delete"/>
+        </FrameLayout>
+    </com.example.androidchoi.jobdam.Util.MyScrollView>
 
     <View
         android:id="@+id/toolbar_shadow"

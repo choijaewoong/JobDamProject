@@ -4,9 +4,8 @@ package com.example.androidchoi.jobdam;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -16,6 +15,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -40,10 +40,10 @@ import com.example.androidchoi.jobdam.Adpater.CardItemAdapter;
 import com.example.androidchoi.jobdam.Calendar.CategoryFolderAdapter;
 import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
-import com.example.androidchoi.jobdam.Model.CategoryData;
 import com.example.androidchoi.jobdam.Model.MyCard;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyCards;
+import com.example.androidchoi.jobdam.Model.Tags;
 import com.example.androidchoi.jobdam.Util.PredicateLayout;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -308,16 +308,15 @@ public class CardBoxFragment extends Fragment {
         super.onResume();
     }
 
-    public void addTagView(String tag, int categoryIndex, final int index, int tagID) {
+    public void addTagView(String tag) {
         final TextView t = new TextView(getActivity());
-        t.setId(tagID);
+//        t.setId(tagID);
         t.setText(tag);
         t.setTextSize(12);
-        t.setTextColor(ContextCompat.getColor(getActivity(), android.R.color.white));
-        Drawable drawable = ContextCompat.getDrawable(getActivity(), R.drawable.image_category_background);
-        drawable.setColorFilter(CategoryData.get(getActivity()).getCategoryList().get(categoryIndex).getColor(), PorterDuff.Mode.MULTIPLY);
+        t.setTextColor(ContextCompat.getColor(getActivity(), android.R.color.darker_gray));
+        LayerDrawable drawable = (LayerDrawable)ContextCompat.getDrawable(getContext(), R.drawable.image_card_tag_border_default);
         t.setBackgroundDrawable(drawable);
-        t.setPadding(16, 8, 16, 8);
+        t.setPadding(12, 4, 12, 4);
         int width = getResources().getDimensionPixelSize(R.dimen.tag_max_width);
         t.setMaxWidth(width);
         t.setSingleLine(true);
@@ -326,24 +325,9 @@ public class CardBoxFragment extends Fragment {
         t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < mTextTags.size(); i++) {
-                    if (t == mTextTags.get(i)) {
-//                        Toast.makeText(CardWriteActivity.this, "해당 태그가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getActivity(), CardWriteActivity.class);
-                        intent.putExtra(MyCard.CARD_ITEM, mCardList.get(index));
-                        intent.putExtra(MyCard.CARD_NEW, false);
-                        startActivityForResult(intent, REQUEST_MODIFY);
-                    }
-                }
             }
         });
-        for (int i = 0; i < mTextTags.size(); i++) {
-            if (t.getId() == mTextTags.get(i).getId()) {
-                return;
-            }
-        }
-        mTextTags.add(t);
-        mPredicateLayout.addView(mTextTags.get(mTextTags.size() - 1));
+        mPredicateLayout.addView(t);
     }
 
     public void showMyMemo() {
@@ -389,15 +373,35 @@ public class CardBoxFragment extends Fragment {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    mScrollView.setVisibility(View.VISIBLE);
-                    int total = 0;
-                    for (int i = 0; i < mCardList.size(); i++) {
-                        int categoryIndex = mCardList.get(i).getCard().getCategory();
-                        for (String tag : mCardList.get(i).getCard().getTags()) {
-                            addTagView(tag, categoryIndex, i, total);
-                            total++;
+                    NetworkManager.getInstance().showCardTag(getContext(), new NetworkManager.OnResultListener() {
+                        @Override
+                        public void onSuccess(Object result) {
+                            Tags tagList = (Tags) result;
+                            Log.i("asdfs",tagList.getTagCount()+"" );
+                            if (tagList.getTagCount() == 0) {
+                                return;
+                            }
+                            mPredicateLayout.removeAllViews();
+                            for (String tag : tagList.getTag()) {
+                                mScrollView.setVisibility(View.VISIBLE);
+                                addTagView(tag);
+                            }
                         }
-                    }
+
+                        @Override
+                        public void onFail(int code) {
+
+                        }
+                    });
+//
+//                    int total = 0;
+//                    for (int i = 0; i < mCardList.size(); i++) {
+//                        int categoryIndex = mCardList.get(i).getCard().getCategory();
+//                        for (String tag : mCardList.get(i).getCard().getTags()) {
+//                            addTagView(tag, categoryIndex, i, total);
+//                            total++;
+//                        }
+//                    }
                 } else {
 
                 }
