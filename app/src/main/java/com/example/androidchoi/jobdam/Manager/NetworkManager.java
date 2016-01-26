@@ -327,6 +327,32 @@ public class NetworkManager {
         });
     }
 
+    private static final String SHOW_MEMO_WITH_TAG = SERVER + "/findtag/%s";
+    public void showMemoWithTag(Context context, String tag, final OnResultListener<MyCardLab> listener) {
+        RequestParams params = new RequestParams();
+        Header[] headers = new Header[1];
+        headers[0] = new BasicHeader("Accept", "application/json");
+        String url = String.format(SHOW_MEMO_WITH_TAG, tag);
+        client.get(context, url, headers, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                MyCardLab myCardLab = new MyCardLab();
+                try {
+                    myCardLab = gson.fromJson(responseString, MyCardLab.class);
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                }
+                listener.onSuccess(myCardLab);
+            }
+        });
+    }
+
+
     // 메모 추가
     private static final String ADD_MEMO = SERVER + "/addmemo";
     public void addMemo(Context context, final String jsonString, final OnResultListener<String> listener) {
@@ -367,12 +393,12 @@ public class NetworkManager {
         }
     }
 
-    public static final String SHOW_CARD_TAG = SERVER + "/memotaglist";
+    public static final String SHOW_MEMO_TAG = SERVER + "/memotaglist";
     public void showCardTag(Context context, final OnResultListener<Tags> listener){
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
-        client.get(context, SHOW_CARD_TAG, headers, params, new TextHttpResponseHandler() {
+        client.get(context, SHOW_MEMO_TAG, headers, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);

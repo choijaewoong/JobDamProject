@@ -15,8 +15,8 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +24,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -269,8 +270,8 @@ public class CardBoxFragment extends Fragment {
         mGridSearchEdit = (EditText)view.findViewById(R.id.editText_folder_search_bar);
         mListSearchDeleteImage = (ImageView) listSearchHeaderView.findViewById(R.id.image_search_delete);
         mGridSearchDeleteImage = (ImageView) view.findViewById(R.id.image_folder_search_delete);
-        setEditListener(mListSearchEdit, mListSearchDeleteImage);
-        setEditListener(mGridSearchEdit, mGridSearchDeleteImage);
+        setEditListener(mListSearchEdit, mListSearchDeleteImage, true);
+        setEditListener(mGridSearchEdit, mGridSearchDeleteImage, false);
 
 
         fam = (FloatingActionMenu) view.findViewById(R.id.menu);
@@ -308,7 +309,7 @@ public class CardBoxFragment extends Fragment {
         super.onResume();
     }
 
-    public void addTagView(String tag) {
+    public void addTagView(String tag, final boolean isListView) {
         final TextView t = new TextView(getActivity());
 //        t.setId(tagID);
         t.setText(tag);
@@ -325,6 +326,12 @@ public class CardBoxFragment extends Fragment {
         t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(isListView){ // 메모 리스트 화면
+                    mListSearchEdit.setText(t.getText());
+                    showMyMemoWithTag(t.getText().toString());
+                }else{ // 메모 폴더 화면
+
+                }
             }
         });
         mPredicateLayout.addView(t);
@@ -348,7 +355,24 @@ public class CardBoxFragment extends Fragment {
                 });
     }
 
-    public void setEditListener(final EditText editText, final ImageView imageView) {
+    public void showMyMemoWithTag(String tag){
+        NetworkManager.getInstance().showMemoWithTag(getActivity(), tag, new NetworkManager.OnResultListener<MyCardLab>() {
+            @Override
+            public void onSuccess(MyCardLab result) {
+                mCardList = result.getCardList();
+                mAdapter.setItems(mCardList);
+                mItemCountTextView.setText(Html.fromHtml("전체카드 <font color=#0db5f7>" + mAdapter.getCount()));
+                mRefreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void onFail(int code) {
+
+            }
+        });
+    }
+
+    public void setEditListener(final EditText editText, final ImageView imageView, final boolean isListView) {
         editText.setHint("태그를 검색해주세요");
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -377,14 +401,13 @@ public class CardBoxFragment extends Fragment {
                         @Override
                         public void onSuccess(Object result) {
                             Tags tagList = (Tags) result;
-                            Log.i("asdfs",tagList.getTagCount()+"" );
                             if (tagList.getTagCount() == 0) {
                                 return;
                             }
                             mPredicateLayout.removeAllViews();
                             for (String tag : tagList.getTag()) {
                                 mScrollView.setVisibility(View.VISIBLE);
-                                addTagView(tag);
+                                addTagView(tag, isListView);
                             }
                         }
 
@@ -393,24 +416,30 @@ public class CardBoxFragment extends Fragment {
 
                         }
                     });
-//
-//                    int total = 0;
-//                    for (int i = 0; i < mCardList.size(); i++) {
-//                        int categoryIndex = mCardList.get(i).getCard().getCategory();
-//                        for (String tag : mCardList.get(i).getCard().getTags()) {
-//                            addTagView(tag, categoryIndex, i, total);
-//                            total++;
-//                        }
-//                    }
                 } else {
 
                 }
+            }
+        });
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    if(TextUtils.isEmpty(v.getText().toString())){
+                        showMyMemo();
+                    }else {
+                        showMyMemoWithTag(v.getText().toString());
+                    }
+                    return true;
+                }
+                return false;
             }
         });
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 editText.setText("");
+                showMyMemo();
             }
         });
     }
