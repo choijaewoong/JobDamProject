@@ -1,30 +1,21 @@
 package com.example.androidchoi.jobdam;
 
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.text.Html;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -45,11 +36,8 @@ public class MyJobListFragment extends Fragment {
     SwipeRefreshLayout mRefreshLayout;
     ListView mListView;
     MyJobItemAdapter mAdapter;
-    EditText mSearchEdit;
-    ImageView mDeleteImage;
     TextView mCountTextView;
     private ArrayList<MyJobs> mJobList;
-    View searchHeaderView;
     View countHeaderView;
     ArrayList<Integer> checkedItems = new ArrayList<Integer>();
 
@@ -78,24 +66,6 @@ public class MyJobListFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        FrameLayout touchInterceptor = (FrameLayout) getActivity().findViewById(R.id.touchInterceptor);
-        touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    if (mSearchEdit.isFocused()) {
-                        Rect outRect = new Rect();
-                        mSearchEdit.getGlobalVisibleRect(outRect);
-                        if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                            mSearchEdit.clearFocus();
-                            InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                        }
-                    }
-                }
-                return false;
-            }
-        });
     }
 
     @Override
@@ -103,43 +73,12 @@ public class MyJobListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_job_list, container, false);
-        searchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
         countHeaderView = inflater.inflate(R.layout.view_header_item_count, null);
         mRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_my_job);
         mRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorPrimary);
         mRefreshLayout.setColorSchemeResources(android.R.color.white);
         mListView = (ListView) view.findViewById(R.id.listview_my_job);
-        mListView.addHeaderView(searchHeaderView);
         mListView.addHeaderView(countHeaderView, null, false);
-        mDeleteImage = (ImageView) searchHeaderView.findViewById(R.id.image_search_delete);
-        mDeleteImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSearchEdit.setText("");
-            }
-        });
-        mSearchEdit = (EditText) searchHeaderView.findViewById(R.id.editText_search_bar);
-        mSearchEdit.setHint("기업을 검색해주세요");
-        mSearchEdit.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String string = s.toString();
-                if (!string.equals("")) {
-                    mDeleteImage.setVisibility(View.VISIBLE);
-                } else {
-                    mDeleteImage.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
         mAdapter = new MyJobItemAdapter();
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -212,7 +151,6 @@ public class MyJobListFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mListView.getCheckedItemCount() + " 개 선택");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(false);
-        mListView.removeHeaderView(searchHeaderView);
         ((MyJobFragment) getParentFragment()).getViewPager().setPagingEnabled(false);
         ((MyJobFragment) getParentFragment()).getTabLayout().setVisibility(View.GONE);
     }
@@ -229,9 +167,6 @@ public class MyJobListFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setBackgroundDrawable(ContextCompat.getDrawable(getContext(), R.color.colorPrimary));
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(true);
-        mListView.removeHeaderView(countHeaderView);
-        mListView.addHeaderView(searchHeaderView);
-        mListView.addHeaderView(countHeaderView, null, false);
         ((MyJobFragment) getParentFragment()).getViewPager().setPagingEnabled(true);
         ((MyJobFragment) getParentFragment()).getTabLayout().setVisibility(View.VISIBLE);
         mAdapter.notifyDataSetChanged();

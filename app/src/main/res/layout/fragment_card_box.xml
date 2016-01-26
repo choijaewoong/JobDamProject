@@ -23,6 +23,7 @@
             android:layout_marginLeft="0dp"
             android:layout_marginTop="0dp"
             android:clipToPadding="false"
+            android:scrollbars="none"
             android:divider="@android:color/transparent"
             android:listSelector="@android:color/transparent"/>
     </android.support.v4.widget.SwipeRefreshLayout>

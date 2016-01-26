@@ -56,6 +56,8 @@ public class AllJobFragment extends Fragment {
     TextView mTextView;
     JobItemAdapter mAdapter;
     EditText mSearchEdit;
+    View searchHeaderView;
+    View countHeaderView;
     ImageView mDeleteImage;
     Spinner mSpinnerJobOrder;
     Spinner mSpinnerJobKind;
@@ -87,6 +89,7 @@ public class AllJobFragment extends Fragment {
                     getMoreItem();
                 }
             }
+
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (totalItemCount > 0 && (firstVisibleItem + visibleItemCount >= totalItemCount - 1)) {
@@ -116,73 +119,37 @@ public class AllJobFragment extends Fragment {
             }
         });
     }
+
     @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            // Inflate the layout for this fragment
-            View view = inflater.inflate(R.layout.fragment_all_job, container, false);
-            View searchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
-            View countHeaderView = inflater.inflate(R.layout.view_header_all_job_count, null);
-            final ToggleButton toggleButton = (ToggleButton)countHeaderView.findViewById(R.id.btn_order_toggle);
-            toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked){
-                        job_ordering = "da";
-                        toggleButton.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
-                    }else {
-                        job_ordering = "pd";
-                        toggleButton.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
-                    }
-                    searchJob();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_all_job, container, false);
+        searchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
+        countHeaderView = inflater.inflate(R.layout.view_header_all_job_count, null);
+        final ToggleButton toggleButton = (ToggleButton) countHeaderView.findViewById(R.id.btn_order_toggle);
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    job_ordering = "da";
+                    toggleButton.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+                } else {
+                    job_ordering = "pd";
+                    toggleButton.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
                 }
-            });
-        mRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_all_job);
+                searchJob();
+            }
+        });
+        mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_all_job);
         mRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorPrimary);
         mRefreshLayout.setColorSchemeResources(android.R.color.white);
         mListView = (ListView) view.findViewById(R.id.listview_all_job);
         mListView.addHeaderView(searchHeaderView);
         mListView.addHeaderView(countHeaderView, null, false);
         mDeleteImage = (ImageView) searchHeaderView.findViewById(R.id.image_search_delete);
-        mDeleteImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSearchEdit.setText("");
-                job_keyword = "";
-                searchJob();
-            }
-        });
         mSearchEdit = (EditText) searchHeaderView.findViewById(R.id.editText_search_bar);
-        mSearchEdit.setHint("기업을 검색해주세요");
-        mSearchEdit.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    //do here your stuff
-                    job_keyword = v.getText().toString();
-                    InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    searchJob();
-                    return true;
-                }
-                return false;
-            }
-        });
-        mSearchEdit.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
-            @Override
-            public void afterTextChanged(Editable s) {
-                String string = s.toString();
-                if (!string.equals("")) {
-                    mDeleteImage.setVisibility(View.VISIBLE);
-                } else {
-                    mDeleteImage.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
+        setEditListener();
 
         mAdapter = new JobItemAdapter();
         mListView.setAdapter(mAdapter);
@@ -199,12 +166,12 @@ public class AllJobFragment extends Fragment {
         initArrayAdapter();
 
         //최신순, 마감순
-        mSpinnerJobOrder = (Spinner)view.findViewById(R.id.spinner_job_region);
+        mSpinnerJobOrder = (Spinner) view.findViewById(R.id.spinner_job_region);
         mSpinnerJobOrder.setAdapter(mArrayAdapters[0]);
         mSpinnerJobOrder.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 1: // 서울
                         job_region = "101000+117000";
                         break;
@@ -249,18 +216,19 @@ public class AllJobFragment extends Fragment {
                 }
                 searchJob();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
         // 직무별
-        mSpinnerJobKind = (Spinner)view.findViewById(R.id.spinner_job_kind);
+        mSpinnerJobKind = (Spinner) view.findViewById(R.id.spinner_job_kind);
         mSpinnerJobKind.setAdapter(mArrayAdapters[1]);
         mSpinnerJobKind.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 1: // 경영, 사무
                         job_kind = "1";
                         break;
@@ -307,18 +275,19 @@ public class AllJobFragment extends Fragment {
                 }
                 searchJob();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
         // 채용 형태
-        mSpinnerJobType = (Spinner)view.findViewById(R.id.spinner_job_type);
+        mSpinnerJobType = (Spinner) view.findViewById(R.id.spinner_job_type);
         mSpinnerJobType.setAdapter(mArrayAdapters[2]);
         mSpinnerJobType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 1: //정규직
                         job_type = "1";
                         break;
@@ -358,6 +327,63 @@ public class AllJobFragment extends Fragment {
         });
         return view;
     }
+
+    private void setEditListener() {
+        mSearchEdit.setHint("기업을 검색해주세요");
+        mSearchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    //do here your stuff
+                    job_keyword = v.getText().toString();
+                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    searchJob();
+                    return true;
+                }
+                return false;
+            }
+        });
+        mSearchEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String string = s.toString();
+                if (!string.equals("")) {
+                    mDeleteImage.setVisibility(View.VISIBLE);
+                } else {
+                    mDeleteImage.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+        mSearchEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService( Context.INPUT_METHOD_SERVICE );
+                    imm.showSoftInput(mSearchEdit, 0 );
+                }else{
+                }
+            }
+        });
+
+        mDeleteImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSearchEdit.setText("");
+                job_keyword = "";
+                searchJob();
+            }
+        });
+    }
+
     private void getMoreItem() {
         if (!isUpdate) {
             final int startIndex = mAdapter.getStartIndex();
@@ -365,26 +391,26 @@ public class AllJobFragment extends Fragment {
                 isUpdate = true;
                 NetworkManager.getInstance().getJobAPI(getActivity(), job_keyword, job_ordering, job_region, job_kind, job_type,
                         page, SHOW_JOB_MAX, new NetworkManager.OnResultListener<JobList>() {
-                    @Override
-                    public void onSuccess(JobList result) {
-                        page++;
-                        for (Job item : result.getJobList()) {
-                            mAdapter.add(item);
-                        }
-                        isUpdate = false;
+                            @Override
+                            public void onSuccess(JobList result) {
+                                page++;
+                                for (Job item : result.getJobList()) {
+                                    mAdapter.add(item);
+                                }
+                                isUpdate = false;
 //                        mRefreshLayout.setRefreshing(false);
-                    }
+                            }
 
-                    @Override
-                    public void onFail(int code) {
-                        isUpdate = false;
-                    }
-                });
+                            @Override
+                            public void onFail(int code) {
+                                isUpdate = false;
+                            }
+                        });
             }
         }
     }
 
-    public void searchJob(){
+    public void searchJob() {
         page = 0;
         NetworkManager.getInstance().getJobAPI(getActivity(), job_keyword, job_ordering, job_region, job_kind, job_type,
                 page, SHOW_JOB_MAX, new NetworkManager.OnResultListener<JobList>() {
@@ -402,20 +428,22 @@ public class AllJobFragment extends Fragment {
 //                            }
 //                        }, 2000);
                     }
+
                     @Override
                     public void onFail(int code) {
                         Toast.makeText(getActivity(), "error : " + code, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
+
     private void initArrayAdapter() {
         mArrayAdapters = new ArrayAdapter[3];
         String[][] StringArray = new String[3][];
         StringArray[0] = getResources().getStringArray(R.array.job_region);
         StringArray[1] = getResources().getStringArray(R.array.job_kind);
         StringArray[2] = getResources().getStringArray(R.array.job_type);
-        for(int i=0; i<mArrayAdapters.length; i++){
-            mArrayAdapters[i] = new ArrayAdapter<String>(getActivity(),R.layout.spinner_header_item);
+        for (int i = 0; i < mArrayAdapters.length; i++) {
+            mArrayAdapters[i] = new ArrayAdapter<String>(getActivity(), R.layout.spinner_header_item);
             mArrayAdapters[i].setDropDownViewResource(R.layout.spinner_dropdown_item);
             mArrayAdapters[i].addAll(StringArray[i]);
         }
