@@ -54,7 +54,7 @@ public class ArticleWriteActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                Toast.makeText(ArticleWriteActivity.this, "emotion", Toast.LENGTH_SHORT).show();
 
-                mImageArrow.setImageResource(android.R.color.black);
+                mImageArrow.setImageResource(R.drawable.button_emotion_close);
                 ArticleEmotionListDialogFragment dialog = new ArticleEmotionListDialogFragment();
                 dialog.show(getSupportFragmentManager(), EMOTION_DIALOG);
             }
@@ -98,7 +98,7 @@ public class ArticleWriteActivity extends AppCompatActivity {
     }
 
     public void setArrow(){
-        mImageArrow.setImageResource(android.R.color.white);
+        mImageArrow.setImageResource(R.drawable.button_emotion_open);
     }
 
     @Override

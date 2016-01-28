@@ -3,7 +3,6 @@ package com.example.androidchoi.jobdam;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.NoticeAdapter;
-import com.example.androidchoi.jobdam.Model.NoticeContentData;
-import com.example.androidchoi.jobdam.Model.NoticeDateData;
 
 
 /**
@@ -53,14 +50,14 @@ public class NoticeFragment extends Fragment {
     }
 
     private void initListItem() {
-        mNoticeAdapter.add(new NoticeDateData("15.12.04"));
-        mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice0)), "12:00", true));
-        mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice2)), "10:30", true));
-        mNoticeAdapter.add(new NoticeDateData("15.12.03"));
-        mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice5)), "18:00", true));
-        mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice3)), "13:00", true));
-        mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice4)), "09:00", true));
-        mNoticeAdapter.notifyDataSetChanged();
+//        mNoticeAdapter.add(new NoticeDateData("15.12.04"));
+//        mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice0)), "12:00", true));
+//        mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice2)), "10:30", true));
+//        mNoticeAdapter.add(new NoticeDateData("15.12.03"));
+//        mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice5)), "18:00", true));
+//        mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice3)), "13:00", true));
+//        mNoticeAdapter.add(new NoticeContentData(0, Html.fromHtml(getString(R.string.notice4)), "09:00", true));
+//        mNoticeAdapter.notifyDataSetChanged();
     }
 //
 //    private void initExpandableMenu() {

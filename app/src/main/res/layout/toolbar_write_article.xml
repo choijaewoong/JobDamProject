@@ -23,8 +23,7 @@
         android:layout_height="6dp"
         android:id="@+id/image_emotion_arrow"
         android:layout_marginTop="4dp"
-        android:background="@android:color/white"
-        />
+        android:src="@drawable/button_emotion_open"/>
 
 
 </LinearLayout>
