@@ -1,6 +1,6 @@
 package com.example.androidchoi.jobdam.Model;
 
-import com.example.androidchoi.jobdam.JobItemView;
+import com.example.androidchoi.jobdam.ItemView.JobItemView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

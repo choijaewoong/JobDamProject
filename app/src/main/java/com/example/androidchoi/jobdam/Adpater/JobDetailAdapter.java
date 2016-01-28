@@ -4,11 +4,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 
-import com.example.androidchoi.jobdam.ExpandableChildAddressItemView;
-import com.example.androidchoi.jobdam.ExpandableChildContentItemView;
-import com.example.androidchoi.jobdam.ExpandableChildPeriodItemView;
-import com.example.androidchoi.jobdam.ExpandableChildQuestionItemView;
-import com.example.androidchoi.jobdam.ExpandableGroupItemView;
+import com.example.androidchoi.jobdam.ItemView.ExpandableChildAddressItemView;
+import com.example.androidchoi.jobdam.ItemView.ExpandableChildContentItemView;
+import com.example.androidchoi.jobdam.ItemView.ExpandableChildPeriodItemView;
+import com.example.androidchoi.jobdam.ItemView.ExpandableChildQuestionItemView;
+import com.example.androidchoi.jobdam.ItemView.ExpandableGroupItemView;
 import com.example.androidchoi.jobdam.Model.AddressData;
 import com.example.androidchoi.jobdam.Model.ChildData;
 import com.example.androidchoi.jobdam.Model.ContentData;

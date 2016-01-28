@@ -7,8 +7,8 @@ import android.widget.BaseAdapter;
 import com.example.androidchoi.jobdam.Model.NoticeContentData;
 import com.example.androidchoi.jobdam.Model.NoticeData;
 import com.example.androidchoi.jobdam.Model.NoticeDateData;
-import com.example.androidchoi.jobdam.NoticeContentItemView;
-import com.example.androidchoi.jobdam.NoticeDateItemView;
+import com.example.androidchoi.jobdam.ItemView.NoticeContentItemView;
+import com.example.androidchoi.jobdam.ItemView.NoticeDateItemView;
 
 import java.util.ArrayList;
 

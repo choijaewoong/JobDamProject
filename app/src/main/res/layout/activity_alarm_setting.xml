@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorBackground"
-    tools:context="com.example.androidchoi.jobdam.Setting.AlarmSettingActivity">
+    tools:context="com.example.androidchoi.jobdam.AlarmSettingActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

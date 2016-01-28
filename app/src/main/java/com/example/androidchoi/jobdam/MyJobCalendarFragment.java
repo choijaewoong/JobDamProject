@@ -12,11 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.androidchoi.jobdam.Calendar.CalendarAdapter;
-import com.example.androidchoi.jobdam.Calendar.CalendarData;
-import com.example.androidchoi.jobdam.Calendar.CalendarItem;
-import com.example.androidchoi.jobdam.Calendar.CalendarManager;
-import com.example.androidchoi.jobdam.Calendar.ItemData;
+import com.example.androidchoi.jobdam.Adpater.CalendarAdapter;
+import com.example.androidchoi.jobdam.Model.Calendar.CalendarData;
+import com.example.androidchoi.jobdam.Model.Calendar.CalendarItem;
+import com.example.androidchoi.jobdam.Manager.CalendarManager;
+import com.example.androidchoi.jobdam.Model.Calendar.ItemData;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
 import com.example.androidchoi.jobdam.Model.MyJobs;

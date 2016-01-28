@@ -1,6 +1,5 @@
 package com.example.androidchoi.jobdam.Model;
 
-import com.example.androidchoi.jobdam.Calendar.CurrentTime;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;

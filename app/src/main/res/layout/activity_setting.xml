@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorBackground"
-    tools:context="com.example.androidchoi.jobdam.Setting.SettingActivity">
+    tools:context="com.example.androidchoi.jobdam.SettingActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

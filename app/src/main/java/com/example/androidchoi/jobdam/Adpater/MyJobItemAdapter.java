@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.example.androidchoi.jobdam.JobItemView;
+import com.example.androidchoi.jobdam.ItemView.JobItemView;
 import com.example.androidchoi.jobdam.Model.MyJob;
 import com.example.androidchoi.jobdam.Model.MyJobs;
 

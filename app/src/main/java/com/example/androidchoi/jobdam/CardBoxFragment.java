@@ -38,7 +38,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.CardItemAdapter;
-import com.example.androidchoi.jobdam.Calendar.CategoryFolderAdapter;
+import com.example.androidchoi.jobdam.Adpater.CategoryFolderAdapter;
 import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.MyCard;

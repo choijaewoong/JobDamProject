@@ -18,8 +18,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.MyJobItemAdapter;
-import com.example.androidchoi.jobdam.Calendar.CalendarItem;
-import com.example.androidchoi.jobdam.Calendar.ItemData;
+import com.example.androidchoi.jobdam.Model.Calendar.CalendarItem;
+import com.example.androidchoi.jobdam.Model.Calendar.ItemData;
 import com.example.androidchoi.jobdam.Model.Job;
 import com.example.androidchoi.jobdam.Model.MyJob;
 import com.example.androidchoi.jobdam.Model.MyJobs;

@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.example.androidchoi.jobdam.Model.MyCards;
-import com.example.androidchoi.jobdam.TaggedCardItemView;
+import com.example.androidchoi.jobdam.ItemView.TaggedCardItemView;
 
 import java.util.ArrayList;
 

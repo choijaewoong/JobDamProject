@@ -4,7 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.example.androidchoi.jobdam.CardItemView;
+import com.example.androidchoi.jobdam.ItemView.CardItemView;
 import com.example.androidchoi.jobdam.Model.MyCards;
 
 import java.util.ArrayList;

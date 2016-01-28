@@ -1,8 +1,6 @@
 package com.example.androidchoi.jobdam.Model;
 
 
-import com.example.androidchoi.jobdam.Calendar.CurrentTime;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;

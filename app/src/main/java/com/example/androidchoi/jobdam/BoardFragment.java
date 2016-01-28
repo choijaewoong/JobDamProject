@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.MyFragmentPagerAdapter;
+import com.example.androidchoi.jobdam.ItemView.TabBoardAllView;
+import com.example.androidchoi.jobdam.ItemView.TabBoardMeView;
 
 import java.util.ArrayList;
 import java.util.List;

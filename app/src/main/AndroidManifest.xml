@@ -13,10 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Calendar.SampleCalenarActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
@@ -46,27 +42,11 @@
             android:windowSoftInputMode="adjustUnspecified" >
         </activity>
         <activity
-            android:name=".Setting.SettingActivity"
+            android:name=".SettingActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".Setting.HelpDeskActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
-            android:name=".Setting.PrivacyActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
-            android:name=".Setting.LegalActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
-            android:name=".Setting.AlarmSettingActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
-            android:name=".Setting.VersionInfoActivity"
+            android:name=".AlarmSettingActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
