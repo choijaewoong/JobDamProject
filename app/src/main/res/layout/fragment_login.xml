@@ -1,150 +1,159 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.example.androidchoi.jobdam.LogIn.LoginFragment"
-                android:background="@color/colorPrimary">
-
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                tools:context="com.example.androidchoi.jobdam.LogIn.LoginFragment"
+                android:id="@+id/layout_login">
     <!-- TODO: Update blank fragment layout -->
-
-
-    <ImageView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/layout_login_top_section"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/image_login_logo"
-        android:scaleType="fitXY"
         android:layout_above="@+id/relativeLayout4"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"/>
+        android:layout_alignParentTop="true"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/image_login_logo"
+            android:paddingTop="20dp"/>
+    </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/relativeLayout4"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="240dp"
         android:layout_gravity="center_horizontal|bottom"
-        android:padding="24dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/relativeLayout4">
+        android:padding="@dimen/default_dimen">
 
         <EditText
-            android:layout_width="250dp"
-            android:layout_height="35dp"
             android:id="@+id/editText_login_email"
+            android:layout_width="250dp"
+            android:layout_height="34dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:autoText="false"
+            android:background="@drawable/image_login_email"
             android:gravity="center_vertical|start"
             android:hint="E-mail"
-            android:textColorHint="@android:color/white"
-            android:textColor="@android:color/white"
-            android:autoText="false"
-            android:singleLine="true"
             android:maxLength="40"
-            android:background="@drawable/image_login_email"
             android:paddingLeft="50dp"
-            android:textSize="@dimen/font_size_default"/>
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/font_size_default"
+            />
 
         <EditText
-            android:layout_width="250dp"
-            android:layout_height="35dp"
             android:id="@+id/editText_login_password"
+            android:layout_width="250dp"
+            android:layout_height="34dp"
             android:layout_below="@+id/editText_login_email"
             android:layout_centerHorizontal="true"
-            android:inputType="textPassword"
-            android:hint="Password"
-            android:singleLine="true"
-            android:maxLength="24"
-            android:gravity="center_vertical|start"
-            android:textColorHint="@android:color/white"
-            android:textColor="@android:color/white"
-            android:background="@drawable/image_login_password"
-            android:paddingLeft="50dp"
+            android:layout_marginBottom="@dimen/default_dimen"
             android:layout_marginTop="@dimen/default_small_dimen"
-            android:layout_marginBottom="@dimen/default_large_dimen"
+            android:background="@drawable/image_login_password"
+            android:gravity="center_vertical|start"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:maxLength="24"
+            android:paddingLeft="50dp"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
             android:textSize="@dimen/font_size_default"/>
 
         <Button
-            android:layout_width="250dp"
-            android:layout_height="35dp"
-            android:text="Log-in"
             android:id="@+id/btn_sign_in"
-            android:background="@drawable/selector_button_login"
+            android:layout_width="250dp"
+            android:layout_height="34dp"
             android:layout_below="@+id/editText_login_password"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/selector_button_login"
+            android:text="Log-in"
             android:textColor="@color/colorPrimary"
-            android:textSize="@dimen/font_size_default"
-            android:layout_marginBottom="@dimen/default_small_dimen"/>
+            android:textSize="@dimen/font_size_default"/>
 
         <TextView
+            android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="비밀번호 찾기"
-            android:id="@+id/textView8"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:text="비밀번호 찾기"
             android:textColor="@android:color/white"/>
 
         <ImageView
+            android:id="@+id/image_google_login_button"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:id="@+id/image_google_login_button"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/image_google"/>
+            android:layout_alignParentRight="true"
+            android:src="@drawable/image_google"
+            android:visibility="gone"/>
 
         <ImageView
+            android:id="@+id/image_faceBook_login_button"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:id="@+id/image_faceBook_login_button"
             android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/default_small_dimen"
             android:layout_toLeftOf="@+id/image_google_login_button"
             android:layout_toStartOf="@+id/image_google_login_button"
             android:src="@drawable/image_facebook"
-            android:layout_marginRight="@dimen/default_small_dimen"/>
+            android:visibility="gone"/>
 
         <TextView
+            android:id="@+id/text_login_fail_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/text_login_fail_message"
             android:layout_below="@+id/btn_sign_in"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="4dp"
             android:textColor="@android:color/white"
-            android:layout_marginBottom="@dimen/default_small_dimen"
             android:visibility="gone"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center"
-            android:layout_below="@+id/text_login_fail_message"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
 
             <TextView
+                android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="처음 오셨나요?"
-                android:id="@+id/textView10"
                 android:layout_alignLeft="@+id/btn_sign_in"
                 android:layout_alignStart="@+id/btn_sign_in"
                 android:layout_below="@+id/btn_sign_in"
                 android:layout_toLeftOf="@+id/textView9"
                 android:layout_toStartOf="@+id/textView9"
                 android:gravity="right"
+                android:text="처음 오셨나요?"
                 />
 
             <TextView
+                android:id="@+id/text_sign_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 가입하기"
-                android:id="@+id/text_sign_up"
                 android:layout_below="@+id/btn_sign_in"
                 android:layout_toLeftOf="@+id/image_google_login_button"
                 android:layout_toStartOf="@+id/image_google_login_button"
-                android:textColor="#ffffff"/>
+                android:text=" 가입하기"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="2dp"/>
 
         </LinearLayout>
 

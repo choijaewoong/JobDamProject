@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam.LogIn;
 
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.MainActivity;
@@ -33,6 +36,8 @@ public class LoginFragment extends Fragment {
     TextView mTextFailMessage;
     EditText mEditEmail;
     EditText mEditPassWord;
+    RelativeLayout mLayoutLogin;
+    RelativeLayout mLayoutTopSection;
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -42,6 +47,8 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+        mLayoutLogin = (RelativeLayout)view.findViewById(R.id.layout_login);
+        mLayoutTopSection = (RelativeLayout)view.findViewById(R.id.layout_login_top_section);
         mTextFailMessage = (TextView)view.findViewById(R.id.text_login_fail_message);
         Button btn = (Button)view.findViewById(R.id.btn_sign_in);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -89,8 +96,29 @@ public class LoginFragment extends Fragment {
             }
         });
         mEditEmail = (EditText)view.findViewById(R.id.editText_login_email);
+//        mEditEmail.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                showAndHideTopSection();
+//            }
+//        });
         mEditPassWord = (EditText)view.findViewById(R.id.editText_login_password);
         return view;
+    }
+
+    public void showAndHideTopSection() {
+        float height = mLayoutTopSection.getHeight();
+        if (mLayoutLogin.getY() == 0) {
+            ObjectAnimator translationRight = ObjectAnimator.ofFloat(mLayoutLogin, "Y",
+                    -height);
+            translationRight.setDuration(1500);
+            translationRight.start();
+        } else {
+            ObjectAnimator translationLeft = ObjectAnimator.ofFloat(mLayoutLogin, "Y",
+                    0f);
+            translationLeft.setDuration(1500);
+            translationLeft.start();
+        }
     }
 
 
