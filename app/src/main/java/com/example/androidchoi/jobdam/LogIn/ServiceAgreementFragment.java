@@ -27,6 +27,7 @@ public class ServiceAgreementFragment extends Fragment {
     TextView mTextPrivateInfo;
     CheckBox mCheckBox;
     CheckBox mCheckBox2;
+
     public ServiceAgreementFragment() {
         // Required empty public constructor
     }
@@ -60,14 +61,12 @@ public class ServiceAgreementFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mCheckBox.isChecked() && mCheckBox.isChecked())
+                if(mCheckBox.isChecked() && mCheckBox2.isChecked())
                 getActivity().getSupportFragmentManager().beginTransaction().add(R.id.login_container, new InputUserInfoFragment()).addToBackStack(null).commit();
                 else
                     Toast.makeText(getActivity(), "약관에 모두 동의해주세요.", Toast.LENGTH_SHORT).show();
             }
         });
-
-
         return view;
     }
 

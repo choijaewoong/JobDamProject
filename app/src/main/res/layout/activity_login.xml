@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/login_container"
     android:background="@color/colorBackground"
+    android:focusableInTouchMode="true"
     tools:context="com.example.androidchoi.jobdam.LogIn.LoginActivity">
 
 
