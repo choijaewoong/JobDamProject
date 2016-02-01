@@ -9,8 +9,8 @@
         android:layout_height="@dimen/corp_logo_size"
         android:id="@+id/image_detail_corp_logo"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/default_large_dimen"
-        android:src="@drawable/image_default_corp_logo"/>
+        android:layout_marginTop="@dimen/default_dimen"
+        />
 
     <TextView
         android:layout_width="wrap_content"
