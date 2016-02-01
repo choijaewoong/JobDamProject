@@ -38,7 +38,6 @@
         android:layout_gravity="left|top"
         android:layout_weight="1"
         android:id="@+id/layout_input_user_profile"
-        android:animateLayoutChanges="true"
         android:background="@color/colorPrimary">
 
         <ImageView
@@ -67,7 +66,7 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:paddingLeft="@dimen/default_large_dimen"
-        android:paddingTop="@dimen/default_large_dimen"
+        android:paddingTop="@dimen/default_dimen"
         android:paddingRight="@dimen/default_large_dimen"
         android:paddingBottom="@dimen/default_dimen">
 
@@ -86,7 +85,9 @@
             android:textIsSelectable="false"
             android:textColorHint="@color/colorLightGray"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/font_size_default"/>
+            android:textSize="@dimen/font_size_default"
+            android:paddingTop="@dimen/default_small_dimen"
+            android:paddingBottom="@dimen/default_small_dimen"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -103,7 +104,9 @@
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/imageView7"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/font_size_default"/>
+            android:textSize="@dimen/font_size_default"
+            android:paddingTop="@dimen/default_small_dimen"
+            android:paddingBottom="@dimen/default_small_dimen"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -120,7 +123,9 @@
             android:textColorHint="@color/colorLightGray"
             android:layout_below="@+id/imageView22"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/font_size_default"/>
+            android:textSize="@dimen/font_size_default"
+            android:paddingTop="@dimen/default_small_dimen"
+            android:paddingBottom="@dimen/default_small_dimen"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -137,7 +142,9 @@
             android:layout_centerHorizontal="true"
             android:textColorHint="@color/colorLightGray"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/font_size_default"/>
+            android:textSize="@dimen/font_size_default"
+            android:paddingTop="@dimen/default_small_dimen"
+            android:paddingBottom="@dimen/default_small_dimen"/>
 
         <ImageView
             android:layout_width="match_parent"
@@ -146,8 +153,7 @@
             android:layout_below="@+id/editText_signup_name"
             android:layout_centerHorizontal="true"
             android:background="@color/colorDivider"
-            android:layout_marginTop="@dimen/default_small_dimen"
-            android:layout_marginBottom="@dimen/default_dimen"/>
+            android:layout_marginBottom="@dimen/default_small_dimen"/>
 
         <ImageView
             android:layout_width="match_parent"
@@ -155,8 +161,7 @@
             android:id="@+id/imageView22"
             android:background="@color/colorDivider"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/default_small_dimen"
-            android:layout_marginBottom="@dimen/default_dimen"
+            android:layout_marginBottom="@dimen/default_small_dimen"
             android:layout_below="@+id/editText_signup_email"/>
 
         <ImageView
@@ -166,8 +171,7 @@
             android:background="@color/colorDivider"
             android:layout_below="@+id/editText_signup_password"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/default_small_dimen"
-            android:layout_marginBottom="@dimen/default_dimen"/>
+            android:layout_marginBottom="@dimen/default_small_dimen"/>
 
         <ImageView
             android:layout_width="match_parent"
@@ -176,8 +180,7 @@
             android:background="@color/colorDivider"
             android:layout_below="@+id/editText_signup_password_check"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/default_small_dimen"
-            android:layout_marginBottom="@dimen/default_dimen"/>
+            android:layout_marginBottom="@dimen/default_small_dimen"/>
 
     </RelativeLayout>
 

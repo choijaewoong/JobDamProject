@@ -5,8 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -26,6 +31,8 @@ import com.example.androidchoi.jobdam.Model.LoginData;
 import com.example.androidchoi.jobdam.Model.User;
 import com.example.androidchoi.jobdam.R;
 import com.example.androidchoi.jobdam.Util.SoftKeyboardHandledLinearLayout;
+
+import java.util.regex.Pattern;
 
 
 /**
@@ -66,11 +73,30 @@ public class InputUserInfoFragment extends Fragment {
                 }
             }
         });
+        mEditEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (isValidEmail(s)) {
+                    mEditEmail.setTextColor(ContextCompat.getColor(getContext(), android.R.color.black));
+                } else {
+                    mEditEmail.setTextColor(ContextCompat.getColor(getContext(), R.color.colorDanger));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
         mEditName = (EditText) view.findViewById(R.id.editText_signup_name);
         mEditName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
+                if (hasFocus) {
                     hideProfile();
                 }
             }
@@ -84,6 +110,26 @@ public class InputUserInfoFragment extends Fragment {
                 }
             }
         });
+        mEditPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (isValidPassword(s)) {
+                    mEditPassword.setTextColor(ContextCompat.getColor(getContext(), android.R.color.black));
+                } else {
+                    mEditPassword.setTextColor(ContextCompat.getColor(getContext(), R.color.colorDanger));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         mEditPasswordCheck = (EditText) view.findViewById(R.id.editText_signup_password_check);
         mEditPasswordCheck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,10 +140,30 @@ public class InputUserInfoFragment extends Fragment {
         mEditPasswordCheck.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_DONE){
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
                     showProfile();
                 }
                 return false;
+            }
+        });
+        mEditPasswordCheck.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (isSamePassword(mEditPasswordCheck.getText(), s)) {
+                    mEditPasswordCheck.setTextColor(ContextCompat.getColor(getContext(), android.R.color.black));
+                } else {
+                    mEditPasswordCheck.setTextColor(ContextCompat.getColor(getContext(), R.color.colorDanger));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
         Button btn = (Button) view.findViewById(R.id.btn_input_complete);
@@ -125,31 +191,41 @@ public class InputUserInfoFragment extends Fragment {
     }
 
     public void signUp(){
-        NetworkManager.getInstance().signup(getActivity(),
-                mEditEmail.getText().toString(), mEditPassword.getText().toString(), mEditName.getText().toString(),
-                new NetworkManager.OnResultListener<LoginData>() {
-                    @Override
-                    public void onSuccess(LoginData result) {
-                        if (result.getMessage().equals(LoginFragment.MESSAGE_SUCCESS)) {
-                            PropertyManager.getInstance().setId(result.getUserId());
-                            PropertyManager.getInstance().setPassword(mEditPassword.getText().toString());
-                            User.getInstance().setUser(result.getUserId(), result.getName());
-                            startActivity(new Intent(getContext(), MainActivity.class));
-                            getActivity().finish();
-                        } else {
-                            if(result.getMessage().equals(LoginFragment.MESSAGE_DUPLICATION)){
-                                Toast.makeText(getActivity(), "중복된 ID입니다.", Toast.LENGTH_SHORT).show();
-                            } else if(result.getMessage().equals(LoginFragment.MESSAGE_MISSING)){
-                                Toast.makeText(getActivity(),"빠짐없이 입력해주세요.", Toast.LENGTH_SHORT).show();
+        if(TextUtils.isEmpty(mEditName.getText())){
+            Toast.makeText(getActivity(), "이름을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+        }else if(!isValidEmail(mEditEmail.getText())){
+            Toast.makeText(getActivity(), "Email을 확인해 주세요.", Toast.LENGTH_SHORT).show();
+        }else if(!isValidPassword(mEditPassword.getText())){
+            Toast.makeText(getActivity(), "비밀번호는 8~20자의 영문, 숫자 조합으로 입력해 주세요.", Toast.LENGTH_SHORT).show();
+        }else if(!isSamePassword(mEditPassword.getText(), mEditPasswordCheck.getText())){
+            Toast.makeText(getActivity(), "비밀번호를 확인해 주세요.", Toast.LENGTH_SHORT).show();
+        }else {
+            NetworkManager.getInstance().signup(getActivity(),
+                    mEditEmail.getText().toString(), mEditPassword.getText().toString(), mEditName.getText().toString(),
+                    new NetworkManager.OnResultListener<LoginData>() {
+                        @Override
+                        public void onSuccess(LoginData result) {
+                            if (result.getMessage().equals(LoginFragment.MESSAGE_SUCCESS)) {
+                                PropertyManager.getInstance().setId(result.getUserId());
+                                PropertyManager.getInstance().setPassword(mEditPassword.getText().toString());
+                                User.getInstance().setUser(result.getUserId(), result.getName());
+                                startActivity(new Intent(getContext(), MainActivity.class));
+                                getActivity().finish();
+                            } else {
+                                if (result.getMessage().equals(LoginFragment.MESSAGE_DUPLICATION)) {
+                                    Toast.makeText(getActivity(), "중복된 ID입니다.", Toast.LENGTH_SHORT).show();
+                                } else if (result.getMessage().equals(LoginFragment.MESSAGE_MISSING)) {
+                                    Toast.makeText(getActivity(), "빠짐없이 입력해주세요.", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onFail(int code) {
-                        // ...
-                    }
-                });
+                        @Override
+                        public void onFail(int code) {
+                            // ...
+                        }
+                    });
+        }
     }
 
     public void hideProfile() {
@@ -164,6 +240,31 @@ public class InputUserInfoFragment extends Fragment {
                 mLayoutProfile.setVisibility(View.VISIBLE);
             }
         }, 300);
+    }
+
+    public final static boolean isValidEmail(CharSequence target) {
+        if (TextUtils.isEmpty(target)) {
+            return false;
+        } else {
+            return Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
+    }
+
+    public final static boolean isValidPassword(CharSequence target) {
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=\\S+$).{8,20}$";
+        if (TextUtils.isEmpty(target)) {
+            return false;
+        } else {
+            return Pattern.compile(PASSWORD_PATTERN).matcher(target).matches();
+        }
+    }
+
+    public final static boolean isSamePassword(CharSequence password, CharSequence passwordCheck ){
+        if(password.equals(passwordCheck)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
