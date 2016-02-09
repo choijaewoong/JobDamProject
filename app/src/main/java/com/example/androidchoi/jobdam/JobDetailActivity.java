@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -32,6 +33,7 @@ import com.example.androidchoi.jobdam.Model.MyJob;
 import com.example.androidchoi.jobdam.Model.PeriodData;
 import com.example.androidchoi.jobdam.Model.QuestionLab;
 import com.example.androidchoi.jobdam.Model.Questions;
+import com.example.androidchoi.jobdam.Model.ScrapCheck;
 import com.google.gson.Gson;
 
 import org.jsoup.Jsoup;
@@ -40,6 +42,7 @@ import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class JobDetailActivity extends AppCompatActivity {
 
@@ -52,6 +55,7 @@ public class JobDetailActivity extends AppCompatActivity {
     private TextView mJobTitle;
     private ExpandableListView mExpandableListView;
     private JobDetailAdapter mExpandableAdapter;
+    private ToggleButton scrapButton;
     boolean isScrap;
     public Questions getQuestions() { return mQuestions; }
 
@@ -78,8 +82,6 @@ public class JobDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mData = (Job) intent.getSerializableExtra(Job.JOBITEM);
-        // 스크랩 확인 요청
-//        isScrap = intent.getBooleanExtra(Job.JOB_SCRAP_CHECK, false);
 
         mExpandableListView = (ExpandableListView) findViewById(R.id.listview_job_detail_expandable);
         mExpandableAdapter = new JobDetailAdapter();
@@ -87,13 +89,28 @@ public class JobDetailActivity extends AppCompatActivity {
         // 헤더뷰 설정
         View corpHeaderView = getLayoutInflater().inflate(R.layout.view_header_job_detail_corp, null);
         View titleHeaderView = getLayoutInflater().inflate(R.layout.view_header_job_detail_title, null);
-        ToggleButton scrapButton = (ToggleButton) titleHeaderView.findViewById(R.id.btn_detail_scrap);
-        scrapButton.setChecked(isScrap);
+        scrapButton = (ToggleButton) titleHeaderView.findViewById(R.id.btn_detail_scrap);
+        checkScrap();
         scrapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
+                스크랩 되어있는 경우 스크랩 해제 후 리스트로 이동
+                스크랩 되어있지 않은 경우 스크랩 후 토스트 메시지 띄움
+                */
                 if (isScrap) {
-                    //deleteMyJob
+                    List<Integer>  jobIdList = new ArrayList<Integer>();
+                    jobIdList.add(mData.getId());
+                    NetworkManager.getInstance().deleteMyJob(JobDetailActivity.this, jobIdList, new NetworkManager.OnResultListener<String>() {
+                        @Override
+                        public void onSuccess(String result) {
+                            finish();
+                        }
+                        @Override
+                        public void onFail(int code) {
+                            Log.i("code", code + " ");
+                        }
+                    });
                 } else {
                     MyJob job = new MyJob();
                     job.setData(mData);
@@ -170,8 +187,6 @@ public class JobDetailActivity extends AppCompatActivity {
                     doc = Jsoup.connect(job.getSiteUrl()).get();
                     img = doc.select("table.corp_logo img").first();
                     if (img != null) {
-////                    setCompanyImage(img.attr("src"));
-//                        job.setCompanyImage(img.attr("src"));
                         return img.attr("src");
                     }
             } catch (IOException e) {
@@ -228,8 +243,25 @@ public class JobDetailActivity extends AppCompatActivity {
                 }
                 initJobDetailMenu(); // 상세 채용 정보 카테고리 생성
             }
+
             @Override
             public void onFail(int code) {
+            }
+        });
+    }
+
+    // 스크랩한 채용공고 인지 확인하는 메소드
+    public void checkScrap(){
+        NetworkManager.getInstance().checkJobScrap(JobDetailActivity.this, mData.getId(), new NetworkManager.OnResultListener<ScrapCheck>() {
+            @Override
+            public void onSuccess(ScrapCheck result) {
+                isScrap = result.isCheck();
+                scrapButton.setChecked(isScrap);
+            }
+
+            @Override
+            public void onFail(int code) {
+
             }
         });
     }

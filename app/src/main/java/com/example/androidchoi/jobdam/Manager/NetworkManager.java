@@ -1,18 +1,17 @@
 package com.example.androidchoi.jobdam.Manager;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import com.begentgroup.xmlparser.XMLParser;
 import com.example.androidchoi.jobdam.Model.ArticleLab;
 import com.example.androidchoi.jobdam.Model.Articles;
-import com.example.androidchoi.jobdam.Model.JobData;
 import com.example.androidchoi.jobdam.Model.JobList;
 import com.example.androidchoi.jobdam.Model.LoginData;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
 import com.example.androidchoi.jobdam.Model.QuestionLab;
+import com.example.androidchoi.jobdam.Model.ScrapCheck;
 import com.example.androidchoi.jobdam.Model.Tags;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -27,9 +26,6 @@ import org.apache.http.Header;
 import org.apache.http.client.HttpClient;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHeader;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -146,48 +142,42 @@ public class NetworkManager {
             }
         });
     }
-
-    static class MyTask extends AsyncTask<JobData, Void, Void> {
-        public interface OnImageListener {
-            public void onSuccess();
-        }
-
-        OnImageListener mListener;
-
-        public void setOnImagListener(OnImageListener listener) {
-            mListener = listener;
-        }
-
-        @Override
-        protected Void doInBackground(JobData... params) {
-            Document doc = null;
-            try {
-                for (JobData job : params) {
-                    doc = Jsoup.connect(job.getSiteUrl()).get();
-
-                    Element img = doc.select("table.corp_logo img").first();
-                    if (img != null) {
-//                    setCompanyImage(img.attr("src"));
-                        job.setCompanyImage(img.attr("src"));
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            mListener.onSuccess();
-        }
-    }
+//    static class MyTask extends AsyncTask<JobData, Void, Void> {
+//        public interface OnImageListener {
+//            public void onSuccess();
+//        }
+//        OnImageListener mListener;
+//        public void setOnImagListener(OnImageListener listener) {
+//            mListener = listener;
+//        }
+//        @Override
+//        protected Void doInBackground(JobData... params) {
+//            Document doc = null;
+//            try {
+//                for (JobData job : params) {
+//                    doc = Jsoup.connect(job.getSiteUrl()).get();
+//
+//                    Element img = doc.select("table.corp_logo img").first();
+//                    if (img != null) {
+////                    setCompanyImage(img.attr("src"));
+//                        job.setCompanyImage(img.attr("src"));
+//                    }
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            return null;
+//        }
+//        @Override
+//        protected void onPostExecute(Void aVoid) {
+//            super.onPostExecute(aVoid);
+//            mListener.onSuccess();
+//        }
+//    }
 
     private static final String SERVER = "http://52.69.235.46:3000";
     // 내가 담은 채용정보 불러오는 method
     private static final String SHOW_MY_JOB = SERVER + "/showmyscrap";
-
     public void showMyJob(Context context, final OnResultListener<MyJobLab> listener) {
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
@@ -211,8 +201,32 @@ public class NetworkManager {
         });
     }
 
-    private static final String SHOW_JOB_QUESTION = SERVER + "/jasoseo/%s";
+    private static final String CHECK_JOB_SCRAP = SERVER + "/scrapcheck/%s";
+    public void checkJobScrap(Context context, int jobId, final OnResultListener<ScrapCheck> listener){
+        RequestParams params = new RequestParams();
+        Header[] headers = new Header[1];
+        headers[0] = new BasicHeader("Accept", "application/json");
+        String url = String.format(CHECK_JOB_SCRAP, jobId);
+        client.get(context, url, headers, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+            }
 
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                try {
+                    ScrapCheck scrap = gson.fromJson(responseString, ScrapCheck.class);
+                    listener.onSuccess(scrap);
+                }catch (JsonSyntaxException e){
+                    listener.onSuccess(new ScrapCheck());
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private static final String SHOW_JOB_QUESTION = SERVER + "/jasoseo/%s";
     public void showJobQuestion(Context context, int jobId, final OnResultListener<QuestionLab> listener) {
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
@@ -240,7 +254,6 @@ public class NetworkManager {
     }
 
     private static final String ADD_QUESTION_TAG = SERVER + "/jasoseotag";
-
     public void addQuestionTag(Context context, int jobId, ArrayList<String> memoId, int questionNumber, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
         params.put("job_id", jobId);

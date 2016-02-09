@@ -116,14 +116,13 @@ public class MyJobListFragment extends Fragment {
             }
         });
         mCountTextView = (TextView) view.findViewById(R.id.text_item_count);
-        showMyJob();
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mAdapter.notifyDataSetChanged();
+        showMyJob();
     }
 
     public void showMyJob() {
