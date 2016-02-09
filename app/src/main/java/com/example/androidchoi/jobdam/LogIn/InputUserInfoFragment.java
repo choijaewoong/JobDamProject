@@ -154,7 +154,7 @@ public class InputUserInfoFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (isSamePassword(mEditPasswordCheck.getText(), s)) {
+                if (isSamePassword(mEditPassword.getText().toString(), s.toString())) {
                     mEditPasswordCheck.setTextColor(ContextCompat.getColor(getContext(), android.R.color.black));
                 } else {
                     mEditPasswordCheck.setTextColor(ContextCompat.getColor(getContext(), R.color.colorDanger));
@@ -197,7 +197,7 @@ public class InputUserInfoFragment extends Fragment {
             Toast.makeText(getActivity(), "Email을 확인해 주세요.", Toast.LENGTH_SHORT).show();
         }else if(!isValidPassword(mEditPassword.getText())){
             Toast.makeText(getActivity(), "비밀번호는 8~20자의 영문, 숫자 조합으로 입력해 주세요.", Toast.LENGTH_SHORT).show();
-        }else if(!isSamePassword(mEditPassword.getText(), mEditPasswordCheck.getText())){
+        }else if(!isSamePassword(mEditPassword.getText().toString(), mEditPasswordCheck.getText().toString())){
             Toast.makeText(getActivity(), "비밀번호를 확인해 주세요.", Toast.LENGTH_SHORT).show();
         }else {
             NetworkManager.getInstance().signup(getActivity(),
@@ -242,7 +242,7 @@ public class InputUserInfoFragment extends Fragment {
         }, 300);
     }
 
-    public final static boolean isValidEmail(CharSequence target) {
+    public boolean isValidEmail(CharSequence target) {
         if (TextUtils.isEmpty(target)) {
             return false;
         } else {
@@ -250,7 +250,7 @@ public class InputUserInfoFragment extends Fragment {
         }
     }
 
-    public final static boolean isValidPassword(CharSequence target) {
+    public boolean isValidPassword(CharSequence target) {
         final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=\\S+$).{8,20}$";
         if (TextUtils.isEmpty(target)) {
             return false;
@@ -259,7 +259,7 @@ public class InputUserInfoFragment extends Fragment {
         }
     }
 
-    public final static boolean isSamePassword(CharSequence password, CharSequence passwordCheck ){
+    public boolean isSamePassword(String password, String passwordCheck ){
         if(password.equals(passwordCheck)){
             return true;
         }else{

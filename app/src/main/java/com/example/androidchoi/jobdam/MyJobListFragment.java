@@ -26,6 +26,7 @@ import com.example.androidchoi.jobdam.Model.MyJobLab;
 import com.example.androidchoi.jobdam.Model.MyJobs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -74,7 +75,7 @@ public class MyJobListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_job_list, container, false);
         countHeaderView = inflater.inflate(R.layout.view_header_item_count, null);
-        mRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_my_job);
+        mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_my_job);
         mRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorPrimary);
         mRefreshLayout.setColorSchemeResources(android.R.color.white);
         mListView = (ListView) view.findViewById(R.id.listview_my_job);
@@ -137,13 +138,13 @@ public class MyJobListFragment extends Fragment {
 
             @Override
             public void onFail(int code) {
-                Log.i("error : ", code+"");
+                Log.i("error : ", code + "");
             }
         });
     }
 
     public void deleteMode() {
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
         super.setMenuVisibility(true);
         mRefreshLayout.setEnabled(false);
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -157,7 +158,7 @@ public class MyJobListFragment extends Fragment {
 
     public void defaultMode() {
         super.setMenuVisibility(false);
-        for(int i=0; i<checkedItems.size(); i++){
+        for (int i = 0; i < checkedItems.size(); i++) {
             mListView.setItemChecked(checkedItems.get(i), false);
         }
         checkedItems.clear();
@@ -169,7 +170,6 @@ public class MyJobListFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowCustomEnabled(true);
         ((MyJobFragment) getParentFragment()).getViewPager().setPagingEnabled(true);
         ((MyJobFragment) getParentFragment()).getTabLayout().setVisibility(View.VISIBLE);
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -185,13 +185,25 @@ public class MyJobListFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == android.R.id.home){
+        if (id == android.R.id.home) {
             defaultMode();
             return true;
         } else if (id == R.id.action_delete) {
+            List<Integer> jobIdList = new ArrayList<Integer>();
+            for (int i = 0; i < checkedItems.size(); i++) {
+                jobIdList.add(((Job) mAdapter.getItem(checkedItems.get(i) - mListView.getHeaderViewsCount())).getId());
+            }
+            NetworkManager.getInstance().deleteMyJob(getActivity(), jobIdList, new NetworkManager.OnResultListener<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    showMyJob();
+                }
 
-            // mAdapter.getCheckedItemIndexList() 보내 삭제 요청
-
+                @Override
+                public void onFail(int code) {
+                    Log.i("code", code + " ");
+                }
+            });
             defaultMode();
             return true;
         }
