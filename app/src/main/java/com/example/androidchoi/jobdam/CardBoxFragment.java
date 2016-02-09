@@ -209,7 +209,7 @@ public class CardBoxFragment extends Fragment {
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                if(!(mListView.getItemAtPosition(position) instanceof MyCards)){
+                if (!(mListView.getItemAtPosition(position) instanceof MyCards)) {
                     return false;
                 }
                 mScrollView.setVisibility(View.GONE);
@@ -485,9 +485,22 @@ public class CardBoxFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
     }
 
-    public void moveCategory() {
+    public void moveCategory(int position) {
+        List<String> memoList = new ArrayList<String>();
+        for (int i = 0; i < checkedItems.size(); i++) {
+            memoList.add(((MyCards) mAdapter.getItem(checkedItems.get(i) - mListView.getHeaderViewsCount())).getId());
+        }
+        NetworkManager.getInstance().changeMemoCategory(getActivity(), memoList, position, new NetworkManager.OnResultListener<String>() {
+            @Override
+            public void onSuccess(String result) {
+                showMyMemo();
+            }
 
-        // 변경된 카드 리스트 서버에 전달
+            @Override
+            public void onFail(int code) {
+                Log.i("code", code + " ");
+            }
+        });
         defaultMode();
     }
 
@@ -507,10 +520,10 @@ public class CardBoxFragment extends Fragment {
         if (id == android.R.id.home) {
             defaultMode();
             return true;
-        } else if (id == R.id.action_move) {
+        } else if (id == R.id.action_move) { // 메모 카테고리 변경
             CustomDialogFragment dialog = new CustomDialogFragment();
             dialog.show(getActivity().getSupportFragmentManager(), CATEGORY_DIALOG);
-        } else if (id == R.id.action_delete) {
+        } else if (id == R.id.action_delete) { // 메모 삭제
             List<String> memoList = new ArrayList<String>();
             for (int i = 0; i < checkedItems.size(); i++) {
                 memoList.add(((MyCards) mAdapter.getItem(checkedItems.get(i) - mListView.getHeaderViewsCount())).getId());

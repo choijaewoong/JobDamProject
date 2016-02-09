@@ -437,6 +437,25 @@ public class NetworkManager {
         });
     }
 
+    private static final String CHANGE_MEMO_CATEGORY = SERVER + "/movingfolder";
+    public void changeMemoCategory(Context context, List<String> memoIds, int categoryIndex, final OnResultListener<String> listener){
+        RequestParams params = new RequestParams();
+        params.put("category", categoryIndex);
+        for(String id : memoIds){
+            params.add("memo_id", id);
+        }
+        client.post(context, CHANGE_MEMO_CATEGORY, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+            }
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                listener.onSuccess(responseString);
+            }
+        });
+    }
+
     public static final String SHOW_MEMO_TAG = SERVER + "/memotaglist";
     public void showCardTag(Context context, final OnResultListener<Tags> listener) {
         RequestParams params = new RequestParams();
@@ -464,7 +483,6 @@ public class NetworkManager {
     //게시글 보기
     public static final String SHOW_ARTICLE = SERVER + "/boardlist";
     public static final String ARTICLE_PAGE = "page";
-
     public void showArticle(Context context, final OnResultListener<ArticleLab> listener) {
         RequestParams params = new RequestParams();
         params.put(ARTICLE_PAGE, 1);
@@ -491,7 +509,6 @@ public class NetworkManager {
 
     // 게시글 추가
     private static final String ADD_ARTICLE = SERVER + "/addboard";
-
     public void addArticle(Context context, String content, int emotion, long timeStamp, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
         params.put("content", content);
@@ -511,7 +528,6 @@ public class NetworkManager {
 
     //게시글 수정
     private static final String UPDATE_ARTICLE = SERVER + "/board/update";
-
     public void updateArticle(Context context, final String jsonString, final OnResultListener<String> listener) {
         try {
             client.post(context, UPDATE_ARTICLE, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
@@ -532,7 +548,6 @@ public class NetworkManager {
 
     // 좋아요
     public static final String LIKE_ARTICLE = SERVER + "/like/%s";
-
     public void likeArticle(Context context, String board_id, final OnResultListener<Articles> listener) {
         RequestParams params = new RequestParams();
         String url = String.format(LIKE_ARTICLE, board_id);
@@ -558,7 +573,6 @@ public class NetworkManager {
     }
 
     public static final String LOG_IN = SERVER + "/login";
-
     public void login(Context context, String userid, String password, final OnResultListener<LoginData> listener) {
         RequestParams params = new RequestParams();
         params.put("user_id", userid);
@@ -577,7 +591,6 @@ public class NetworkManager {
     }
 
     public static final String SIGN_UP = SERVER + "/signup";
-
     public void signup(Context context, String userid, String password, String name, final OnResultListener<LoginData> listener) {
         RequestParams params = new RequestParams();
         params.put("user_id", userid);

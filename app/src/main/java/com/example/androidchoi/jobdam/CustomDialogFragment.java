@@ -66,7 +66,7 @@ public class CustomDialogFragment extends DialogFragment {
                     CardBoxFragment cardBoxFragment;
                     cardBoxFragment = (CardBoxFragment)getActivity().getSupportFragmentManager().findFragmentByTag(MainActivity.TAG_CARD_BOX);
                     if(cardBoxFragment != null){
-                        cardBoxFragment.moveCategory();
+                        cardBoxFragment.moveCategory(position);
                     }
                 }
                 dismiss();
