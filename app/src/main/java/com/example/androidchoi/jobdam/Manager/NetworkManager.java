@@ -305,7 +305,6 @@ public class NetworkManager {
 
     //메모 보기
     public static final String SHOW_MY_MEMO = SERVER + "/mymemolist";
-
     public void showMyMemo(Context context, final OnResultListener<MyCardLab> listener) {
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
@@ -330,7 +329,6 @@ public class NetworkManager {
     }
 
     public static final String SHOW_FILTERED_MEMO = SERVER + "/folderlist";
-
     public void showFilteredMemo(Context context, int index, final OnResultListener<MyCardLab> listener) {
         RequestParams params = new RequestParams();
         params.put("category", index);
@@ -356,7 +354,6 @@ public class NetworkManager {
     }
 
     private static final String SHOW_MEMO_WITH_TAG = SERVER + "/findtag/%s";
-
     public void showMemoWithTag(Context context, String tag, final OnResultListener<MyCardLab> listener) {
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
@@ -381,10 +378,8 @@ public class NetworkManager {
         });
     }
 
-
     // 메모 추가
     private static final String ADD_MEMO = SERVER + "/addmemo";
-
     public void addMemo(Context context, final String jsonString, final OnResultListener<String> listener) {
         try {
             client.post(context, ADD_MEMO, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
@@ -405,7 +400,6 @@ public class NetworkManager {
 
     //메모 수정
     private static final String UPDATE_MEMO = SERVER + "/memo/update";
-
     public void updateMemo(Context context, final String jsonString, final OnResultListener<String> listener) {
         try {
             client.post(context, UPDATE_MEMO, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
@@ -424,8 +418,26 @@ public class NetworkManager {
         }
     }
 
-    public static final String SHOW_MEMO_TAG = SERVER + "/memotaglist";
+    //메모 삭제
+    private static final String DELETE_MEMO = SERVER + "/memo/delete";
+    public void deleteMemo(Context context, List<String> memoIds, final OnResultListener<String> listener){
+        RequestParams params = new RequestParams();
+        for(String id : memoIds){
+            params.add("memo_id", id);
+        }
+        client.post(context, DELETE_MEMO, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+            }
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                listener.onSuccess(responseString);
+            }
+        });
+    }
 
+    public static final String SHOW_MEMO_TAG = SERVER + "/memotaglist";
     public void showCardTag(Context context, final OnResultListener<Tags> listener) {
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];

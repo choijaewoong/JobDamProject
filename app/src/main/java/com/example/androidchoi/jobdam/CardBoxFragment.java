@@ -15,6 +15,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -50,6 +51,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import in.srain.cube.views.GridViewWithHeaderAndFooter;
 
@@ -172,10 +174,10 @@ public class CardBoxFragment extends Fragment {
         listSearchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
         itemCountHeaderView = inflater.inflate(R.layout.view_header_card_item_count, null);
         categoryCountHeaderView = inflater.inflate(R.layout.view_header_category_item_count, null);
-        gridSearchHeaderView = (RelativeLayout)view.findViewById(R.id.layout_card_folder_search);
+        gridSearchHeaderView = (RelativeLayout) view.findViewById(R.id.layout_card_folder_search);
 
         //리스트 뷰
-        mRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_card_box);
+        mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_card_box);
         mRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorPrimary);
         mRefreshLayout.setColorSchemeResources(android.R.color.white);
         mListView = (ListView) view.findViewById(R.id.listview_card);
@@ -207,6 +209,9 @@ public class CardBoxFragment extends Fragment {
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                if(!(mListView.getItemAtPosition(position) instanceof MyCards)){
+                    return false;
+                }
                 mScrollView.setVisibility(View.GONE);
                 deleteMode();
                 return true;
@@ -267,7 +272,7 @@ public class CardBoxFragment extends Fragment {
 
         // 검색 뷰
         mListSearchEdit = (EditText) listSearchHeaderView.findViewById(R.id.editText_search_bar);
-        mGridSearchEdit = (EditText)view.findViewById(R.id.editText_folder_search_bar);
+        mGridSearchEdit = (EditText) view.findViewById(R.id.editText_folder_search_bar);
         mListSearchDeleteImage = (ImageView) listSearchHeaderView.findViewById(R.id.image_search_delete);
         mGridSearchDeleteImage = (ImageView) view.findViewById(R.id.image_folder_search_delete);
         setEditListener(mListSearchEdit, mListSearchDeleteImage, true);
@@ -315,7 +320,7 @@ public class CardBoxFragment extends Fragment {
         t.setText(tag);
         t.setTextSize(12);
         t.setTextColor(ContextCompat.getColor(getActivity(), android.R.color.darker_gray));
-        LayerDrawable drawable = (LayerDrawable)ContextCompat.getDrawable(getContext(), R.drawable.image_card_tag_border_default);
+        LayerDrawable drawable = (LayerDrawable) ContextCompat.getDrawable(getContext(), R.drawable.image_card_tag_border_default);
         t.setBackgroundDrawable(drawable);
         t.setPadding(12, 4, 12, 4);
         int width = getResources().getDimensionPixelSize(R.dimen.tag_max_width);
@@ -326,10 +331,10 @@ public class CardBoxFragment extends Fragment {
         t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isListView){ // 메모 리스트 화면
+                if (isListView) { // 메모 리스트 화면
                     mListSearchEdit.setText(t.getText());
                     showMyMemoWithTag(t.getText().toString());
-                }else{ // 메모 폴더 화면
+                } else { // 메모 폴더 화면
 
                 }
             }
@@ -355,7 +360,7 @@ public class CardBoxFragment extends Fragment {
                 });
     }
 
-    public void showMyMemoWithTag(String tag){
+    public void showMyMemoWithTag(String tag) {
         NetworkManager.getInstance().showMemoWithTag(getActivity(), tag, new NetworkManager.OnResultListener<MyCardLab>() {
             @Override
             public void onSuccess(MyCardLab result) {
@@ -424,11 +429,11 @@ public class CardBoxFragment extends Fragment {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    if(TextUtils.isEmpty(v.getText().toString())){
+                    if (TextUtils.isEmpty(v.getText().toString())) {
                         showMyMemo();
-                    }else {
+                    } else {
                         showMyMemoWithTag(v.getText().toString());
                     }
                     return true;
@@ -502,12 +507,25 @@ public class CardBoxFragment extends Fragment {
         if (id == android.R.id.home) {
             defaultMode();
             return true;
-        }else if(id == R.id.action_move){
+        } else if (id == R.id.action_move) {
             CustomDialogFragment dialog = new CustomDialogFragment();
             dialog.show(getActivity().getSupportFragmentManager(), CATEGORY_DIALOG);
-        }else if (id == R.id.action_delete) {
+        } else if (id == R.id.action_delete) {
+            List<String> memoList = new ArrayList<String>();
+            for (int i = 0; i < checkedItems.size(); i++) {
+                memoList.add(((MyCards) mAdapter.getItem(checkedItems.get(i) - mListView.getHeaderViewsCount())).getId());
+            }
+            NetworkManager.getInstance().deleteMemo(getActivity(), memoList, new NetworkManager.OnResultListener<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    showMyMemo();
+                }
 
-            // mAdapter.getCheckedItemIndexList() 보내 삭제 요청
+                @Override
+                public void onFail(int code) {
+                    Log.i("code", code + " ");
+                }
+            });
 
             defaultMode();
             return true;
