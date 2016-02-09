@@ -16,7 +16,8 @@
             android:scrollbars="none"
             android:clipToPadding="false"
             android:divider="@android:color/transparent"
-            android:listSelector="@android:color/transparent"/>
+            android:listSelector="@android:color/transparent"
+            android:paddingBottom="50dp"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </FrameLayout>

@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.example.androidchoi.jobdam.Adpater.BoardItemAdapter;
+import com.example.androidchoi.jobdam.Adpater.MyBoardItemAdapter;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.ArticleLab;
 
@@ -22,7 +22,7 @@ import com.example.androidchoi.jobdam.Model.ArticleLab;
 public class BoardMeFragment extends Fragment {
 
     ListView mListView;
-    BoardItemAdapter mAdapter;
+    MyBoardItemAdapter mAdapter;
     SwipeRefreshLayout mRefreshLayout;
 
     @Override
@@ -36,8 +36,10 @@ public class BoardMeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_board_me, container, false);
+        View profileHeaderView = inflater.inflate(R.layout.view_header_my_board, null);
         mListView = (ListView)view.findViewById(R.id.listView_board_me);
-        mAdapter = new BoardItemAdapter();
+        mListView.addHeaderView(profileHeaderView);
+        mAdapter = new MyBoardItemAdapter();
         showArticle();
         mListView.setAdapter(mAdapter);
 
@@ -55,7 +57,7 @@ public class BoardMeFragment extends Fragment {
     }
 
     public void showArticle(){
-        NetworkManager.getInstance().showArticle(getActivity(),
+        NetworkManager.getInstance().showMyArticle(getActivity(),
                 new NetworkManager.OnResultListener<ArticleLab>() {
                     @Override
                     public void onSuccess(ArticleLab result) {

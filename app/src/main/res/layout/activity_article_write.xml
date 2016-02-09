@@ -39,7 +39,8 @@
         android:gravity="center"
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/black"
-        android:hint="내 생각을 자유롭게 작성하세요."/>
+        android:hint="내 생각을 자유롭게 작성하세요."
+        android:padding="@dimen/default_dimen"/>
 
     <FrameLayout
         android:id="@+id/touchInterceptor"

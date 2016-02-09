@@ -10,10 +10,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.androidchoi.jobdam.Model.CurrentTime;
 import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Articles;
+import com.example.androidchoi.jobdam.Model.CurrentTime;
 import com.example.androidchoi.jobdam.Model.EmotionData;
 import com.example.androidchoi.jobdam.R;
 
@@ -22,7 +22,7 @@ import java.util.Calendar;
 /**
  * Created by Tacademy on 2015-10-29.
  */
-public class BoardItemView extends RelativeLayout{
+public class MyBoardItemView extends RelativeLayout{
 
     TextView mTextContent;
     LinearLayout mLayoutLikeButton;
@@ -33,13 +33,13 @@ public class BoardItemView extends RelativeLayout{
     ImageView mImageEmotionIcon;
     Articles article;
 
-    public BoardItemView(Context context) {
+    public MyBoardItemView(Context context) {
         super(context);
         init();
     }
 
     private void init() {
-        inflate(getContext(), R.layout.view_board_item, this);
+        inflate(getContext(), R.layout.view_my_board_item, this);
         mTextContent = (TextView)findViewById(R.id.text_board_content);
         mLayoutLikeButton = (LinearLayout)findViewById(R.id.layout_board_like_button);
         mLayoutLikeButton.setOnClickListener(new OnClickListener() {
@@ -116,13 +116,11 @@ public class BoardItemView extends RelativeLayout{
         }
         CurrentTime writeDate = new CurrentTime();
         writeDate.seTimeStamp(time);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(time);
-
         if(writeDate.getYear() == Calendar.getInstance().get(Calendar.YEAR)){
             return writeDate.getMonth() + "월 " + writeDate.getDayOfMonth() + "일 "
                     + writeDate.getAmPm() + " " + writeDate.getHourOfDay() + ":" + String.format("%02d", writeDate.getMinute());
         }else {
+
             return writeDate.getYear() + "년 " + writeDate.getMonth() + "월 " + writeDate.getDayOfMonth() + "일 "
                     + writeDate.getAmPm() + " " + writeDate.getHourOfDay() + ":" + String.format("%02d", writeDate.getMinute());
         }

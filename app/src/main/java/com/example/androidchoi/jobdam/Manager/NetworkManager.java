@@ -495,13 +495,38 @@ public class NetworkManager {
 
     //게시글 보기
     public static final String SHOW_ARTICLE = SERVER + "/boardlist";
-    public static final String ARTICLE_PAGE = "page";
     public void showArticle(Context context, final OnResultListener<ArticleLab> listener) {
         RequestParams params = new RequestParams();
         params.put(ARTICLE_PAGE, 1);
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
         client.get(context, SHOW_ARTICLE, headers, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                ArticleLab articleLab = new ArticleLab();
+                try {
+                    articleLab = gson.fromJson(responseString, ArticleLab.class);
+                } catch (JsonSyntaxException e) {
+                    e.printStackTrace();
+                }
+                listener.onSuccess(articleLab);
+            }
+        });
+    }
+
+    //내가 쓴 게시글 보기
+    public static final String SHOW_MY_ARTICLE = SERVER + "/myboardlist";
+    public static final String ARTICLE_PAGE = "page";
+    public void showMyArticle(Context context, final OnResultListener<ArticleLab> listener) {
+        RequestParams params = new RequestParams();
+        Header[] headers = new Header[1];
+        headers[0] = new BasicHeader("Accept", "application/json");
+        client.get(context, SHOW_MY_ARTICLE, headers, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
