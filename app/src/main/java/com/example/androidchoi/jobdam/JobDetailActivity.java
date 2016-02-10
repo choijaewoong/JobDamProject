@@ -146,7 +146,9 @@ public class JobDetailActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String img) {
                 if(img != null) {
-                    Glide.with(MyApplication.getContext()).load(img).into(mCorpLogo);
+                    Glide.with(MyApplication.getContext())
+                            .load(img)
+                            .into(mCorpLogo);
                 }else{
                     mCorpLogo.setImageResource(R.drawable.image_default_corp_logo);
                 }
