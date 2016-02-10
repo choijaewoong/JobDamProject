@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.MyBoardItemAdapter;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
@@ -24,6 +25,7 @@ public class BoardMeFragment extends Fragment {
     ListView mListView;
     MyBoardItemAdapter mAdapter;
     SwipeRefreshLayout mRefreshLayout;
+    TextView mTextMyBoardTotal;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -53,6 +55,8 @@ public class BoardMeFragment extends Fragment {
             }
         });
         ((BoardFragment)getParentFragment()).writeActicleButton.attachToListView(mListView);
+
+        mTextMyBoardTotal = (TextView)profileHeaderView.findViewById(R.id.text_my_board_total);
         return view;
     }
 
@@ -64,6 +68,7 @@ public class BoardMeFragment extends Fragment {
                         //서버에서 게시글 리스트 가져와 저장
                         mAdapter.setItems(result.getArticleList());
                         mRefreshLayout.setRefreshing(false);
+                        mTextMyBoardTotal.setText("Total " + result.getTotalCount());
                     }
                     @Override
                     public void onFail(int code) {

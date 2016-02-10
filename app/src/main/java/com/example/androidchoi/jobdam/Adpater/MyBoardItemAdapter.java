@@ -41,6 +41,9 @@ public class MyBoardItemAdapter extends BaseAdapter {
             view = (MyBoardItemView)convertView;
         }
         view.setItemData(mItems.get(position));
+        if(position == getCount()-1){
+            view.setShadow();
+        }
         return view;
     }
 }

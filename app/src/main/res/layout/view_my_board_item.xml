@@ -1,129 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white">
 
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_my_board_item"
+        android:background="@android:color/white">
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/shadow_depth"
         android:background="@drawable/shadow_bottom"/>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:id="@+id/relativeLayout6"
-        android:layout_marginTop="@dimen/default_dimen"
-        android:layout_marginLeft="@dimen/default_large_dimen">
+        <RelativeLayout
+            android:id="@+id/relativeLayout6"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginLeft="@dimen/default_large_dimen"
+            android:layout_marginTop="@dimen/default_dimen">
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentTop="false"
+                android:layout_centerHorizontal="true"
+                android:text="지금 내 기분은?"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/font_size_min"/>
+
+            <ImageView
+                android:id="@+id/image_emotion_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_above="@+id/text_emotion_description"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/default_small_dimen"
+                android:src="@drawable/emotion_smile"
+                android:tint="@color/colorPrimary"
+                android:tintMode="multiply"/>
+
+            <TextView
+                android:id="@+id/text_emotion_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="행복해요"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/font_size_default"/>
+        </RelativeLayout>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/text_board_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView22"
-            android:layout_alignParentTop="false"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentStart="false"
-            android:text="지금 내 기분은?"
-            android:layout_centerHorizontal="true"
-            android:textSize="@dimen/font_size_min"
-            android:textColor="@color/colorText"/>
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/image_emotion_icon"
-            android:layout_above="@+id/text_emotion_description"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
             android:layout_marginBottom="@dimen/default_small_dimen"
-            android:tint="@color/colorPrimary"
-            android:tintMode="multiply"
-            android:src="@drawable/emotion_smile"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="행복해요"
-            android:id="@+id/text_emotion_description"
-            android:textColor="@color/colorPrimary"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/default_large_dimen"
+            android:layout_marginRight="@dimen/default_large_dimen"
+            android:layout_marginTop="@dimen/default_large_dimen"
+            android:layout_toEndOf="@+id/relativeLayout6"
+            android:layout_toRightOf="@+id/relativeLayout6"
+            android:lineSpacingExtra="4dp"
+            android:minHeight="80dp"
+            android:text="New Text"
+            android:textColor="@color/colorText"
+            android:textIsSelectable="false"
             android:textSize="@dimen/font_size_default"/>
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="80dp"
-        android:text="New Text"
-        android:lineSpacingExtra="4dp"
-        android:id="@+id/text_board_content"
-        android:layout_toRightOf="@+id/relativeLayout6"
-        android:layout_toEndOf="@+id/relativeLayout6"
-        android:layout_marginLeft="@dimen/default_large_dimen"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="@dimen/default_large_dimen"
-        android:layout_marginTop="@dimen/default_large_dimen"
-        android:layout_marginBottom="@dimen/default_small_dimen"
-        android:textColor="@color/colorText"
-        android:textSize="@dimen/font_size_default"
-        android:textIsSelectable="false"/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/divider_width"
-        android:id="@+id/imageView32"
-        android:src="@color/colorLightPrimary"
-        android:layout_below="@+id/text_board_write_date"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="@dimen/default_small_dimen"
-        android:layout_marginRight="@dimen/default_small_dimen"
-        android:layout_marginLeft="@dimen/default_small_dimen"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView32"
-        android:layout_alignParentRight="true"
-        android:gravity="center_vertical|right"
-        android:padding="@dimen/default_small_dimen"
-        android:id="@+id/layout_board_like_button"
-        android:layout_alignParentLeft="false"
-        android:layout_marginRight="@dimen/default_small_dimen">
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/image_board_like"
-            android:src="@drawable/selector_button_article_like"/>
+            android:id="@+id/imageView32"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_width"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/text_board_write_date"
+            android:layout_marginLeft="@dimen/default_small_dimen"
+            android:layout_marginRight="@dimen/default_small_dimen"
+            android:layout_marginTop="@dimen/default_small_dimen"
+            android:src="@color/colorLightPrimary"/>
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/layout_board_like_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/text_board_like_count"
-            android:textColor="@color/colorPrimary"
-            android:text="10"
-            android:layout_below="@+id/imageView32"
+            android:layout_alignParentLeft="false"
             android:layout_alignParentRight="true"
+            android:layout_below="@+id/imageView32"
+            android:layout_marginRight="@dimen/default_small_dimen"
+            android:gravity="center_vertical|right"
+            android:orientation="horizontal"
+            android:padding="@dimen/default_small_dimen">
+
+            <ImageView
+                android:id="@+id/image_board_like"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/selector_button_article_like"/>
+
+            <TextView
+                android:id="@+id/text_board_like_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/imageView32"
+                android:paddingLeft="4dp"
+                android:text="10"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/font_size_small"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_board_write_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:textSize="@dimen/font_size_small"
-            android:paddingLeft="4dp"/>
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/text_board_content"
+            android:layout_marginRight="@dimen/default_dimen"
+            android:text="New Text"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/font_size_semi_min"
+            />
+        </RelativeLayout>
 
-    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/shadow_depth"
+        android:background="@drawable/shadow_bottom"
+        android:layout_below="@+id/layout_my_board_item"
+        android:id="@+id/view_my_board_item_shadow"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/text_board_write_date"
-        android:layout_below="@+id/text_board_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="@dimen/default_dimen"
-        android:textSize="@dimen/font_size_semi_min"
-        android:textColor="@color/colorText"
-        />
-
-</RelativeLayout>
+    </RelativeLayout>

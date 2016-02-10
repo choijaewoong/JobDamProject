@@ -32,6 +32,7 @@ public class MyBoardItemView extends RelativeLayout{
     TextView mTextWriteDate;
     ImageView mImageEmotionIcon;
     Articles article;
+    View mItemBottomShadow;
 
     public MyBoardItemView(Context context) {
         super(context);
@@ -71,6 +72,7 @@ public class MyBoardItemView extends RelativeLayout{
         mTextEmotionDescription = (TextView)findViewById(R.id.text_emotion_description);
         mTextWriteDate = (TextView)findViewById(R.id.text_board_write_date);
         mImageEmotionIcon = (ImageView)findViewById(R.id.image_emotion_icon);
+        mItemBottomShadow = findViewById(R.id.view_my_board_item_shadow);
     }
 
     public void setItemData(Articles data){
@@ -81,6 +83,11 @@ public class MyBoardItemView extends RelativeLayout{
         mImageEmotionIcon.setImageResource(EmotionData.get(MyApplication.getContext()).getCategoryList().get(data.getArticle().getEmotionIndex()).getImageResource());
         mTextWriteDate.setText(getTimeAgo(data.getArticle().getWriteTimeStamp()));
         mTextEmotionDescription.setText(EmotionData.get(MyApplication.getContext()).getCategoryList().get(data.getArticle().getEmotionIndex()).getDescription());
+        mItemBottomShadow.setVisibility(GONE);
+    }
+
+    public void setShadow(){
+        mItemBottomShadow.setVisibility(VISIBLE);
     }
 
     public void showLikeToast(){

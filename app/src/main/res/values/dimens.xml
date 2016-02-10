@@ -88,8 +88,10 @@
     <!--<dimen name="font_size_small">8dp</dimen>-->
 
     <dimen name="dialog_height">432dp</dimen>
-    <dimen name="emotion_dialog_height">100dp</dimen>
 
+    <!-- board -->
+    <dimen name="emotion_dialog_height">100dp</dimen>
     <dimen name="emotion_dialog_top_margin">80dp</dimen>
+    <dimen name="my_board_profile_image_size">90dp</dimen>
 
 </resources>
