@@ -56,7 +56,8 @@
             android:src="@drawable/m_camera_icon"
             android:layout_alignBottom="@+id/imageView8"
             android:layout_alignRight="@+id/imageView8"
-            android:layout_alignEnd="@+id/imageView8"/>
+            android:layout_alignEnd="@+id/imageView8"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 
