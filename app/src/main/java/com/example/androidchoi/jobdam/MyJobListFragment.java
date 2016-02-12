@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.MyJobItemAdapter;
+import com.example.androidchoi.jobdam.Dialog.DeleteDialogFragment;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Job;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
@@ -188,22 +189,35 @@ public class MyJobListFragment extends Fragment {
             defaultMode();
             return true;
         } else if (id == R.id.action_delete) {
-            List<Integer> jobIdList = new ArrayList<Integer>();
-            for (int i = 0; i < checkedItems.size(); i++) {
-                jobIdList.add(((Job) mAdapter.getItem(checkedItems.get(i) - mListView.getHeaderViewsCount())).getId());
-            }
-            NetworkManager.getInstance().deleteMyJob(getActivity(), jobIdList, new NetworkManager.OnResultListener<String>() {
+            final DeleteDialogFragment dialog = new DeleteDialogFragment();
+            dialog.show(getActivity().getSupportFragmentManager(), "dialog");
+            DeleteDialogFragment.ButtonEventListener listener = new DeleteDialogFragment.ButtonEventListener() {
                 @Override
-                public void onSuccess(String result) {
-                    showMyJob();
-                }
+                public void onYesEvent() {
+                    List<Integer> jobIdList = new ArrayList<Integer>();
+                    for (int i = 0; i < checkedItems.size(); i++) {
+                        jobIdList.add(((Job) mAdapter.getItem(checkedItems.get(i) - mListView.getHeaderViewsCount())).getId());
+                    }
+                    NetworkManager.getInstance().deleteMyJob(getActivity(), jobIdList, new NetworkManager.OnResultListener<String>() {
+                        @Override
+                        public void onSuccess(String result) {
+                            showMyJob();
+                        }
 
-                @Override
-                public void onFail(int code) {
-                    Log.i("code", code + " ");
+                        @Override
+                        public void onFail(int code) {
+                            Log.i("code", code + " ");
+                        }
+                    });
+                    dialog.dismiss();
+                    defaultMode();
                 }
-            });
-            defaultMode();
+                @Override
+                public void onNoEvent() {
+                    dialog.dismiss();
+                }
+            };
+            dialog.setButtonEventListener(listener);
             return true;
         }
         return true;

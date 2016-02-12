@@ -40,6 +40,8 @@ import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.CardItemAdapter;
 import com.example.androidchoi.jobdam.Adpater.CategoryFolderAdapter;
+import com.example.androidchoi.jobdam.Dialog.CategoryListDialogFragment;
+import com.example.androidchoi.jobdam.Dialog.DeleteDialogFragment;
 import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.MyCard;
@@ -521,26 +523,38 @@ public class CardBoxFragment extends Fragment {
             defaultMode();
             return true;
         } else if (id == R.id.action_move) { // 메모 카테고리 변경
-            CustomDialogFragment dialog = new CustomDialogFragment();
+            CategoryListDialogFragment dialog = new CategoryListDialogFragment();
             dialog.show(getActivity().getSupportFragmentManager(), CATEGORY_DIALOG);
         } else if (id == R.id.action_delete) { // 메모 삭제
-            List<String> memoList = new ArrayList<String>();
-            for (int i = 0; i < checkedItems.size(); i++) {
-                memoList.add(((MyCards) mAdapter.getItem(checkedItems.get(i) - mListView.getHeaderViewsCount())).getId());
-            }
-            NetworkManager.getInstance().deleteMemo(getActivity(), memoList, new NetworkManager.OnResultListener<String>() {
+            final DeleteDialogFragment dialog = new DeleteDialogFragment();
+            dialog.show(getActivity().getSupportFragmentManager(), "dialog");
+            DeleteDialogFragment.ButtonEventListener listener = new DeleteDialogFragment.ButtonEventListener() {
                 @Override
-                public void onSuccess(String result) {
-                    showMyMemo();
-                }
+                public void onYesEvent() {
+                    List<String> memoList = new ArrayList<String>();
+                    for (int i = 0; i < checkedItems.size(); i++) {
+                        memoList.add(((MyCards) mAdapter.getItem(checkedItems.get(i) - mListView.getHeaderViewsCount())).getId());
+                    }
+                    NetworkManager.getInstance().deleteMemo(getActivity(), memoList, new NetworkManager.OnResultListener<String>() {
+                        @Override
+                        public void onSuccess(String result) {
+                            showMyMemo();
+                        }
 
+                        @Override
+                        public void onFail(int code) {
+                            Log.i("code", code + " ");
+                        }
+                    });
+                    defaultMode();
+                    dialog.dismiss();
+                }
                 @Override
-                public void onFail(int code) {
-                    Log.i("code", code + " ");
+                public void onNoEvent() {
+                    dialog.dismiss();
                 }
-            });
-
-            defaultMode();
+            };
+            dialog.setButtonEventListener(listener);
             return true;
         }
         return true;

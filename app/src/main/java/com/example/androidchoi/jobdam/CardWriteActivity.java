@@ -20,6 +20,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.androidchoi.jobdam.Dialog.CategoryListDialogFragment;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.CategoryData;
 import com.example.androidchoi.jobdam.Model.MyCard;
@@ -126,7 +127,7 @@ public class CardWriteActivity extends AppCompatActivity {
         mTextCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomDialogFragment dialog = new CustomDialogFragment();
+                CategoryListDialogFragment dialog = new CategoryListDialogFragment();
                 dialog.show(getSupportFragmentManager(), CardBoxFragment.CATEGORY_DIALOG);
             }
         });
@@ -229,7 +230,7 @@ public class CardWriteActivity extends AppCompatActivity {
         mCategorySelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomDialogFragment dialog = new CustomDialogFragment();
+                CategoryListDialogFragment dialog = new CategoryListDialogFragment();
                 dialog.show(getSupportFragmentManager(), CardBoxFragment.CATEGORY_DIALOG);
                 mCancelSaveLayout.setVisibility(View.VISIBLE);
             }

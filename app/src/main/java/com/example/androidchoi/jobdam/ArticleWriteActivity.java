@@ -18,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.androidchoi.jobdam.Dialog.ArticleEmotionListDialogFragment;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Article;
 import com.example.androidchoi.jobdam.Model.EmotionData;

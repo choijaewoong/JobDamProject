@@ -1,8 +1,7 @@
-package com.example.androidchoi.jobdam;
+package com.example.androidchoi.jobdam.Dialog;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -14,11 +13,15 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.androidchoi.jobdam.Adpater.DialogCategoryAdapter;
+import com.example.androidchoi.jobdam.CardBoxFragment;
+import com.example.androidchoi.jobdam.CardWriteActivity;
+import com.example.androidchoi.jobdam.MainActivity;
 import com.example.androidchoi.jobdam.Model.CategoryData;
+import com.example.androidchoi.jobdam.R;
 
 import java.util.ArrayList;
 
-public class CustomDialogFragment extends DialogFragment {
+public class CategoryListDialogFragment extends DialogFragment {
 
     Toolbar toolbar;
     ListView mListView;
@@ -46,10 +49,9 @@ public class CustomDialogFragment extends DialogFragment {
         dialog.getWindow().setAttributes(params);
     }
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_custom_dialog, container, false);
+        View view = inflater.inflate(R.layout.fragment_category_list_dialog, container, false);
         toolbar = (Toolbar) view.findViewById(R.id.dialog_toolbar);
         mListView = (ListView) view.findViewById(R.id.list_view_category);
 

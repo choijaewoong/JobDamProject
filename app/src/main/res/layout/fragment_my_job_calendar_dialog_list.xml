@@ -3,7 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
               android:orientation="vertical"
-             tools:context="com.example.androidchoi.jobdam.MyJobCalendarListDialogFragment"
+             tools:context="com.example.androidchoi.jobdam.Dialog.MyJobCalendarListDialogFragment"
                 android:background="@color/colorBackground">
 
     <!-- TODO: Update blank fragment layout -->

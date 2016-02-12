@@ -1,4 +1,4 @@
-package com.example.androidchoi.jobdam;
+package com.example.androidchoi.jobdam.Dialog;
 
 
 import android.app.Dialog;
@@ -15,6 +15,8 @@ import android.view.WindowManager;
 
 import com.example.androidchoi.jobdam.Adpater.RecyclerAdapter;
 import com.example.androidchoi.jobdam.Adpater.ViewHolder;
+import com.example.androidchoi.jobdam.ArticleWriteActivity;
+import com.example.androidchoi.jobdam.R;
 
 
 /**

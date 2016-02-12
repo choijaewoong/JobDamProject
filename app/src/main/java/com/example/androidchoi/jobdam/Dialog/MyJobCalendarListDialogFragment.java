@@ -1,4 +1,4 @@
-package com.example.androidchoi.jobdam;
+package com.example.androidchoi.jobdam.Dialog;
 
 
 import android.app.Dialog;
@@ -18,11 +18,13 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.MyJobItemAdapter;
+import com.example.androidchoi.jobdam.JobDetailActivity;
 import com.example.androidchoi.jobdam.Model.Calendar.CalendarItem;
 import com.example.androidchoi.jobdam.Model.Calendar.ItemData;
 import com.example.androidchoi.jobdam.Model.Job;
 import com.example.androidchoi.jobdam.Model.MyJob;
 import com.example.androidchoi.jobdam.Model.MyJobs;
+import com.example.androidchoi.jobdam.R;
 import com.example.androidchoi.jobdam.Util.ListUtils;
 
 import java.util.ArrayList;

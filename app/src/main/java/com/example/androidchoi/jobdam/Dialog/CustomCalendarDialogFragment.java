@@ -1,4 +1,4 @@
-package com.example.androidchoi.jobdam;
+package com.example.androidchoi.jobdam.Dialog;
 
 
 import android.app.Dialog;
@@ -16,11 +16,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.androidchoi.jobdam.CardWriteActivity;
 import com.example.androidchoi.jobdam.Model.Calendar.CalendarData;
 import com.example.androidchoi.jobdam.Model.Calendar.CalendarItem;
 import com.example.androidchoi.jobdam.Manager.CalendarManager;
 import com.example.androidchoi.jobdam.Model.Calendar.ItemData;
 import com.example.androidchoi.jobdam.Adpater.MemoCalendarAdapter;
+import com.example.androidchoi.jobdam.R;
 
 import java.util.ArrayList;
 
@@ -72,7 +74,7 @@ public class CustomCalendarDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_custom_calendar_dialog_frament, container, false);
+        View view = inflater.inflate(R.layout.fragment_custom_calendar_dialog, container, false);
         titleView = (TextView)view.findViewById(R.id.title);
         textCheck = (TextView)view.findViewById(R.id.text_card_calender_check_button);
         ImageView imageCalendarButton = (ImageView)view.findViewById(R.id.image_next_month_button);
