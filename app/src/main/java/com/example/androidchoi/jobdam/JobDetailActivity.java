@@ -23,6 +23,7 @@ import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 import com.example.androidchoi.jobdam.Adpater.JobDetailAdapter;
+import com.example.androidchoi.jobdam.Dialog.DeleteDialogFragment;
 import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.AddressData;
@@ -89,7 +90,7 @@ public class JobDetailActivity extends AppCompatActivity {
         // 헤더뷰 설정
         View corpHeaderView = getLayoutInflater().inflate(R.layout.view_header_job_detail_corp, null);
         View titleHeaderView = getLayoutInflater().inflate(R.layout.view_header_job_detail_title, null);
-        scrapButton = (ToggleButton) titleHeaderView.findViewById(R.id.btn_detail_scrap);
+        scrapButton = (ToggleButton)titleHeaderView.findViewById(R.id.btn_detail_scrap);
         checkScrap();
         scrapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,18 +100,33 @@ public class JobDetailActivity extends AppCompatActivity {
                 스크랩 되어있지 않은 경우 스크랩 후 토스트 메시지 띄움
                 */
                 if (isScrap) {
-                    List<Integer>  jobIdList = new ArrayList<Integer>();
-                    jobIdList.add(mData.getId());
-                    NetworkManager.getInstance().deleteMyJob(JobDetailActivity.this, jobIdList, new NetworkManager.OnResultListener<String>() {
+                    scrapButton.setChecked(true);
+                    final DeleteDialogFragment dialog = new DeleteDialogFragment();
+                    dialog.show(getSupportFragmentManager(), "dialog");
+                    DeleteDialogFragment.ButtonEventListener listener = new DeleteDialogFragment.ButtonEventListener() {
                         @Override
-                        public void onSuccess(String result) {
-                            finish();
+                        public void onYesEvent() {
+                            List<Integer> jobIdList = new ArrayList<Integer>();
+                            jobIdList.add(mData.getId());
+                            NetworkManager.getInstance().deleteMyJob(JobDetailActivity.this, jobIdList, new NetworkManager.OnResultListener<String>() {
+                                @Override
+                                public void onSuccess(String result) {
+                                    finish();
+                                }
+                                @Override
+                                public void onFail(int code) {
+                                    Log.i("code", code + " ");
+                                }
+                            });
+                            dialog.dismiss();
+                            isScrap = !isScrap;
                         }
                         @Override
-                        public void onFail(int code) {
-                            Log.i("code", code + " ");
+                        public void onNoEvent() {
+                            dialog.dismiss();
                         }
-                    });
+                    };
+                    dialog.setButtonEventListener(listener);
                 } else {
                     MyJob job = new MyJob();
                     job.setData(mData);
@@ -126,8 +142,8 @@ public class JobDetailActivity extends AppCompatActivity {
                         public void onFail(int code) {
                         }
                     });
+                    isScrap = !isScrap;
                 }
-                isScrap = !isScrap;
             }
         });
         Button corpLink = (Button) titleHeaderView.findViewById(R.id.btn_detail_move_homepage);
