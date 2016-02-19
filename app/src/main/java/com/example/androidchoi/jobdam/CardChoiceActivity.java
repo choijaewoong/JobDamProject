@@ -9,9 +9,11 @@ import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.CardItemAdapter;
 import com.example.androidchoi.jobdam.ItemView.ExpandableChildQuestionItemView;
+import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyCards;
@@ -55,7 +57,8 @@ public class CardChoiceActivity extends AppCompatActivity {
                     }
                     @Override
                     public void onFail(int code) {
-                        Log.i("code : ", code+"");
+                        Log.i("error : ", code+"");
+                        Toast.makeText(MyApplication.getContext(), "데이터를 불러 올 수 없습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -93,7 +96,8 @@ public class CardChoiceActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onFail(int code) {
-                    Log.i("code", code+" ");
+                    Log.i("error : ", code+"");
+                    Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                 }
             });
             return true;

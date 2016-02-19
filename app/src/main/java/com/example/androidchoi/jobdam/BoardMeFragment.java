@@ -11,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.MyBoardItemAdapter;
+import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.ArticleLab;
 
@@ -72,7 +74,8 @@ public class BoardMeFragment extends Fragment {
                     }
                     @Override
                     public void onFail(int code) {
-                        Log.i("error : ", code + "");
+                        Log.i("error : ", code+"");
+                        Toast.makeText(MyApplication.getContext(), "데이터를 불러 올 수 없습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

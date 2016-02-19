@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Dialog.ArticleEmotionListDialogFragment;
+import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Article;
 import com.example.androidchoi.jobdam.Model.EmotionData;
@@ -130,7 +132,8 @@ public class ArticleWriteActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onFail(int code) {
-                    Toast.makeText(ArticleWriteActivity.this, "실패.", Toast.LENGTH_SHORT).show();
+                    Log.i("error : ", code + "");
+                    Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             });

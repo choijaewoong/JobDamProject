@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -75,7 +76,8 @@ public class FilteredCardActivity extends AppCompatActivity {
 
                     @Override
                     public void onFail(int code) {
-                        Toast.makeText(MyApplication.getContext(), code + "", Toast.LENGTH_SHORT).show();
+                        Log.i("error : ", code + "");
+                        Toast.makeText(MyApplication.getContext(), "데이터를 불러 올 수 없습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

@@ -3,6 +3,7 @@ package com.example.androidchoi.jobdam;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.CalendarAdapter;
 import com.example.androidchoi.jobdam.Dialog.MyJobCalendarListDialogFragment;
+import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Model.Calendar.CalendarData;
 import com.example.androidchoi.jobdam.Model.Calendar.CalendarItem;
 import com.example.androidchoi.jobdam.Manager.CalendarManager;
@@ -132,7 +134,8 @@ public class MyJobCalendarFragment extends Fragment {
 
             @Override
             public void onFail(int code) {
-                Toast.makeText(getActivity(), code + "", Toast.LENGTH_SHORT).show();
+                Log.i("error : ", code + "");
+                Toast.makeText(MyApplication.getContext(), "데이터를 불러 올 수 없습니다.", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -6,8 +6,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.MainActivity;
+import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Manager.PropertyManager;
 import com.example.androidchoi.jobdam.Model.LoginData;
@@ -36,6 +39,8 @@ public class SplashActivity extends AppCompatActivity {
                 }
                 @Override
                 public void onFail(int code) {
+                    Log.i("error : ", code + "");
+                    Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                     goLogin();
                 }
             });

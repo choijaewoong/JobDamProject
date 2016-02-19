@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Dialog.CategoryListDialogFragment;
+import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.CategoryData;
 import com.example.androidchoi.jobdam.Model.MyCard;
@@ -164,7 +165,8 @@ public class CardWriteActivity extends AppCompatActivity {
 
                         @Override
                         public void onFail(int code) {
-                            Toast.makeText(CardWriteActivity.this, "실패.", Toast.LENGTH_SHORT).show();
+                            Log.i("error : ", code+"");
+                            Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                             setResult(Activity.RESULT_CANCELED);
                             finish();
                         }
@@ -180,7 +182,8 @@ public class CardWriteActivity extends AppCompatActivity {
                         }
                         @Override
                         public void onFail(int code) {
-                            Toast.makeText(CardWriteActivity.this, "실패.", Toast.LENGTH_SHORT).show();
+                            Log.i("error : ", code+"");
+                            Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                             setResult(Activity.RESULT_CANCELED);
                             finish();
                         }

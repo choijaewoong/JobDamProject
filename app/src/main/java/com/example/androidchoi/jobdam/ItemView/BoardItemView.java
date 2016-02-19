@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam.ItemView;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +63,8 @@ public class BoardItemView extends RelativeLayout{
 
                             @Override
                             public void onFail(int code) {
+                                Log.i("error : ", code + "");
+                                Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                             }
                         });
             }

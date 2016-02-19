@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.MainActivity;
+import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Manager.PropertyManager;
 import com.example.androidchoi.jobdam.Model.LoginData;
@@ -222,7 +224,8 @@ public class InputUserInfoFragment extends Fragment {
 
                         @Override
                         public void onFail(int code) {
-                            // ...
+                            Log.i("error : ", code + "");
+                            Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                         }
                     });
         }

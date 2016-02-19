@@ -4,6 +4,7 @@ package com.example.androidchoi.jobdam;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Articles;
 
@@ -82,6 +84,8 @@ public class ArticleFragment extends Fragment {
 
                             @Override
                             public void onFail(int code) {
+                                Log.i("error : ", code + "");
+                                Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                             }
                         });
             }

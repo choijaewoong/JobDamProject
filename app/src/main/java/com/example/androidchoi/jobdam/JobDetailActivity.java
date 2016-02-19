@@ -115,7 +115,8 @@ public class JobDetailActivity extends AppCompatActivity {
                                 }
                                 @Override
                                 public void onFail(int code) {
-                                    Log.i("code", code + " ");
+                                    Log.i("error : ", code+"");
+                                    Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                                 }
                             });
                             dialog.dismiss();
@@ -140,6 +141,8 @@ public class JobDetailActivity extends AppCompatActivity {
 
                         @Override
                         public void onFail(int code) {
+                            Log.i("error : ", code+"");
+                            Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                         }
                     });
                     isScrap = !isScrap;
@@ -264,6 +267,8 @@ public class JobDetailActivity extends AppCompatActivity {
 
             @Override
             public void onFail(int code) {
+                Log.i("error : ", code+"");
+                Toast.makeText(MyApplication.getContext(), "데이터를 불러 올 수 없습니다.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -279,7 +284,8 @@ public class JobDetailActivity extends AppCompatActivity {
 
             @Override
             public void onFail(int code) {
-
+                Log.i("error : ", code+"");
+                Toast.makeText(MyApplication.getContext(), "데이터를 불러 올 수 없습니다.", Toast.LENGTH_SHORT).show();
             }
         });
     }

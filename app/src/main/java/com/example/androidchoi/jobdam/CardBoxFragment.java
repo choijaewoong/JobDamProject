@@ -357,7 +357,8 @@ public class CardBoxFragment extends Fragment {
 
                     @Override
                     public void onFail(int code) {
-                        Toast.makeText(MyApplication.getContext(), code + "", Toast.LENGTH_SHORT).show();
+                        Log.i("error : ", code+"");
+                        Toast.makeText(MyApplication.getContext(), "데이터를 불러 올 수 없습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -374,7 +375,8 @@ public class CardBoxFragment extends Fragment {
 
             @Override
             public void onFail(int code) {
-
+                Log.i("error : ", code+"");
+                Toast.makeText(MyApplication.getContext(), "데이터를 불러 올 수 없습니다.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -420,7 +422,8 @@ public class CardBoxFragment extends Fragment {
 
                         @Override
                         public void onFail(int code) {
-
+                            Log.i("error : ", code+"");
+                            Toast.makeText(MyApplication.getContext(), "데이터를 불러 올 수 없습니다.", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
@@ -500,7 +503,8 @@ public class CardBoxFragment extends Fragment {
 
             @Override
             public void onFail(int code) {
-                Log.i("code", code + " ");
+                Log.i("error : ", code+"");
+                Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
             }
         });
         defaultMode();
@@ -543,7 +547,8 @@ public class CardBoxFragment extends Fragment {
 
                         @Override
                         public void onFail(int code) {
-                            Log.i("code", code + " ");
+                            Log.i("error : ", code+"");
+                            Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                         }
                     });
                     defaultMode();

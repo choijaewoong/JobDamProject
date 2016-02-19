@@ -18,9 +18,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.MyJobItemAdapter;
 import com.example.androidchoi.jobdam.Dialog.DeleteDialogFragment;
+import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Job;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
@@ -139,6 +141,7 @@ public class MyJobListFragment extends Fragment {
             @Override
             public void onFail(int code) {
                 Log.i("error : ", code + "");
+                Toast.makeText(MyApplication.getContext(), "데이터를 불러 올 수 없습니다.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -206,7 +209,8 @@ public class MyJobListFragment extends Fragment {
 
                         @Override
                         public void onFail(int code) {
-                            Log.i("code", code + " ");
+                            Log.i("error : ", code+"");
+                            Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                         }
                     });
                     dialog.dismiss();

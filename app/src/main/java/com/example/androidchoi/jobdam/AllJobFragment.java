@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.androidchoi.jobdam.Adpater.JobItemAdapter;
+import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Job;
 import com.example.androidchoi.jobdam.Model.JobData;
@@ -403,6 +405,8 @@ public class AllJobFragment extends Fragment {
 
                             @Override
                             public void onFail(int code) {
+                                Log.i("error : ", code+"");
+                                Toast.makeText(MyApplication.getContext(), "데이터를 불러 올 수 없습니다.", Toast.LENGTH_SHORT).show();
                                 isUpdate = false;
                             }
                         });
@@ -431,7 +435,8 @@ public class AllJobFragment extends Fragment {
 
                     @Override
                     public void onFail(int code) {
-                        Toast.makeText(getActivity(), "error : " + code, Toast.LENGTH_SHORT).show();
+                        Log.i("error : ", code+"");
+                        Toast.makeText(MyApplication.getContext(), "데이터를 불러 올 수 없습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

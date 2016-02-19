@@ -19,6 +19,7 @@ package com.example.androidchoi.jobdam.Adpater;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -139,6 +140,8 @@ public class LayoutAdapter extends RecyclerView.Adapter<LayoutAdapter.SimpleView
 
                             @Override
                             public void onFail(int code) {
+                                Log.i("error : ", code + "");
+                                Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                             }
                         });
             }
