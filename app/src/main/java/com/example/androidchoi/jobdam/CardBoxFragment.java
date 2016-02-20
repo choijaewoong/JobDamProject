@@ -89,6 +89,7 @@ public class CardBoxFragment extends Fragment {
     private ArrayList<MyCards> mCardList = new ArrayList<MyCards>();
     View listSearchHeaderView;
     View itemCountHeaderView;
+    View progressFooterView;
     RelativeLayout gridSearchHeaderView;
     View categoryCountHeaderView;
     ArrayList<Integer> checkedItems = new ArrayList<Integer>();
@@ -177,6 +178,7 @@ public class CardBoxFragment extends Fragment {
         itemCountHeaderView = inflater.inflate(R.layout.view_header_card_item_count, null);
         categoryCountHeaderView = inflater.inflate(R.layout.view_header_category_item_count, null);
         gridSearchHeaderView = (RelativeLayout) view.findViewById(R.id.layout_card_folder_search);
+        progressFooterView = inflater.inflate(R.layout.view_footer_all_job_more_item, null);
 
         //리스트 뷰
         mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_card_box);
@@ -345,6 +347,7 @@ public class CardBoxFragment extends Fragment {
     }
 
     public void showMyMemo() {
+        mListView.addFooterView(progressFooterView, null, false);
         NetworkManager.getInstance().showMyMemo(getActivity(),
                 new NetworkManager.OnResultListener<MyCardLab>() {
                     @Override
@@ -353,6 +356,7 @@ public class CardBoxFragment extends Fragment {
                         mAdapter.setItems(mCardList);
                         mItemCountTextView.setText(Html.fromHtml("전체카드 <font color=#0db5f7>" + mAdapter.getCount()));
                         mRefreshLayout.setRefreshing(false);
+                        mListView.removeFooterView(progressFooterView);
                     }
 
                     @Override

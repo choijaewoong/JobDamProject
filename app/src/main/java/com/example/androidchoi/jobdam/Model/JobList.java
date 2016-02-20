@@ -7,9 +7,9 @@ import java.util.ArrayList;
  * Created by Choi on 2015-11-10.
  */
 public class JobList {
-    private String start;
-    private String count;
-    private String total;
+    private int start;
+    private int count;
+    private int total;
 
     @SerializedName("job")
     private ArrayList<JobData> mJobList;
@@ -17,6 +17,6 @@ public class JobList {
     public ArrayList<JobData> getJobList() {
         return mJobList;
     }
-    public String getTotal() { return total; }
+    public int getTotal() { return total; }
 }
 

@@ -60,6 +60,7 @@ public class AllJobFragment extends Fragment {
     EditText mSearchEdit;
     View searchHeaderView;
     View countHeaderView;
+    View progressFooterView;
     ImageView mDeleteImage;
     Spinner mSpinnerJobOrder;
     Spinner mSpinnerJobKind;
@@ -129,6 +130,7 @@ public class AllJobFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_all_job, container, false);
         searchHeaderView = inflater.inflate(R.layout.view_header_item_search, null);
         countHeaderView = inflater.inflate(R.layout.view_header_all_job_count, null);
+        progressFooterView = inflater.inflate(R.layout.view_footer_all_job_more_item, null);
         final ToggleButton toggleButton = (ToggleButton) countHeaderView.findViewById(R.id.btn_order_toggle);
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -400,7 +402,9 @@ public class AllJobFragment extends Fragment {
                                     mAdapter.add(item);
                                 }
                                 isUpdate = false;
-//                        mRefreshLayout.setRefreshing(false);
+                                if(mAdapter.getCount() == result.getTotal()){
+                                    mListView.removeFooterView(progressFooterView);
+                                }
                             }
 
                             @Override
@@ -415,6 +419,9 @@ public class AllJobFragment extends Fragment {
     }
 
     public void searchJob() {
+        if(mListView.getFooterViewsCount() == 0){
+            mListView.addFooterView(progressFooterView,null, false);
+        }
         page = 0;
         NetworkManager.getInstance().getJobAPI(getActivity(), job_keyword, job_ordering, job_region, job_kind, job_type,
                 page, SHOW_JOB_MAX, new NetworkManager.OnResultListener<JobList>() {
@@ -423,14 +430,11 @@ public class AllJobFragment extends Fragment {
                         mRefreshLayout.setRefreshing(false);
                         page++;
                         mAdapter.setItems(result.getJobList());
-                        mAdapter.setTotalCount(Integer.parseInt(result.getTotal()));
+                        mAdapter.setTotalCount(result.getTotal());
                         mTextView.setText(Html.fromHtml("공채정보 총 <font color=#0db5f7>" + result.getTotal() + "</font>건"));
-//                        mRefreshLayout.postDelayed(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                mRefreshLayout.setRefreshing(false);
-//                            }
-//                        }, 2000);
+                        if(mAdapter.getCount() == result.getTotal()){
+                            mListView.removeFooterView(progressFooterView);
+                        }
                     }
 
                     @Override

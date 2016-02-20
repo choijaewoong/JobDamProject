@@ -43,6 +43,7 @@ public class MyJobListFragment extends Fragment {
     TextView mCountTextView;
     private ArrayList<MyJobs> mJobList;
     View countHeaderView;
+    View progressFooterView;
     ArrayList<Integer> checkedItems = new ArrayList<Integer>();
 
     MainActivity.OnMyJobListCallBack callback = new MainActivity.OnMyJobListCallBack() {
@@ -78,6 +79,7 @@ public class MyJobListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_job_list, container, false);
         countHeaderView = inflater.inflate(R.layout.view_header_item_count, null);
+        progressFooterView = inflater.inflate(R.layout.view_footer_all_job_more_item, null);
         mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_my_job);
         mRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorPrimary);
         mRefreshLayout.setColorSchemeResources(android.R.color.white);
@@ -129,6 +131,7 @@ public class MyJobListFragment extends Fragment {
     }
 
     public void showMyJob() {
+        mListView.addFooterView(progressFooterView, null, false);
         NetworkManager.getInstance().showMyJob(getActivity(), new NetworkManager.OnResultListener<MyJobLab>() {
             @Override
             public void onSuccess(MyJobLab result) {
@@ -136,6 +139,7 @@ public class MyJobListFragment extends Fragment {
                 mAdapter.setItems(mJobList);
                 mCountTextView.setText(Html.fromHtml("총 <font color=#0db5f7>" + mAdapter.getCount() + "</font>건"));
                 mRefreshLayout.setRefreshing(false);
+                mListView.removeFooterView(progressFooterView);
             }
 
             @Override

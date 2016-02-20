@@ -28,6 +28,7 @@ public class BoardMeFragment extends Fragment {
     MyBoardItemAdapter mAdapter;
     SwipeRefreshLayout mRefreshLayout;
     TextView mTextMyBoardTotal;
+    View progressFooterView;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -42,6 +43,7 @@ public class BoardMeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_board_me, container, false);
         View profileHeaderView = inflater.inflate(R.layout.view_header_my_board, null);
         mListView = (ListView)view.findViewById(R.id.listView_board_me);
+        progressFooterView = inflater.inflate(R.layout.view_footer_all_job_more_item, null);
         mListView.addHeaderView(profileHeaderView);
         mAdapter = new MyBoardItemAdapter();
         showArticle();
@@ -63,6 +65,7 @@ public class BoardMeFragment extends Fragment {
     }
 
     public void showArticle(){
+        mListView.addFooterView(progressFooterView);
         NetworkManager.getInstance().showMyArticle(getActivity(),
                 new NetworkManager.OnResultListener<ArticleLab>() {
                     @Override
@@ -71,6 +74,7 @@ public class BoardMeFragment extends Fragment {
                         mAdapter.setItems(result.getArticleList());
                         mRefreshLayout.setRefreshing(false);
                         mTextMyBoardTotal.setText("Total " + result.getTotalCount());
+                        mListView.removeFooterView(progressFooterView);
                     }
                     @Override
                     public void onFail(int code) {

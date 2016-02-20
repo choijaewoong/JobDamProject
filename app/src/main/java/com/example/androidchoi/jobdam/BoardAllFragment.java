@@ -26,6 +26,7 @@ public class BoardAllFragment extends Fragment {
     ListView mListView;
     BoardItemAdapter mAdapter;
     SwipeRefreshLayout mRefreshLayout;
+    View progressFooterView;
 
     public BoardAllFragment() {
         // Required empty public constructor
@@ -43,6 +44,7 @@ public class BoardAllFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_board_all, container, false);
         mListView = (ListView)view.findViewById(R.id.listView_board_all);
+        progressFooterView = inflater.inflate(R.layout.view_footer_all_job_more_item, null);
         mAdapter = new BoardItemAdapter();
         showArticle();
         mListView.setAdapter(mAdapter);
@@ -61,6 +63,7 @@ public class BoardAllFragment extends Fragment {
     }
 
     public void showArticle(){
+        mListView.addFooterView(progressFooterView);
         NetworkManager.getInstance().showArticle(getActivity(),
                 new NetworkManager.OnResultListener<ArticleLab>() {
                     @Override
@@ -68,6 +71,7 @@ public class BoardAllFragment extends Fragment {
                         //서버에서 게시글 리스트 가져와 저장
                         mAdapter.setItems(result.getArticleList());
                         mRefreshLayout.setRefreshing(false);
+                        mListView.removeFooterView(progressFooterView);
                     }
                     @Override
                     public void onFail(int code) {
