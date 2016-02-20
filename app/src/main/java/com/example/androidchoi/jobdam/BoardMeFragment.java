@@ -46,7 +46,6 @@ public class BoardMeFragment extends Fragment {
         progressFooterView = inflater.inflate(R.layout.view_footer_all_job_more_item, null);
         mListView.addHeaderView(profileHeaderView);
         mAdapter = new MyBoardItemAdapter();
-        showArticle();
         mListView.setAdapter(mAdapter);
 
         mRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_board_me);
@@ -61,11 +60,15 @@ public class BoardMeFragment extends Fragment {
         ((BoardFragment)getParentFragment()).writeActicleButton.attachToListView(mListView);
 
         mTextMyBoardTotal = (TextView)profileHeaderView.findViewById(R.id.text_my_board_total);
+
+        showArticle();
         return view;
     }
 
     public void showArticle(){
-        mListView.addFooterView(progressFooterView);
+        if(!mRefreshLayout.isRefreshing()){
+            mListView.addFooterView(progressFooterView);
+        }
         NetworkManager.getInstance().showMyArticle(getActivity(),
                 new NetworkManager.OnResultListener<ArticleLab>() {
                     @Override

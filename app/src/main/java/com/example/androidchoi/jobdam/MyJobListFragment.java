@@ -131,7 +131,9 @@ public class MyJobListFragment extends Fragment {
     }
 
     public void showMyJob() {
-        mListView.addFooterView(progressFooterView, null, false);
+        if(!mRefreshLayout.isRefreshing()){
+            mListView.addFooterView(progressFooterView, null, false);
+        }
         NetworkManager.getInstance().showMyJob(getActivity(), new NetworkManager.OnResultListener<MyJobLab>() {
             @Override
             public void onSuccess(MyJobLab result) {

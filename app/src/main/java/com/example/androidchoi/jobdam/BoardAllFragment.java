@@ -46,7 +46,6 @@ public class BoardAllFragment extends Fragment {
         mListView = (ListView)view.findViewById(R.id.listView_board_all);
         progressFooterView = inflater.inflate(R.layout.view_footer_all_job_more_item, null);
         mAdapter = new BoardItemAdapter();
-        showArticle();
         mListView.setAdapter(mAdapter);
 
         mRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh_board_all);
@@ -59,11 +58,15 @@ public class BoardAllFragment extends Fragment {
             }
         });
         ((BoardFragment)getParentFragment()).writeActicleButton.attachToListView(mListView);
+
+        showArticle();
         return view;
     }
 
     public void showArticle(){
-        mListView.addFooterView(progressFooterView);
+        if(!mRefreshLayout.isRefreshing()){
+            mListView.addFooterView(progressFooterView);
+        }
         NetworkManager.getInstance().showArticle(getActivity(),
                 new NetworkManager.OnResultListener<ArticleLab>() {
                     @Override

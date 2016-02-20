@@ -57,6 +57,7 @@ public class JobDetailActivity extends AppCompatActivity {
     private ExpandableListView mExpandableListView;
     private JobDetailAdapter mExpandableAdapter;
     private ToggleButton scrapButton;
+    private View progressFooterView;
     boolean isScrap;
     public Questions getQuestions() { return mQuestions; }
 
@@ -84,6 +85,7 @@ public class JobDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mData = (Job) intent.getSerializableExtra(Job.JOBITEM);
 
+        progressFooterView = getLayoutInflater().inflate(R.layout.view_footer_all_job_more_item, null);
         mExpandableListView = (ExpandableListView) findViewById(R.id.listview_job_detail_expandable);
         mExpandableAdapter = new JobDetailAdapter();
         mExpandableAdapter.setData(mData.getId(), mData.getCompanyName());
@@ -256,6 +258,7 @@ public class JobDetailActivity extends AppCompatActivity {
     }
 
     public void showJobQuestion(){
+        mExpandableListView.addFooterView(progressFooterView);
         NetworkManager.getInstance().showJobQuestion(JobDetailActivity.this, mData.getId(), new NetworkManager.OnResultListener<QuestionLab>() {
             @Override
             public void onSuccess(QuestionLab result) {
@@ -263,6 +266,7 @@ public class JobDetailActivity extends AppCompatActivity {
                     mQuestions = result.getQuestions();
                 }
                 initJobDetailMenu(); // 상세 채용 정보 카테고리 생성
+                mExpandableListView.removeFooterView(progressFooterView);
             }
 
             @Override

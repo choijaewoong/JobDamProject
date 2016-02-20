@@ -347,7 +347,9 @@ public class CardBoxFragment extends Fragment {
     }
 
     public void showMyMemo() {
-        mListView.addFooterView(progressFooterView, null, false);
+        if(!mRefreshLayout.isRefreshing()){
+            mListView.addFooterView(progressFooterView, null, false);
+        }
         NetworkManager.getInstance().showMyMemo(getActivity(),
                 new NetworkManager.OnResultListener<MyCardLab>() {
                     @Override

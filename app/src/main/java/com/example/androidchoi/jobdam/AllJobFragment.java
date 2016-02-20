@@ -419,7 +419,7 @@ public class AllJobFragment extends Fragment {
     }
 
     public void searchJob() {
-        if(mListView.getFooterViewsCount() == 0){
+        if(mListView.getFooterViewsCount() == 0 && !mRefreshLayout.isRefreshing()){
             mListView.addFooterView(progressFooterView,null, false);
         }
         page = 0;
