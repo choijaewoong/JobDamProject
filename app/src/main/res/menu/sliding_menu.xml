@@ -4,18 +4,18 @@
         android:id="@+id/menu_group"
         android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_all_job"
+            android:icon="@drawable/icon_menu_jcj"
+            android:checked="true"
+            android:title="@string/all_job"/>
+        <item
             android:id="@+id/nav_my_job"
             android:icon="@drawable/icon_menu_ndc"
-            android:checked="true"
             android:title="@string/my_job"/>
         <item
             android:id="@+id/nav_card_box"
             android:icon="@drawable/icon_menu_ncb"
             android:title="@string/card_box"/>
-        <item
-            android:id="@+id/nav_all_job"
-            android:icon="@drawable/icon_menu_jcj"
-            android:title="@string/all_job"/>
         <item
             android:id="@+id/nav_board"
             android:icon="@drawable/icon_menu_jdt"

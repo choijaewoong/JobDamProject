@@ -54,7 +54,7 @@ public class MainActivity extends SlidingFragmentActivity
 
         if (savedInstanceState == null) {
 //          getSupportFragmentManager().beginTransaction().add(R.id.menu_container, new MenuFragment()).commit();
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyJobFragment(), TAG_MY_JOB).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new AllJobFragment(), TAG_ALL_JOB).commit();
         }
         mSlidingMenu = getSlidingMenu();
         mSlidingMenu.setBehindWidthRes(R.dimen.menu_width);
@@ -106,7 +106,12 @@ public class MainActivity extends SlidingFragmentActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         int id = menuItem.getItemId();
-        if (id == R.id.nav_my_job) {
+        if (id == R.id.nav_all_job) {
+            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_ALL_JOB);
+            if (old == null) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, new AllJobFragment(), TAG_ALL_JOB).commit();
+            }
+        } else if (id == R.id.nav_my_job) {
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_MY_JOB);
             if (old == null) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new MyJobFragment(), TAG_MY_JOB).commit();
@@ -115,11 +120,6 @@ public class MainActivity extends SlidingFragmentActivity
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_CARD_BOX);
             if (old == null) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.container, new CardBoxFragment(), TAG_CARD_BOX).commit();
-            }
-        } else if (id == R.id.nav_all_job) {
-            Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_ALL_JOB);
-            if (old == null) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, new AllJobFragment(), TAG_ALL_JOB).commit();
             }
         } else if (id == R.id.nav_board) {
             Fragment old = getSupportFragmentManager().findFragmentByTag(TAG_BOARD);
