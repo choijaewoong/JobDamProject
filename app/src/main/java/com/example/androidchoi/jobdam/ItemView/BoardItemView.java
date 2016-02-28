@@ -17,6 +17,7 @@ import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.Articles;
 import com.example.androidchoi.jobdam.Model.EmotionData;
 import com.example.androidchoi.jobdam.R;
+import com.example.androidchoi.jobdam.Util.ExpandableTextView;
 
 import java.util.Calendar;
 
@@ -25,7 +26,7 @@ import java.util.Calendar;
  */
 public class BoardItemView extends RelativeLayout{
 
-    TextView mTextContent;
+    ExpandableTextView mTextContent;
     LinearLayout mLayoutLikeButton;
     ImageView mImageLike;
     TextView mTextLikeCount;
@@ -41,7 +42,7 @@ public class BoardItemView extends RelativeLayout{
 
     private void init() {
         inflate(getContext(), R.layout.view_board_item, this);
-        mTextContent = (TextView)findViewById(R.id.text_board_content);
+        mTextContent = (ExpandableTextView)findViewById(R.id.text_board_content);
         mLayoutLikeButton = (LinearLayout)findViewById(R.id.layout_board_like_button);
         mLayoutLikeButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -78,6 +79,7 @@ public class BoardItemView extends RelativeLayout{
 
     public void setItemData(Articles data){
         article = data;
+        mTextContent.setCollapsed();
         mTextContent.setText(data.getArticle().getContent());
         mTextLikeCount.setText(data.getArticle().getLikeCount() + "");
         mImageLike.setSelected(data.getArticle().getLikeBool());

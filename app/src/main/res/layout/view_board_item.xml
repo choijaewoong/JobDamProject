@@ -58,12 +58,10 @@
                 android:textSize="@dimen/font_size_default"/>
         </RelativeLayout>
 
-        <TextView
+        <com.example.androidchoi.jobdam.Util.ExpandableTextView
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
-            android:text="New Text"
-            android:lineSpacingExtra="4dp"
             android:id="@+id/text_board_content"
             android:layout_toRightOf="@+id/relativeLayout6"
             android:layout_toEndOf="@+id/relativeLayout6"
@@ -72,9 +70,26 @@
             android:layout_marginRight="@dimen/default_dimen"
             android:layout_marginTop="@dimen/default_dimen"
             android:layout_marginBottom="@dimen/default_small_dimen"
-            android:textColor="@color/colorText"
-            android:textSize="@dimen/font_size_default"
-            android:textIsSelectable="false"/>
+            android:minHeight="100dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="4dp"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/font_size_default"
+                android:textIsSelectable="false"
+                android:id="@+id/expandable_text"
+                android:ellipsize="end"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/button_unfold"
+                android:id="@+id/expand_collapse"/>
+
+        </com.example.androidchoi.jobdam.Util.ExpandableTextView>
 
         <ImageView
             android:layout_width="match_parent"
