@@ -166,11 +166,11 @@ public class JobDetailActivity extends AppCompatActivity {
         myTask.setOnImagListener(new MyTask.OnImageListener() {
             @Override
             public void onSuccess(String img) {
-                if(img != null) {
+                if (img != null) {
                     Glide.with(MyApplication.getContext())
                             .load(img)
                             .into(mCorpLogo);
-                }else{
+                } else {
                     mCorpLogo.setImageResource(R.drawable.image_default_corp_logo);
                 }
             }
@@ -273,6 +273,7 @@ public class JobDetailActivity extends AppCompatActivity {
             public void onFail(int code) {
                 Log.i("error : ", code+"");
                 Toast.makeText(MyApplication.getContext(), "데이터를 불러 올 수 없습니다.", Toast.LENGTH_SHORT).show();
+                mExpandableListView.removeFooterView(progressFooterView);
             }
         });
     }

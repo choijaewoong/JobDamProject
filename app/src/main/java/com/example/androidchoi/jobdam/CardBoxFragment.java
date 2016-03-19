@@ -363,8 +363,9 @@ public class CardBoxFragment extends Fragment {
 
                     @Override
                     public void onFail(int code) {
-                        Log.i("error : ", code+"");
+                        Log.i("error : ", code + "");
                         Toast.makeText(MyApplication.getContext(), "데이터를 불러 올 수 없습니다.", Toast.LENGTH_SHORT).show();
+                        mListView.removeFooterView(progressFooterView);
                     }
                 });
     }
