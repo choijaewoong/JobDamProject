@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.androidchoi.jobdam.Adpater.MyFragmentPagerAdapter;
+import com.example.androidchoi.jobdam.Adpater.BoardPagerAdapter;
 import com.example.androidchoi.jobdam.ItemView.TabBoardAllView;
 import com.example.androidchoi.jobdam.ItemView.TabBoardMeView;
 
@@ -28,7 +28,7 @@ public class BoardFragment extends Fragment {
     private static final int REQUEST_WRITE = 1;
     ViewPager mViewPager;
     TabLayout mTabLayout;
-    MyFragmentPagerAdapter mAdapter;
+    BoardPagerAdapter mAdapter;
     List<Fragment> mChildFragment = new ArrayList<Fragment>();
     com.melnykov.fab.FloatingActionButton writeActicleButton;
 
@@ -59,7 +59,7 @@ public class BoardFragment extends Fragment {
         List<Fragment> fragments = new ArrayList<Fragment>();
         fragments.add(0, new BoardAllFragment());
         fragments.add(1, new BoardMeFragment());
-        mAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(),fragments);
+        mAdapter = new BoardPagerAdapter(getChildFragmentManager(),fragments);
         mAdapter.setTabList(new String[]{"잡담 톡", "나의 톡"});
         mViewPager = (ViewPager) view.findViewById(R.id.tab_pager);
         mViewPager.setAdapter(mAdapter);

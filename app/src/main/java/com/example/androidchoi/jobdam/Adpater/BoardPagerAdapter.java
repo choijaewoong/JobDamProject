@@ -2,45 +2,46 @@ package com.example.androidchoi.jobdam.Adpater;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.androidchoi.jobdam.ArticleFragment;
-import com.example.androidchoi.jobdam.Model.Articles;
+import com.example.androidchoi.jobdam.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by Choi on 2015-11-11.
+ * Created by Choi on 2015-11-04.
  */
-public class BoardPagerAdapter extends FragmentPagerAdapter {
+public class BoardPagerAdapter extends FragmentStatePagerAdapter{
+    final int PAGE_COUNT = 2;
+    private String[] mTabTitles = new String[PAGE_COUNT];
+    private int tabIcons[] = {R.drawable.image_board_all_icon_selected, R.drawable.image_board_me_icon_selected};
+    private List<Fragment> mFragments = new ArrayList<Fragment>();
 
-    ArrayList<Articles> mItems = new ArrayList<Articles>();
-
-    public void setItems(ArrayList<Articles> items){
-        mItems = items;
-        notifyDataSetChanged();
-    }
-
-    public BoardPagerAdapter(FragmentManager fm) {
+    public BoardPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
+        mFragments = fragments;
     }
 
-    @Override
-    public int getItemPosition(Object object) {
-           // after this, onCreateView() of Fragment is ca lled.
-            return POSITION_NONE;   // notifyDataSetChanged
+    public void setTabList(String strings[]){
+        mTabTitles = strings;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return ArticleFragment.newInstance(mItems.get(position));
+        return mFragments.get(position);
     }
+
     @Override
     public int getCount() {
-        return mItems.size();
+        return PAGE_COUNT;
     }
+
     @Override
-    public float getPageWidth(int position) {
-        return 1.0f;
+    public CharSequence getPageTitle(int position) {
+        return mTabTitles[position];
     }
+
+
 }
+

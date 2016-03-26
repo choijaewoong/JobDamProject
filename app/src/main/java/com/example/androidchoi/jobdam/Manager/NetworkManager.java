@@ -124,16 +124,6 @@ public class NetworkManager {
                 ByteArrayInputStream bais = new ByteArrayInputStream(responseBody);
                 final JobList jobList = parser.fromXml(bais, "jobs", JobList.class);
                 listener.onSuccess(jobList);
-//                for(final JobData job : jobList.getJobList()) {
-//                    MyTask myTask = new MyTask();
-//                    myTask.setOnImagListener(new MyTask.OnImageListener() {
-//                        @Override
-//                        public void onSuccess() {
-//                            listener.onSuccess(jobList);
-//                        }
-//                    });
-//                    myTask.execute(job);
-//                }
             }
 
             @Override
@@ -142,38 +132,6 @@ public class NetworkManager {
             }
         });
     }
-//    static class MyTask extends AsyncTask<JobData, Void, Void> {
-//        public interface OnImageListener {
-//            public void onSuccess();
-//        }
-//        OnImageListener mListener;
-//        public void setOnImagListener(OnImageListener listener) {
-//            mListener = listener;
-//        }
-//        @Override
-//        protected Void doInBackground(JobData... params) {
-//            Document doc = null;
-//            try {
-//                for (JobData job : params) {
-//                    doc = Jsoup.connect(job.getSiteUrl()).get();
-//
-//                    Element img = doc.select("table.corp_logo img").first();
-//                    if (img != null) {
-////                    setCompanyImage(img.attr("src"));
-//                        job.setCompanyImage(img.attr("src"));
-//                    }
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            return null;
-//        }
-//        @Override
-//        protected void onPostExecute(Void aVoid) {
-//            super.onPostExecute(aVoid);
-//            mListener.onSuccess();
-//        }
-//    }
 
     private static final String SERVER = "http://52.69.235.46:3000";
     // 내가 담은 채용정보 불러오는 method
@@ -201,6 +159,7 @@ public class NetworkManager {
         });
     }
 
+    // 채용정보 스크랩 유무 확인 요청 method
     private static final String CHECK_JOB_SCRAP = SERVER + "/scrapcheck/%s";
     public void checkJobScrap(Context context, int jobId, final OnResultListener<ScrapCheck> listener){
         RequestParams params = new RequestParams();
@@ -254,6 +213,7 @@ public class NetworkManager {
         });
     }
 
+    // 해당 질문에 카드 태그 요청
     private static final String ADD_QUESTION_TAG = SERVER + "/jasoseotag";
     public void addQuestionTag(Context context, int jobId, ArrayList<String> memoId, int questionNumber, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
@@ -342,6 +302,7 @@ public class NetworkManager {
         });
     }
 
+    // 해당 카테고리 메모 요청 method
     public static final String SHOW_FILTERED_MEMO = SERVER + "/folderlist";
     public void showFilteredMemo(Context context, int index, final OnResultListener<MyCardLab> listener) {
         RequestParams params = new RequestParams();
@@ -367,6 +328,7 @@ public class NetworkManager {
         });
     }
 
+    // 해당 태그를 가진 메모 요청 method
     private static final String SHOW_MEMO_WITH_TAG = SERVER + "/findtag/%s";
     public void showMemoWithTag(Context context, String tag, final OnResultListener<MyCardLab> listener) {
         RequestParams params = new RequestParams();
@@ -451,6 +413,7 @@ public class NetworkManager {
         });
     }
 
+    // 카테고리 수정
     private static final String CHANGE_MEMO_CATEGORY = SERVER + "/movingfolder";
     public void changeMemoCategory(Context context, List<String> memoIds, int categoryIndex, final OnResultListener<String> listener){
         RequestParams params = new RequestParams();
@@ -470,6 +433,7 @@ public class NetworkManager {
         });
     }
 
+    // 카드 태그 리스트 요청 method
     public static final String SHOW_MEMO_TAG = SERVER + "/memotaglist";
     public void showCardTag(Context context, final OnResultListener<Tags> listener) {
         RequestParams params = new RequestParams();
@@ -611,6 +575,7 @@ public class NetworkManager {
         });
     }
 
+    // 로그인
     public static final String LOG_IN = SERVER + "/login";
     public void login(Context context, String userid, String password, final OnResultListener<LoginData> listener) {
         RequestParams params = new RequestParams();
@@ -629,6 +594,7 @@ public class NetworkManager {
         });
     }
 
+    // 회원가입
     public static final String SIGN_UP = SERVER + "/signup";
     public void signup(Context context, String userid, String password, String name, final OnResultListener<LoginData> listener) {
         RequestParams params = new RequestParams();
