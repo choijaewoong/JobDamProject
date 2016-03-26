@@ -32,7 +32,6 @@ import com.example.androidchoi.jobdam.Model.ContentData;
 import com.example.androidchoi.jobdam.Model.Job;
 import com.example.androidchoi.jobdam.Model.MyJob;
 import com.example.androidchoi.jobdam.Model.PeriodData;
-import com.example.androidchoi.jobdam.Model.QuestionLab;
 import com.example.androidchoi.jobdam.Model.Questions;
 import com.example.androidchoi.jobdam.Model.ScrapCheck;
 import com.google.gson.Gson;
@@ -82,6 +81,7 @@ public class JobDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
 
+        // 이전 activity에서 채용 정보 받음
         Intent intent = getIntent();
         mData = (Job) intent.getSerializableExtra(Job.JOBITEM);
 
@@ -102,6 +102,7 @@ public class JobDetailActivity extends AppCompatActivity {
                 스크랩 되어있지 않은 경우 스크랩 후 토스트 메시지 띄움
                 */
                 if (isScrap) {
+                    // 스크랩 해제
                     scrapButton.setChecked(true);
                     final DeleteDialogFragment dialog = new DeleteDialogFragment();
                     dialog.show(getSupportFragmentManager(), "dialog");
@@ -131,6 +132,7 @@ public class JobDetailActivity extends AppCompatActivity {
                     };
                     dialog.setButtonEventListener(listener);
                 } else {
+                    // 스크랩
                     MyJob job = new MyJob();
                     job.setData(mData);
                     Gson gson = new Gson();
@@ -162,8 +164,8 @@ public class JobDetailActivity extends AppCompatActivity {
         });
 
         mCorpLogo = (ImageView)corpHeaderView.findViewById(R.id.image_detail_corp_logo);
-        MyTask myTask = new MyTask(mData);
-        myTask.setOnImagListener(new MyTask.OnImageListener() {
+        CorpLogoCrawlingTask myTask = new CorpLogoCrawlingTask(mData);
+        myTask.setOnImagListener(new CorpLogoCrawlingTask.OnImageListener() {
             @Override
             public void onSuccess(String img) {
                 if (img != null) {
@@ -176,6 +178,7 @@ public class JobDetailActivity extends AppCompatActivity {
             }
         });
         myTask.execute();
+
         mCorpName = (TextView) corpHeaderView.findViewById(R.id.text_detail_corp_name);
         mCorpName.setText(mData.getCompanyName());
         mJobTitle = (TextView) titleHeaderView.findViewById(R.id.text_detail_job_title);
@@ -189,9 +192,10 @@ public class JobDetailActivity extends AppCompatActivity {
         showJobQuestion();
     }
 
-    static class MyTask extends AsyncTask<Void, Void, String> {
+    // 기업 로고 크롤링으로 가져오는 스레드
+    static class CorpLogoCrawlingTask extends AsyncTask<Void, Void, String> {
         Job job;
-        public MyTask(Job job){
+        public CorpLogoCrawlingTask(Job job){
             this.job = job;
         }
         public interface OnImageListener {
@@ -246,6 +250,7 @@ public class JobDetailActivity extends AppCompatActivity {
         mExpandableAdapter.notifyDataSetChanged();
     }
 
+    // show CustomToast method
     public void showScrapToast(){
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.view_toast_scrap,
@@ -257,13 +262,15 @@ public class JobDetailActivity extends AppCompatActivity {
         toast.show();
     }
 
+    // 채용 정보 질문 리스트 요청 method
     public void showJobQuestion(){
         mExpandableListView.addFooterView(progressFooterView);
-        NetworkManager.getInstance().showJobQuestion(JobDetailActivity.this, mData.getId(), new NetworkManager.OnResultListener<QuestionLab>() {
+        NetworkManager.getInstance().showJobQuestion(JobDetailActivity.this, mData.getId(), new NetworkManager.OnResultListener<Questions>() {
             @Override
-            public void onSuccess(QuestionLab result) {
+            public void onSuccess(Questions result) {
+                mQuestions = new Questions();
                 if (result != null) {
-                    mQuestions = result.getQuestions();
+                    mQuestions = result;
                 }
                 initJobDetailMenu(); // 상세 채용 정보 카테고리 생성
                 mExpandableListView.removeFooterView(progressFooterView);

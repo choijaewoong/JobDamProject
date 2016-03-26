@@ -33,6 +33,7 @@ public class JobQuestionActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
 
+
         Intent intent = getIntent();
         mQuestions = (Questions) intent.getSerializableExtra(ExpandableChildQuestionItemView.QUESTION_LIST);
         mCorpName = intent.getStringExtra(ExpandableChildQuestionItemView.CORP_NAME);

@@ -10,7 +10,7 @@ import com.example.androidchoi.jobdam.Model.JobList;
 import com.example.androidchoi.jobdam.Model.LoginData;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
 import com.example.androidchoi.jobdam.Model.MyJobLab;
-import com.example.androidchoi.jobdam.Model.QuestionLab;
+import com.example.androidchoi.jobdam.Model.Questions;
 import com.example.androidchoi.jobdam.Model.ScrapCheck;
 import com.example.androidchoi.jobdam.Model.Tags;
 import com.google.gson.Gson;
@@ -226,8 +226,9 @@ public class NetworkManager {
         });
     }
 
+    //채용공고 질문 요청 method
     private static final String SHOW_JOB_QUESTION = SERVER + "/jasoseo/%s";
-    public void showJobQuestion(Context context, int jobId, final OnResultListener<QuestionLab> listener) {
+    public void showJobQuestion(Context context, int jobId, final OnResultListener<Questions> listener) {
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
@@ -241,14 +242,14 @@ public class NetworkManager {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Log.i("QuestionLab", responseString);
-                QuestionLab questionLab = new QuestionLab();
+                Questions questions = new Questions();
                 try {
-                    questionLab = gson.fromJson(responseString, QuestionLab.class);
+                    questions = gson.fromJson(responseString, Questions.class);
 //                    questionLab.getQuestions().getQuestionList().get(0).addTestTag();
                 } catch (JsonSyntaxException e) {
                     e.printStackTrace();
                 }
-                listener.onSuccess(questionLab);
+                listener.onSuccess(questions);
             }
         });
     }
