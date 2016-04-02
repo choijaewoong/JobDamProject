@@ -243,25 +243,25 @@ public class JobDetailActivity extends AppCompatActivity {
                 mCorpLogo.setImageResource(R.drawable.image_industry_1);
                 break;
             case "2":
-                mCorpLogo.setImageResource(R.drawable.image_industry_10);
+                mCorpLogo.setImageResource(R.drawable.image_industry_2);
                 break;
             case "3":
                 mCorpLogo.setImageResource(R.drawable.image_industry_3);
                 break;
             case "4":
-                mCorpLogo.setImageResource(R.drawable.image_industry_10);
+                mCorpLogo.setImageResource(R.drawable.image_industry_4);
                 break;
             case "5":
-                mCorpLogo.setImageResource(R.drawable.image_industry_10);
+                mCorpLogo.setImageResource(R.drawable.image_industry_5);
                 break;
             case "6":
                 mCorpLogo.setImageResource(R.drawable.image_industry_6);
                 break;
             case "7":
-                mCorpLogo.setImageResource(R.drawable.image_industry_10);
+                mCorpLogo.setImageResource(R.drawable.image_industry_7);
                 break;
             case "8":
-                mCorpLogo.setImageResource(R.drawable.image_industry_10);
+                mCorpLogo.setImageResource(R.drawable.image_industry_8);
                 break;
             case "9":
                 mCorpLogo.setImageResource(R.drawable.image_industry_9);

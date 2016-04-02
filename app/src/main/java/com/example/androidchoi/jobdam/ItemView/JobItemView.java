@@ -65,25 +65,25 @@ public class JobItemView extends RelativeLayout implements Checkable {
                 mImageJobLogo.setImageResource(R.drawable.image_industry_1);
                 break;
             case "2":
-                mImageJobLogo.setImageResource(R.drawable.image_industry_10);
+                mImageJobLogo.setImageResource(R.drawable.image_industry_2);
                 break;
             case "3":
                 mImageJobLogo.setImageResource(R.drawable.image_industry_3);
                 break;
             case "4":
-                mImageJobLogo.setImageResource(R.drawable.image_industry_10);
+                mImageJobLogo.setImageResource(R.drawable.image_industry_4);
                 break;
             case "5":
-                mImageJobLogo.setImageResource(R.drawable.image_industry_10);
+                mImageJobLogo.setImageResource(R.drawable.image_industry_5);
                 break;
             case "6":
                 mImageJobLogo.setImageResource(R.drawable.image_industry_6);
                 break;
             case "7":
-                mImageJobLogo.setImageResource(R.drawable.image_industry_10);
+                mImageJobLogo.setImageResource(R.drawable.image_industry_7);
                 break;
             case "8":
-                mImageJobLogo.setImageResource(R.drawable.image_industry_10);
+                mImageJobLogo.setImageResource(R.drawable.image_industry_8);
                 break;
             case "9":
                 mImageJobLogo.setImageResource(R.drawable.image_industry_9);
