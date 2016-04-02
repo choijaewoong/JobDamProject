@@ -173,8 +173,11 @@ public class JobDetailActivity extends AppCompatActivity {
         CorpLogoCrawlingTask myTask = new CorpLogoCrawlingTask(mData);
         myTask.setOnImagListener(new CorpLogoCrawlingTask.OnImageListener() {
             @Override
-            public void onSuccess(String img) {
+            public void onSuccess(String img){
                 if (img != null) {
+                    if(img.substring(0,4).equals("http")){
+                        img = "http:" + img;
+                    }
                     Glide.with(MyApplication.getContext())
                             .load(img)
                             .into(mCorpLogo);
@@ -216,7 +219,7 @@ public class JobDetailActivity extends AppCompatActivity {
             Element img = null;
             try {
                     doc = Jsoup.connect(job.getSiteUrl()).get();
-                    img = doc.select("table.corp_logo img").first();
+                    img = doc.select("div.company_logo img").first();
                     if (img != null) {
                         return img.attr("src");
                     }
