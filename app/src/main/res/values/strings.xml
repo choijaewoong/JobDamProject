@@ -78,7 +78,10 @@
     <string name="check_scrap">스크랩 되었습니다.</string>
     <string name="check_not_scrap">이미 스크랩 되어있습니다.</string>
 
-    <!-- Notice String -->
+    <!-- Alert String -->
+    <string name="page_not_find">페이지가 존재 하지 않습니다.</string>
+
+
     <!-- Service Agreement -->
     <string name="text_user_agreement"><![CDATA[이 약관은 (주)잡담(이하 "회사")에서 제공하는 서비스\n
         "잡담"의 이용과 관련하여 회사와 고객간의 권리, 의무 및\n

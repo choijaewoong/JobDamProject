@@ -1,11 +1,13 @@
 package com.example.androidchoi.jobdam.ItemView;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Model.AddressData;
 import com.example.androidchoi.jobdam.R;
@@ -29,10 +31,13 @@ public class ExpandableChildAddressItemView extends FrameLayout{
         mButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uriUrl = Uri.parse(data.getURLAddress());
-                Intent intent = new Intent(Intent.ACTION_VIEW, uriUrl);
-                v.getContext().startActivity(intent);
-
+                try {
+                    Uri uriUrl = Uri.parse(data.getURLAddress());
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    v.getContext().startActivity(intent);
+                }catch(ActivityNotFoundException e){
+                    Toast.makeText(getContext(), getContext().getString(R.string.page_not_find), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

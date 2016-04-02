@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -157,9 +158,13 @@ public class JobDetailActivity extends AppCompatActivity {
         corpLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uriUrl = Uri.parse(mData.getCompanyLink());
-                Intent intent = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(intent);
+                try {
+                    Uri uriUrl = Uri.parse(mData.getCompanyLink());
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(intent);
+                }catch(ActivityNotFoundException e){
+                    Toast.makeText(JobDetailActivity.this, getString(R.string.page_not_find), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
