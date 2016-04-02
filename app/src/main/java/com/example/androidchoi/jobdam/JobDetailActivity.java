@@ -164,6 +164,7 @@ public class JobDetailActivity extends AppCompatActivity {
         });
 
         mCorpLogo = (ImageView)corpHeaderView.findViewById(R.id.image_detail_corp_logo);
+        setImageLogo(mData.getIndustryCode());
         CorpLogoCrawlingTask myTask = new CorpLogoCrawlingTask(mData);
         myTask.setOnImagListener(new CorpLogoCrawlingTask.OnImageListener() {
             @Override
@@ -172,8 +173,6 @@ public class JobDetailActivity extends AppCompatActivity {
                     Glide.with(MyApplication.getContext())
                             .load(img)
                             .into(mCorpLogo);
-                } else {
-                    mCorpLogo.setImageResource(R.drawable.image_default_corp_logo);
                 }
             }
         });
@@ -226,6 +225,42 @@ public class JobDetailActivity extends AppCompatActivity {
         protected void onPostExecute(String img) {
             super.onPostExecute(img);
             mListener.onSuccess(img);
+        }
+    }
+
+
+    private void setImageLogo(String code){
+        switch (code){
+            case "1":
+                mCorpLogo.setImageResource(R.drawable.image_industry_1);
+                break;
+            case "2":
+                mCorpLogo.setImageResource(R.drawable.image_industry_10);
+                break;
+            case "3":
+                mCorpLogo.setImageResource(R.drawable.image_industry_3);
+                break;
+            case "4":
+                mCorpLogo.setImageResource(R.drawable.image_industry_10);
+                break;
+            case "5":
+                mCorpLogo.setImageResource(R.drawable.image_industry_10);
+                break;
+            case "6":
+                mCorpLogo.setImageResource(R.drawable.image_industry_6);
+                break;
+            case "7":
+                mCorpLogo.setImageResource(R.drawable.image_industry_10);
+                break;
+            case "8":
+                mCorpLogo.setImageResource(R.drawable.image_industry_10);
+                break;
+            case "9":
+                mCorpLogo.setImageResource(R.drawable.image_industry_9);
+                break;
+            default:
+                mCorpLogo.setImageResource(R.drawable.image_industry_10);
+                break;
         }
     }
 

@@ -14,6 +14,7 @@ public abstract class Job implements Serializable{
     public abstract int getId();
     public abstract String getCompanyName();
     public abstract String getCompanyLink();
+    public abstract String getIndustryCode();
     public abstract String getSiteUrl();
     public abstract  int getStart();
     public abstract  int getEnd();

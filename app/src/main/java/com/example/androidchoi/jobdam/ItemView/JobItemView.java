@@ -45,6 +45,56 @@ public class JobItemView extends RelativeLayout implements Checkable {
         mLayout = (RelativeLayout) findViewById(R.id.layout_job_item_container);
     }
 
+    public void setItemData(final Job itemData, boolean check) {
+        mCorp.setText(itemData.getCompanyName());
+        mTitle.setText(itemData.getJobTitle());
+        setImageJob(itemData.getIndustryCode());
+        setChecked(false);
+        Date start = new Date(itemData.getStart() * 1000L);
+        Date end = new Date(itemData.getEnd() * 1000L);
+        boolean checkDeadLine = setDDay(end); // deadline이 없는 경우만 false를 받음.
+        setPeriod(start, end, checkDeadLine);
+        if (!check) { // 전체 채용 정보인 경우 항목보기 버튼 안보이도록 함.
+            mTextQuestion.setVisibility(GONE);
+        }
+    }
+
+    private void setImageJob(String code){
+        switch (code){
+            case "1":
+                mImageJobLogo.setImageResource(R.drawable.image_industry_1);
+                break;
+            case "2":
+                mImageJobLogo.setImageResource(R.drawable.image_industry_10);
+                break;
+            case "3":
+                mImageJobLogo.setImageResource(R.drawable.image_industry_3);
+                break;
+            case "4":
+                mImageJobLogo.setImageResource(R.drawable.image_industry_10);
+                break;
+            case "5":
+                mImageJobLogo.setImageResource(R.drawable.image_industry_10);
+                break;
+            case "6":
+                mImageJobLogo.setImageResource(R.drawable.image_industry_6);
+                break;
+            case "7":
+                mImageJobLogo.setImageResource(R.drawable.image_industry_10);
+                break;
+            case "8":
+                mImageJobLogo.setImageResource(R.drawable.image_industry_10);
+                break;
+            case "9":
+                mImageJobLogo.setImageResource(R.drawable.image_industry_9);
+                break;
+            default:
+                mImageJobLogo.setImageResource(R.drawable.image_industry_10);
+                break;
+        }
+    }
+
+    // period 계산 method
     private void setPeriod(Date start, Date end, boolean checkDeadLine) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
         StringBuilder period = new StringBuilder();
@@ -57,6 +107,7 @@ public class JobItemView extends RelativeLayout implements Checkable {
         mPeriod.setText(period.toString());
     }
 
+    // d-day 계산 method
     private boolean setDDay(Date end) {
         Calendar endDay = Calendar.getInstance();
         Calendar currentDay = Calendar.getInstance();
@@ -85,7 +136,7 @@ public class JobItemView extends RelativeLayout implements Checkable {
         } else if (d_day > 200) {
             mDDay.setText("상시");
             mDDay.setBackgroundResource(R.drawable.image_dday_box_always);
-            return false;
+            return false; // deadline이 없는 경우 false 리턴
         } else {
             mDDay.setBackgroundResource(R.drawable.image_dday_box_default);
             if (d_day > 99) {
@@ -97,29 +148,13 @@ public class JobItemView extends RelativeLayout implements Checkable {
         return true;
     }
 
-    public void setItemData(final Job itemData, boolean check) {
-        mCorp.setText(itemData.getCompanyName());
-        mTitle.setText(itemData.getJobTitle());
-        setChecked(false);
-        Date start = new Date(itemData.getStart() * 1000L);
-        Date end = new Date(itemData.getEnd() * 1000L);
-        boolean checkDeadLine = setDDay(end);
-        setPeriod(start, end, checkDeadLine);
-        if (!check) {
-            mTextQuestion.setVisibility(GONE);
-        }
-//        Glide.with(MyApplication.getContext()).load(itemData.getCompanyImage()).into(mImageJobLogo);
-    }
-
     @Override
     public void setChecked(boolean checked) {
         this.isChecked = checked;
         if (checked) {
             mLayout.setSelected(true);
-//            mLayout.setBackgroundResource(R.color.colorLightPrimary);
         } else {
             mLayout.setSelected(false);
-//            mLayout.setBackgroundResource(R.drawable.image_job_container);
         }
     }
 

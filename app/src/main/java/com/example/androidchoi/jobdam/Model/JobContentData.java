@@ -12,6 +12,7 @@ public class JobContentData implements Serializable {
     private String location;
     @SerializedName("job-type")
     private String jobType;
+    private JobIndustryCodeData industry;
     @SerializedName("job-category")
     private String jobCategory;
     @SerializedName("experience-level")
@@ -33,6 +34,7 @@ public class JobContentData implements Serializable {
     public String getLocation() {
         return location;
     }
+    public JobIndustryCodeData getIndustry() { return industry; }
     public String getJobType() {
         return jobType;
     }
