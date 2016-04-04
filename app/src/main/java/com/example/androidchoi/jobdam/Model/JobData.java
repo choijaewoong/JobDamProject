@@ -32,7 +32,17 @@ public class JobData extends Job implements Serializable {
     @Override
     public String getCompanyLink() { return company.getName().getLink(); }
     @Override
-    public String getIndustryCode() { return position.getIndustry().getCode().substring(0,1); }
+    public String getIndustryCode() {
+        String code = position.getIndustry().getCode().split(",")[0];
+        switch (code.length()){
+            case 3 :
+                return code.substring(0,1);
+            case 4 :
+                return code.substring(0,2);
+            case 0 :
+                return "10";
+        }
+        return position.getIndustry().getCode().substring(0,1); }
     @Override
     public String getSiteUrl() { return url; }
     @Override

@@ -27,6 +27,7 @@ public class JobContentData implements Serializable {
         jobCategory = "";
         experienceLevel = "";
         educationLevel = "";
+        industry = new JobIndustryCodeData();
     }
     public String getTitle() {
         return title;

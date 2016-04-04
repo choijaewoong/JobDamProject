@@ -12,4 +12,8 @@ public class JobIndustryCodeData implements Serializable {
     public String getCode() {
         return code;
     }
+
+    public JobIndustryCodeData(){
+        code = "";
+    }
 }
