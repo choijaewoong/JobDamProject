@@ -11,7 +11,7 @@ public abstract class Job implements Serializable{
     public static final String JOBID = "job_id";
 
     public abstract void init();
-    public abstract int getId();
+    public abstract String getId();
     public abstract String getCompanyName();
     public abstract String getCompanyLink();
     public abstract String getIndustryCode();

@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class JobData extends Job implements Serializable {
 
     @SerializedName("id")
-    private int job_id;
+    private String job_id;
     private int mLogoResourceId;
     private JobCompanyData company;
     private JobContentData position;
@@ -26,7 +26,7 @@ public class JobData extends Job implements Serializable {
     @Override
     public void init(){}
     @Override
-    public int getId() { return job_id; }
+    public String getId() { return job_id; }
     @Override
     public String getCompanyName() {return company.getName().getValue();}
     @Override

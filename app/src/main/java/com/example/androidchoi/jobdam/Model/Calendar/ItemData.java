@@ -11,10 +11,10 @@ public class ItemData implements CalendarManager.CalendarComparable<ItemData>{
 	public int year;
 	public int month;
 	public int day;
-	private int JobId;
+	private String JobId;
 	private boolean isStart = true;
 	public boolean isStart() { return isStart; }
-	public int getJobId() { return JobId; }
+	public String getJobId() { return JobId; }
 
 	public ItemData(MyJob myJob, boolean isStart) {
 		Date date;

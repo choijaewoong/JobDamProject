@@ -110,7 +110,7 @@ public class JobDetailActivity extends AppCompatActivity {
                     DeleteDialogFragment.ButtonEventListener listener = new DeleteDialogFragment.ButtonEventListener() {
                         @Override
                         public void onYesEvent() {
-                            List<Integer> jobIdList = new ArrayList<Integer>();
+                            List<String> jobIdList = new ArrayList<String>();
                             jobIdList.add(mData.getId());
                             NetworkManager.getInstance().deleteMyJob(JobDetailActivity.this, jobIdList, new NetworkManager.OnResultListener<String>() {
                                 @Override
@@ -175,7 +175,7 @@ public class JobDetailActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String img){
                 if (img != null) {
-                    if(img.substring(0,4).equals("http")){
+                    if(!img.substring(0,4).equals("http")){
                         img = "http:" + img;
                     }
                     Glide.with(MyApplication.getContext())

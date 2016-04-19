@@ -204,7 +204,7 @@ public class MyJobListFragment extends Fragment {
             DeleteDialogFragment.ButtonEventListener listener = new DeleteDialogFragment.ButtonEventListener() {
                 @Override
                 public void onYesEvent() {
-                    List<Integer> jobIdList = new ArrayList<Integer>();
+                    List<String> jobIdList = new ArrayList<String>();
                     for (int i = 0; i < checkedItems.size(); i++) {
                         jobIdList.add(((Job) mAdapter.getItem(checkedItems.get(i) - mListView.getHeaderViewsCount())).getId());
                     }

@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class MyJob extends Job implements Serializable{
 
-    private int job_id;
+    private String job_id;
     private String url;
     private String posting_date;
     private int openingTimestamp;
@@ -28,7 +28,7 @@ public class MyJob extends Job implements Serializable{
     }
     @Override
     public void init(){
-        job_id = 0;
+        job_id = "0";
         company = "empty";
         jobtitle = "empty";
         openingTimestamp = 0;
@@ -40,7 +40,7 @@ public class MyJob extends Job implements Serializable{
     }
 
     @Override
-    public int getId() { return job_id; }
+    public String getId() { return job_id; }
     @Override
     public String getCompanyName() {
         return company;

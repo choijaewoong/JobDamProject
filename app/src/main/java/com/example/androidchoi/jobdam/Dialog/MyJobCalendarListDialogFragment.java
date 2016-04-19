@@ -158,7 +158,7 @@ public class MyJobCalendarListDialogFragment extends DialogFragment {
 
 
 
-    public MyJob findJob(int id) {
+    public MyJob findJob(String id) {
         for (MyJobs myJobs : mJobList) {
             if (myJobs.getJob().getId() == id)
                 return myJobs.getJob();

@@ -161,7 +161,7 @@ public class NetworkManager {
 
     // 채용정보 스크랩 유무 확인 요청 method
     private static final String CHECK_JOB_SCRAP = SERVER + "/scrapcheck/%s";
-    public void checkJobScrap(Context context, int jobId, final OnResultListener<ScrapCheck> listener){
+    public void checkJobScrap(Context context, String jobId, final OnResultListener<ScrapCheck> listener){
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
@@ -187,7 +187,7 @@ public class NetworkManager {
 
     //채용공고 질문 요청 method
     private static final String SHOW_JOB_QUESTION = SERVER + "/jasoseo/%s";
-    public void showJobQuestion(Context context, int jobId, final OnResultListener<Questions> listener) {
+    public void showJobQuestion(Context context, String jobId, final OnResultListener<Questions> listener) {
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
@@ -215,7 +215,7 @@ public class NetworkManager {
 
     // 해당 질문에 카드 태그 요청
     private static final String ADD_QUESTION_TAG = SERVER + "/jasoseotag";
-    public void addQuestionTag(Context context, int jobId, ArrayList<String> memoId, int questionNumber, final OnResultListener<String> listener) {
+    public void addQuestionTag(Context context, String jobId, ArrayList<String> memoId, int questionNumber, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
         params.put("job_id", jobId);
         params.put("Qnum", questionNumber);
@@ -259,10 +259,10 @@ public class NetworkManager {
 
     // 채용정보 삭제
     private static final String DELETE_MY_JOB = SERVER + "/myscrapd";
-    public void deleteMyJob(Context context, List<Integer> jobIds, final OnResultListener<String> listener) {
+    public void deleteMyJob(Context context, List<String> jobIds, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
-        for (int id : jobIds) {
-            params.put("job_id", id);
+        for (String id : jobIds) {
+            params.add("job_id", id);
         }
         client.post(context, DELETE_MY_JOB, params, new TextHttpResponseHandler() {
             @Override
