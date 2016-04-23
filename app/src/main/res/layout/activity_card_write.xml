@@ -30,25 +30,14 @@
             android:src="@drawable/button_category_folder"/>
 
         <ImageView
-            android:id="@+id/image_add_picture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/image_category_select"
-            android:layout_toRightOf="@+id/image_category_select"
-            android:padding="@dimen/default_small_dimen"
-            android:src="@drawable/button_gallery"/>
-
-        <ImageView
             android:id="@+id/image_card_category_color"
             android:layout_width="@dimen/button_divider_width"
             android:layout_height="@dimen/button_divider_height"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/default_small_dimen"
-            android:layout_toEndOf="@+id/image_add_picture"
-            android:layout_toRightOf="@+id/image_add_picture"
-            android:background="@color/colorGray"
-            />
+            android:background="@color/colorCategoryPrivate"
+            android:layout_toEndOf="@+id/image_category_select"
+            android:layout_toRightOf="@+id/image_category_select"/>
 
         <TextView
             android:id="@+id/text_card_category_title"
