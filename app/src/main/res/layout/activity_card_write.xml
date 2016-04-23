@@ -57,8 +57,8 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/image_card_category_color"
             android:layout_toRightOf="@+id/image_card_category_color"
-            android:text="메모"
-            android:textColor="@color/colorCategoryDefault"
+            android:text="@string/category_private"
+            android:textColor="@color/colorCategoryPrivate"
             android:textStyle="bold"
             android:padding="@dimen/default_small_dimen"/>
 

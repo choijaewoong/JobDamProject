@@ -30,11 +30,13 @@
     <string name="alarm">알림 설정</string>
     <string name="version">Version</string>
     <!-- Category Name-->
-    <string name="category_default">메모</string>
-    <string name="category_scrap">스크랩</string>
-    <string name="category_win">수상내역</string>
-    <string name="category_intern">인턴</string>
-    <string name="category_link">링크</string>
+    <string name="category_private">개인 신상</string>
+    <string name="category_intern">인턴/아르바이트</string>
+    <string name="category_study">학업</string>
+    <string name="category_win">수상경력</string>
+    <string name="category_activity">교내/외 활동</string>
+    <string name="category_abroad">해외 경험</string>
+    <string name="category_etc">기타</string>
 
     <!-- floating button label-->
     <string name="write_card">카드 작성</string>

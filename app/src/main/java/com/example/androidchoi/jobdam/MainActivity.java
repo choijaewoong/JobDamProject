@@ -154,10 +154,10 @@ public class MainActivity extends SlidingFragmentActivity
         } else if (getSupportFragmentManager().findFragmentByTag(TAG_MY_JOB) != null
                 && myJobListCallBack.onCheckMode()) {
             myJobListCallBack.onChangeMode();
-        } else if (isBackPressed) {
+        } else if (isBackPressed) {  // 두번 눌렀을 경우
             mHandler.removeMessages(MESSAGE_BACK_TIMEOUT);
             super.onBackPressed();
-        } else {
+        } else { // 한번 눌렀을 경우
             isBackPressed = true;
             Toast.makeText(this, "'뒤로'버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
             mHandler.sendEmptyMessageDelayed(MESSAGE_BACK_TIMEOUT, TIME_BACK_TIMEOUT);
@@ -165,21 +165,18 @@ public class MainActivity extends SlidingFragmentActivity
     }
 
     public interface OnCardBoxCallBack {
-        boolean onCheckMode();
-        void onChangeMode();
+        boolean onCheckMode(); // deleteMode 인지 아닌지 확인하는 메소드
+        void onChangeMode(); // deleteMode에서 defaultMode로 변경하는 메소드
     }
-
     OnCardBoxCallBack cardBoxCallBack;
     public void setOnCardBoxCallback(OnCardBoxCallBack callback) {
         cardBoxCallBack = callback;
     }
 
     public interface OnMyJobListCallBack {
-        boolean onCheckMode();
-
-        void onChangeMode();
+        boolean onCheckMode(); // deleteMode 인지 아닌지 확인하는 메소드
+        void onChangeMode(); // deleteMode에서 defaultMode로 변경하는 메소드
     }
-
     OnMyJobListCallBack myJobListCallBack;
     public void setOnMyJobListCallback(OnMyJobListCallBack callback) {
         myJobListCallBack = callback;

@@ -23,13 +23,13 @@ public class CategoryData {
     private CategoryData(Context context) {
         mContext = context;
         mCategoryList = new ArrayList<CategoryData>();
-        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_default),
-                R.drawable.image_category_4,
-                ContextCompat.getColor(context, R.color.colorCategoryDefault)));
-        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_scrap), R.drawable.image_category_5, ContextCompat.getColor(context, R.color.colorCategoryScrap)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_private), R.drawable.image_category_3, ContextCompat.getColor(context, R.color.colorCategoryPrivate)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_intern), R.drawable.image_category_7, ContextCompat.getColor(context, R.color.colorCategoryIntern)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_study), R.drawable.image_category_4, ContextCompat.getColor(context, R.color.colorCategoryStudy)));
         mCategoryList.add(new CategoryData(mContext.getString(R.string.category_win), R.drawable.image_category_6, ContextCompat.getColor(context, R.color.colorCategoryWin)));
-        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_intern), R.drawable.image_category_2, ContextCompat.getColor(context, R.color.colorCategoryIntern)));
-        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_link), R.drawable.image_category_8, ContextCompat.getColor(context, R.color.colorCategoryLink)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_activity), R.drawable.image_category_1, ContextCompat.getColor(context, R.color.colorCategoryActivity)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_abroad), R.drawable.image_category_5, ContextCompat.getColor(context, R.color.colorCategoryAbroad)));
+        mCategoryList.add(new CategoryData(mContext.getString(R.string.category_etc), R.drawable.image_category_2, ContextCompat.getColor(context, R.color.colorCategoryEtc)));
     }
 
     private CategoryData(String name, int imageResource, int color) {
