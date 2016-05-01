@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -32,7 +33,6 @@ import com.example.androidchoi.jobdam.Model.ContentData;
 import com.example.androidchoi.jobdam.Model.Job;
 import com.example.androidchoi.jobdam.Model.MyJob;
 import com.example.androidchoi.jobdam.Model.PeriodData;
-import com.example.androidchoi.jobdam.Model.QuestionLab;
 import com.example.androidchoi.jobdam.Model.Questions;
 import com.example.androidchoi.jobdam.Model.ScrapCheck;
 import com.google.gson.Gson;
@@ -82,6 +82,7 @@ public class JobDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
 
+        // 이전 activity에서 채용 정보 받음
         Intent intent = getIntent();
         mData = (Job) intent.getSerializableExtra(Job.JOBITEM);
 
@@ -102,13 +103,14 @@ public class JobDetailActivity extends AppCompatActivity {
                 스크랩 되어있지 않은 경우 스크랩 후 토스트 메시지 띄움
                 */
                 if (isScrap) {
+                    // 스크랩 해제
                     scrapButton.setChecked(true);
                     final DeleteDialogFragment dialog = new DeleteDialogFragment();
                     dialog.show(getSupportFragmentManager(), "dialog");
                     DeleteDialogFragment.ButtonEventListener listener = new DeleteDialogFragment.ButtonEventListener() {
                         @Override
                         public void onYesEvent() {
-                            List<Integer> jobIdList = new ArrayList<Integer>();
+                            List<String> jobIdList = new ArrayList<String>();
                             jobIdList.add(mData.getId());
                             NetworkManager.getInstance().deleteMyJob(JobDetailActivity.this, jobIdList, new NetworkManager.OnResultListener<String>() {
                                 @Override
@@ -131,6 +133,7 @@ public class JobDetailActivity extends AppCompatActivity {
                     };
                     dialog.setButtonEventListener(listener);
                 } else {
+                    // 스크랩
                     MyJob job = new MyJob();
                     job.setData(mData);
                     Gson gson = new Gson();
@@ -155,27 +158,34 @@ public class JobDetailActivity extends AppCompatActivity {
         corpLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri uriUrl = Uri.parse(mData.getCompanyLink());
-                Intent intent = new Intent(Intent.ACTION_VIEW, uriUrl);
-                startActivity(intent);
+                try {
+                    Uri uriUrl = Uri.parse(mData.getCompanyLink());
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uriUrl);
+                    startActivity(intent);
+                }catch(ActivityNotFoundException e){
+                    Toast.makeText(JobDetailActivity.this, getString(R.string.page_not_find), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         mCorpLogo = (ImageView)corpHeaderView.findViewById(R.id.image_detail_corp_logo);
-        MyTask myTask = new MyTask(mData);
-        myTask.setOnImagListener(new MyTask.OnImageListener() {
+        setImageLogo(mData.getIndustryCode());
+        CorpLogoCrawlingTask myTask = new CorpLogoCrawlingTask(mData);
+        myTask.setOnImagListener(new CorpLogoCrawlingTask.OnImageListener() {
             @Override
-            public void onSuccess(String img) {
-                if(img != null) {
+            public void onSuccess(String img){
+                if (img != null) {
+                    if(!img.substring(0,4).equals("http")){
+                        img = "http:" + img;
+                    }
                     Glide.with(MyApplication.getContext())
                             .load(img)
                             .into(mCorpLogo);
-                }else{
-                    mCorpLogo.setImageResource(R.drawable.image_default_corp_logo);
                 }
             }
         });
         myTask.execute();
+
         mCorpName = (TextView) corpHeaderView.findViewById(R.id.text_detail_corp_name);
         mCorpName.setText(mData.getCompanyName());
         mJobTitle = (TextView) titleHeaderView.findViewById(R.id.text_detail_job_title);
@@ -189,9 +199,10 @@ public class JobDetailActivity extends AppCompatActivity {
         showJobQuestion();
     }
 
-    static class MyTask extends AsyncTask<Void, Void, String> {
+    // 기업 로고 크롤링으로 가져오는 스레드
+    static class CorpLogoCrawlingTask extends AsyncTask<Void, Void, String> {
         Job job;
-        public MyTask(Job job){
+        public CorpLogoCrawlingTask(Job job){
             this.job = job;
         }
         public interface OnImageListener {
@@ -208,7 +219,7 @@ public class JobDetailActivity extends AppCompatActivity {
             Element img = null;
             try {
                     doc = Jsoup.connect(job.getSiteUrl()).get();
-                    img = doc.select("table.corp_logo img").first();
+                    img = doc.select("div.company_logo img").first();
                     if (img != null) {
                         return img.attr("src");
                     }
@@ -222,6 +233,42 @@ public class JobDetailActivity extends AppCompatActivity {
         protected void onPostExecute(String img) {
             super.onPostExecute(img);
             mListener.onSuccess(img);
+        }
+    }
+
+
+    private void setImageLogo(String code){
+        switch (code){
+            case "1":
+                mCorpLogo.setImageResource(R.drawable.image_industry_1);
+                break;
+            case "2":
+                mCorpLogo.setImageResource(R.drawable.image_industry_2);
+                break;
+            case "3":
+                mCorpLogo.setImageResource(R.drawable.image_industry_3);
+                break;
+            case "4":
+                mCorpLogo.setImageResource(R.drawable.image_industry_4);
+                break;
+            case "5":
+                mCorpLogo.setImageResource(R.drawable.image_industry_5);
+                break;
+            case "6":
+                mCorpLogo.setImageResource(R.drawable.image_industry_6);
+                break;
+            case "7":
+                mCorpLogo.setImageResource(R.drawable.image_industry_7);
+                break;
+            case "8":
+                mCorpLogo.setImageResource(R.drawable.image_industry_8);
+                break;
+            case "9":
+                mCorpLogo.setImageResource(R.drawable.image_industry_9);
+                break;
+            default:
+                mCorpLogo.setImageResource(R.drawable.image_industry_10);
+                break;
         }
     }
 
@@ -246,6 +293,7 @@ public class JobDetailActivity extends AppCompatActivity {
         mExpandableAdapter.notifyDataSetChanged();
     }
 
+    // show CustomToast method
     public void showScrapToast(){
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.view_toast_scrap,
@@ -257,13 +305,15 @@ public class JobDetailActivity extends AppCompatActivity {
         toast.show();
     }
 
+    // 채용 정보 질문 리스트 요청 method
     public void showJobQuestion(){
         mExpandableListView.addFooterView(progressFooterView);
-        NetworkManager.getInstance().showJobQuestion(JobDetailActivity.this, mData.getId(), new NetworkManager.OnResultListener<QuestionLab>() {
+        NetworkManager.getInstance().showJobQuestion(JobDetailActivity.this, mData.getId(), new NetworkManager.OnResultListener<Questions>() {
             @Override
-            public void onSuccess(QuestionLab result) {
+            public void onSuccess(Questions result) {
+                mQuestions = new Questions();
                 if (result != null) {
-                    mQuestions = result.getQuestions();
+                    mQuestions = result;
                 }
                 initJobDetailMenu(); // 상세 채용 정보 카테고리 생성
                 mExpandableListView.removeFooterView(progressFooterView);
@@ -273,6 +323,7 @@ public class JobDetailActivity extends AppCompatActivity {
             public void onFail(int code) {
                 Log.i("error : ", code+"");
                 Toast.makeText(MyApplication.getContext(), "데이터를 불러 올 수 없습니다.", Toast.LENGTH_SHORT).show();
+                mExpandableListView.removeFooterView(progressFooterView);
             }
         });
     }

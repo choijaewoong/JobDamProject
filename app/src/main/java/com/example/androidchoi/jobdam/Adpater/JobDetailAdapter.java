@@ -26,7 +26,7 @@ import java.util.List;
 public class JobDetailAdapter extends BaseExpandableListAdapter {
 
     List<GroupData> mItems = new ArrayList<GroupData>();
-    int  mJobId;
+    String  mJobId;
     String mCorpName;
     private static final int VIEW_TYPE_COUNT = 4;
     private static final int TYPE_INDEX_CONTENT = 0;
@@ -52,7 +52,7 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
         notifyDataSetChanged();
     }
 
-    public void setData(int jobId, String corpName){
+    public void setData(String jobId, String corpName){
         mJobId = jobId;
         mCorpName = corpName;
     }
@@ -154,6 +154,7 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
                     view = new ExpandableChildQuestionItemView(parent.getContext());
                 }
                 view.setExpandableQuestion((QuestionData)mItems.get(groupPosition).getChildDataList().get(childPosition), mJobId, mCorpName, childPosition);
+                // 마지막 질문 밑에 상세보기 버튼 추가
                 if(isLastChild){
                     view.setVisibleDetailButton();
                 }

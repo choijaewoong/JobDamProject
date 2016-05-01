@@ -47,7 +47,7 @@
     <dimen name="card_item_image_thumnail_size">60dp</dimen>
     <dimen name="card_item_image_thumnail_margin">24dp</dimen>
     <dimen name="card_right_padding">40dp</dimen>
-    <dimen name="card_left_padding">24dp</dimen>
+    <dimen name="category_bar_right_margin">16dp</dimen>
     <dimen name="category_bar_bottom_margin">1.25dp</dimen>
     <dimen name="card_item_vertical_gap">6dp</dimen>
     <!-- card write activity-->

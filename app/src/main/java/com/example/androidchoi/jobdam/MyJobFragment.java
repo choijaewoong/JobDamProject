@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.androidchoi.jobdam.Adpater.MyFragmentPagerAdapter;
+import com.example.androidchoi.jobdam.Adpater.BoardPagerAdapter;
 import com.example.androidchoi.jobdam.Util.CustomViewPager;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class MyJobFragment extends Fragment {
 
     CustomViewPager mViewPager;
     TabLayout mTabLayout;
-    MyFragmentPagerAdapter mAdapter;
+    BoardPagerAdapter mAdapter;
     public MyJobFragment() {
         // Required empty public constructor
     }
@@ -51,7 +51,7 @@ public class MyJobFragment extends Fragment {
         List<Fragment> fragments = new ArrayList<Fragment>();
         fragments.add(0,new MyJobListFragment());
         fragments.add(1,new MyJobCalendarFragment());
-        mAdapter = new MyFragmentPagerAdapter(getChildFragmentManager(), fragments);
+        mAdapter = new BoardPagerAdapter(getChildFragmentManager(), fragments);
         mAdapter.setTabList(new String[]{"잡담 리스트", "잡담캘린더"});
         mViewPager = (CustomViewPager)view.findViewById(R.id.tab_pager);
         mViewPager.setAdapter(mAdapter);

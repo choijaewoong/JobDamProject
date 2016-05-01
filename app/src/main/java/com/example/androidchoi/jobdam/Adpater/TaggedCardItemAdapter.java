@@ -4,8 +4,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.example.androidchoi.jobdam.Model.MyCards;
 import com.example.androidchoi.jobdam.ItemView.TaggedCardItemView;
+import com.example.androidchoi.jobdam.Model.MyCard;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class TaggedCardItemAdapter extends BaseAdapter {
 
-    ArrayList<MyCards> mItems = new ArrayList<MyCards>();
+    ArrayList<MyCard> mItems = new ArrayList<MyCard>();
     ArrayList<Boolean> mCheck = new ArrayList<Boolean>();
     TaggedCardItemView.OnContentOpenCallBack mCallBack = new TaggedCardItemView.OnContentOpenCallBack() {
         @Override
@@ -22,7 +22,7 @@ public class TaggedCardItemAdapter extends BaseAdapter {
             mCheck.set(position, check);
         }
     };
-    public void setItems(ArrayList<MyCards> items){
+    public void setItems(ArrayList<MyCard> items){
         mItems = items;
         for(int i=0; i<mItems.size(); i++){
             mCheck.add(false);
@@ -53,7 +53,7 @@ public class TaggedCardItemAdapter extends BaseAdapter {
             view = (TaggedCardItemView)convertView;
         }
         view.setOnContentOpenCallback(mCallBack);
-        view.setItemData(mItems.get(position).getCard(), position, mCheck.get(position));
+        view.setItemData(mItems.get(position), position, mCheck.get(position));
         return view;
     }
 }

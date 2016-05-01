@@ -1,20 +1,20 @@
 package com.example.androidchoi.jobdam.Model;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by Choi on 2015-11-12.
  */
 public class MyJob extends Job implements Serializable{
 
-    private int job_id;
+    private String job_id;
     private String url;
     private String posting_date;
     private int openingTimestamp;
     private int expirationTimestamp;
     private String company;
     private String companySite;
+    private String industryCode;
     private String jobtitle;
     private String position;
     private String location;
@@ -22,14 +22,13 @@ public class MyJob extends Job implements Serializable{
     private String required_level;
     private String salary;
     private String companyImage;
-    private List<MyJobUser> scrap_userID;
 
     public MyJob() {
         init();
     }
     @Override
     public void init(){
-        job_id = 0;
+        job_id = "0";
         company = "empty";
         jobtitle = "empty";
         openingTimestamp = 0;
@@ -41,13 +40,15 @@ public class MyJob extends Job implements Serializable{
     }
 
     @Override
-    public int getId() { return job_id; }
+    public String getId() { return job_id; }
     @Override
     public String getCompanyName() {
         return company;
     }
     @Override
     public String getCompanyLink() { return companySite; }
+    @Override
+    public String getIndustryCode() { return industryCode; }
     @Override
     public String getSiteUrl() { return url;}
     @Override
@@ -79,17 +80,18 @@ public class MyJob extends Job implements Serializable{
     public int getEnd() {return expirationTimestamp;}
 
     public void setData(Job data){
-     job_id = data.getId();
-     company = data.getCompanyName();
-     companySite = data.getCompanyLink();
-     url = data.getSiteUrl();
-     openingTimestamp = data.getStart();
-    expirationTimestamp = data.getEnd();
-     salary = data.getSalary();
-     jobtitle = data.getJobTitle();
-     location = data.getLocation();
-     exprience_level = data.getExperienceLevel();
-     required_level = data.getEducationLevel();
-    companyImage = data.getCompanyImage();
+        job_id = data.getId();
+        company = data.getCompanyName();
+        companySite = data.getCompanyLink();
+        industryCode = data.getIndustryCode();
+        url = data.getSiteUrl();
+        openingTimestamp = data.getStart();
+        expirationTimestamp = data.getEnd();
+        salary = data.getSalary();
+        jobtitle = data.getJobTitle();
+        location = data.getLocation();
+        exprience_level = data.getExperienceLevel();
+        required_level = data.getEducationLevel();
+        companyImage = data.getCompanyImage();
     }
 }

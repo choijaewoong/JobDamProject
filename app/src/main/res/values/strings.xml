@@ -30,11 +30,13 @@
     <string name="alarm">알림 설정</string>
     <string name="version">Version</string>
     <!-- Category Name-->
-    <string name="category_default">메모</string>
-    <string name="category_scrap">스크랩</string>
-    <string name="category_win">수상내역</string>
-    <string name="category_intern">인턴</string>
-    <string name="category_link">링크</string>
+    <string name="category_private">개인 신상</string>
+    <string name="category_intern">인턴/아르바이트</string>
+    <string name="category_study">학업</string>
+    <string name="category_win">수상경력</string>
+    <string name="category_activity">교내/외 활동</string>
+    <string name="category_abroad">해외 경험</string>
+    <string name="category_etc">기타</string>
 
     <!-- floating button label-->
     <string name="write_card">카드 작성</string>
@@ -83,7 +85,10 @@
     <string name="check_scrap">스크랩 되었습니다.</string>
     <string name="check_not_scrap">이미 스크랩 되어있습니다.</string>
 
-    <!-- Notice String -->
+    <!-- Alert String -->
+    <string name="page_not_find">페이지가 존재 하지 않습니다.</string>
+
+
     <!-- Service Agreement -->
     <string name="text_user_agreement"><![CDATA[이 약관은 (주)잡담(이하 "회사")에서 제공하는 서비스\n
         "잡담"의 이용과 관련하여 회사와 고객간의 권리, 의무 및\n

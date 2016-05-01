@@ -16,7 +16,7 @@ import com.example.androidchoi.jobdam.CardChoiceActivity;
 import com.example.androidchoi.jobdam.JobDetailActivity;
 import com.example.androidchoi.jobdam.JobQuestionActivity;
 import com.example.androidchoi.jobdam.Model.CategoryData;
-import com.example.androidchoi.jobdam.Model.MyCards;
+import com.example.androidchoi.jobdam.Model.MyCard;
 import com.example.androidchoi.jobdam.Model.QuestionData;
 import com.example.androidchoi.jobdam.Model.Questions;
 import com.example.androidchoi.jobdam.R;
@@ -36,9 +36,9 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
         super(context);
         init();
     }
-    TextView mTextQuestionView;
+    TextView mTextQuestionView; // 질문 텍스트
     PredicateLayout mPredicateLayout;
-    ImageView mImageQuestionDetailButton;
+    ImageView mImageQuestionDetailButton; // 상세 보기 버튼
 
     private void init() {
         View view = inflate(getContext(), R.layout.view_expandable_child_question_item,this);
@@ -47,7 +47,7 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
         mImageQuestionDetailButton = (ImageView)view.findViewById(R.id.image_job_question_detail_button);
     }
 
-    public void setExpandableQuestion(final QuestionData data, final int jobId, final String corpName,  final int position){
+    public void setExpandableQuestion(final QuestionData data, final String jobId, final String corpName,  final int position){
         mTextQuestionView.setText(data.getQuestion());
         mImageQuestionDetailButton.setVisibility(GONE); //상세보기 숨김
         mPredicateLayout.setOnClickListener(new OnClickListener() {
@@ -60,10 +60,12 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
                 ((JobDetailActivity) getContext()).startActivityForResult(intent, JobDetailActivity.REQUEST_ATTACH);
             }
         });
+
+        // 해당 질문에 태그된 카드가 있는 경우 뷰에 태그된 카드 추가
         if(data.getCardList() != null){
             mPredicateLayout.removeViews(1, mPredicateLayout.getChildCount()-1);
-            for (MyCards myCards : data.getCardList()) {
-                addTagView(myCards.getCard().getTitle(), myCards.getCard().getCategory());
+            for (MyCard myCard : data.getCardList()) {
+                addTagView(myCard.getTitle(), myCard.getCategory());
             }
         }
         mImageQuestionDetailButton.setOnClickListener(new OnClickListener() {
@@ -82,6 +84,7 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
         mImageQuestionDetailButton.setVisibility(VISIBLE);
     }
 
+    // 질문에 카드 태그 추가 메소드
     public void addTagView(String tag, int categoryIndex){
         TextView t = new TextView(getContext());
         t.setText(tag);
@@ -96,27 +99,6 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
         t.setSingleLine(true);
         t.setEllipsize(TextUtils.TruncateAt.END);
         t.setGravity(Gravity.CENTER);
-//        t.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                for(int i=0; i<mTextTags.size(); i++){
-//                    if(t == mTextTags.get(i)){
-////                        Toast.makeText(CardWriteActivity.this, "해당 태그가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(getActivity(), CardWriteActivity.class);
-//                        intent.putExtra(MyCard.CARD_ITEM, mCardList.get(index));
-//                        intent.putExtra(MyCard.CARD_NEW, false);
-//                        startActivityForResult(intent, REQUEST_MODIFY);
-//                    }
-//                }
-//            }
-//        });
-//        for(int i=0; i<mTextTags.size(); i++) {
-//            if (t.getId() == mTextTags.get(i).getId()) {
-//                return;
-//            }
-//        }
-//        mTextTags.add(t);
-//        mPredicateLayout.addView(mTextTags.get(mTextTags.size() - 1));
         mPredicateLayout.addView(t);
     }
 }

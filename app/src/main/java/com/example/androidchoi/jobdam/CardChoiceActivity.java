@@ -25,7 +25,7 @@ public class CardChoiceActivity extends AppCompatActivity {
     ListView mListView;
     CardItemAdapter mAdapter;
     int mQuestionNum;
-    int mJobId;
+    String mJobId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class CardChoiceActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mQuestionNum = intent.getIntExtra(ExpandableChildQuestionItemView.QUESTION_NUM, 0);
-        mJobId = intent.getIntExtra(ExpandableChildQuestionItemView.JOB_ID, -1);
+        mJobId = intent.getStringExtra(ExpandableChildQuestionItemView.JOB_ID);
 
         mListView = (ListView)findViewById(R.id.listView_attach_card);
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
