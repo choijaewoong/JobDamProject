@@ -342,7 +342,6 @@ public class CardWriteActivity extends AppCompatActivity {
         mSpinnerWorkCompetence.setAdapter(mArrayAdapters[1]);
         mSpinnerAttitudeCompetence = (Spinner)findViewById(R.id.spinner_attitude_competence);
         mSpinnerAttitudeCompetence.setAdapter(mArrayAdapters[2]);
-
     }
 
     private void initArrayAdapter() {

@@ -3,10 +3,12 @@
           xmlns:android="http://schemas.android.com/apk/res/android"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:paddingTop="@dimen/default_small_dimen"
-          android:paddingBottom="@dimen/default_small_dimen"
+          android:paddingTop="@dimen/default_min_dimen"
+          android:paddingBottom="@dimen/default_min_dimen"
           android:ellipsize="marquee"
           android:singleLine="true"
-          android:textColor="@color/colorPrimary"
+          android:text="sssfdsf"
+          android:textColor="@color/colorGray"
+          android:textSize="@dimen/font_size_semi_large"
           android:textAlignment="center">
 </TextView>
