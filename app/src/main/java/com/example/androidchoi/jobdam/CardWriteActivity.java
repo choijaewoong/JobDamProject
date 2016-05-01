@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Dialog.CategoryListDialogFragment;
+import com.example.androidchoi.jobdam.Dialog.SaveDialogFragment;
 import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.CategoryData;
@@ -152,45 +153,10 @@ public class CardWriteActivity extends AppCompatActivity {
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String jsonString;
-                if (isNew == true) {  // add CardData
-                    jsonString = addJsonString();
-                    NetworkManager.getInstance().addMemo(CardWriteActivity.this, jsonString, new NetworkManager.OnResultListener<String>() {
-                        @Override
-                        public void onSuccess(String result) {
-                            Log.i("생성", jsonString);
-                            setResult(Activity.RESULT_OK);
-                            finish();
-                        }
-
-                        @Override
-                        public void onFail(int code) {
-                            Log.i("error : ", code+"");
-                            Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                            setResult(Activity.RESULT_CANCELED);
-                            finish();
-                        }
-                    });
-                } else { //modify CardData
-                    jsonString = modifyJsonString();
-                    NetworkManager.getInstance().updateMemo(CardWriteActivity.this, jsonString, new NetworkManager.OnResultListener<String>() {
-                        @Override
-                        public void onSuccess(String result) {
-                            Log.i("수정", jsonString);
-                            setResult(Activity.RESULT_OK);
-                            finish();
-                        }
-                        @Override
-                        public void onFail(int code) {
-                            Log.i("error : ", code+"");
-                            Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                            setResult(Activity.RESULT_CANCELED);
-                            finish();
-                        }
-                    });
-                }
+                saveCardData();
             }
-        });
+        }); // 저장 버튼 클릭 이벤트 설정
+
         mTextTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -259,6 +225,47 @@ public class CardWriteActivity extends AppCompatActivity {
         });
     }
 
+    // 변경된 카드 내용 저장 메소드
+    public void saveCardData(){
+        final String jsonString;
+        if (isNew == true) {  // add CardData
+            jsonString = addJsonString();
+            NetworkManager.getInstance().addMemo(CardWriteActivity.this, jsonString, new NetworkManager.OnResultListener<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    Log.i("생성", jsonString);
+                    setResult(Activity.RESULT_OK);
+                    finish();
+                }
+
+                @Override
+                public void onFail(int code) {
+                    Log.i("error : ", code+"");
+                    Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                    setResult(Activity.RESULT_CANCELED);
+                    finish();
+                }
+            });
+        } else { //modify CardData
+            jsonString = modifyJsonString();
+            NetworkManager.getInstance().updateMemo(CardWriteActivity.this, jsonString, new NetworkManager.OnResultListener<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    Log.i("수정", jsonString);
+                    setResult(Activity.RESULT_OK);
+                    finish();
+                }
+                @Override
+                public void onFail(int code) {
+                    Log.i("error : ", code+"");
+                    Toast.makeText(MyApplication.getContext(), "요청에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                    setResult(Activity.RESULT_CANCELED);
+                    finish();
+                }
+            });
+        }
+    }
+
     //태그 더하기
     public void addTagView(String tag){
         final TextView t = new TextView(CardWriteActivity.this);
@@ -316,5 +323,28 @@ public class CardWriteActivity extends AppCompatActivity {
         mEditContent.setVisibility(View.VISIBLE);
         mEditTitle.setText(mTextTitle.getText());
         mEditContent.setText(mTextContent.getText());
+    }
+
+    @Override
+    public void onBackPressed() {
+        final SaveDialogFragment dialog = new SaveDialogFragment();
+        dialog.show(getSupportFragmentManager(), "dialog");
+        SaveDialogFragment.ButtonEventListener listener = new SaveDialogFragment.ButtonEventListener() {
+            @Override
+            public void onYesEvent() {
+                saveCardData();
+            }
+
+            @Override
+            public void onNoEvent() {
+                finish();
+            }
+
+            @Override
+            public void onCancelEvent() {
+                dialog.dismiss();
+            }
+        };
+        dialog.setButtonEventListener(listener);
     }
 }

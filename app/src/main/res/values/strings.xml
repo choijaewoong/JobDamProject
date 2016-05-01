@@ -71,7 +71,12 @@
     <string name="dialog_delete_title">삭제하시겠습니까?</string>
     <string name="dialog_delete_sub_title">삭제된 데이터는 복구되지 않습니다.</string>
     <string name="dialog_delete_yes">삭제</string>
-    <string name="dialog_cancel">취소</string>
+    <string name="dialog_delete_no">취소</string>
+    <string name="dialog_save_title">저장하시겠습니까?</string>
+    <string name="dialog_save_sub_title">변경된 내용이 저장됩니다.</string>
+    <string name="dialog_save_yes">저장</string>
+    <string name="dialog_save_no">닫기</string>
+    <string name="dialog_save_cancel">취소</string>
     <string name="dialog_close">닫 기</string>
 
     <!-- Check Message-->
