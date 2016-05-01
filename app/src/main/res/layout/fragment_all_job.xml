@@ -14,7 +14,7 @@
         android:layout_marginLeft="0dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
-        android:id="@+id/linearLayout9"
+        android:id="@+id/linearLayout_spinner"
         android:background="@color/colorPrimary">
 
         <Spinner
@@ -43,7 +43,7 @@
         android:id="@+id/refresh_all_job"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/linearLayout9">
+        android:layout_below="@+id/linearLayout_spinner">
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
         android:clipToPadding="false"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="0dp"
-        android:layout_below="@+id/linearLayout9"/>
+        android:layout_below="@+id/linearLayout_spinner"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <View
@@ -64,7 +64,7 @@
         android:layout_height="@dimen/shadow_depth"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout9"
+        android:layout_below="@+id/linearLayout_spinner"
         android:layout_gravity="center"
         android:background="@drawable/shadow_bottom"/>
 

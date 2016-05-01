@@ -13,10 +13,12 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +50,10 @@ public class CardWriteActivity extends AppCompatActivity {
     TextView mCancelButton;
     TextView mSaveButton;
     boolean isNew;
+    Spinner mSpinnerJobCompetence;
+    Spinner mSpinnerWorkCompetence;
+    Spinner mSpinnerAttitudeCompetence;
+    ArrayAdapter<String>[] mArrayAdapters;
 
     //작성 기능
     EditText mEditTitle;
@@ -223,6 +229,8 @@ public class CardWriteActivity extends AppCompatActivity {
                 mEditTag.setText("");
             }
         });
+
+        setSpinner(); // 스피너 설정
     }
 
     // 변경된 카드 내용 저장 메소드
@@ -323,6 +331,31 @@ public class CardWriteActivity extends AppCompatActivity {
         mEditContent.setVisibility(View.VISIBLE);
         mEditTitle.setText(mTextTitle.getText());
         mEditContent.setText(mTextContent.getText());
+    }
+
+    //스피너 세팅 메소드
+    public void setSpinner(){
+        initArrayAdapter();
+        mSpinnerJobCompetence = (Spinner)findViewById(R.id.spinner_job_competence);
+        mSpinnerJobCompetence.setAdapter(mArrayAdapters[0]);
+        mSpinnerWorkCompetence = (Spinner)findViewById(R.id.spinner_work_competence);
+        mSpinnerWorkCompetence.setAdapter(mArrayAdapters[1]);
+        mSpinnerAttitudeCompetence = (Spinner)findViewById(R.id.spinner_attitude_competence);
+        mSpinnerAttitudeCompetence.setAdapter(mArrayAdapters[2]);
+
+    }
+
+    private void initArrayAdapter() {
+        mArrayAdapters = new ArrayAdapter[3];
+        String[][] StringArray = new String[3][];
+        StringArray[0] = getResources().getStringArray(R.array.job_competence);
+        StringArray[1] = getResources().getStringArray(R.array.work_competence);
+        StringArray[2] = getResources().getStringArray(R.array.attitude_competence);
+        for (int i = 0; i < mArrayAdapters.length; i++) {
+            mArrayAdapters[i] = new ArrayAdapter<String>(CardWriteActivity.this, R.layout.spinner_header_item_card);
+            mArrayAdapters[i].setDropDownViewResource(R.layout.spinner_dropdown_item_card);
+            mArrayAdapters[i].addAll(StringArray[i]);
+        }
     }
 
     @Override

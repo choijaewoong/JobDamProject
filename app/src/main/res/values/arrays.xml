@@ -43,6 +43,67 @@
         <item>전임</item>
         <item>해외</item>
         <item>기타</item>
+    </string-array>
 
+    <string-array name="job_competence">
+        <item>총무</item>
+        <item>재무회계</item>
+        <item>법무</item>
+        <item>인사</item>
+        <item>전략기획</item>
+        <item>구매</item>
+        <item>생산관리</item>
+        <item>품질관리</item>
+        <item>물류유통</item>
+        <item>영업</item>
+        <item>마케팅</item>
+        <item>상품기획</item>
+        <item>고객서비스</item>
+        <item>광고홍보</item>
+        <item>연구개발</item>
+        <item>IT</item>
+        <item>사업관리</item>
+        <item>디자인</item>
+    </string-array>
+
+    <string-array name="work_competence">
+        <item>문서작성</item>
+        <item>성과지향</item>
+        <item>통찰력</item>
+        <item>준비성</item>
+        <item>적응력</item>
+        <item>고객지향</item>
+        <item>팀워크</item>
+        <item>의사소통</item>
+        <item>리더쉽</item>
+        <item>창의력</item>
+        <item>문제해결</item>
+        <item>논리력</item>
+        <item>설득력</item>
+        <item>자기관리</item>
+        <item>시간관리</item>
+        <item>꼼꼼함</item>
+        <item>의사결정</item>
+        <item>글로벌마인드</item>
+        <item>위기관리</item>
+        <item>통섭력</item>
+        <item>발표능력</item>
+        <item>정보분석</item>
+        <item>실천력</item>
+        <item>집중력</item>
+        <item>기회력</item>
+    </string-array>
+
+    <string-array name="attitude_competence">
+        <item>끈기</item>
+        <item>이타심</item>
+        <item>성실성</item>
+        <item>신뢰성</item>
+        <item>도전정신</item>
+        <item>책임감</item>
+        <item>자신감</item>
+        <item>적극성</item>
+        <item>지적 탐구심</item>
+        <item>도덕성</item>
     </string-array>
 </resources>
