@@ -46,6 +46,7 @@
     </string-array>
 
     <string-array name="job_competence">
+        <item>직무역량</item>
         <item>총무</item>
         <item>재무회계</item>
         <item>법무</item>
@@ -67,6 +68,7 @@
     </string-array>
 
     <string-array name="work_competence">
+        <item>업무역량</item>
         <item>문서작성</item>
         <item>성과지향</item>
         <item>통찰력</item>
@@ -95,6 +97,7 @@
     </string-array>
 
     <string-array name="attitude_competence">
+        <item>태도역량</item>
         <item>끈기</item>
         <item>이타심</item>
         <item>성실성</item>

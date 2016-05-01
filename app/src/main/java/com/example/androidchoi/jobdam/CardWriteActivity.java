@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -217,13 +218,10 @@ public class CardWriteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String tag = mEditTag.getText().toString();
-                String LengthCheck = tag.replace(" ", "");
-                if(LengthCheck.length() != 0){
-                    if(mData.getCard().getTags().size() > 5){
-                        Toast.makeText(CardWriteActivity.this, "더 이상 추가 할 수 없습니다.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        mData.getCard().addTag(tag);
-                        addTagView(tag);
+                String lengthCheck = tag.replace(" ", "");
+                if(lengthCheck.length() != 0){
+                    if(mData.getCard().addTag(tag)) {
+                            addTagView(tag);
                     }
                 }
                 mEditTag.setText("");
@@ -293,19 +291,28 @@ public class CardWriteActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 mCancelSaveLayout.setVisibility(View.VISIBLE);
-                for(int i=0; i<mTextTags.size(); i++){
-                    if(t == mTextTags.get(i)){
-                        Toast.makeText(CardWriteActivity.this, "해당 태그가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                        mData.getCard().removeTag(i);
-                        mPredicateLayout.removeView(mTextTags.get(i));
-                        mTextTags.remove(i);
-                    }
-                }
+                Toast.makeText(CardWriteActivity.this, "해당 태그가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                mPredicateLayout.removeView(t);
+                mData.getCard().removeTagText(t.getText().toString());
                 return true;
             }
         });
-        mTextTags.add(t);
-        mPredicateLayout.addView(mTextTags.get(mTextTags.size() - 1));
+//        t.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                mCancelSaveLayout.setVisibility(View.VISIBLE);
+//                for(int i=0; i<mTextTags.size(); i++){
+//                    if(t == mTextTags.get(i)){
+//                        Toast.makeText(CardWriteActivity.this, "해당 태그가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+//                        mData.getCard().removeTag(i);
+//                        mPredicateLayout.removeView(mTextTags.get(i));
+//                        mTextTags.remove(i);
+//                    }
+//                }
+//                return true;
+//            }
+//        });
+        mPredicateLayout.addView(t);
     }
 
     public String addJsonString() {
@@ -338,10 +345,94 @@ public class CardWriteActivity extends AppCompatActivity {
         initArrayAdapter();
         mSpinnerJobCompetence = (Spinner)findViewById(R.id.spinner_job_competence);
         mSpinnerJobCompetence.setAdapter(mArrayAdapters[0]);
+        mSpinnerJobCompetence.setSelection(mData.getCard().getJobCompetenceIndex());
+        mSpinnerJobCompetence.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String old = mArrayAdapters[0].getItem(mData.getCard().getJobCompetenceIndex());
+                String select = (String) mSpinnerJobCompetence.getSelectedItem();
+                if(old.equals(select)){
+                    return;
+                }
+                int tagIndex = findTagIndex(old);
+                if(tagIndex != -1) {
+                    if(mData.getCard().removeTagText(old)) {
+                        mPredicateLayout.removeViewAt(tagIndex);
+                    }
+                }
+                mData.getCard().setJobCompetenceIndex(position);
+                if(position > 0 ) {
+                    if(mData.getCard().addTag(select)) {
+                        addTagView((String) mSpinnerJobCompetence.getSelectedItem());
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         mSpinnerWorkCompetence = (Spinner)findViewById(R.id.spinner_work_competence);
         mSpinnerWorkCompetence.setAdapter(mArrayAdapters[1]);
+        mSpinnerWorkCompetence.setSelection(mData.getCard().getWorkCompetenceIndex());
+        mSpinnerWorkCompetence.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String old = mArrayAdapters[1].getItem(mData.getCard().getWorkCompetenceIndex());
+                String select = (String) mSpinnerWorkCompetence.getSelectedItem();
+                if(old.equals(select)){
+                    return;
+                }
+                int tagIndex = findTagIndex(old);
+                if(tagIndex != -1) {
+                    if(mData.getCard().removeTagText(old)) {
+                        mPredicateLayout.removeViewAt(tagIndex);
+                    }
+                }
+                mData.getCard().setWorkCompetenceIndex(position);
+                if(position > 0) {
+                    if(mData.getCard().addTag(select)) {
+                        addTagView((String) mSpinnerWorkCompetence.getSelectedItem());
+                    }
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         mSpinnerAttitudeCompetence = (Spinner)findViewById(R.id.spinner_attitude_competence);
         mSpinnerAttitudeCompetence.setAdapter(mArrayAdapters[2]);
+        mSpinnerAttitudeCompetence.setSelection(mData.getCard().getAttitudeCompetenceIndex());
+        mSpinnerAttitudeCompetence.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String old = mArrayAdapters[2].getItem(mData.getCard().getAttitudeCompetenceIndex());
+                String select = (String) mSpinnerAttitudeCompetence.getSelectedItem();
+                if(old.equals(select)){
+                    return;
+                }
+                int tagIndex = findTagIndex(old);
+                if(tagIndex != -1) {
+                    if(mData.getCard().removeTagText(old)) {
+                        mPredicateLayout.removeViewAt(tagIndex);
+                    }
+                }
+                mData.getCard().setAttitudeCompetenceIndex(position);
+                if(position > 0) {
+                    if(mData.getCard().addTag(select)) {
+                        addTagView((String) mSpinnerAttitudeCompetence.getSelectedItem());
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void initArrayAdapter() {
@@ -355,6 +446,16 @@ public class CardWriteActivity extends AppCompatActivity {
             mArrayAdapters[i].setDropDownViewResource(R.layout.spinner_dropdown_item_card);
             mArrayAdapters[i].addAll(StringArray[i]);
         }
+    }
+
+    private int findTagIndex(String str){
+        for(int i=0; i<mPredicateLayout.getChildCount(); i++){
+            TextView textView = (TextView)mPredicateLayout.getChildAt(i);
+            if(textView.getText().toString().equals(str)){
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override

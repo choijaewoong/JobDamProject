@@ -20,9 +20,5 @@ public class MyCards implements Serializable{
     public MyCards() {
         card = new MyCard();
     }
-    public MyCards(String test) {
-        card = new MyCard(test);
-    }
-
 
 }
