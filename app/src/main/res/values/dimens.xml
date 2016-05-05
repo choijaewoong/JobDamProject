@@ -16,6 +16,9 @@
     <!-- Default Dialog-->
     <dimen name="default_dialog_width">230dp</dimen>
     <dimen name="default_dialog_height">150dp</dimen>
+    <!-- Question Dialog -->
+    <dimen name="question_dialog_width">250dp</dimen>
+    <dimen name="question_dialog_height">280dp</dimen>
 
     <!-- navigation bar-->
     <dimen name="nav_header_vertical_spacing">16dp</dimen>

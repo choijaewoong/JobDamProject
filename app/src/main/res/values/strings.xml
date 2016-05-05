@@ -80,6 +80,8 @@
     <string name="dialog_save_no">닫기</string>
     <string name="dialog_save_cancel">취소</string>
     <string name="dialog_close">닫 기</string>
+    <string name="dialog_question_list_title">질문 수정</string>
+    <string name="dialog_category_list_title">카테고리 선택</string>
 
     <!-- Check Message-->
     <string name="check_scrap">스크랩 되었습니다.</string>

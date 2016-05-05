@@ -176,7 +176,8 @@ public class NetworkManager {
 
     //채용공고 질문 요청 method
     private static final String SHOW_JOB_QUESTION = SERVER + "/jasoseo/%s";
-    public void showJobQuestion(Context context, String jobId, final OnResultListener<Questions> listener) {
+    public void
+    showJobQuestion(Context context, String jobId, final OnResultListener<Questions> listener) {
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
