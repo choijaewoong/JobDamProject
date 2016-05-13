@@ -1,10 +1,15 @@
 package com.example.androidchoi.jobdam.Adpater;
 
+import android.content.Context;
+import android.graphics.Rect;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.example.androidchoi.jobdam.Model.QuestionData;
@@ -21,7 +26,6 @@ public class QuestionPagerAdapter extends PagerAdapter{
 
     List<View> scrappedView = new ArrayList<View>();
     List<QuestionData> mItems = new ArrayList<QuestionData>();
-    EditText editTextQuestion;
 
     public void setItems(Questions questions){
         for(QuestionData questionData : questions.getQuestionList()){
@@ -46,8 +50,26 @@ public class QuestionPagerAdapter extends PagerAdapter{
         }else {
             view = LayoutInflater.from(container.getContext()).inflate(R.layout.view_page_job_question, container, false);
         }
-//        TextView textView = (TextView)view.findViewById(R.id.text_job_question);
-        editTextQuestion = (EditText)view.findViewById(R.id.editText_job_question);
+        final EditText editTextQuestion = (EditText)view.findViewById(R.id.editText_job_question);
+        FrameLayout touchInterceptor = (FrameLayout)view.findViewById(R.id.touchInterceptor);
+        touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (editTextQuestion.isFocused()) {
+                        Rect outRect = new Rect();
+                        editTextQuestion.getGlobalVisibleRect(outRect);
+                        if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
+                            editTextQuestion.clearFocus();
+                            InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        }
+                    }
+                }
+                return false;
+            }
+        });
+
         TaggedCardItemAdapter adapter = new TaggedCardItemAdapter();
         adapter.setItems(mItems.get(position).getCardList());
         ListView listView = (ListView)view.findViewById(R.id.listView_memo_tag);

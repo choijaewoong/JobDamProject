@@ -39,7 +39,7 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/listView_memo_tag"
         android:paddingTop="@dimen/default_small_dimen"
         android:layout_alignParentLeft="true"
@@ -49,4 +49,11 @@
         android:divider="@android:color/transparent"
         android:listSelector="@android:color/transparent"
         android:layout_below="@+id/editText_job_question"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/touchInterceptor"
+        android:visibility="visible">
+    </FrameLayout>
 </RelativeLayout>
