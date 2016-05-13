@@ -104,7 +104,7 @@ public class CardWriteActivity extends AppCompatActivity {
         mTextTitle = (TextView) findViewById(R.id.text_view_card_title);
         mTextContent = (TextView) findViewById(R.id.text_view_card_content);
         mEditTag = (EditText)findViewById(R.id.edit_text_card_tag);
-        mPredicateLayout =(PredicateLayout)findViewById(R.id.layout_job_question_tag);
+        mPredicateLayout =(PredicateLayout)findViewById(R.id.layout_card_tag);
 //        mTextStartDate = (TextView) findViewById(R.id.text_start_date);
 //        mTextEndDate = (TextView) findViewById(R.id.text_end_date);
 

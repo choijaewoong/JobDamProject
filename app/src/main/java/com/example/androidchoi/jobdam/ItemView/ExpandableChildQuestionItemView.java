@@ -12,7 +12,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.androidchoi.jobdam.CardChoiceActivity;
 import com.example.androidchoi.jobdam.JobDetailActivity;
 import com.example.androidchoi.jobdam.JobQuestionActivity;
 import com.example.androidchoi.jobdam.Model.CategoryData;
@@ -39,25 +38,35 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
     TextView mTextQuestionView; // 질문 텍스트
     PredicateLayout mPredicateLayout;
     ImageView mImageQuestionDetailButton; // 상세 보기 버튼
+    ImageView mImageQuestionModifyButton; // 질문 수정 버튼
+//    RelativeLayout mLayoutQuestion;
 
     private void init() {
         View view = inflate(getContext(), R.layout.view_expandable_child_question_item,this);
         mTextQuestionView = (TextView)view.findViewById(R.id.text_job_question);
         mPredicateLayout = (PredicateLayout)view.findViewById(R.id.layout_job_question_tag);
         mImageQuestionDetailButton = (ImageView)view.findViewById(R.id.image_job_question_detail_button);
+//        mImageQuestionModifyButton = (ImageView)view.findViewById(R.id.image_job_question_modify_button);
+//        mLayoutQuestion = (RelativeLayout)findViewById(R.id.layout_job_question);
     }
 
     public void setExpandableQuestion(final QuestionData data, final String jobId, final String corpName,  final int position){
         mTextQuestionView.setText(data.getQuestion());
-        mImageQuestionDetailButton.setVisibility(GONE); //상세보기 숨김
+        mImageQuestionDetailButton.setVisibility(GONE); // 질문 수정, 상세보기 숨김
         mPredicateLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), CardChoiceActivity.class);
-                //질문 번호
+//                Intent intent = new Intent(getContext(), CardChoiceActivity.class);
+//                //질문 번호
+//                intent.putExtra(QUESTION_NUM, position);
+//                intent.putExtra(JOB_ID, jobId);
+//                ((JobDetailActivity) getContext()).startActivityForResult(intent, JobDetailActivity.REQUEST_ATTACH);
+                Intent intent = new Intent(getContext(), JobQuestionActivity.class);
+                Questions questions = ((JobDetailActivity) getContext()).getQuestions();
+                intent.putExtra(QUESTION_LIST, questions);
                 intent.putExtra(QUESTION_NUM, position);
-                intent.putExtra(JOB_ID, jobId);
-                ((JobDetailActivity) getContext()).startActivityForResult(intent, JobDetailActivity.REQUEST_ATTACH);
+                intent.putExtra(CORP_NAME, corpName);
+                ((JobDetailActivity) getContext()).startActivityForResult(intent, JobDetailActivity.REQUEST_DETAIL);
             }
         });
 
@@ -78,9 +87,16 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
                 ((JobDetailActivity) getContext()).startActivityForResult(intent, JobDetailActivity.REQUEST_DETAIL);
             }
         });
+//        mImageQuestionModifyButton.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                QuestionListDialogFragment dialog = new QuestionListDialogFragment();
+//                dialog.show(((JobDetailActivity) getContext()).getSupportFragmentManager(), JobDetailActivity.QUESTION_DIALOG);
+//            }
+//        });
     }
 
-    public void setVisibleDetailButton(){
+    public void setVisibleQuestionBottomLayout(){
         mImageQuestionDetailButton.setVisibility(VISIBLE);
     }
 

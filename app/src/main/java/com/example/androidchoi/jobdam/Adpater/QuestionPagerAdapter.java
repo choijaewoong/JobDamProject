@@ -29,8 +29,11 @@ public class QuestionPagerAdapter extends PagerAdapter{
         notifyDataSetChanged();
     }
 
-    public void addItem(QuestionData questionData){
-        mItems.add(questionData);
+    public void addItems(List<QuestionData> questions){
+        for(QuestionData questionData : questions) {
+            mItems.add(questionData);
+        }
+        notifyDataSetChanged();
     }
 
     @Override

@@ -49,6 +49,7 @@ public class JobDetailActivity extends AppCompatActivity {
 
     public static final int REQUEST_ATTACH = 1;
     public static final int REQUEST_DETAIL = 2;
+    public static final String QUESTION_DIALOG = "question_dialog";
     private Job mData;
     private Questions mQuestions;
     private ImageView mCorpLogo;

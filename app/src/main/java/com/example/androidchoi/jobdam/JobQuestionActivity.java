@@ -7,11 +7,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.QuestionPagerAdapter;
 import com.example.androidchoi.jobdam.ItemView.ExpandableChildQuestionItemView;
 import com.example.androidchoi.jobdam.Model.Questions;
+import com.github.clans.fab.FloatingActionButton;
 import com.viewpagerindicator.CirclePageIndicator;
 
 public class JobQuestionActivity extends AppCompatActivity {
@@ -21,7 +23,9 @@ public class JobQuestionActivity extends AppCompatActivity {
     QuestionPagerAdapter mQuestionPagerAdapter;
     Questions mQuestions;
     String mCorpName;
+    int mQuestionPosition;
     CirclePageIndicator mCirclePageIndicator;
+    FloatingActionButton mFloatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +41,29 @@ public class JobQuestionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mQuestions = (Questions) intent.getSerializableExtra(ExpandableChildQuestionItemView.QUESTION_LIST);
         mCorpName = intent.getStringExtra(ExpandableChildQuestionItemView.CORP_NAME);
+        mQuestionPosition = intent.getIntExtra(ExpandableChildQuestionItemView.QUESTION_NUM, 0);
         mTextToolbarTitle = (TextView)findViewById(R.id.toolbar_title);
         mTextToolbarTitle.setText(mCorpName);
 
-        MyTask task = new MyTask();
+        mFloatingActionButton = (FloatingActionButton)findViewById(R.id.fab_add_question);
+        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 질문 추가 다이얼로그 생성
+
+                // 샘플 질문 추가
+                mQuestionPagerAdapter.addItems(mQuestions.getQuestionList());
+//                mQuestions.getQuestionList().add(mQuestions.getQuestionList().get(1));
+//                mViewPager.setOffscreenPageLimit(mQuestions.getQuestionList().size());
+                mCirclePageIndicator.notifyDataSetChanged();
+            }
+        });
+
+        CreateQuestionTask task = new CreateQuestionTask();
         task.execute();
     }
 
-    class MyTask extends AsyncTask<Void, Void, Void> {
+    class CreateQuestionTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
             mViewPager = (ViewPager)findViewById(R.id.pager_job_question);
@@ -59,6 +78,7 @@ public class JobQuestionActivity extends AppCompatActivity {
             mViewPager.setOffscreenPageLimit(mQuestions.getQuestionList().size());
             mViewPager.setAdapter(mQuestionPagerAdapter);
             mCirclePageIndicator.setViewPager(mViewPager);
+            mViewPager.setCurrentItem(mQuestionPosition, true);
         }
     }
 //    @Override

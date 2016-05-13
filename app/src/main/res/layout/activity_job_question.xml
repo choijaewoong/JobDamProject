@@ -1,54 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.androidchoi.jobdam.JobQuestionActivity"
-    android:orientation="vertical">
+    tools:context="com.example.androidchoi.jobdam.JobQuestionActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/collapsing_toolbar"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp">
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="JobTitle"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_size_title"/>
+    </android.support.v7.widget.Toolbar>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:theme="@style/AppTheme.AppBarOverlay"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-            <TextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="JobTitle"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/font_size_title"/>
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
     <com.viewpagerindicator.CirclePageIndicator
         android:id="@+id/pager_indicator"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/default_dimen"
         android:paddingRight="@dimen/default_large_dimen"
         android:paddingLeft="@dimen/default_dimen"
-        android:layout_gravity="right"/>
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:gravity="right"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager_job_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        android:layout_below="@+id/pager_indicator"/>
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab_add_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/fab_add"
+        app:fab_colorNormal="@color/colorPrimary"
+        app:fab_colorPressed="@color/colorLightPrimary"
+        app:fab_colorRipple="@color/colorPrimary"
+        app:fab_label="@string/add_cartegory"
+        app:fab_size="normal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="@dimen/default_dimen"
+        android:layout_marginBottom="@dimen/default_dimen"/>
+
+    <!--<com.melnykov.fab.FloatingActionButton-->
+        <!--android:id="@+id/fab_add_question"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/fab_add"-->
+        <!--app:fab_colorNormal="@color/colorPrimary"-->
+        <!--app:fab_colorPressed="@color/colorLightPrimary"-->
+        <!--app:fab_colorRipple="@color/colorPrimary"-->
+        <!--app:fab_type="normal"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:padding="2dp"-->
+        <!--android:layout_marginRight="@dimen/default_dimen"-->
+        <!--android:layout_marginBottom="@dimen/default_dimen"-->
+        <!--android:layout_gravity="right"/>-->
 
 
-</LinearLayout>
+</RelativeLayout>

@@ -154,9 +154,9 @@ public class JobDetailAdapter extends BaseExpandableListAdapter {
                     view = new ExpandableChildQuestionItemView(parent.getContext());
                 }
                 view.setExpandableQuestion((QuestionData)mItems.get(groupPosition).getChildDataList().get(childPosition), mJobId, mCorpName, childPosition);
-                // 마지막 질문 밑에 상세보기 버튼 추가
+                // 마지막 질문 밑에 질문 수정 버튼, 상세보기 버튼 추가
                 if(isLastChild){
-                    view.setVisibleDetailButton();
+                    view.setVisibleQuestionBottomLayout();
                 }
                 return view;
             }

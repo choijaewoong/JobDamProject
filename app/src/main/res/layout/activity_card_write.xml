@@ -252,7 +252,7 @@
             android:textColorHint="@color/colorLightGray"
             android:textSize="@dimen/font_size_semi_large"
             android:visibility="gone"
-            android:layout_above="@+id/layout_job_question_tag"
+            android:layout_above="@+id/layout_card_tag"
             />
 
         <ScrollView
@@ -264,7 +264,7 @@
             android:layout_below="@+id/image_divider"
             android:fillViewport="true"
             android:visibility="visible"
-            android:layout_above="@+id/layout_job_question_tag">
+            android:layout_above="@+id/layout_card_tag">
 
             <TextView
                 android:id="@+id/text_view_card_content"
@@ -280,7 +280,7 @@
         </ScrollView>
 
         <com.example.androidchoi.jobdam.Util.PredicateLayout
-            android:id="@+id/layout_job_question_tag"
+            android:id="@+id/layout_card_tag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/linearLayout6"
