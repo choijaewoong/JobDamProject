@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -81,11 +82,11 @@ public class JobQuestionActivity extends AppCompatActivity {
             mViewPager.setCurrentItem(mQuestionPosition, true);
         }
     }
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_save, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
+    @Override
+         public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_modify, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -95,9 +96,9 @@ public class JobQuestionActivity extends AppCompatActivity {
             return true;
         }
 
-        else if (id == R.id.action_save) {
+        else if (id == R.id.action_modify) {
             // 태그 순서 변경 사항 서버 저장
-            finish();
+            //finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
