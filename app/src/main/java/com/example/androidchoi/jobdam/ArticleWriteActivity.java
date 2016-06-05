@@ -106,7 +106,7 @@ public class ArticleWriteActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_modify, menu);
+        getMenuInflater().inflate(R.menu.menu_save, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

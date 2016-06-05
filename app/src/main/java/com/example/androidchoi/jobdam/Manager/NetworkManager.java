@@ -1,7 +1,6 @@
 package com.example.androidchoi.jobdam.Manager;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.begentgroup.xmlparser.XMLParser;
 import com.example.androidchoi.jobdam.Model.ArticleLab;
@@ -606,7 +605,6 @@ public class NetworkManager {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Log.i("asdfasdfasdfasd", responseString);
                 listener.onSuccess(responseString);
             }
         });

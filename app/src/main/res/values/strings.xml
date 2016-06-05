@@ -41,6 +41,9 @@
     <!-- floating button label-->
     <string name="write_card">카드 작성</string>
     <string name="add_cartegory">카테고리 추가</string>
+    <string name="add_card">카드 추가</string>
+    <string name="add_question">자기소개서 질문 추가</string>
+    <string name="delete_question">자기소개서 질문 삭제</string>
 
     <!-- login -->
     <string name="input_info">정보 입력</string>

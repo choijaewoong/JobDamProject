@@ -46,21 +46,77 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"/>
 
-    <com.github.clans.fab.FloatingActionButton
-        android:id="@+id/fab_add_question"
-        android:layout_width="wrap_content"
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/floating_menu"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/fab_add"
-        app:fab_colorNormal="@color/colorPrimary"
-        app:fab_colorPressed="@color/colorLightPrimary"
-        app:fab_colorRipple="@color/colorPrimary"
-        app:fab_label="@string/add_cartegory"
-        app:fab_size="normal"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="false"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="@dimen/default_dimen"
-        android:layout_marginBottom="@dimen/default_dimen"/>
+        android:layout_alignParentTop="false"
+        android:layout_gravity="right|bottom"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:paddingBottom="@dimen/default_small_dimen"
+        android:paddingRight="@dimen/default_small_dimen"
+        app:menu_animationDelayPerItem="50"
+        app:menu_buttonSpacing="0dp"
+        app:menu_colorNormal="#0db5f7"
+        app:menu_colorPressed="#1594c6"
+        app:menu_colorRipple="#99FFFFFF"
+        app:menu_fab_size="normal"
+        app:menu_icon="@drawable/fab_add"
+        app:menu_labels_colorNormal="@color/colorBackgroundBlur"
+        app:menu_labels_colorPressed="@color/colorLightGray"
+        app:menu_labels_colorRipple="@color/colorGray"
+        app:menu_labels_cornerRadius="12dp"
+        app:menu_labels_ellipsize="none"
+        app:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+        app:menu_labels_margin="0dp"
+        app:menu_labels_maxLines="-1"
+        app:menu_labels_position="left"
+        app:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+        app:menu_labels_showShadow="false"
+        app:menu_labels_singleLine="false"
+        app:menu_labels_textColor="#FFFFFF"
+        app:menu_labels_textSize="14sp"
+        app:menu_openDirection="up"
+        app:menu_showShadow="true">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_add_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/floating_button_add_category"
+            app:fab_colorNormal="@android:color/white"
+            app:fab_colorPressed="@color/colorLightDivider"
+            app:fab_colorRipple="@color/colorDivider"
+            app:fab_label="@string/add_card"
+            app:fab_size="mini"
+            />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_add_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/floating_button_write"
+            app:fab_colorNormal="@android:color/white"
+            app:fab_colorPressed="@color/colorLightDivider"
+            app:fab_colorRipple="@color/colorDivider"
+            app:fab_label="@string/add_question"
+            app:fab_size="mini"/>
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_delete_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/floating_button_delete"
+            app:fab_colorNormal="@android:color/white"
+            app:fab_colorPressed="@color/colorLightDivider"
+            app:fab_colorRipple="@color/colorDivider"
+            app:fab_label="@string/add_question"
+            app:fab_size="mini"/>
+
+    </com.github.clans.fab.FloatingActionMenu>
 
     <!--<com.melnykov.fab.FloatingActionButton-->
         <!--android:id="@+id/fab_add_question"-->

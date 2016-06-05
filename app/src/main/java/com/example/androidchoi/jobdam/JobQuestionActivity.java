@@ -17,6 +17,7 @@ import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.QuestionData;
 import com.example.androidchoi.jobdam.Model.Questions;
 import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.viewpagerindicator.CirclePageIndicator;
 
 public class JobQuestionActivity extends AppCompatActivity {
@@ -34,7 +35,10 @@ public class JobQuestionActivity extends AppCompatActivity {
     private int mQuestionPosition;
     private String mJobId;
     CirclePageIndicator mCirclePageIndicator;
-    FloatingActionButton mFloatingActionButton;
+    private FloatingActionMenu mFloatingActionMenu;
+    private FloatingActionButton mFloatingAddCardButton;
+    private FloatingActionButton mFloatingAddQuestionButton;
+    private FloatingActionButton mFloatingDeleteQuestionButton;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -67,22 +71,33 @@ public class JobQuestionActivity extends AppCompatActivity {
         mTextToolbarTitle = (TextView)findViewById(R.id.toolbar_title);
         mTextToolbarTitle.setText(mCorpName);
 
-        mFloatingActionButton = (FloatingActionButton)findViewById(R.id.fab_add_question);
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+
+        // 플로팅 액션 버튼 설정
+        mFloatingActionMenu = (FloatingActionMenu)findViewById(R.id.floating_menu);
+        mFloatingAddCardButton = (FloatingActionButton)findViewById(R.id.fab_add_card);
+        mFloatingAddCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 질문 추가 다이얼로그 생성
                 Intent intent = new Intent(JobQuestionActivity.this, CardChoiceActivity.class);
-                //질문 번호
                 intent.putExtra(EXTRA_QUESTION_NUM, mViewPager.getCurrentItem());
                 intent.putExtra(EXTRA_JOB_ID, mJobId);
                 startActivityForResult(intent, REQUEST_ADD_CARD);
+                mFloatingActionMenu.close(true);
+            }
+        });
+        mFloatingAddQuestionButton = (FloatingActionButton)findViewById(R.id.fab_add_question);
+        mFloatingAddQuestionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addQuestion();
+                mFloatingActionMenu.close(true);
+            }
+        });
+        mFloatingDeleteQuestionButton = (FloatingActionButton)findViewById(R.id.fab_delete_question);
+        mFloatingDeleteQuestionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                // 샘플 질문 추가
-//                mQuestionPagerAdapter.addItems(mQuestions.getQuestionList());
-////                mQuestions.getQuestionList().add(mQuestions.getQuestionList().get(1));
-////                mViewPager.setOffscreenPageLimit(mQuestions.getQuestionList().size());
-//                mCirclePageIndicator.notifyDataSetChanged();
             }
         });
 
@@ -123,7 +138,6 @@ public class JobQuestionActivity extends AppCompatActivity {
         }
 
         else if (id == R.id.action_modify) {
-            addQuestion();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -137,7 +151,6 @@ public class JobQuestionActivity extends AppCompatActivity {
                 mCirclePageIndicator.notifyDataSetChanged();
                 mViewPager.setCurrentItem(mQuestionPagerAdapter.getCount()-1);
             }
-
             @Override
             public void onFail(int code) {
 
