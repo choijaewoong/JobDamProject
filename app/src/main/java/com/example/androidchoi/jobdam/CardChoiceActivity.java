@@ -12,7 +12,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.androidchoi.jobdam.Adpater.CardItemAdapter;
-import com.example.androidchoi.jobdam.ItemView.ExpandableChildQuestionItemView;
 import com.example.androidchoi.jobdam.Manager.MyApplication;
 import com.example.androidchoi.jobdam.Manager.NetworkManager;
 import com.example.androidchoi.jobdam.Model.MyCardLab;
@@ -38,8 +37,8 @@ public class CardChoiceActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
 
         Intent intent = getIntent();
-        mQuestionNum = intent.getIntExtra(ExpandableChildQuestionItemView.QUESTION_NUM, 0);
-        mJobId = intent.getStringExtra(ExpandableChildQuestionItemView.JOB_ID);
+        mQuestionNum = intent.getIntExtra(JobQuestionActivity.EXTRA_QUESTION_NUM, 0);
+        mJobId = intent.getStringExtra(JobQuestionActivity.EXTRA_JOB_ID);
 
         mListView = (ListView)findViewById(R.id.listView_attach_card);
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -91,7 +90,9 @@ public class CardChoiceActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Object result) {
                     Log.i("result", result.toString());
-                    setResult(RESULT_OK);
+                    Intent intent = new Intent();
+                    intent.putExtra(JobQuestionActivity.EXTRA_QUESTION_NUM, mQuestionNum);
+                    setResult(RESULT_OK, intent);
                     finish();
                 }
                 @Override

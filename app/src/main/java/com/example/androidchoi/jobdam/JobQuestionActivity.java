@@ -1,5 +1,6 @@
 package com.example.androidchoi.jobdam;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,21 +13,37 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.QuestionPagerAdapter;
-import com.example.androidchoi.jobdam.ItemView.ExpandableChildQuestionItemView;
 import com.example.androidchoi.jobdam.Model.Questions;
 import com.github.clans.fab.FloatingActionButton;
 import com.viewpagerindicator.CirclePageIndicator;
 
 public class JobQuestionActivity extends AppCompatActivity {
+    public static final String EXTRA_QUESTION_NUM = "questionNumber";
+    public static final String EXTRA_JOB_ID = "questionId";
+    public static final String EXTRA_QUESTION_LIST = "questionList";
+    public static final String EXTRA_CORP_NAME = "corpName";
+    public static final int REQUEST_ADD_CARD = 1;
 
     TextView mTextToolbarTitle;
     ViewPager mViewPager;
     QuestionPagerAdapter mQuestionPagerAdapter;
-    Questions mQuestions;
-    String mCorpName;
-    int mQuestionPosition;
+    private Questions mQuestions;
+    private String mCorpName;
+    private int mQuestionPosition;
+    private String mJobId;
     CirclePageIndicator mCirclePageIndicator;
     FloatingActionButton mFloatingActionButton;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == REQUEST_ADD_CARD) {
+            CreateQuestionTask task = new CreateQuestionTask();
+            task.execute();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +58,10 @@ public class JobQuestionActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        mQuestions = (Questions) intent.getSerializableExtra(ExpandableChildQuestionItemView.QUESTION_LIST);
-        mCorpName = intent.getStringExtra(ExpandableChildQuestionItemView.CORP_NAME);
-        mQuestionPosition = intent.getIntExtra(ExpandableChildQuestionItemView.QUESTION_NUM, 0);
+        mQuestions = (Questions) intent.getSerializableExtra(EXTRA_QUESTION_LIST);
+        mCorpName = intent.getStringExtra(EXTRA_CORP_NAME);
+        mQuestionPosition = intent.getIntExtra(EXTRA_QUESTION_NUM, 0);
+        mJobId = intent.getStringExtra(EXTRA_JOB_ID);
         mTextToolbarTitle = (TextView)findViewById(R.id.toolbar_title);
         mTextToolbarTitle.setText(mCorpName);
 
@@ -52,12 +70,17 @@ public class JobQuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 질문 추가 다이얼로그 생성
+                Intent intent = new Intent(JobQuestionActivity.this, CardChoiceActivity.class);
+                //질문 번호
+                intent.putExtra(EXTRA_QUESTION_NUM, mViewPager.getCurrentItem());
+                intent.putExtra(EXTRA_JOB_ID, mJobId);
+                startActivityForResult(intent, REQUEST_ADD_CARD);
 
                 // 샘플 질문 추가
-                mQuestionPagerAdapter.addItems(mQuestions.getQuestionList());
-//                mQuestions.getQuestionList().add(mQuestions.getQuestionList().get(1));
-//                mViewPager.setOffscreenPageLimit(mQuestions.getQuestionList().size());
-                mCirclePageIndicator.notifyDataSetChanged();
+//                mQuestionPagerAdapter.addItems(mQuestions.getQuestionList());
+////                mQuestions.getQuestionList().add(mQuestions.getQuestionList().get(1));
+////                mViewPager.setOffscreenPageLimit(mQuestions.getQuestionList().size());
+//                mCirclePageIndicator.notifyDataSetChanged();
             }
         });
 

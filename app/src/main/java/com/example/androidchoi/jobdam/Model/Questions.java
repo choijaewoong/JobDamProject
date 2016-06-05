@@ -20,4 +20,13 @@ public class Questions implements Serializable{
     public List<QuestionData> getQuestionList() {
         return questionList;
     }
+
+    // sample
+    public Questions(){
+        questionList.add(new QuestionData("1"));
+        questionList.add(new QuestionData("2"));
+        questionList.add(new QuestionData("3"));
+        questionList.add(new QuestionData("4"));
+        questionList.add(new QuestionData("5"));
+    }
 }

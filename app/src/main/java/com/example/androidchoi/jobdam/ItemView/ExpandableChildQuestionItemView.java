@@ -26,11 +26,6 @@ import com.example.androidchoi.jobdam.Util.PredicateLayout;
  */
 public class ExpandableChildQuestionItemView extends FrameLayout {
 
-    public static final String QUESTION_NUM = "questionNumber";
-    public static final String JOB_ID = "questionId";
-    public static final String QUESTION_LIST = "questionList";
-    public static final String CORP_NAME = "corpName";
-
     public ExpandableChildQuestionItemView(Context context) {
         super(context);
         init();
@@ -63,9 +58,10 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
 //                ((JobDetailActivity) getContext()).startActivityForResult(intent, JobDetailActivity.REQUEST_ATTACH);
                 Intent intent = new Intent(getContext(), JobQuestionActivity.class);
                 Questions questions = ((JobDetailActivity) getContext()).getQuestions();
-                intent.putExtra(QUESTION_LIST, questions);
-                intent.putExtra(QUESTION_NUM, position);
-                intent.putExtra(CORP_NAME, corpName);
+                intent.putExtra(JobQuestionActivity.EXTRA_QUESTION_LIST, questions);
+                intent.putExtra(JobQuestionActivity.EXTRA_QUESTION_NUM, position);
+                intent.putExtra(JobQuestionActivity.EXTRA_CORP_NAME, corpName);
+                intent.putExtra(JobQuestionActivity.EXTRA_JOB_ID, jobId);
                 ((JobDetailActivity) getContext()).startActivityForResult(intent, JobDetailActivity.REQUEST_DETAIL);
             }
         });
@@ -82,8 +78,8 @@ public class ExpandableChildQuestionItemView extends FrameLayout {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), JobQuestionActivity.class);
                 Questions questions = ((JobDetailActivity) getContext()).getQuestions();
-                intent.putExtra(QUESTION_LIST, questions);
-                intent.putExtra(CORP_NAME, corpName);
+                intent.putExtra(JobQuestionActivity.EXTRA_QUESTION_LIST, questions);
+                intent.putExtra(JobQuestionActivity.EXTRA_CORP_NAME, corpName);
                 ((JobDetailActivity) getContext()).startActivityForResult(intent, JobDetailActivity.REQUEST_DETAIL);
             }
         });

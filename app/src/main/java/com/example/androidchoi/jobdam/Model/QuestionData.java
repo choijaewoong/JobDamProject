@@ -20,4 +20,10 @@ public class QuestionData implements ChildData, Serializable {
     private ArrayList<MyCard> cardList = new ArrayList<MyCard>();
     public String getQuestion() {  return question; }
     public ArrayList<MyCard> getCardList() { return cardList; }
+
+    //sample
+    public QuestionData(String str){
+        question = str + "번째 질문 입니다.";
+        limit = "300";
+    }
 }
