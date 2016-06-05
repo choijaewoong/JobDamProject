@@ -10,23 +10,9 @@ import java.util.List;
  * Created by Choi on 2015-12-02.
  */
 public class Questions implements Serializable{
-//    int job_id;
     @SerializedName("Question")
     List<QuestionData> questionList = new ArrayList<>();
-
-//    public int getJobId() {
-//        return job_id;
-//    }
     public List<QuestionData> getQuestionList() {
         return questionList;
-    }
-
-    // sample
-    public Questions(){
-        questionList.add(new QuestionData("1"));
-        questionList.add(new QuestionData("2"));
-        questionList.add(new QuestionData("3"));
-        questionList.add(new QuestionData("4"));
-        questionList.add(new QuestionData("5"));
     }
 }

@@ -19,11 +19,11 @@ public class QuestionData implements ChildData, Serializable {
     @SerializedName("tag")
     private ArrayList<MyCard> cardList = new ArrayList<MyCard>();
     public String getQuestion() {  return question; }
+    public String getLimit() {  return limit; }
     public ArrayList<MyCard> getCardList() { return cardList; }
 
-    //sample
-    public QuestionData(String str){
-        question = str + "번째 질문 입니다.";
-        limit = "300";
+    public QuestionData(){
+        question = "";
+        limit = "";
     }
 }

@@ -41,6 +41,11 @@ public class QuestionPagerAdapter extends PagerAdapter{
         notifyDataSetChanged();
     }
 
+    public void addItem(QuestionData question){
+        mItems.add(question);
+        notifyDataSetChanged();
+    }
+
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
 //        return super.instantiateItem(container, position);

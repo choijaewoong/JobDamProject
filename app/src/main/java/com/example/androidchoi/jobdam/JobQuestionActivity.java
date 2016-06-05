@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.androidchoi.jobdam.Adpater.QuestionPagerAdapter;
+import com.example.androidchoi.jobdam.Manager.NetworkManager;
+import com.example.androidchoi.jobdam.Model.QuestionData;
 import com.example.androidchoi.jobdam.Model.Questions;
 import com.github.clans.fab.FloatingActionButton;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -121,10 +123,25 @@ public class JobQuestionActivity extends AppCompatActivity {
         }
 
         else if (id == R.id.action_modify) {
-            // 태그 순서 변경 사항 서버 저장
-            //finish();
+            addQuestion();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void addQuestion(){
+        NetworkManager.getInstance().addQuestion(JobQuestionActivity.this, mJobId, new NetworkManager.OnResultListener<String>() {
+            @Override
+            public void onSuccess(String result) {
+                mQuestionPagerAdapter.addItem(new QuestionData());
+                mCirclePageIndicator.notifyDataSetChanged();
+                mViewPager.setCurrentItem(mQuestionPagerAdapter.getCount()-1);
+            }
+
+            @Override
+            public void onFail(int code) {
+
+            }
+        });
     }
 }

@@ -1,6 +1,7 @@
 package com.example.androidchoi.jobdam.Manager;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.begentgroup.xmlparser.XMLParser;
 import com.example.androidchoi.jobdam.Model.ArticleLab;
@@ -51,6 +52,7 @@ public class NetworkManager {
         }
         return instance;
     }
+
     AsyncHttpClient client;
     XMLParser parser;
     Gson gson;
@@ -88,6 +90,7 @@ public class NetworkManager {
 
     public interface OnResultListener<T> {
         public void onSuccess(T result);
+
         public void onFail(int code);
     }
 
@@ -119,15 +122,18 @@ public class NetworkManager {
                 final JobList jobList = parser.fromXml(bais, "jobs", JobList.class);
                 listener.onSuccess(jobList);
             }
+
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 listener.onFail(statusCode);
             }
         });
     }
+
     private static final String SERVER = "http://52.69.235.46:3000";
     // 내가 담은 채용정보 불러오는 method
     private static final String SHOW_MY_JOB = SERVER + "/showmyscrap";
+
     public void showMyJob(Context context, final OnResultListener<MyJobLab> listener) {
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
@@ -137,6 +143,7 @@ public class NetworkManager {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 MyJobLab myJobLab = new MyJobLab();
@@ -149,9 +156,11 @@ public class NetworkManager {
             }
         });
     }
+
     // 채용정보 스크랩 유무 확인 요청 method
     private static final String CHECK_JOB_SCRAP = SERVER + "/scrapcheck/%s";
-    public void checkJobScrap(Context context, String jobId, final OnResultListener<ScrapCheck> listener){
+
+    public void checkJobScrap(Context context, String jobId, final OnResultListener<ScrapCheck> listener) {
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
         headers[0] = new BasicHeader("Accept", "application/json");
@@ -161,12 +170,13 @@ public class NetworkManager {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 try {
                     ScrapCheck scrap = gson.fromJson(responseString, ScrapCheck.class);
                     listener.onSuccess(scrap);
-                }catch (JsonSyntaxException e){
+                } catch (JsonSyntaxException e) {
                     listener.onSuccess(new ScrapCheck());
                     e.printStackTrace();
                 }
@@ -176,6 +186,7 @@ public class NetworkManager {
 
     //채용공고 질문 요청 method
     private static final String SHOW_JOB_QUESTION = SERVER + "/jasoseo/%s";
+
     public void
     showJobQuestion(Context context, String jobId, final OnResultListener<Questions> listener) {
         RequestParams params = new RequestParams();
@@ -187,6 +198,7 @@ public class NetworkManager {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Questions questions = new Questions();
@@ -199,6 +211,7 @@ public class NetworkManager {
             }
         });
     }
+
     // 해당 질문에 카드 태그 요청
     private static final String ADD_QUESTION_TAG = SERVER + "/jasoseotag";
     public void addQuestionTag(Context context, String jobId, ArrayList<String> memoId, int questionNumber, final OnResultListener<String> listener) {
@@ -213,12 +226,14 @@ public class NetworkManager {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 listener.onSuccess(responseString);
             }
         });
     }
+
     // 채용정보 담기
     private static final String ADD_MY_JOB = SERVER + "/addscrap";
     public void addMyJob(Context context, final String jsonString, final OnResultListener<String> listener) {
@@ -238,8 +253,10 @@ public class NetworkManager {
             e.printStackTrace();
         }
     }
+
     // 채용정보 삭제
     private static final String DELETE_MY_JOB = SERVER + "/myscrapd";
+
     public void deleteMyJob(Context context, List<String> jobIds, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
         for (String id : jobIds) {
@@ -250,14 +267,17 @@ public class NetworkManager {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 listener.onSuccess(responseString);
             }
         });
     }
+
     //메모 보기
     public static final String SHOW_MY_MEMO = SERVER + "/mymemolist";
+
     public void showMyMemo(Context context, final OnResultListener<MyCardLab> listener) {
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
@@ -267,6 +287,7 @@ public class NetworkManager {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 MyCardLab myCardLab = new MyCardLab();
@@ -279,8 +300,10 @@ public class NetworkManager {
             }
         });
     }
+
     // 해당 카테고리 메모 요청 method
     public static final String SHOW_FILTERED_MEMO = SERVER + "/folderlist";
+
     public void showFilteredMemo(Context context, int index, final OnResultListener<MyCardLab> listener) {
         RequestParams params = new RequestParams();
         params.put("category", index);
@@ -291,6 +314,7 @@ public class NetworkManager {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 MyCardLab myCardLab = new MyCardLab();
@@ -303,8 +327,10 @@ public class NetworkManager {
             }
         });
     }
+
     // 해당 태그를 가진 메모 요청 method
     private static final String SHOW_MEMO_WITH_TAG = SERVER + "/findtag/%s";
+
     public void showMemoWithTag(Context context, String tag, final OnResultListener<MyCardLab> listener) {
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
@@ -315,6 +341,7 @@ public class NetworkManager {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 MyCardLab myCardLab = new MyCardLab();
@@ -327,8 +354,10 @@ public class NetworkManager {
             }
         });
     }
+
     // 메모 추가
     private static final String ADD_MEMO = SERVER + "/addmemo";
+
     public void addMemo(Context context, final String jsonString, final OnResultListener<String> listener) {
         try {
             client.post(context, ADD_MEMO, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
@@ -336,6 +365,7 @@ public class NetworkManager {
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
                 }
+
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
                     listener.onSuccess(responseString);
@@ -345,8 +375,10 @@ public class NetworkManager {
             e.printStackTrace();
         }
     }
+
     //메모 수정
     private static final String UPDATE_MEMO = SERVER + "/memo/update";
+
     public void updateMemo(Context context, final String jsonString, final OnResultListener<String> listener) {
         try {
             client.post(context, UPDATE_MEMO, new StringEntity(jsonString, "UTF-8"), "application/json", new TextHttpResponseHandler() {
@@ -354,6 +386,7 @@ public class NetworkManager {
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
                 }
+
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
                     listener.onSuccess(responseString);
@@ -363,11 +396,13 @@ public class NetworkManager {
             e.printStackTrace();
         }
     }
+
     //메모 삭제
     private static final String DELETE_MEMO = SERVER + "/memo/delete";
-    public void deleteMemo(Context context, List<String> memoIds, final OnResultListener<String> listener){
+
+    public void deleteMemo(Context context, List<String> memoIds, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
-        for(String id : memoIds){
+        for (String id : memoIds) {
             params.add("memo_id", id);
         }
         client.post(context, DELETE_MEMO, params, new TextHttpResponseHandler() {
@@ -375,18 +410,21 @@ public class NetworkManager {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 listener.onSuccess(responseString);
             }
         });
     }
+
     // 카테고리 수정
     private static final String CHANGE_MEMO_CATEGORY = SERVER + "/movingfolder";
-    public void changeMemoCategory(Context context, List<String> memoIds, int categoryIndex, final OnResultListener<String> listener){
+
+    public void changeMemoCategory(Context context, List<String> memoIds, int categoryIndex, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
         params.put("category", categoryIndex);
-        for(String id : memoIds){
+        for (String id : memoIds) {
             params.add("memo_id", id);
         }
         client.post(context, CHANGE_MEMO_CATEGORY, params, new TextHttpResponseHandler() {
@@ -394,14 +432,17 @@ public class NetworkManager {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 listener.onFail(statusCode);
             }
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 listener.onSuccess(responseString);
             }
         });
     }
+
     // 카드 태그 리스트 요청 method
     public static final String SHOW_MEMO_TAG = SERVER + "/memotaglist";
+
     public void showCardTag(Context context, final OnResultListener<Tags> listener) {
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
@@ -424,8 +465,10 @@ public class NetworkManager {
             }
         });
     }
+
     //게시글 보기
     public static final String SHOW_ARTICLE = SERVER + "/boardlist";
+
     public void showArticle(Context context, final OnResultListener<ArticleLab> listener) {
         RequestParams params = new RequestParams();
         params.put(ARTICLE_PAGE, 1);
@@ -449,9 +492,11 @@ public class NetworkManager {
             }
         });
     }
+
     //내가 쓴 게시글 보기
     public static final String SHOW_MY_ARTICLE = SERVER + "/myboardlist";
     public static final String ARTICLE_PAGE = "page";
+
     public void showMyArticle(Context context, final OnResultListener<ArticleLab> listener) {
         RequestParams params = new RequestParams();
         Header[] headers = new Header[1];
@@ -474,8 +519,10 @@ public class NetworkManager {
             }
         });
     }
+
     // 게시글 추가
     private static final String ADD_ARTICLE = SERVER + "/addboard";
+
     public void addArticle(Context context, String content, int emotion, long timeStamp, final OnResultListener<String> listener) {
         RequestParams params = new RequestParams();
         params.put("content", content);
@@ -492,6 +539,7 @@ public class NetworkManager {
             }
         });
     }
+
     //게시글 수정
     private static final String UPDATE_ARTICLE = SERVER + "/board/update";
     public void updateArticle(Context context, final String jsonString, final OnResultListener<String> listener) {
@@ -511,6 +559,7 @@ public class NetworkManager {
             e.printStackTrace();
         }
     }
+
     // 좋아요
     public static final String LIKE_ARTICLE = SERVER + "/like/%s";
     public void likeArticle(Context context, String board_id, final OnResultListener<Articles> listener) {
@@ -536,6 +585,45 @@ public class NetworkManager {
             }
         });
     }
+
+    // 자소서 질문 추가
+    public static final String ADD_QUESTION = SERVER + "/jasoseo/mobile/add";
+//    public void addQuestion(Context context, String jobId, List<QuestionData> questionDatas, final OnResultListener<String> listener) {
+    public void addQuestion(Context context, String jobId, final OnResultListener<String> listener) {
+        RequestParams params = new RequestParams();
+        params.put("job_id", jobId);
+        params.put("jasoseo", "");
+        params.put("limit", "1000");
+//        for (QuestionData questionData : questionDatas) {
+//            params.add("jasoseo", questionData.getQuestion());
+//            params.add("limit", questionData.getLimit());
+//        }
+        client.post(context, ADD_QUESTION, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFail(statusCode);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Log.i("asdfasdfasdfasd", responseString);
+                listener.onSuccess(responseString);
+            }
+        });
+    }
+
+    // 자소서 질문 수정
+    public static final String UPDATE_QUESTION = SERVER + "/jasoseo/mobile/add";
+    public void updateQuestion() {
+
+    }
+
+    // 자소서 질문 삭제
+    public static final String DELETE_QUESTION = SERVER + "/jasoseo/mobile/delete";
+    public void deleteQuestion() {
+
+    }
+
 
     // 로그인
     public static final String LOG_IN = SERVER + "/login";
